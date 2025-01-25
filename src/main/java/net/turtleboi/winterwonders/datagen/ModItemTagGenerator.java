@@ -3,11 +3,9 @@ package net.turtleboi.winterwonders.datagen;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.data.PackOutput;
 import net.minecraft.data.tags.ItemTagsProvider;
-import net.minecraft.tags.ItemTags;
 import net.minecraft.world.level.block.Block;
 import net.minecraftforge.common.data.ExistingFileHelper;
 import net.turtleboi.winterwonders.WinterWonders;
-import net.turtleboi.winterwonders.item.ModItems;
 import net.turtleboi.winterwonders.util.ModTags;
 import org.jetbrains.annotations.Nullable;
 

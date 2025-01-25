@@ -8,7 +8,7 @@ import net.minecraftforge.client.model.generators.ItemModelProvider;
 import net.minecraftforge.common.data.ExistingFileHelper;
 import net.minecraftforge.registries.RegistryObject;
 import net.turtleboi.winterwonders.WinterWonders;
-import net.turtleboi.winterwonders.item.ModItems;
+import net.turtleboi.winterwonders.init.ModItems;
 
 public class ModItemModelProvider extends ItemModelProvider {
     public ModItemModelProvider(PackOutput output, ExistingFileHelper existingFileHelper) {

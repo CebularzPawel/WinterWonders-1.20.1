@@ -1,4 +1,4 @@
-package net.turtleboi.winterwonders.item.items;
+package net.turtleboi.winterwonders.item.custom;
 
 import net.minecraft.world.item.Item;
 
