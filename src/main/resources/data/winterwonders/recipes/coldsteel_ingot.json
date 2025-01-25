@@ -1,0 +1,19 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "pattern": [
+    "CC",
+    "II"
+  ],
+  "key": {
+    "C": {
+      "item": "winterwonders:coldsteel_scrap"
+    },
+    "I": {
+      "item": "minecraft:iron_ingot"
+    }
+  },
+  "result": {
+    "item": "winterwonders:coldsteel_ingot"
+  }
+}

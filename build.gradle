@@ -63,8 +63,8 @@ repositories {
 
 dependencies {
     minecraft "net.minecraftforge:forge:${minecraft_version}-${forge_version}"
-    compileOnly(fg.deobf("top.theillusivec4.curios:curios-forge:${curios_version}:api"))
-    runtimeOnly(fg.deobf("top.theillusivec4.curios:curios-forge:${curios_version}"))
+    //compileOnly(fg.deobf("top.theillusivec4.curios:curios-forge:${curios_version}:api"))
+    //runtimeOnly(fg.deobf("top.theillusivec4.curios:curios-forge:${curios_version}"))
 }
 
 tasks.named('processResources', ProcessResources).configure {

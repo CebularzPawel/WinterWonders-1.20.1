@@ -1,0 +1,26 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "pattern": [
+    " FT",
+    " SF",
+    "L  "
+  ],
+  "key": {
+    "T": {
+      "item": "winterwonders:trueice_shard"
+    },
+    "F": {
+      "item": "winterwonders:frost_essence"
+    },
+    "S": {
+      "item": "minecraft:stick"
+    },
+    "L": {
+      "item": "minecraft:lapis_lazuli"
+    }
+  },
+  "result": {
+    "item": "winterwonders:frostbite_wand"
+  }
+}

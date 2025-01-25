@@ -1,8 +1,0 @@
-{
-  "variants": {
-    "facing=north": { "model": "ancientcurses:block/sconced_wall_unlit_torch", "y": 0 },
-    "facing=south": { "model": "ancientcurses:block/sconced_wall_unlit_torch", "y": 180 },
-    "facing=west":  { "model": "ancientcurses:block/sconced_wall_unlit_torch", "y": 270 },
-    "facing=east":  { "model": "ancientcurses:block/sconced_wall_unlit_torch", "y": 90 }
-  }
-}
