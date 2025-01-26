@@ -24,7 +24,7 @@ public class IceSlushBlock extends MultifaceBlock {
 
     @Override
     public boolean skipRendering(BlockState pState, BlockState pAdjacentBlockState, Direction pSide) {
-        return pAdjacentBlockState.is(this) ? true : super.skipRendering(pState, pAdjacentBlockState, pSide);
+        return pAdjacentBlockState.is(this) || super.skipRendering(pState, pAdjacentBlockState, pSide);
     }
 
 

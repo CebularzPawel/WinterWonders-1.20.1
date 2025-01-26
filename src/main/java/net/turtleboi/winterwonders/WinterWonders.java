@@ -14,9 +14,7 @@ import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
 import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
-import net.turtleboi.winterwonders.init.ModBlocks;
-import net.turtleboi.winterwonders.init.ModCreativeModeTabs;
-import net.turtleboi.winterwonders.init.ModItems;
+import net.turtleboi.winterwonders.init.*;
 import org.slf4j.Logger;
 
 @Mod(WinterWonders.MOD_ID)
@@ -30,16 +28,15 @@ public class WinterWonders {
         ModItems.register(modEventBus);
         ModBlocks.register(modEventBus);
         ModCreativeModeTabs.register(modEventBus);
-
+        ModEntities.register(modEventBus);
+        ModParticles.register(modEventBus);
         modEventBus.addListener(this::commonSetup);
-
 
         MinecraftForge.EVENT_BUS.register(this);
         modEventBus.addListener(this::addCreative);
     }
 
     private void commonSetup(final FMLCommonSetupEvent event) {
-
 
     }
 
