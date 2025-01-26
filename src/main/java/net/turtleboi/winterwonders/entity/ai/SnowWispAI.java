@@ -2,25 +2,26 @@ package net.turtleboi.winterwonders.entity.ai;
 
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.ImmutableSet;
+import com.mojang.datafixers.util.Pair;
 import com.mojang.serialization.Dynamic;
 import net.minecraft.util.Mth;
 import net.minecraft.util.Unit;
+import net.minecraft.util.valueproviders.UniformInt;
 import net.minecraft.world.entity.ai.Brain;
-import net.minecraft.world.entity.ai.behavior.AnimalPanic;
-import net.minecraft.world.entity.ai.behavior.DoNothing;
-import net.minecraft.world.entity.ai.behavior.LookAtTargetSink;
-import net.minecraft.world.entity.ai.behavior.RandomStroll;
+import net.minecraft.world.entity.ai.behavior.*;
 import net.minecraft.world.entity.ai.behavior.declarative.BehaviorBuilder;
 import net.minecraft.world.entity.ai.memory.MemoryModuleType;
 import net.minecraft.world.entity.ai.memory.MemoryStatus;
 import net.minecraft.world.entity.ai.sensing.Sensor;
 import net.minecraft.world.entity.ai.sensing.SensorType;
+import net.minecraft.world.entity.animal.allay.AllayAi;
 import net.minecraft.world.entity.schedule.Activity;
 import net.turtleboi.winterwonders.entity.ai.behaviour.FollowPlayerAround;
 import net.turtleboi.winterwonders.entity.custom.SnowWisp;
 
 import java.util.List;
 import java.util.Map;
+import java.util.function.Predicate;
 
 public class SnowWispAI
 {
@@ -52,7 +53,7 @@ public class SnowWispAI
 
     private static void initIdleActivities(Brain<SnowWisp> brain)
     {
-        brain.addActivity(Activity.IDLE, 10,ImmutableList.of(RandomStroll.stroll(1.0F),new DoNothing(30,60)));
+        brain.addActivityWithConditions(Activity.IDLE, ImmutableList.of(Pair.of(0, GoToWantedItem.create((p_218428_) -> true, 1.75F, true, 32)), Pair.of(3, SetEntityLookTargetSometimes.create(6.0F, UniformInt.of(30, 60))), Pair.of(4, new RunOne(ImmutableList.of(Pair.of(RandomStroll.fly(1.0F), 2), Pair.of(SetWalkTargetFromLookTarget.create(1.0F, 3), 2), Pair.of(new DoNothing(30, 60), 1))))), ImmutableSet.of());
     }
 
     static {
