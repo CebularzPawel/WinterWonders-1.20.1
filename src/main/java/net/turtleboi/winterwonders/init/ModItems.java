@@ -18,55 +18,55 @@ public class ModItems {
     public static final DeferredRegister<Item> ITEMS =
             DeferredRegister.create(ForgeRegistries.ITEMS, WinterWonders.MOD_ID);
 
-    public static final RegistryObject<Item> FROST_ESSENCE = ITEMS.register("frost_essence",
+    public static final RegistryObject<Item> FROST_ESSENCE = registerItem("frost_essence",
             () -> new Item(new Item.Properties().rarity(Rarity.UNCOMMON)));
 
-    public static final RegistryObject<Item> TRUEICE_SHARD = ITEMS.register("trueice_shard",
+    public static final RegistryObject<Item> TRUEICE_SHARD = registerItem("trueice_shard",
             () -> new Item(new Item.Properties().rarity(Rarity.RARE)));
 
-    public static final RegistryObject<Item> FROZEN_HEART = ITEMS.register("frozen_heart",
+    public static final RegistryObject<Item> FROZEN_HEART = registerItem("frozen_heart",
             () -> new Item(new Item.Properties().rarity(Rarity.EPIC)));
 
-    public static final RegistryObject<Item> COLDSTEEL_SCRAP = ITEMS.register("coldsteel_scrap",
+    public static final RegistryObject<Item> COLDSTEEL_SCRAP = registerItem("coldsteel_scrap",
             () -> new Item(new Item.Properties().rarity(Rarity.RARE)));
 
-    public static final RegistryObject<Item> COLDSTEEL_INGOT = ITEMS.register("coldsteel_ingot",
+    public static final RegistryObject<Item> COLDSTEEL_INGOT = registerItem("coldsteel_ingot",
             () -> new Item(new Item.Properties().rarity(Rarity.RARE)));
 
-    public static final RegistryObject<Item> COLDSTEEL_SWORD = ITEMS.register("coldsteel_sword",
+    public static final RegistryObject<Item> COLDSTEEL_SWORD = registerItem("coldsteel_sword",
             () -> new Item(new Item.Properties().rarity(Rarity.RARE)));
 
-    public static final RegistryObject<Item> COLDSTEEL_PICKAXE = ITEMS.register("coldsteel_pickaxe",
+    public static final RegistryObject<Item> COLDSTEEL_PICKAXE = registerItem("coldsteel_pickaxe",
             () -> new Item(new Item.Properties().rarity(Rarity.RARE)));
 
-    public static final RegistryObject<Item> COLDSTEEL_AXE = ITEMS.register("coldsteel_axe",
+    public static final RegistryObject<Item> COLDSTEEL_AXE = registerItem("coldsteel_axe",
             () -> new Item(new Item.Properties().rarity(Rarity.RARE)));
 
-    public static final RegistryObject<Item> COLDSTEEL_SHOVEL = ITEMS.register("coldsteel_shovel",
+    public static final RegistryObject<Item> COLDSTEEL_SHOVEL = registerItem("coldsteel_shovel",
             () -> new Item(new Item.Properties().rarity(Rarity.RARE)));
 
-    public static final RegistryObject<Item> COLDSTEEL_HOE = ITEMS.register("coldsteel_hoe",
+    public static final RegistryObject<Item> COLDSTEEL_HOE = registerItem("coldsteel_hoe",
             () -> new Item(new Item.Properties().rarity(Rarity.RARE)));
 
 
-    public static final RegistryObject<Item> FROSTBITE_WAND = ITEMS.register("frostbite_wand",
+    public static final RegistryObject<Item> FROSTBITE_WAND = registerItem("frostbite_wand",
             () -> new FrostbiteWandItem(new Item.Properties().rarity(Rarity.RARE)));
 
 
-    //public static <I extends Item> RegistryObject<I> registerItem(String itemName, Supplier<I> itemSup)
-    //{
-    //    return registerItem(itemName,itemSup,true);
-    //}
-//
-    //public static <I extends Item> RegistryObject<I> registerItem(String itemName, Supplier<I> itemSup, boolean putInTab)
-    //{
-    //    RegistryObject<I> regObj = ITEMS.register(itemName,itemSup);
-    //    if(putInTab)
-    //        {
-    //            ModCreativeModeTabs.ITEM_LIST.add(regObj.get());
-    //        }
-    //    return regObj;
-    //}
+    public static <I extends Item> RegistryObject<I> registerItem(String itemName, Supplier<I> itemSup)
+    {
+        return registerItem(itemName,itemSup,true);
+    }
+
+    public static <I extends Item> RegistryObject<I> registerItem(String itemName, Supplier<I> itemSup, boolean putInTab)
+    {
+        RegistryObject<I> regObj = ITEMS.register(itemName,itemSup);
+        if(putInTab)
+            {
+                ModCreativeModeTabs.ITEM_LIST.add(regObj.get());
+            }
+        return regObj;
+    }
 
 
     public static void register(IEventBus eventBus) {
