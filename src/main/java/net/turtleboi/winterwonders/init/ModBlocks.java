@@ -8,6 +8,7 @@ import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.LeavesBlock;
+import net.minecraft.world.level.block.SaplingBlock;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraftforge.eventbus.api.IEventBus;
@@ -16,6 +17,7 @@ import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.RegistryObject;
 import net.turtleboi.winterwonders.WinterWonders;
 import net.turtleboi.winterwonders.block.custom.ModFlammableRotatedPillarBlock;
+import net.turtleboi.winterwonders.worldgen.tree.PineTreeGrower;
 
 
 import java.util.function.Supplier;
@@ -76,7 +78,7 @@ public class ModBlocks {
             });
 
     public static final RegistryObject<Block> GREYPINE_SAPLING = registerBlock("greypine_sapling",
-            () -> new ModFlammableRotatedPillarBlock(BlockBehaviour.Properties.copy(Blocks.SPRUCE_SAPLING).strength(3f)));
+            () -> new SaplingBlock(new PineTreeGrower(), BlockBehaviour.Properties.copy(Blocks.SPRUCE_SAPLING)));
 
     private static <T extends Block> RegistryObject<T> registerBlock(String name, Supplier<T> block) {
         RegistryObject<T> toReturn = BLOCKS.register(name, block);

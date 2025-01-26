@@ -44,6 +44,7 @@ public class ModCreativeModeTabs {
                         pOutput.accept(ModBlocks.STRIPPED_GREYPINE_WOOD.get());
                         pOutput.accept(ModBlocks.GREYPINE_PLANKS.get());
                         pOutput.accept(ModBlocks.GREYPINE_LEAVES.get());
+                        pOutput.accept(ModBlocks.GREYPINE_SAPLING.get());
                     })
                     .build());
 

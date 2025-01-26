@@ -3,11 +3,13 @@ package net.turtleboi.winterwonders.datagen;
 import net.minecraft.data.PackOutput;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.Item;
+import net.minecraft.world.level.block.Block;
 import net.minecraftforge.client.model.generators.ItemModelBuilder;
 import net.minecraftforge.client.model.generators.ItemModelProvider;
 import net.minecraftforge.common.data.ExistingFileHelper;
 import net.minecraftforge.registries.RegistryObject;
 import net.turtleboi.winterwonders.WinterWonders;
+import net.turtleboi.winterwonders.init.ModBlocks;
 import net.turtleboi.winterwonders.init.ModItems;
 
 public class ModItemModelProvider extends ItemModelProvider {
@@ -29,6 +31,14 @@ public class ModItemModelProvider extends ItemModelProvider {
         simpleItem(ModItems.COLDSTEEL_SHOVEL);
         simpleItem(ModItems.COLDSTEEL_HOE);
         simpleItem(ModItems.FROSTBITE_WAND);
+
+        saplingItem(ModBlocks.GREYPINE_SAPLING);
+    }
+
+    private ItemModelBuilder saplingItem(RegistryObject<Block> item) {
+        return withExistingParent(item.getId().getPath(),
+                new ResourceLocation("item/generated")).texture("layer0",
+                new ResourceLocation(WinterWonders.MOD_ID,"block/" + item.getId().getPath()));
     }
 
     private ItemModelBuilder simpleItem(RegistryObject<Item> item) {
