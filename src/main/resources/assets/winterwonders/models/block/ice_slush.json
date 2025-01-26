@@ -1,0 +1,17 @@
+{
+  "ambientocclusion": false,
+  "render_type": "minecraft:cutout",
+  "textures": {
+    "particle": "winterwonders:block/ice_slush",
+    "mud_splash": "winterwonders:block/ice_slush"
+  },
+  "elements": [
+    {   "from": [ 0, 0, 0.1 ],
+      "to": [ 16, 16, 0.1 ],
+      "faces": {
+        "north": { "uv": [ 16, 0, 0, 16 ], "texture": "#mud_splash" },
+        "south": { "uv": [ 0, 0, 16, 16 ], "texture": "#mud_splash" }
+      }
+    }
+  ]
+}

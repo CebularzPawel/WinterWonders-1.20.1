@@ -11,11 +11,13 @@ import net.minecraft.world.level.block.LeavesBlock;
 import net.minecraft.world.level.block.SaplingBlock;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.material.MapColor;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.RegistryObject;
 import net.turtleboi.winterwonders.WinterWonders;
+import net.turtleboi.winterwonders.block.custom.IceSlushBlock;
 import net.turtleboi.winterwonders.block.custom.ModFlammableRotatedPillarBlock;
 import net.turtleboi.winterwonders.worldgen.tree.PineTreeGrower;
 
@@ -58,6 +60,10 @@ public class ModBlocks {
                     return 5;
                 }
             });
+
+
+    public static final RegistryObject<Block> ICE_SLUSH = registerBlock("ice_slush",
+            ()-> new IceSlushBlock(BlockBehaviour.Properties.copy(Blocks.ICE).mapColor(MapColor.ICE).replaceable().strength(0.2F).friction(0.98F)));
 
     public static final RegistryObject<Block> GREYPINE_LEAVES = registerBlock("greypine_leaves",
             () -> new LeavesBlock(BlockBehaviour.Properties.copy(Blocks.SPRUCE_LEAVES)){
