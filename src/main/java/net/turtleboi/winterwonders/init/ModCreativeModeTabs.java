@@ -36,6 +36,14 @@ public class ModCreativeModeTabs {
                         pOutput.accept(ModItems.COLDSTEEL_SHOVEL.get());
                         pOutput.accept(ModItems.COLDSTEEL_HOE.get());
                         pOutput.accept(ModItems.FROSTBITE_WAND.get());
+
+                        pOutput.accept(ModBlocks.COLDSTEEL_BLOCK.get());
+                        pOutput.accept(ModBlocks.GREYPINE_LOG.get());
+                        pOutput.accept(ModBlocks.GREYPINE_WOOD.get());
+                        pOutput.accept(ModBlocks.STRIPPED_GREYPINE_LOG.get());
+                        pOutput.accept(ModBlocks.STRIPPED_GREYPINE_WOOD.get());
+                        pOutput.accept(ModBlocks.GREYPINE_PLANKS.get());
+                        pOutput.accept(ModBlocks.GREYPINE_LEAVES.get());
                     })
                     .build());
 

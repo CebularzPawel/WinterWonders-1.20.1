@@ -24,7 +24,6 @@ public class WinterWonders {
         ModBlocks.register(modEventBus);
         ModCreativeModeTabs.register(modEventBus);
 
-
         modEventBus.addListener(this::commonSetup);
 
 

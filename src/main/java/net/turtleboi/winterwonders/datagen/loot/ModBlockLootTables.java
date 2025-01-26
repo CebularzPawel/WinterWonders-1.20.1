@@ -5,13 +5,16 @@ import net.minecraft.world.flag.FeatureFlags;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.enchantment.Enchantments;
 import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.storage.loot.LootTable;
 import net.minecraft.world.level.storage.loot.entries.LootItem;
 import net.minecraft.world.level.storage.loot.functions.ApplyBonusCount;
 import net.minecraft.world.level.storage.loot.functions.SetItemCountFunction;
 import net.minecraft.world.level.storage.loot.providers.number.UniformGenerator;
+import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.registries.RegistryObject;
 import net.turtleboi.winterwonders.init.ModBlocks;
+import net.turtleboi.winterwonders.init.ModItems;
 
 import java.util.Set;
 
@@ -22,7 +25,15 @@ public class ModBlockLootTables extends BlockLootSubProvider {
 
     @Override
     protected void generate() {
+        this.dropSelf(ModBlocks.COLDSTEEL_BLOCK.get());
+        this.dropSelf(ModBlocks.GREYPINE_LOG.get());
+        this.dropSelf(ModBlocks.GREYPINE_WOOD.get());
+        this.dropSelf(ModBlocks.STRIPPED_GREYPINE_LOG.get());
+        this.dropSelf(ModBlocks.STRIPPED_GREYPINE_WOOD.get());
+        this.dropSelf(ModBlocks.GREYPINE_PLANKS.get());
 
+        this.add(ModBlocks.GREYPINE_LEAVES.get(), block ->
+                createLeavesDrops(block, Blocks.DIRT, NORMAL_LEAVES_SAPLING_CHANCES));
     }
 
     protected LootTable.Builder createCopperLikeOreDrops(Block pBlock, Item item) {

@@ -1,1 +1,8 @@
-// 1.20.1	2025-01-25T19:06:12.8268141	Loot Tables
+// 1.20.1	2025-01-25T22:25:15.865137	Loot Tables
+6385a076e85b8fea7847dba01087ba5f1fba2dfe data/winterwonders/loot_tables/blocks/coldsteel_block.json
+1a8d1d473371b8bfe1adb5a0d6a76abdad2fc75c data/winterwonders/loot_tables/blocks/greypine_leaves.json
+b7837c9689a861c248ee3bdc2bd93c970b4c5ac2 data/winterwonders/loot_tables/blocks/greypine_log.json
+18dcb48f562133ab6d858c35a13cddf41ff194cd data/winterwonders/loot_tables/blocks/greypine_planks.json
+ab218c54a7041f2903eb435f3f92c76e5a852152 data/winterwonders/loot_tables/blocks/greypine_wood.json
+234aec24a404382ff27812909d61a6f79fc01b16 data/winterwonders/loot_tables/blocks/stripped_greypine_log.json
+ecbc65a086d3566fef5068c04f7199026090f4c7 data/winterwonders/loot_tables/blocks/stripped_greypine_wood.json

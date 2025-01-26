@@ -3,9 +3,12 @@ package net.turtleboi.winterwonders.datagen;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.data.PackOutput;
 import net.minecraft.data.tags.ItemTagsProvider;
+import net.minecraft.tags.ItemTags;
 import net.minecraft.world.level.block.Block;
 import net.minecraftforge.common.data.ExistingFileHelper;
+import net.minecraftforge.fml.common.Mod;
 import net.turtleboi.winterwonders.WinterWonders;
+import net.turtleboi.winterwonders.init.ModBlocks;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.concurrent.CompletableFuture;
@@ -18,6 +21,13 @@ public class ModItemTagGenerator extends ItemTagsProvider {
 
     @Override
     protected void addTags(HolderLookup.Provider pProvider) {
+        this.tag(ItemTags.LOGS_THAT_BURN)
+                .add(ModBlocks.GREYPINE_LOG.get().asItem())
+                .add(ModBlocks.GREYPINE_WOOD.get().asItem())
+                .add(ModBlocks.STRIPPED_GREYPINE_LOG.get().asItem())
+                .add(ModBlocks.STRIPPED_GREYPINE_WOOD.get().asItem());
 
+        this.tag(ItemTags.PLANKS)
+                .add(ModBlocks.GREYPINE_PLANKS.get().asItem());
     }
 }

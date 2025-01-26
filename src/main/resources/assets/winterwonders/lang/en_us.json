@@ -1,16 +1,28 @@
 {
+  "creativetab.winterwonders_tab": "Winter Wonders",
   "creativetab.winterwonders_item_tab": "Winter Wonders Item Tab",
   "creativetab.winterwonders_block_tab": "Winter Wonders Block Tab",
   "sounds.ancientcurses.deprecophobia": "Deprecophobia music plays",
 
   "effect.winterwonders.chilled": "Chilled",
 
-  "block.winterwonders.cursed_altar": "Cursed Altar",
+  "block.winterwonders.coldsteel_block": "Coldsteel Block",
+  "block.winterwonders.greypine_log": "Grey Pine Log",
+  "block.winterwonders.greypine_wood": "Grey Pine Wood",
+  "block.winterwonders.stripped_greypine_log": "Stripped Grey Pine Log",
+  "block.winterwonders.stripped_greypine_wood": "Stripped Grey Pine Wood",
+  "block.winterwonders.greypine_leaves": "Grey Pine Leaves",
+  "block.winterwonders.greypine_planks": "Grey Pine Planks",
 
   "item.winterwonders.frost_essence": "Frost Essence",
   "item.winterwonders.trueice_shard": "True Ice Shard",
   "item.winterwonders.frozen_heart": "Frozen Heart",
   "item.winterwonders.coldsteel_scrap": "Coldsteel Scraps",
   "item.winterwonders.coldsteel_ingot": "Coldsteel Ingot",
+  "item.winterwonders.coldsteel_sword": "Coldsteel Sword",
+  "item.winterwonders.coldsteel_pickaxe": "Coldsteel Pickaxe",
+  "item.winterwonders.coldsteel_axe": "Coldsteel Axe",
+  "item.winterwonders.coldsteel_shovel": "Coldsteel Shovel",
+  "item.winterwonders.coldsteel_hoe": "Coldsteel Hoe",
   "item.winterwonders.frostbite_wand": "Frostbite Wand"
 }
