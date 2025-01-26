@@ -15,24 +15,22 @@ public class ModBlocks
 {
     public static final DeferredRegister<Block> BLOCKS = DeferredRegister.create(ForgeRegistries.BLOCKS, WinterWonders.MOD_ID);
 
-    public static <I extends Block> RegistryObject<I> registerBlock(String blockName, Supplier<I> blockSup)
-    {
-        return registerBlock(blockName,blockSup,true);
+    private static <T extends Block> RegistryObject<T> registerBlock(String name, Supplier<T> block) {
+        RegistryObject<T> toReturn = BLOCKS.register(name, block);
+        registerBlockItem(name, toReturn);
+        return toReturn;
     }
 
-    public static <I extends Block> RegistryObject<I> registerBlock(String blockName, Supplier<I> blockSup, boolean putInTab)
-    {
-        RegistryObject<I> regObj = BLOCKS.register(blockName,blockSup);
-        ModItems.registerItem(blockName,()->new BlockItem(regObj.get(),new Item.Properties()),false);
-        if(putInTab)
-        {
-            ModCreativeModeTabs.BLOCK_LIST.add(regObj.get());
-        }
-        return regObj;
+    private static <T extends Block> RegistryObject<Item> registerBlockItem(String name, RegistryObject<T> block) {
+        return ModItems.ITEMS.register(name, () -> new BlockItem(block.get(), new Item.Properties()));
     }
-    
-    public static void register(IEventBus eventBus)
-    {
+
+    private static <T extends Block> RegistryObject<T> registerBlockWithoutItem(String name, Supplier<T> block) {
+        return BLOCKS.register(name, block);
+    }
+
+
+    public static void register(IEventBus eventBus) {
         BLOCKS.register(eventBus);
     }
 }

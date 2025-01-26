@@ -22,6 +22,12 @@ public class ModItemModelProvider extends ItemModelProvider {
         simpleItem(ModItems.FROZEN_HEART);
         simpleItem(ModItems.COLDSTEEL_SCRAP);
         simpleItem(ModItems.COLDSTEEL_INGOT);
+        simpleItem(ModItems.COLDSTEEL_INGOT);
+        simpleItem(ModItems.COLDSTEEL_SWORD);
+        simpleItem(ModItems.COLDSTEEL_PICKAXE);
+        simpleItem(ModItems.COLDSTEEL_AXE);
+        simpleItem(ModItems.COLDSTEEL_SHOVEL);
+        simpleItem(ModItems.COLDSTEEL_HOE);
         simpleItem(ModItems.FROSTBITE_WAND);
     }
 
