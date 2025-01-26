@@ -17,6 +17,6 @@ public class SnowWispRenderer extends MobRenderer<SnowWisp, SnowWispModel>
 
     @Override
     public ResourceLocation getTextureLocation(SnowWisp snowWisp) {
-        return new ResourceLocation(WinterWonders.MOD_ID,"textures/entity/snow_wisp.eng");
+        return new ResourceLocation(WinterWonders.MOD_ID,"textures/entity/snow_wisp.png");
     }
 }

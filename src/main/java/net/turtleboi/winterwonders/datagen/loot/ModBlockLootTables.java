@@ -36,6 +36,8 @@ public class ModBlockLootTables extends BlockLootSubProvider {
 
         this.add(ModBlocks.GREYPINE_LEAVES.get(), block ->
                 createLeavesDrops(block, ModBlocks.GREYPINE_SAPLING.get(), NORMAL_LEAVES_SAPLING_CHANCES));
+
+        this.dropWhenSilkTouch(ModBlocks.ICE_SLUSH.get());
     }
 
     protected LootTable.Builder createCopperLikeOreDrops(Block pBlock, Item item) {

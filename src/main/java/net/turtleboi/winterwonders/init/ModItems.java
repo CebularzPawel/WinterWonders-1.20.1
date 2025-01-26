@@ -1,13 +1,13 @@
 package net.turtleboi.winterwonders.init;
 
 import net.minecraft.ChatFormatting;
-import net.minecraft.world.item.Item;
-import net.minecraft.world.item.Rarity;
+import net.minecraft.world.item.*;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.RegistryObject;
 import net.turtleboi.winterwonders.WinterWonders;
+import net.turtleboi.winterwonders.item.ModToolTiers;
 import net.turtleboi.winterwonders.item.custom.FrostbiteWandItem;
 
 import java.util.function.Supplier;
@@ -34,19 +34,19 @@ public class ModItems {
             () -> new Item(new Item.Properties().rarity(Rarity.RARE)));
 
     public static final RegistryObject<Item> COLDSTEEL_SWORD = ITEMS.register("coldsteel_sword",
-            () -> new Item(new Item.Properties().rarity(Rarity.RARE)));
+            () -> new SwordItem(ModToolTiers.COLDSTEEL, 3, -2.4f, new Item.Properties().rarity(Rarity.RARE)));
 
     public static final RegistryObject<Item> COLDSTEEL_PICKAXE = ITEMS.register("coldsteel_pickaxe",
-            () -> new Item(new Item.Properties().rarity(Rarity.RARE)));
+            () -> new PickaxeItem(ModToolTiers.COLDSTEEL, 1, -2.8f, new Item.Properties().rarity(Rarity.RARE)));
 
     public static final RegistryObject<Item> COLDSTEEL_AXE = ITEMS.register("coldsteel_axe",
-            () -> new Item(new Item.Properties().rarity(Rarity.RARE)));
+            () -> new AxeItem(ModToolTiers.COLDSTEEL, 6, -3f, new Item.Properties().rarity(Rarity.RARE)));
 
     public static final RegistryObject<Item> COLDSTEEL_SHOVEL = ITEMS.register("coldsteel_shovel",
-            () -> new Item(new Item.Properties().rarity(Rarity.RARE)));
+            () -> new ShovelItem(ModToolTiers.COLDSTEEL, 2, -3f, new Item.Properties().rarity(Rarity.RARE)));
 
     public static final RegistryObject<Item> COLDSTEEL_HOE = ITEMS.register("coldsteel_hoe",
-            () -> new Item(new Item.Properties().rarity(Rarity.RARE)));
+            () -> new HoeItem(ModToolTiers.COLDSTEEL, -2, -0.5f, new Item.Properties().rarity(Rarity.RARE)));
 
 
     public static final RegistryObject<Item> FROSTBITE_WAND = ITEMS.register("frostbite_wand",

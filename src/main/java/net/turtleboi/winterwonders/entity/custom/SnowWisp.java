@@ -103,14 +103,16 @@ public class SnowWisp extends Monster {
             double spreadX = (random.nextDouble() - 0.5) * 0.4;
             double spreadZ = (random.nextDouble() - 0.5) * 0.4;
 
-            level().addParticle(
-                    ModParticles.AURORA_PARTICLE.get(),
-                    true,
-                    entityX + spreadX,
-                    entityY,
-                    entityZ + spreadZ,
-                    0, -0.05, 0
-            );
+            if (this.level().isClientSide) {
+                this.level().addParticle(
+                        ModParticles.AURORA_PARTICLE.get(),
+                        true,
+                        entityX + spreadX,
+                        entityY,
+                        entityZ + spreadZ,
+                        0, -0.05, 0
+                );
+            }
         }
     }
 }

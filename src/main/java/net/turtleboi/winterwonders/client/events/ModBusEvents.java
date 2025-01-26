@@ -40,6 +40,7 @@ public class ModBusEvents
 
     @SubscribeEvent
     public static void registerParticleFactories(RegisterParticleProvidersEvent event) {
-        event.registerSpriteSet(ModParticles.AURORA_PARTICLE.get(), AuroraParticle.Provider::new);
+        event.registerSpriteSet(ModParticles.AURORA_PARTICLE.get(),
+                AuroraParticle.Provider::new);
     }
 }

@@ -1,4 +1,4 @@
-// 1.20.1	2025-01-26T02:28:56.1682145	Block States: winterwonders
+// 1.20.1	2025-01-26T13:47:18.7265024	Block States: winterwonders
 2fdb1573ac40ff6d115f56ba734ad6b641b71585 assets/winterwonders/blockstates/coldsteel_block.json
 d64b6e02cbd301f6314fe128712417aaf0cb4b60 assets/winterwonders/blockstates/greypine_leaves.json
 444f6a406931ab3ca46ea0eb8ae7d9edf6023157 assets/winterwonders/blockstates/greypine_log.json
@@ -15,8 +15,8 @@ a13b9cfdf427bb45aad394ae8f47488524223e7f assets/winterwonders/models/block/greyp
 88c991802d9ba9dc1da562985dd3f7f8979790df assets/winterwonders/models/block/greypine_sapling.json
 5789d0f17574b6b40c1550b34720b92150e6ee18 assets/winterwonders/models/block/greypine_wood.json
 05228790a607426dfb8d3115d6842b5ffb76475d assets/winterwonders/models/block/greypine_wood_horizontal.json
-d913d1d21aafbe15cd0a64a8ed07c0e4e4072670 assets/winterwonders/models/block/stripped_greypine_log.json
-1a025da84f20838d12eb41c0c144b6d3084e0886 assets/winterwonders/models/block/stripped_greypine_log_horizontal.json
+01f5421fae0419e100b2c92c064cee68e535e618 assets/winterwonders/models/block/stripped_greypine_log.json
+04dd74c0927e5dd87044374477775336a339f37d assets/winterwonders/models/block/stripped_greypine_log_horizontal.json
 d913d1d21aafbe15cd0a64a8ed07c0e4e4072670 assets/winterwonders/models/block/stripped_greypine_wood.json
 1a025da84f20838d12eb41c0c144b6d3084e0886 assets/winterwonders/models/block/stripped_greypine_wood_horizontal.json
 18e0f1495ccb963c533e27cca149919d398a3b44 assets/winterwonders/models/item/coldsteel_block.json

@@ -12,8 +12,8 @@ public class ModParticles
 {
     public static final DeferredRegister<ParticleType<?>> PARTICLES = DeferredRegister.create(ForgeRegistries.PARTICLE_TYPES, WinterWonders.MOD_ID);
 
-    public static final RegistryObject<SimpleParticleType> AURORA_PARTICLE = PARTICLES.register("aurora_particles",
-            ()-> new SimpleParticleType(true));
+    public static final RegistryObject<SimpleParticleType> AURORA_PARTICLE =
+            PARTICLES.register("aurora_particles", ()-> new SimpleParticleType(true));
 
     public static void register(IEventBus eventBus)
     {

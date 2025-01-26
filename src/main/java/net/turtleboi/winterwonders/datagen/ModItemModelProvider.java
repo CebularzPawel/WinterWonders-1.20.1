@@ -24,13 +24,13 @@ public class ModItemModelProvider extends ItemModelProvider {
         simpleItem(ModItems.FROZEN_HEART);
         simpleItem(ModItems.COLDSTEEL_SCRAP);
         simpleItem(ModItems.COLDSTEEL_INGOT);
-        simpleItem(ModItems.COLDSTEEL_INGOT);
-        simpleItem(ModItems.COLDSTEEL_SWORD);
-        simpleItem(ModItems.COLDSTEEL_PICKAXE);
-        simpleItem(ModItems.COLDSTEEL_AXE);
-        simpleItem(ModItems.COLDSTEEL_SHOVEL);
-        simpleItem(ModItems.COLDSTEEL_HOE);
-        simpleItem(ModItems.FROSTBITE_WAND);
+
+        handheldItem(ModItems.COLDSTEEL_SWORD);
+        handheldItem(ModItems.COLDSTEEL_PICKAXE);
+        handheldItem(ModItems.COLDSTEEL_AXE);
+        handheldItem(ModItems.COLDSTEEL_SHOVEL);
+        handheldItem(ModItems.COLDSTEEL_HOE);
+        handheldItem(ModItems.FROSTBITE_WAND);
 
         saplingItem(ModBlocks.GREYPINE_SAPLING);
     }
@@ -39,6 +39,12 @@ public class ModItemModelProvider extends ItemModelProvider {
         return withExistingParent(item.getId().getPath(),
                 new ResourceLocation("item/generated")).texture("layer0",
                 new ResourceLocation(WinterWonders.MOD_ID,"block/" + item.getId().getPath()));
+    }
+
+    private ItemModelBuilder handheldItem(RegistryObject<Item> item) {
+        return withExistingParent(item.getId().getPath(),
+                new ResourceLocation("item/handheld")).texture("layer0",
+                new ResourceLocation(WinterWonders.MOD_ID,"item/" + item.getId().getPath()));
     }
 
     private ItemModelBuilder simpleItem(RegistryObject<Item> item) {
