@@ -30,11 +30,18 @@ public class ModCreativeModeTabs {
                         pOutput.accept(ModItems.FROZEN_HEART.get());
                         pOutput.accept(ModItems.COLDSTEEL_SCRAP.get());
                         pOutput.accept(ModItems.COLDSTEEL_INGOT.get());
+
                         pOutput.accept(ModItems.COLDSTEEL_SWORD.get());
                         pOutput.accept(ModItems.COLDSTEEL_PICKAXE.get());
                         pOutput.accept(ModItems.COLDSTEEL_AXE.get());
                         pOutput.accept(ModItems.COLDSTEEL_SHOVEL.get());
                         pOutput.accept(ModItems.COLDSTEEL_HOE.get());
+
+                        pOutput.accept(ModItems.COLDSTEEL_HELMET.get());
+                        pOutput.accept(ModItems.COLDSTEEL_CHESTPLATE.get());
+                        pOutput.accept(ModItems.COLDSTEEL_LEGGINGS.get());
+                        pOutput.accept(ModItems.COLDSTEEL_BOOTS.get());
+
                         pOutput.accept(ModItems.FROSTBITE_WAND.get());
 
                         pOutput.accept(ModBlocks.COLDSTEEL_BLOCK.get());

@@ -20,10 +20,17 @@
   "item.winterwonders.frozen_heart": "Frozen Heart",
   "item.winterwonders.coldsteel_scrap": "Coldsteel Scraps",
   "item.winterwonders.coldsteel_ingot": "Coldsteel Ingot",
+
   "item.winterwonders.coldsteel_sword": "Coldsteel Sword",
   "item.winterwonders.coldsteel_pickaxe": "Coldsteel Pickaxe",
   "item.winterwonders.coldsteel_axe": "Coldsteel Axe",
   "item.winterwonders.coldsteel_shovel": "Coldsteel Shovel",
   "item.winterwonders.coldsteel_hoe": "Coldsteel Hoe",
+
+  "item.winterwonders.coldsteel_helmet": "Coldsteel Helmet",
+  "item.winterwonders.coldsteel_chestplate": "Coldsteel Chestplate",
+  "item.winterwonders.coldsteel_leggings": "Coldsteel Leggings",
+  "item.winterwonders.coldsteel_boots": "Coldsteel Boots",
+
   "item.winterwonders.frostbite_wand": "Frostbite Wand"
 }
