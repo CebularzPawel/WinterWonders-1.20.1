@@ -1,0 +1,28 @@
+{
+  "type": "minecraft:entity",
+  "pools": [
+    {
+      "rolls": {
+        "type": "minecraft:uniform",
+        "min": 1,
+        "max": 2
+      },
+      "bonus_rolls": {
+        "type": "minecraft:uniform",
+        "min": 1,
+        "max": 2
+      },
+      "entries": [
+        {
+          "type": "minecraft:loot_table",
+          "name": "minecraft:entities/zombie"
+        },
+        {
+          "type": "minecraft:item",
+          "name": "winterwonders:coldsteel_scrap",
+          "weight": 1
+        }
+      ]
+    }
+  ]
+}

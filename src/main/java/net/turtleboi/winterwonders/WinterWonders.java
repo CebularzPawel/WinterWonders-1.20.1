@@ -53,12 +53,10 @@ public class WinterWonders {
 
     }
     @Mod.EventBusSubscriber(modid = MOD_ID, bus = Mod.EventBusSubscriber.Bus.MOD, value = Dist.CLIENT)
-    public static class ClientModEvents
-    {
+    public static class ClientModEvents {
         @SubscribeEvent
         public static void onClientSetup(FMLClientSetupEvent event) {
             ItemBlockRenderTypes.setRenderLayer(ModBlocks.ICE_SLUSH.get(),RenderType.translucent());
-            EntityRenderers.register(ModEntities.SNOW_WISP.get(), SnowWispRenderer::new);
         }
     }
 }

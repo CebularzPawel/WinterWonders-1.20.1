@@ -3,9 +3,9 @@
   "biomes": "#forge:is_cold",
 
   "spawners":{
-    "type": "winterwonders:snow_wisp",
-    "weight": 125,
+    "type": "winterwonders:revenant",
+    "weight": 40,
     "minCount": 1,
-    "maxCount": 4
+    "maxCount": 2
   }
 }
