@@ -25,7 +25,7 @@ public class ModBlockStateProvider extends BlockStateProvider {
         axisBlock(((RotatedPillarBlock) ModBlocks.GREYPINE_WOOD.get()), blockTexture(ModBlocks.GREYPINE_LOG.get()), blockTexture(ModBlocks.GREYPINE_LOG.get()));
 
         axisBlock(((RotatedPillarBlock) ModBlocks.STRIPPED_GREYPINE_LOG.get()), blockTexture(ModBlocks.STRIPPED_GREYPINE_LOG.get()),
-                new ResourceLocation(WinterWonders.MOD_ID, "block/greypine_log_top"));
+                new ResourceLocation(WinterWonders.MOD_ID, "block/stripped_greypine_log_top"));
         axisBlock(((RotatedPillarBlock) ModBlocks.STRIPPED_GREYPINE_WOOD.get()), blockTexture(ModBlocks.STRIPPED_GREYPINE_LOG.get()), blockTexture(ModBlocks.STRIPPED_GREYPINE_LOG.get()));
 
         blockItem(ModBlocks.GREYPINE_LOG);
