@@ -7,6 +7,7 @@ import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.RegistryObject;
 import net.turtleboi.winterwonders.WinterWonders;
+import net.turtleboi.winterwonders.entity.custom.RevenantEntity;
 import net.turtleboi.winterwonders.entity.custom.SnowWispEntity;
 
 public class ModEntities
@@ -16,6 +17,10 @@ public class ModEntities
     public static final RegistryObject<EntityType<SnowWispEntity>> SNOW_WISP =
             TYPES.register("snow_wisp",()-> EntityType.Builder.of(SnowWispEntity::new, MobCategory.MONSTER)
                     .sized(0.35F, 0.6F).clientTrackingRange(8).updateInterval(2).build("snow_wisp"));
+
+    public static final RegistryObject<EntityType<RevenantEntity>> REVENANT =
+            TYPES.register("revenant",()-> EntityType.Builder.of(RevenantEntity::new, MobCategory.MONSTER)
+                    .sized(0.6F, 1.95F).build("revenant"));
 
     public static void register(IEventBus eventBus)
     {
