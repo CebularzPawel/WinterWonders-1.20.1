@@ -44,7 +44,7 @@ public class FollowPlayerAround extends Behavior<Mob> {
     protected void tick(ServerLevel pLevel, Mob pOwner, long pGameTime) {
         pOwner.getBrain().getMemory(REQUIRED_MEMORY).ifPresent(player -> {
             if (player != null && player.isAlive()) {
-                Path path = pOwner.getNavigation().createPath(player.blockPosition(), 1);
+                Path path = pOwner.getNavigation().createPath(player.getX(), player.getEyeY(), player.getZ(), 1);
                 if (path != null) {
                     pOwner.getNavigation().moveTo(path, 1.0);
                 }

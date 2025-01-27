@@ -1,0 +1,11 @@
+{
+  "type": "forge:add_spawns",
+  "biomes": "#forge:is_cold",
+
+  "spawners":{
+    "type": "winterwonders:snow_wisp",
+    "weight": 75,
+    "minCount": 1,
+    "maxCount": 3
+  }
+}

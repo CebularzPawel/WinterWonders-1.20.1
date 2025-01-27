@@ -1,52 +1,93 @@
 package net.turtleboi.winterwonders.client.models.entity;
 
+import com.mojang.blaze3d.vertex.PoseStack;
+import com.mojang.blaze3d.vertex.VertexConsumer;
+import net.minecraft.client.model.EntityModel;
 import net.minecraft.client.model.HierarchicalModel;
+import net.minecraft.client.model.geom.ModelLayerLocation;
 import net.minecraft.client.model.geom.ModelPart;
 import net.minecraft.client.model.geom.PartPose;
 import net.minecraft.client.model.geom.builders.*;
+import net.minecraft.client.renderer.LightTexture;
 import net.minecraft.client.renderer.RenderType;
-import net.turtleboi.winterwonders.entity.custom.SnowWisp;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.entity.Entity;
+import net.turtleboi.winterwonders.WinterWonders;
+import net.turtleboi.winterwonders.entity.animations.ModAnimationDefintions;
+import net.turtleboi.winterwonders.entity.custom.SnowWispEntity;
 
-public class SnowWispModel extends HierarchicalModel<SnowWisp>
-{
-    private final ModelPart root;
-    private final ModelPart head;
-    private final ModelPart body;
-    private final ModelPart right_arm;
-    private final ModelPart left_arm;
-    private final ModelPart right_wing;
-    private final ModelPart left_wing;
+public class SnowWispModel<T extends Entity> extends HierarchicalModel<T> {
+    public static final ModelLayerLocation SNOW_WISP_LAYER = new ModelLayerLocation(new ResourceLocation(WinterWonders.MOD_ID, "snow_wisp"), "main");
+    private final ModelPart bb_main;
+    private final ModelPart wing1;
+    private final ModelPart wing2;
 
-    public SnowWispModel(ModelPart pRoot) {
+    private float r = 1.0F;
+    private float g = 1.0F;
+    private float b = 1.0F;
+
+    public SnowWispModel(ModelPart root) {
         super(RenderType::entityTranslucent);
-        this.root = pRoot.getChild("root");
-        this.head = this.root.getChild("head");
-        this.body = this.root.getChild("body");
-        this.right_arm = this.body.getChild("right_arm");
-        this.left_arm = this.body.getChild("left_arm");
-        this.right_wing = this.body.getChild("right_wing");
-        this.left_wing = this.body.getChild("left_wing");
-    }
-
-    public ModelPart root() {
-        return this.root;
-    }
-
-    public static LayerDefinition createBodyLayer() {
-        MeshDefinition $$0 = new MeshDefinition();
-        PartDefinition $$1 = $$0.getRoot();
-        PartDefinition $$2 = $$1.addOrReplaceChild("root", CubeListBuilder.create(), PartPose.offset(0.0F, 23.5F, 0.0F));
-        $$2.addOrReplaceChild("head", CubeListBuilder.create().texOffs(0, 0).addBox(-2.5F, -5.0F, -2.5F, 5.0F, 5.0F, 5.0F, new CubeDeformation(0.0F)), PartPose.offset(0.0F, -3.99F, 0.0F));
-        PartDefinition $$3 = $$2.addOrReplaceChild("body", CubeListBuilder.create().texOffs(0, 10).addBox(-1.5F, 0.0F, -1.0F, 3.0F, 4.0F, 2.0F, new CubeDeformation(0.0F)).texOffs(0, 16).addBox(-1.5F, 0.0F, -1.0F, 3.0F, 5.0F, 2.0F, new CubeDeformation(-0.2F)), PartPose.offset(0.0F, -4.0F, 0.0F));
-        $$3.addOrReplaceChild("right_arm", CubeListBuilder.create().texOffs(23, 0).addBox(-0.75F, -0.5F, -1.0F, 1.0F, 4.0F, 2.0F, new CubeDeformation(-0.01F)), PartPose.offset(-1.75F, 0.5F, 0.0F));
-        $$3.addOrReplaceChild("left_arm", CubeListBuilder.create().texOffs(23, 6).addBox(-0.25F, -0.5F, -1.0F, 1.0F, 4.0F, 2.0F, new CubeDeformation(-0.01F)), PartPose.offset(1.75F, 0.5F, 0.0F));
-        $$3.addOrReplaceChild("right_wing", CubeListBuilder.create().texOffs(16, 14).addBox(0.0F, 1.0F, 0.0F, 0.0F, 5.0F, 8.0F, new CubeDeformation(0.0F)), PartPose.offset(-0.5F, 0.0F, 0.6F));
-        $$3.addOrReplaceChild("left_wing", CubeListBuilder.create().texOffs(16, 14).addBox(0.0F, 1.0F, 0.0F, 0.0F, 5.0F, 8.0F, new CubeDeformation(0.0F)), PartPose.offset(0.5F, 0.0F, 0.6F));
-        return LayerDefinition.create($$0, 32, 32);
+        bb_main = root.getChild("bb_main");
+        wing1 = bb_main.getChild("wing1");
+        wing2 = bb_main.getChild("wing2");
     }
 
     @Override
-    public void setupAnim(SnowWisp snowWisp, float v, float v1, float v2, float v3, float v4) {
+    public ModelPart root() {
+        return bb_main;
+    }
 
+    public static LayerDefinition createBodyLayer() {
+        MeshDefinition meshdefinition = new MeshDefinition();
+        PartDefinition partdefinition = meshdefinition.getRoot();
+
+        PartDefinition bb_main = partdefinition.addOrReplaceChild(
+                "bb_main",
+                CubeListBuilder.create()
+                        .texOffs(0, 0)
+                        .addBox(-3.0F, -6.0F, -3.0F, 6.0F, 6.0F, 6.0F,
+                                new CubeDeformation(0.0F)),
+                PartPose.offset(0.0F, 24.0F, 0.0F)
+        );
+
+        PartDefinition wing1 = bb_main.addOrReplaceChild(
+                "wing1",
+                CubeListBuilder.create()
+                        .texOffs(12, 6)
+                        .addBox(0.0F, -1.0F, -1.0F, 0.0F, 4.0F, 6.0F,
+                                new CubeDeformation(0.0F)),
+                PartPose.offset(-1.0F, -4.0F, 4.0F)
+        );
+
+        PartDefinition wing2 = bb_main.addOrReplaceChild(
+                "wing2",
+                CubeListBuilder.create()
+                        .texOffs(0, 6)
+                        .addBox(0.0F, -1.0F, -1.0F, 0.0F, 4.0F, 6.0F,
+                                new CubeDeformation(0.0F)),
+                PartPose.offset(1.0F, -4.0F, 4.0F)
+        );
+
+        return LayerDefinition.create(meshdefinition, 32, 32);
+    }
+
+
+    @Override
+    public void setupAnim(Entity entity, float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch) {
+        this.root().getAllParts().forEach(ModelPart::resetPose);
+
+        this.animate(((SnowWispEntity) entity).idleAnimationState, ModAnimationDefintions.WING_FLAP_IDLE, ageInTicks, 1f);
+    }
+
+    public void setColor(int color) {
+        this.r = (color >> 16 & 255) / 255.0F;
+        this.g = (color >> 8 & 255) / 255.0F;
+        this.b = (color & 255) / 255.0F;
+    }
+
+    @Override
+    public void renderToBuffer(PoseStack poseStack, VertexConsumer vertexConsumer, int packedLight, int packedOverlay, float red, float green, float blue, float alpha) {
+        bb_main.render(poseStack, vertexConsumer, LightTexture.FULL_BRIGHT, packedOverlay, this.r, this.g, this.b, alpha);
     }
 }

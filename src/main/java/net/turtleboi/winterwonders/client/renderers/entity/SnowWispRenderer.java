@@ -1,22 +1,35 @@
 package net.turtleboi.winterwonders.client.renderers.entity;
 
+import com.mojang.blaze3d.vertex.PoseStack;
+import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.entity.EntityRendererProvider;
 import net.minecraft.client.renderer.entity.MobRenderer;
 import net.minecraft.resources.ResourceLocation;
 import net.turtleboi.winterwonders.WinterWonders;
-import net.turtleboi.winterwonders.client.models.ModModelLayers;
 import net.turtleboi.winterwonders.client.models.entity.SnowWispModel;
-import net.turtleboi.winterwonders.entity.custom.SnowWisp;
+import net.turtleboi.winterwonders.entity.custom.SnowWispEntity;
 
-public class SnowWispRenderer extends MobRenderer<SnowWisp, SnowWispModel>
-{
+public class SnowWispRenderer extends MobRenderer<SnowWispEntity, SnowWispModel<SnowWispEntity>> {
+    private static final ResourceLocation TEXTURE = new ResourceLocation(WinterWonders.MOD_ID, "textures/entity/snow_wisp.png");
 
     public SnowWispRenderer(EntityRendererProvider.Context pContext) {
-        super(pContext, new SnowWispModel(pContext.bakeLayer(ModModelLayers.SNOW_WISP_LAYER)), 0.4F);
+        super(pContext, new SnowWispModel<>(pContext.bakeLayer(SnowWispModel.SNOW_WISP_LAYER)), 0.25f);
+        this.addLayer(new SnowWispEyesLayer(this));
     }
 
     @Override
-    public ResourceLocation getTextureLocation(SnowWisp snowWisp) {
-        return new ResourceLocation(WinterWonders.MOD_ID,"textures/entity/snow_wisp.png");
+    public ResourceLocation getTextureLocation(SnowWispEntity snowWispEntity) {
+        return TEXTURE;
     }
+
+    @Override
+    public void render(SnowWispEntity entity, float entityYaw, float partialTicks,
+                       PoseStack poseStack, MultiBufferSource buffer, int packedLight) {
+        poseStack.pushPose();
+        int color = entity.getColorMultiplier();
+        this.model.setColor(color);
+        poseStack.popPose();
+        super.render(entity, entityYaw, partialTicks, poseStack, buffer, packedLight);
+    }
+
 }

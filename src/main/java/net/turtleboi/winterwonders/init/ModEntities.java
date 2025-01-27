@@ -7,14 +7,15 @@ import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.RegistryObject;
 import net.turtleboi.winterwonders.WinterWonders;
-import net.turtleboi.winterwonders.entity.custom.SnowWisp;
+import net.turtleboi.winterwonders.entity.custom.SnowWispEntity;
 
 public class ModEntities
 {
     public static final DeferredRegister<EntityType<?>> TYPES = DeferredRegister.create(ForgeRegistries.ENTITY_TYPES, WinterWonders.MOD_ID);
 
-    public static final RegistryObject<EntityType<SnowWisp>> SNOW_WISP = TYPES.register("snow_wisp",()->
-            EntityType.Builder.of(SnowWisp::new, MobCategory.MONSTER).sized(0.35F, 0.6F).clientTrackingRange(8).updateInterval(2).build("snow_wisp"));
+    public static final RegistryObject<EntityType<SnowWispEntity>> SNOW_WISP =
+            TYPES.register("snow_wisp",()-> EntityType.Builder.of(SnowWispEntity::new, MobCategory.MONSTER)
+                    .sized(0.35F, 0.6F).clientTrackingRange(8).updateInterval(2).build("snow_wisp"));
 
     public static void register(IEventBus eventBus)
     {
