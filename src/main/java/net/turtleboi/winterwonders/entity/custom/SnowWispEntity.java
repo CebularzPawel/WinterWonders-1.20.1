@@ -49,6 +49,59 @@ public class SnowWispEntity extends Monster {
     private int idleAnimationTimeout = 0;
 
     private BlockPos lastLightPos = null;
+
+    @Override
+    protected void updateWalkAnimation(float pPartialTick) {
+        super.updateWalkAnimation(pPartialTick);
+    }
+
+    public static AttributeSupplier.Builder createAttributes() {
+        return Mob.createMobAttributes()
+                .add(Attributes.MOVEMENT_SPEED,0.5D)
+                .add(Attributes.MAX_HEALTH, 4D)
+                .add(Attributes.FLYING_SPEED, 0.5D);
+    }
+
+    protected @NotNull PathNavigation createNavigation(@NotNull Level pLevel) {
+        FlyingPathNavigation flyingpathnavigation = new FlyingPathNavigation(this, pLevel);
+        flyingpathnavigation.setCanOpenDoors(false);
+        flyingpathnavigation.setCanFloat(true);
+        flyingpathnavigation.setCanPassDoors(true);
+        return flyingpathnavigation;
+    }
+
+    //This is so that it would be passive but spawn at night
+    @Override
+    public boolean doHurtTarget(@NotNull Entity pEntity) {
+        return !(pEntity instanceof Player);
+    }
+
+    @Override
+    public boolean canAttack(@NotNull LivingEntity pTarget) {
+        return !(pTarget instanceof Player);
+    }
+
+    @Override
+    protected @NotNull Brain<?> makeBrain(@NotNull Dynamic<?> pDynamic) {
+        return SnowWispAI.makeBrain(this,pDynamic);
+    }
+
+    @Override
+    public Brain<SnowWispEntity> getBrain() {
+        return (Brain<SnowWispEntity>) super.getBrain();
+    }
+
+    protected void customServerAiStep() {
+        ServerLevel level = (ServerLevel)this.level();
+        level.getProfiler().push("wispBrain");
+        this.getBrain().tick(level, this);
+        this.level().getProfiler().pop();
+        this.level().getProfiler().push("wispUpdateActivity");
+        SnowWispAI.updateActivity(this);
+        this.level().getProfiler().pop();
+        super.customServerAiStep();
+    }
+
     @Override
     public void tick() {
         super.tick();
@@ -104,58 +157,6 @@ public class SnowWispEntity extends Monster {
     }
 
     @Override
-    protected void updateWalkAnimation(float pPartialTick) {
-        super.updateWalkAnimation(pPartialTick);
-    }
-
-    public static AttributeSupplier.Builder createAttributes() {
-        return Mob.createMobAttributes()
-                .add(Attributes.MOVEMENT_SPEED,0.5D)
-                .add(Attributes.MAX_HEALTH, 4D)
-                .add(Attributes.FLYING_SPEED, 0.5D);
-    }
-
-    protected @NotNull PathNavigation createNavigation(@NotNull Level pLevel) {
-        FlyingPathNavigation flyingpathnavigation = new FlyingPathNavigation(this, pLevel);
-        flyingpathnavigation.setCanOpenDoors(false);
-        flyingpathnavigation.setCanFloat(true);
-        flyingpathnavigation.setCanPassDoors(true);
-        return flyingpathnavigation;
-    }
-
-    //This is so that it would be passive but spawn at night
-    @Override
-    public boolean doHurtTarget(@NotNull Entity pEntity) {
-        return !(pEntity instanceof Player);
-    }
-
-    @Override
-    public boolean canAttack(@NotNull LivingEntity pTarget) {
-        return !(pTarget instanceof Player);
-    }
-
-    @Override
-    protected @NotNull Brain<?> makeBrain(@NotNull Dynamic<?> pDynamic) {
-        return SnowWispAI.makeBrain(this,pDynamic);
-    }
-
-    @Override
-    public Brain<SnowWispEntity> getBrain() {
-        return (Brain<SnowWispEntity>) super.getBrain();
-    }
-
-    protected void customServerAiStep() {
-        ServerLevel level = (ServerLevel)this.level();
-        level.getProfiler().push("wispBrain");
-        this.getBrain().tick(level, this);
-        this.level().getProfiler().pop();
-        this.level().getProfiler().push("wispUpdateActivity");
-        SnowWispAI.updateActivity(this);
-        this.level().getProfiler().pop();
-        super.customServerAiStep();
-    }
-
-    @Override
     protected void checkFallDamage(double pY, boolean pOnGround, BlockState pState, BlockPos pPos) {
 
     }
@@ -170,23 +171,23 @@ public class SnowWispEntity extends Monster {
         super.aiStep();
 
         if (!this.onGround()) {
-            double entityX = getX();
-            double entityY = getY() - 0.5;
-            double entityZ = getZ();
-
-            double spreadX = (random.nextDouble() - 0.5) * 0.4;
-            double spreadZ = (random.nextDouble() - 0.5) * 0.4;
-
-            if (this.level().isClientSide) {
-                this.level().addParticle(
-                        ModParticles.AURORA_PARTICLE.get(),
-                        true,
-                        entityX + spreadX,
-                        entityY,
-                        entityZ + spreadZ,
-                        0, -0.05, 0
-                );
-            }
+//            double entityX = getX();
+//            double entityY = getY() - 0.5;
+//            double entityZ = getZ();
+//
+//            double spreadX = (random.nextDouble() - 0.5) * 0.4;
+//            double spreadZ = (random.nextDouble() - 0.5) * 0.4;
+//
+//            if (this.level().isClientSide) {
+//                this.level().addParticle(
+//                        ModParticles.AURORA_PARTICLE.get(),
+//                        true,
+//                        entityX + spreadX,
+//                        entityY,
+//                        entityZ + spreadZ,
+//                        0, -0.05, 0
+//                );
+//            }
         }
 
         if (!this.level().isClientSide) {

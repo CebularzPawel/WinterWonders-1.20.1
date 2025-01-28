@@ -69,7 +69,6 @@ public class SnowWispAI
     private static void initIdleActivities(Brain<SnowWispEntity> brain)
     {
         brain.addActivityWithConditions(Activity.IDLE, ImmutableList.of(
-                Pair.of(1, new FlockBehavior<>()),
                 Pair.of(1, new RunOne(ImmutableList.of(Pair.of(RandomStroll.fly(1.0F), 2),
                         Pair.of(SetWalkTargetFromLookTarget.create(1.0F, 3), 2),
                         Pair.of(new DoNothing(30, 60), 1)))),

@@ -82,9 +82,13 @@ public class SnowWispModel<T extends Entity> extends HierarchicalModel<T> {
     }
 
     public void setColor(int color) {
-        this.r = Math.min(((color >> 16 & 255) / 255.0F) * 1.2F, 1.0F); 
-        this.g = Math.min(((color >> 8 & 255) / 255.0F) * 1.2F, 1.0F);  
-        this.b = Math.min(((color & 255) / 255.0F) * 1.2F, 1.0F);   
+        this.r = clamp(((color >> 16 & 0xFF) / 255.0F) * 1.2F);
+        this.g = clamp(((color >> 8 & 0xFF) / 255.0F) * 1.2F);
+        this.b = clamp(((color & 0xFF) / 255.0F) * 1.2F);
+    }
+
+    private float clamp(float value) {
+        return Math.max(0.0F, Math.min(value, 1.0F));
     }
 
     @Override
