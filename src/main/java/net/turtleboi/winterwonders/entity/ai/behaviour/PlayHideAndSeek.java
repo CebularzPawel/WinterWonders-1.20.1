@@ -13,6 +13,7 @@ import net.minecraft.world.entity.ai.memory.MemoryStatus;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.Vec3;
+import org.jetbrains.annotations.NotNull;
 
 import java.util.*;
 
@@ -21,8 +22,9 @@ public class PlayHideAndSeek<E extends PathfinderMob> extends Behavior<E> {
     private static final int SEARCH_RADIUS = 10;
     private static final int SEARCH_HEIGHT = 3;
     private static final Random RANDOM = new Random();
-
+    private static final float PLAY_CHANCE = 0.2F;
     private enum GamePhase {
+        WANDERING,
         SEEKING_HIDING_SPOT,
         HIDING,
         RUNNING_TO_PLAYER,
@@ -41,17 +43,26 @@ public class PlayHideAndSeek<E extends PathfinderMob> extends Behavior<E> {
     }
 
     @Override
-    protected boolean checkExtraStartConditions(ServerLevel pLevel, E pOwner) {
-        return pOwner.getBrain().hasMemoryValue(MemoryModuleType.NEAREST_VISIBLE_PLAYER) &&
-                !pOwner.getBrain().hasMemoryValue(MemoryModuleType.LIKED_PLAYER);
+    protected boolean checkExtraStartConditions(@NotNull ServerLevel pLevel, E pOwner) {
+        boolean shouldPlay = pOwner.getBrain().hasMemoryValue(MemoryModuleType.NEAREST_VISIBLE_PLAYER) &&
+                !pOwner.getBrain().hasMemoryValue(MemoryModuleType.LIKED_PLAYER) &&
+                RANDOM.nextFloat() < PLAY_CHANCE;
+        if (!shouldPlay) {
+            startWandering(pOwner);
+        }
+        return shouldPlay;
     }
 
+
     @Override
-    protected void start(ServerLevel pLevel, E pEntity, long pGameTime) {
+    protected void start(@NotNull ServerLevel pLevel, E pEntity, long pGameTime) {
         targetPlayer = pEntity.getBrain().getMemory(MemoryModuleType.NEAREST_VISIBLE_PLAYER).orElse(null);
-        if (targetPlayer != null) {
+
+        if (targetPlayer != null && RANDOM.nextFloat() < PLAY_CHANCE) {
             notifyPlayer(targetPlayer, "A snow wisp wants to play hide and seek! Try to find it!");
             findHidingSpot(pLevel, pEntity);
+        } else {
+            currentPhase = GamePhase.WANDERING;
         }
     }
 
@@ -59,7 +70,6 @@ public class PlayHideAndSeek<E extends PathfinderMob> extends Behavior<E> {
         List<BlockPos> potentialSpots = new ArrayList<>();
         BlockPos entityPos = entity.blockPosition();
 
-        // Search for valid hiding spots
         for (int x = -SEARCH_RADIUS; x <= SEARCH_RADIUS; x++) {
             for (int y = -SEARCH_HEIGHT; y <= SEARCH_HEIGHT; y++) {
                 for (int z = -SEARCH_RADIUS; z <= SEARCH_RADIUS; z++) {
@@ -78,7 +88,6 @@ public class PlayHideAndSeek<E extends PathfinderMob> extends Behavior<E> {
     }
 
     private boolean isGoodHidingSpot(ServerLevel level, BlockPos pos) {
-        // Check if the block is solid and has space above it
         BlockState state = level.getBlockState(pos);
         return state.isSolid() &&
                 level.getBlockState(pos.above()).isAir() &&
@@ -86,9 +95,9 @@ public class PlayHideAndSeek<E extends PathfinderMob> extends Behavior<E> {
     }
 
     @Override
-    protected void tick(ServerLevel pLevel, E pEntity, long pGameTime) {
-        if (targetPlayer == null || !targetPlayer.isAlive()) {
-            stopGame(pLevel, pEntity);
+    protected void tick(@NotNull ServerLevel pLevel, @NotNull E pEntity, long pGameTime) {
+        if (currentPhase == GamePhase.GAME_OVER || targetPlayer == null || !targetPlayer.isAlive()) {
+            startWandering(pEntity);
             return;
         }
 
@@ -105,7 +114,6 @@ public class PlayHideAndSeek<E extends PathfinderMob> extends Behavior<E> {
             }
             case HIDING -> {
                 hideTime++;
-                // If player is very close or we've been hiding for too long, run to player
                 if (pEntity.distanceToSqr(targetPlayer) < 3.0 * 3.0 || hideTime > MAX_HIDE_TIME) {
                     currentPhase = GamePhase.RUNNING_TO_PLAYER;
                     notifyPlayer(targetPlayer, "The snow wisp has been found! Right-click to befriend it!");
@@ -126,6 +134,7 @@ public class PlayHideAndSeek<E extends PathfinderMob> extends Behavior<E> {
                     currentPhase = GamePhase.GAME_OVER;
                 }
             }
+            case WANDERING -> startWandering(pEntity);
             case GAME_OVER -> stopGame(pLevel, pEntity);
         }
     }
@@ -141,6 +150,28 @@ public class PlayHideAndSeek<E extends PathfinderMob> extends Behavior<E> {
         player.displayClientMessage(Component.literal(message), true);
     }
 
+    private void startWandering(E pEntity) {
+        Vec3 randomPos = getRandomNearbyPosition(pEntity);
+        if (randomPos != null) {
+            pEntity.getNavigation().moveTo(randomPos.x, randomPos.y, randomPos.z, MOVEMENT_SPEED / 2);
+        }
+    }
+
+    private Vec3 getRandomNearbyPosition(E pEntity) {
+        BlockPos entityPos = pEntity.blockPosition();
+        for (int i = 0; i < 10; i++) {
+            int offsetX = RANDOM.nextInt(SEARCH_RADIUS * 2) - SEARCH_RADIUS;
+            int offsetZ = RANDOM.nextInt(SEARCH_RADIUS * 2) - SEARCH_RADIUS;
+            int offsetY = RANDOM.nextInt(SEARCH_HEIGHT * 2) - SEARCH_HEIGHT;
+
+            BlockPos randomPos = entityPos.offset(offsetX, offsetY, offsetZ);
+            if (pEntity.level().getBlockState(randomPos).isAir() && pEntity.level().getBlockState(randomPos.below()).isSolid()) {
+                return Vec3.atCenterOf(randomPos);
+            }
+        }
+        return null;
+    }
+
     private void stopGame(ServerLevel level, E entity) {
         entity.getNavigation().stop();
         entity.removeEffect(MobEffects.GLOWING);
@@ -148,12 +179,12 @@ public class PlayHideAndSeek<E extends PathfinderMob> extends Behavior<E> {
     }
 
     @Override
-    protected void stop(ServerLevel pLevel, E pEntity, long pGameTime) {
+    protected void stop(@NotNull ServerLevel pLevel, @NotNull E pEntity, long pGameTime) {
         stopGame(pLevel, pEntity);
     }
 
     @Override
-    protected boolean canStillUse(ServerLevel pLevel, E pEntity, long pGameTime) {
+    protected boolean canStillUse(@NotNull ServerLevel pLevel, @NotNull E pEntity, long pGameTime) {
         return currentPhase != GamePhase.GAME_OVER && targetPlayer != null && targetPlayer.isAlive();
     }
 }
