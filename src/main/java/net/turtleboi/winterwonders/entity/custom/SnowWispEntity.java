@@ -4,6 +4,7 @@ import com.mojang.serialization.Dynamic;
 import net.minecraft.core.BlockPos;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.util.RandomSource;
+import net.minecraft.world.Difficulty;
 import net.minecraft.world.entity.*;
 import net.minecraft.world.entity.ai.Brain;
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
@@ -26,13 +27,16 @@ import org.jetbrains.annotations.NotNull;
 
 import java.util.Random;
 
-public class SnowWispEntity extends Monster {
+import static net.minecraft.world.entity.monster.Monster.checkMonsterSpawnRules;
+import static net.minecraft.world.entity.monster.Monster.isDarkEnoughToSpawn;
+
+public class SnowWispEntity extends PathfinderMob {
     private int startColor;
     private int endColor;
     private float colorTransition = 0.0F;
     private int currentColor = 0xFFFFFF;
 
-    public SnowWispEntity(EntityType<? extends Monster> pEntityType, Level pLevel) {
+    public SnowWispEntity(EntityType<? extends PathfinderMob> pEntityType, Level pLevel) {
         super(pEntityType, pLevel);
         this.moveControl = new FlyingMoveControl(this, 20, true);
         this.setPathfindingMalus(BlockPathTypes.LAVA, 8.0F);
@@ -224,5 +228,9 @@ public class SnowWispEntity extends Monster {
 
     public static boolean canSpawn(EntityType<SnowWispEntity> entityType, ServerLevelAccessor level, MobSpawnType spawnType, BlockPos pos, RandomSource random){
         return checkMonsterSpawnRules(entityType, level, spawnType, pos, random);
+    }
+
+    public static boolean checkMonsterSpawnRules(EntityType<? extends Mob> pType, ServerLevelAccessor pLevel, MobSpawnType pSpawnType, BlockPos pPos, RandomSource pRandom) {
+        return isDarkEnoughToSpawn(pLevel, pPos, pRandom) && checkMobSpawnRules(pType, pLevel, pSpawnType, pPos, pRandom);
     }
 }
