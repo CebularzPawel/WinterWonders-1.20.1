@@ -18,9 +18,6 @@ public class ModCreativeModeTabs {
     public static final DeferredRegister<CreativeModeTab> CREATIVE_MODE_TABS =
             DeferredRegister.create(Registries.CREATIVE_MODE_TAB, WinterWonders.MOD_ID);
 
-    public static final List<Item> ITEM_LIST = new ArrayList<>();
-    public static final List<Block> BLOCK_LIST = new ArrayList<>();
-
     public static final RegistryObject<CreativeModeTab> WINTERWONDERS_TAB = CREATIVE_MODE_TABS.register("winterwonders_tab",
             () -> CreativeModeTab.builder().icon(() -> new ItemStack(ModItems.COLDSTEEL_INGOT.get()))
                     .title(Component.translatable("creativetab.winterwonders_tab"))
@@ -54,23 +51,10 @@ public class ModCreativeModeTabs {
                         pOutput.accept(ModBlocks.GREYPINE_SAPLING.get());
 
                         pOutput.accept(ModItems.SNOW_WISP_SPAWN_EGG.get());
+                        pOutput.accept(ModItems.REVENANT_SPAWN_EGG.get());
+                        pOutput.accept(ModItems.PINGIN_SPAWN_EGG.get());
                     })
                     .build());
-
-    //public static final RegistryObject<CreativeModeTab> WINTERWONDERS_ITEM_TAB = CREATIVE_MODE_TABS.register("winterwonders_item_tab",
-    //        () -> CreativeModeTab.builder()
-    //                .icon(() -> new ItemStack(ModItems.COLDSTEEL_INGOT.get()))
-    //                .title(Component.translatable("creativetab.winterwonders_item_tab"))
-    //                .displayItems((pParameters, pOutput) -> ITEM_LIST.forEach(pOutput::accept))
-    //                .build());
-    //
-    //public static final RegistryObject<CreativeModeTab> WINTERWONDERS_BLOCK_TAB = CREATIVE_MODE_TABS.register("winterwonders_block_tab",
-    //        () -> CreativeModeTab.builder()
-    //                .icon(() -> new ItemStack(ModItems.COLDSTEEL_INGOT.get()))
-    //                .title(Component.translatable("creativetab.winterwonders_block_tab"))
-    //                .displayItems((pParameters, pOutput) -> BLOCK_LIST.forEach(pOutput::accept))
-    //                .build());
-
 
     public static void register(IEventBus eventBus) {
         CREATIVE_MODE_TABS.register(eventBus);

@@ -12,10 +12,13 @@ import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
 import net.turtleboi.winterwonders.WinterWonders;
+import net.turtleboi.winterwonders.client.models.entity.PinginModel;
 import net.turtleboi.winterwonders.client.models.entity.SnowWispModel;
 import net.turtleboi.winterwonders.client.particles.AuroraParticle;
+import net.turtleboi.winterwonders.client.renderers.entity.PinginRenderer;
 import net.turtleboi.winterwonders.client.renderers.entity.RevenantRenderer;
 import net.turtleboi.winterwonders.client.renderers.entity.SnowWispRenderer;
+import net.turtleboi.winterwonders.entity.custom.PinginEntity;
 import net.turtleboi.winterwonders.entity.custom.RevenantEntity;
 import net.turtleboi.winterwonders.entity.custom.SnowWispEntity;
 import net.turtleboi.winterwonders.init.ModEntities;
@@ -29,17 +32,20 @@ public class ModBusEvents
     public static void onClientSetupEvent(FMLClientSetupEvent event) {
         EntityRenderers.register(ModEntities.SNOW_WISP.get(), SnowWispRenderer::new);
         EntityRenderers.register(ModEntities.REVENANT.get(), RevenantRenderer::new);
+        EntityRenderers.register(ModEntities.PINGIN.get(), PinginRenderer::new);
     }
 
     @SubscribeEvent
     public static void registerAttributes(EntityAttributeCreationEvent event) {
         event.put(ModEntities.SNOW_WISP.get(), SnowWispEntity.createAttributes().build());
         event.put(ModEntities.REVENANT.get(), RevenantEntity.createAttributes().build());
+        event.put(ModEntities.PINGIN.get(), PinginEntity.createAttributes().build());
     }
 
     @SubscribeEvent
     public static void registerEntityLayer(EntityRenderersEvent.RegisterLayerDefinitions event) {
         event.registerLayerDefinition(SnowWispModel.SNOW_WISP_LAYER, SnowWispModel::createBodyLayer);
+        event.registerLayerDefinition(PinginModel.PINGIN_LAYER, PinginModel::createBodyLayer);
     }
 
     @SubscribeEvent

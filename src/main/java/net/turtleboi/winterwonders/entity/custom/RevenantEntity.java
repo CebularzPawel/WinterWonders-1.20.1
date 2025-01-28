@@ -33,6 +33,11 @@ public class RevenantEntity extends Zombie {
     }
 
     @Override
+    protected boolean isSunSensitive() {
+        return false;
+    }
+
+    @Override
     public boolean doHurtTarget(Entity target) {
         boolean didAttack = super.doHurtTarget(target);
 
