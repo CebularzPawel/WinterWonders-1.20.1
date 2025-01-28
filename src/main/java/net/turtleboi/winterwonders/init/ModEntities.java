@@ -15,7 +15,7 @@ public class ModEntities
     public static final DeferredRegister<EntityType<?>> TYPES = DeferredRegister.create(ForgeRegistries.ENTITY_TYPES, WinterWonders.MOD_ID);
 
     public static final RegistryObject<EntityType<SnowWispEntity>> SNOW_WISP =
-            TYPES.register("snow_wisp",()-> EntityType.Builder.of(SnowWispEntity::new, MobCategory.MONSTER)
+            TYPES.register("snow_wisp",()-> EntityType.Builder.of(SnowWispEntity::new, MobCategory.AMBIENT)
                     .sized(0.35F, 0.6F).clientTrackingRange(8).updateInterval(2).build("snow_wisp"));
 
     public static final RegistryObject<EntityType<RevenantEntity>> REVENANT =

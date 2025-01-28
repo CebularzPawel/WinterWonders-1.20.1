@@ -2,6 +2,9 @@ package net.turtleboi.winterwonders.entity.custom;
 
 import com.mojang.serialization.Dynamic;
 import net.minecraft.core.BlockPos;
+import net.minecraft.network.syncher.EntityDataAccessor;
+import net.minecraft.network.syncher.EntityDataSerializers;
+import net.minecraft.network.syncher.SynchedEntityData;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.Difficulty;
@@ -31,10 +34,10 @@ import static net.minecraft.world.entity.monster.Monster.checkMonsterSpawnRules;
 import static net.minecraft.world.entity.monster.Monster.isDarkEnoughToSpawn;
 
 public class SnowWispEntity extends PathfinderMob {
+    private static final EntityDataAccessor<Integer> COLOR = SynchedEntityData.defineId(SnowWispEntity.class, EntityDataSerializers.INT);
     private int startColor;
     private int endColor;
     private float colorTransition = 0.0F;
-    private int currentColor = 0xFFFFFF;
 
     public SnowWispEntity(EntityType<? extends PathfinderMob> pEntityType, Level pLevel) {
         super(pEntityType, pLevel);
@@ -47,6 +50,12 @@ public class SnowWispEntity extends PathfinderMob {
         do {
             this.endColor = POSSIBLE_COLORS[this.random.nextInt(POSSIBLE_COLORS.length)];
         } while (this.endColor == this.startColor);
+    }
+
+    @Override
+    protected void defineSynchedData() {
+        super.defineSynchedData();
+        this.entityData.define(COLOR, 0xFFFFFF); // default
     }
 
     public AnimationState idleAnimationState = new AnimationState();
@@ -74,17 +83,6 @@ public class SnowWispEntity extends PathfinderMob {
         return flyingpathnavigation;
     }
 
-    //This is so that it would be passive but spawn at night
-    @Override
-    public boolean doHurtTarget(@NotNull Entity pEntity) {
-        return !(pEntity instanceof Player);
-    }
-
-    @Override
-    public boolean canAttack(@NotNull LivingEntity pTarget) {
-        return !(pTarget instanceof Player);
-    }
-
     @Override
     protected @NotNull Brain<?> makeBrain(@NotNull Dynamic<?> pDynamic) {
         return SnowWispAI.makeBrain(this,pDynamic);
@@ -108,24 +106,10 @@ public class SnowWispEntity extends PathfinderMob {
 
     @Override
     public void tick() {
-        super.tick();
-
         if (this.level().isClientSide){
             setupAnimationStates();
-
-            this.colorTransition += 0.01F;
-            if (this.colorTransition >= 1.0F) {
-
-                this.startColor = this.endColor;
-                this.colorTransition = 0.0F;
-                int newColor;
-                do {
-                    newColor = POSSIBLE_COLORS[this.random.nextInt(POSSIBLE_COLORS.length)];
-                } while (newColor == this.startColor);
-                this.endColor = newColor;
-            }
-            this.currentColor = blendColor(this.startColor, this.endColor, this.colorTransition);
         }
+        super.tick();
     }
 
     private void setupAnimationStates(){
@@ -195,6 +179,19 @@ public class SnowWispEntity extends PathfinderMob {
         }
 
         if (!this.level().isClientSide) {
+            this.colorTransition += 0.01F;
+            if (this.colorTransition >= 1.0F) {
+                this.startColor = this.endColor;
+                this.colorTransition = 0.0F;
+                int newColor;
+                do {
+                    newColor = POSSIBLE_COLORS[this.random.nextInt(POSSIBLE_COLORS.length)];
+                } while (newColor == this.startColor);
+                this.endColor = newColor;
+            }
+            int newColor = blendColor(this.startColor, this.endColor, this.colorTransition);
+            this.entityData.set(COLOR, newColor);
+
             BlockPos currentPos = this.blockPosition();
             if (this.lastLightPos != null && !this.lastLightPos.equals(currentPos)) {
                 if (this.level().getBlockState(this.lastLightPos).is(Blocks.LIGHT)) {
@@ -223,14 +220,10 @@ public class SnowWispEntity extends PathfinderMob {
     }
 
     public int getColorMultiplier() {
-        return currentColor;
+        return this.entityData.get(COLOR);
     }
 
     public static boolean canSpawn(EntityType<SnowWispEntity> entityType, ServerLevelAccessor level, MobSpawnType spawnType, BlockPos pos, RandomSource random){
-        return checkMonsterSpawnRules(entityType, level, spawnType, pos, random);
-    }
-
-    public static boolean checkMonsterSpawnRules(EntityType<? extends Mob> pType, ServerLevelAccessor pLevel, MobSpawnType pSpawnType, BlockPos pPos, RandomSource pRandom) {
-        return isDarkEnoughToSpawn(pLevel, pPos, pRandom) && checkMobSpawnRules(pType, pLevel, pSpawnType, pPos, pRandom);
+        return isDarkEnoughToSpawn(level, pos, random) && checkMobSpawnRules(entityType, level, spawnType, pos, random);
     }
 }
