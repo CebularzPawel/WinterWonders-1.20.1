@@ -1,7 +1,9 @@
 package net.turtleboi.winterwonders.init;
 
+import com.google.common.base.Suppliers;
 import net.minecraft.ChatFormatting;
 import net.minecraft.world.item.*;
+import net.minecraftforge.common.ForgeSpawnEggItem;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
@@ -51,6 +53,9 @@ public class ModItems {
 
     public static final RegistryObject<Item> FROSTBITE_WAND = ITEMS.register("frostbite_wand",
             () -> new FrostbiteWandItem(new Item.Properties().rarity(Rarity.RARE)));
+
+    public static final RegistryObject<Item> SNOW_WISP_SPAWN_EGG = ITEMS.register("snow_wisp_spawn_egg",
+            ()-> new ForgeSpawnEggItem(ModEntities.SNOW_WISP,0x6666,0x5555,new Item.Properties()));
 
 
     //public static <I extends Item> RegistryObject<I> registerItem(String itemName, Supplier<I> itemSup)

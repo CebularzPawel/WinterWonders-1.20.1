@@ -45,6 +45,8 @@ public class ModCreativeModeTabs {
                         pOutput.accept(ModBlocks.GREYPINE_PLANKS.get());
                         pOutput.accept(ModBlocks.GREYPINE_LEAVES.get());
                         pOutput.accept(ModBlocks.GREYPINE_SAPLING.get());
+
+                        pOutput.accept(ModItems.SNOW_WISP_SPAWN_EGG.get());
                     })
                     .build());
 

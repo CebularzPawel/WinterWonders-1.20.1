@@ -8,6 +8,7 @@ import net.minecraft.resources.ResourceLocation;
 import net.turtleboi.winterwonders.WinterWonders;
 import net.turtleboi.winterwonders.client.models.entity.SnowWispModel;
 import net.turtleboi.winterwonders.entity.custom.SnowWispEntity;
+import org.jetbrains.annotations.NotNull;
 
 public class SnowWispRenderer extends MobRenderer<SnowWispEntity, SnowWispModel<SnowWispEntity>> {
     private static final ResourceLocation TEXTURE = new ResourceLocation(WinterWonders.MOD_ID, "textures/entity/snow_wisp.png");
@@ -18,7 +19,7 @@ public class SnowWispRenderer extends MobRenderer<SnowWispEntity, SnowWispModel<
     }
 
     @Override
-    public ResourceLocation getTextureLocation(SnowWispEntity snowWispEntity) {
+    public @NotNull ResourceLocation getTextureLocation(@NotNull SnowWispEntity snowWispEntity) {
         return TEXTURE;
     }
 

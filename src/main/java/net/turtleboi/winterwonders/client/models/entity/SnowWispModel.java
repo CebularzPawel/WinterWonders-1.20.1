@@ -11,6 +11,7 @@ import net.minecraft.client.model.geom.builders.*;
 import net.minecraft.client.renderer.LightTexture;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.util.Mth;
 import net.minecraft.world.entity.Entity;
 import net.turtleboi.winterwonders.WinterWonders;
 import net.turtleboi.winterwonders.entity.animations.ModAnimationDefintions;
@@ -81,9 +82,9 @@ public class SnowWispModel<T extends Entity> extends HierarchicalModel<T> {
     }
 
     public void setColor(int color) {
-        this.r = (color >> 16 & 255) / 255.0F;
-        this.g = (color >> 8 & 255) / 255.0F;
-        this.b = (color & 255) / 255.0F;
+        this.r = Math.min(((color >> 16 & 255) / 255.0F) * 1.2F, 1.0F); 
+        this.g = Math.min(((color >> 8 & 255) / 255.0F) * 1.2F, 1.0F);  
+        this.b = Math.min(((color & 255) / 255.0F) * 1.2F, 1.0F);   
     }
 
     @Override
