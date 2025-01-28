@@ -1,4 +1,4 @@
-// 1.20.1	2025-01-27T14:03:51.905867	Item Models: winterwonders
+// 1.20.1	2025-01-28T13:58:44.458479	Item Models: winterwonders
 571ae5f8ec505248c58090bb345299cb86f28b9b assets/winterwonders/models/item/coldsteel_axe.json
 2685bc5a8330a836ebd268206acd08fccfc2140f assets/winterwonders/models/item/coldsteel_boots.json
 65dce4fdba69534421c4ef422805cc2cad80f224 assets/winterwonders/models/item/coldsteel_boots_amethyst_trim.json
@@ -54,4 +54,7 @@ c7bb864c14a4ba54b2bd194c8060005c92af996b assets/winterwonders/models/item/frostb
 14dec54b47871d3346f65262045e36c49111fba9 assets/winterwonders/models/item/frost_essence.json
 001800a2b27d7fddce6777e7e4c36793a3832391 assets/winterwonders/models/item/frozen_heart.json
 98cd2e5716d13729b0f07c9e12d2bbff67fba439 assets/winterwonders/models/item/greypine_sapling.json
+63ec6c618a3a23eab4cab9c52d7d3250de9b516e assets/winterwonders/models/item/pingin_spawn_egg.json
+63ec6c618a3a23eab4cab9c52d7d3250de9b516e assets/winterwonders/models/item/revenant_spawn_egg.json
+63ec6c618a3a23eab4cab9c52d7d3250de9b516e assets/winterwonders/models/item/snow_wisp_spawn_egg.json
 218b4747b17f1ee380065ea930ccead60abc05d3 assets/winterwonders/models/item/trueice_shard.json

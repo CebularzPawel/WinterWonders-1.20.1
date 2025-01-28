@@ -60,6 +60,10 @@ public class ModItemModelProvider extends ItemModelProvider {
         trimmedArmorItem(ModItems.COLDSTEEL_CHESTPLATE);
         trimmedArmorItem(ModItems.COLDSTEEL_LEGGINGS);
         trimmedArmorItem(ModItems.COLDSTEEL_BOOTS);
+
+        withExistingParent(ModItems.SNOW_WISP_SPAWN_EGG.getId().getPath(), mcLoc("item/template_spawn_egg"));
+        withExistingParent(ModItems.REVENANT_SPAWN_EGG.getId().getPath(), mcLoc("item/template_spawn_egg"));
+        withExistingParent(ModItems.PINGIN_SPAWN_EGG.getId().getPath(), mcLoc("item/template_spawn_egg"));
     }
 
     private void trimmedArmorItem(RegistryObject<Item> itemRegistryObject) {
