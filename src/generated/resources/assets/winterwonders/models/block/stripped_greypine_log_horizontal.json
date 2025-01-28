@@ -1,7 +1,7 @@
 {
   "parent": "minecraft:block/cube_column_horizontal",
   "textures": {
-    "end": "winterwonders:block/greypine_log_top",
+    "end": "winterwonders:block/stripped_greypine_log_top",
     "side": "winterwonders:block/stripped_greypine_log"
   }
 }

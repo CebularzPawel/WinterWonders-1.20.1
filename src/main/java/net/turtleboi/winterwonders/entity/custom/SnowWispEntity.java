@@ -110,9 +110,9 @@ public class SnowWispEntity extends Monster {
 
     public static AttributeSupplier.Builder createAttributes() {
         return Mob.createMobAttributes()
-                .add(Attributes.MOVEMENT_SPEED,0.23D)
-                .add(Attributes.MAX_HEALTH, 12D)
-                .add(Attributes.FLYING_SPEED, 0.25D);
+                .add(Attributes.MOVEMENT_SPEED,0.5D)
+                .add(Attributes.MAX_HEALTH, 4D)
+                .add(Attributes.FLYING_SPEED, 0.5D);
     }
 
     protected @NotNull PathNavigation createNavigation(@NotNull Level pLevel) {

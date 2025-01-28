@@ -28,6 +28,7 @@ public class ModBusEvents
     @SubscribeEvent
     public static void onClientSetupEvent(FMLClientSetupEvent event) {
         EntityRenderers.register(ModEntities.SNOW_WISP.get(), SnowWispRenderer::new);
+        EntityRenderers.register(ModEntities.REVENANT.get(), RevenantRenderer::new);
     }
 
     @SubscribeEvent
@@ -39,11 +40,6 @@ public class ModBusEvents
     @SubscribeEvent
     public static void registerEntityLayer(EntityRenderersEvent.RegisterLayerDefinitions event) {
         event.registerLayerDefinition(SnowWispModel.SNOW_WISP_LAYER, SnowWispModel::createBodyLayer);
-    }
-
-    @SubscribeEvent
-    public static void onRegisterRenderers(EntityRenderersEvent.RegisterRenderers event) {
-        event.registerEntityRenderer(ModEntities.REVENANT.get(), RevenantRenderer::new);
     }
 
     @SubscribeEvent

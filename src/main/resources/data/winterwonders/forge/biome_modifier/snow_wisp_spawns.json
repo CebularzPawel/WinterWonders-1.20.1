@@ -4,8 +4,8 @@
 
   "spawners":{
     "type": "winterwonders:snow_wisp",
-    "weight": 75,
+    "weight": 125,
     "minCount": 1,
-    "maxCount": 3
+    "maxCount": 4
   }
 }

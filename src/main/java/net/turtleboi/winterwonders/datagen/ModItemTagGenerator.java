@@ -9,6 +9,7 @@ import net.minecraftforge.common.data.ExistingFileHelper;
 import net.minecraftforge.fml.common.Mod;
 import net.turtleboi.winterwonders.WinterWonders;
 import net.turtleboi.winterwonders.init.ModBlocks;
+import net.turtleboi.winterwonders.init.ModItems;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.concurrent.CompletableFuture;
@@ -29,5 +30,11 @@ public class ModItemTagGenerator extends ItemTagsProvider {
 
         this.tag(ItemTags.PLANKS)
                 .add(ModBlocks.GREYPINE_PLANKS.get().asItem());
+
+        this.tag(ItemTags.TRIMMABLE_ARMOR)
+                .add(ModItems.COLDSTEEL_HELMET.get())
+                .add(ModItems.COLDSTEEL_CHESTPLATE.get())
+                .add(ModItems.COLDSTEEL_LEGGINGS.get())
+                .add(ModItems.COLDSTEEL_BOOTS.get());
     }
 }
