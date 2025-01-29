@@ -154,6 +154,7 @@ public class SnowWispEntity extends PathfinderMob {
         return !this.onGround();
     }
 
+
     @Override
     public void aiStep() {
         super.aiStep();
