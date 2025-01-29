@@ -25,7 +25,8 @@ public class PinginEntity extends Animal {
 
     @Override
     protected void registerGoals() {
-        this.goalSelector.addGoal(1, new FloatGoal(this));
+        this.goalSelector.addGoal(0, new FloatGoal(this));
+        this.goalSelector.addGoal(1, new PanicGoal(this, 2.0D));
 
         this.goalSelector.addGoal(2, new BreedGoal(this, 1.15D));
         this.goalSelector.addGoal(3, new TemptGoal(this, 1.15D, Ingredient.of(Items.SALMON), false));
@@ -70,9 +71,9 @@ public class PinginEntity extends Animal {
     }
 
     public static AttributeSupplier.Builder createAttributes(){
-        return Animal.createLivingAttributes()
+        return Animal.createMobAttributes()
                 .add(Attributes.MAX_HEALTH, 12D)
-                .add(Attributes.MOVEMENT_SPEED, 0.005D)
+                .add(Attributes.MOVEMENT_SPEED, 0.25D)
                 .add(Attributes.FOLLOW_RANGE, 24D);
     }
 
