@@ -43,7 +43,7 @@ public class FollowLikedPlayer<E extends PathfinderMob> extends Behavior<E> {
         Player likedPlayer = level.getPlayerByUUID(likedPlayerUUID);
 
         if (likedPlayer != null && likedPlayer.isAlive()) {
-            Vec3 currentTargetPos = new Vec3(likedPlayer.getX(), likedPlayer.getEyeY(), likedPlayer.getZ());
+            Vec3 currentTargetPos = likedPlayer.position();
             double distance = entity.distanceToSqr(likedPlayer);
 
             if (distance > MIN_FOLLOW_DISTANCE * MIN_FOLLOW_DISTANCE &&
@@ -52,8 +52,8 @@ public class FollowLikedPlayer<E extends PathfinderMob> extends Behavior<E> {
                 boolean shouldRecalculatePath = shouldRecalculatePath(currentTargetPos, entity);
 
                 if (shouldRecalculatePath && pathfindingCooldown <= 0) {
-                    double offsetX = (Math.random() * 2 - 1) * MIN_FOLLOW_DISTANCE * 0.5;
-                    double offsetZ = (Math.random() * 2 - 1) * MIN_FOLLOW_DISTANCE * 0.5;
+                    double offsetX = (Math.random() - 0.5) * MIN_FOLLOW_DISTANCE;
+                    double offsetZ = (Math.random() - 0.5) * MIN_FOLLOW_DISTANCE;
 
                     entity.getNavigation().moveTo(
                             currentTargetPos.x + offsetX,
@@ -66,11 +66,11 @@ public class FollowLikedPlayer<E extends PathfinderMob> extends Behavior<E> {
                     pathfindingCooldown = 10;
                 }
 
-                updateRotation(entity, currentTargetPos);
+                updateRotation(entity, likedPlayer.position());
 
             } else if (distance >= MAX_FOLLOW_DISTANCE * MAX_FOLLOW_DISTANCE) {
-                double offsetX = (Math.random() * 2 - 1) * 2;
-                double offsetZ = (Math.random() * 2 - 1) * 2;
+                double offsetX = (Math.random() - 0.5) * 4;
+                double offsetZ = (Math.random() - 0.5) * 4;
                 entity.teleportTo(
                         likedPlayer.getX() + offsetX,
                         likedPlayer.getY(),
@@ -99,16 +99,19 @@ public class FollowLikedPlayer<E extends PathfinderMob> extends Behavior<E> {
         double dx = targetPos.x - entity.getX();
         double dz = targetPos.z - entity.getZ();
 
-        double targetYaw = Math.atan2(dz, dx) * (180.0 / Math.PI) - 90.0;
+        float targetYaw = (float) Math.toDegrees(Math.atan2(-dx, dz));
 
-        double currentYaw = entity.getYRot() % 360.0;
-        if (currentYaw < 0) currentYaw += 360.0;
+        float currentYaw = entity.getYRot() % 360.0f;
+        if (currentYaw > 180.0f) currentYaw -= 360.0f;
+        if (currentYaw < -180.0f) currentYaw += 360.0f;
 
-        double diff = targetYaw - currentYaw;
-        if (diff < -180.0) diff += 360.0;
-        if (diff > 180.0) diff -= 360.0;
+        float yawDiff = targetYaw - currentYaw;
+        if (yawDiff > 180.0f) yawDiff -= 360.0f;
+        if (yawDiff < -180.0f) yawDiff += 360.0f;
 
-        entity.setYRot((float)(currentYaw + diff * ROTATION_SPEED));
+        entity.setYRot(currentYaw + yawDiff * (float)ROTATION_SPEED);
+        entity.yRotO = entity.getYRot();
+        entity.setYBodyRot(entity.getYRot());
     }
 
     @Override

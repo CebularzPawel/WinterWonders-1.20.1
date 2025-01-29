@@ -122,10 +122,11 @@ public class SnowWispEntity extends PathfinderMob {
     }
 
     private static final int[] POSSIBLE_COLORS = new int[] {
-            0xD0F4F9,
-            0xD0F9DF,
-            0xF9D0F7,
-            0xF9F7D0
+            0xD0B9F3,
+            0xFFFCC2,
+            0xFDD6BD,
+            0xFFC2D9,
+            0xC8FFF8
     };
 
     private static int blendColor(int colorA, int colorB, float progress) {
@@ -153,6 +154,7 @@ public class SnowWispEntity extends PathfinderMob {
     protected boolean isFlapping() {
         return !this.onGround();
     }
+
 
     @Override
     public void aiStep() {
