@@ -114,7 +114,7 @@ public class SnowWispEntity extends PathfinderMob {
 
     private void setupAnimationStates(){
         if(this.idleAnimationTimeout <= 0){
-            this.idleAnimationTimeout = this.random.nextInt(40) +80;
+            this.idleAnimationTimeout = this.random.nextInt(40) + 160;
             this.idleAnimationState.start(this.tickCount);
         } else {
             --this.idleAnimationTimeout;
@@ -158,27 +158,6 @@ public class SnowWispEntity extends PathfinderMob {
     @Override
     public void aiStep() {
         super.aiStep();
-
-        if (!this.onGround()) {
-//            double entityX = getX();
-//            double entityY = getY() - 0.5;
-//            double entityZ = getZ();
-//
-//            double spreadX = (random.nextDouble() - 0.5) * 0.4;
-//            double spreadZ = (random.nextDouble() - 0.5) * 0.4;
-//
-//            if (this.level().isClientSide) {
-//                this.level().addParticle(
-//                        ModParticles.AURORA_PARTICLE.get(),
-//                        true,
-//                        entityX + spreadX,
-//                        entityY,
-//                        entityZ + spreadZ,
-//                        0, -0.05, 0
-//                );
-//            }
-        }
-
         if (!this.level().isClientSide) {
             this.colorTransition += 0.01F;
             if (this.colorTransition >= 1.0F) {

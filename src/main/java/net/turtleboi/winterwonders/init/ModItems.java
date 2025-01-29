@@ -67,24 +67,13 @@ public class ModItems {
             () -> new FrostbiteWandItem(new Item.Properties().rarity(Rarity.RARE)));
 
     public static final RegistryObject<Item> SNOW_WISP_SPAWN_EGG = ITEMS.register("snow_wisp_spawn_egg",
-            ()-> new ForgeSpawnEggItem(ModEntities.SNOW_WISP,0x6666,0x5555,new Item.Properties()));
+            ()-> new ForgeSpawnEggItem(ModEntities.SNOW_WISP,0xffffff,0xc5ebeb,new Item.Properties()));
 
+    public static final RegistryObject<Item> REVENANT_SPAWN_EGG = ITEMS.register("revenant_spawn_egg",
+            ()-> new ForgeSpawnEggItem(ModEntities.REVENANT,0x6e6e6e,0x6c8696,new Item.Properties()));
 
-    //public static <I extends Item> RegistryObject<I> registerItem(String itemName, Supplier<I> itemSup)
-    //{
-    //    return registerItem(itemName,itemSup,true);
-    //}
-//
-    //public static <I extends Item> RegistryObject<I> registerItem(String itemName, Supplier<I> itemSup, boolean putInTab)
-    //{
-    //    RegistryObject<I> regObj = ITEMS.register(itemName,itemSup);
-    //    if(putInTab)
-    //        {
-    //            ModCreativeModeTabs.ITEM_LIST.add(regObj.get());
-    //        }
-    //    return regObj;
-    //}
-
+    public static final RegistryObject<Item> PINGIN_SPAWN_EGG = ITEMS.register("pingin_spawn_egg",
+            ()-> new ForgeSpawnEggItem(ModEntities.PINGIN,0x11273f,0xe4ef73,new Item.Properties()));
 
     public static void register(IEventBus eventBus) {
         ITEMS.register(eventBus);
