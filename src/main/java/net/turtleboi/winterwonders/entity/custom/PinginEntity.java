@@ -32,7 +32,7 @@ public class PinginEntity extends Animal {
 
         this.goalSelector.addGoal(4, new FollowParentGoal(this, 1.1D));
 
-        this.goalSelector.addGoal(5, new RandomStrollGoal(this, 1D));
+        this.goalSelector.addGoal(5, new RandomStrollGoal(this, 0.75D));
         this.goalSelector.addGoal(6, new LookAtPlayerGoal(this, Player.class, 3f));
         this.goalSelector.addGoal(7, new RandomLookAroundGoal(this));
     }
@@ -72,7 +72,7 @@ public class PinginEntity extends Animal {
     public static AttributeSupplier.Builder createAttributes(){
         return Animal.createLivingAttributes()
                 .add(Attributes.MAX_HEALTH, 12D)
-                .add(Attributes.MOVEMENT_SPEED, 0.25D)
+                .add(Attributes.MOVEMENT_SPEED, 0.005D)
                 .add(Attributes.FOLLOW_RANGE, 24D);
     }
 
