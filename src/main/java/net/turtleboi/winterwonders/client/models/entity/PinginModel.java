@@ -59,10 +59,8 @@ public class PinginModel<T extends Entity> extends HierarchicalModel<T> {
     public void setupAnim(Entity entity, float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch) {
         this.root().getAllParts().forEach(ModelPart::resetPose);
 
-        if (entity.walkDist > 0){
-            this.applyHeadRotation(netHeadYaw, headPitch, ageInTicks);
-        }
-        this.animateWalk(ModAnimationDefintions.PINGIN_WALK, limbSwing, limbSwingAmount, 1f, 1f);
+        this.applyHeadRotation(netHeadYaw, headPitch, ageInTicks);
+        this.animateWalk(ModAnimationDefintions.PINGIN_WALK, limbSwing, limbSwingAmount, 2f, 2.4f);
         this.animate(((PinginEntity) entity).idleAnimationState, ModAnimationDefintions.PINGIN_IDLE, ageInTicks, 1f);
     }
 
