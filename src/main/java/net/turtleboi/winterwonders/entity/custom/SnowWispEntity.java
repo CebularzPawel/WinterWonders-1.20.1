@@ -48,7 +48,6 @@ public class SnowWispEntity extends PathfinderMob {
     private Player targetPlayer;
     private int playingTicks = 0;
     private static final int PLAYING_DURATION = 200;
-    private static Optional<UUID> likedPlayer;
 
     public SnowWispEntity(EntityType<? extends PathfinderMob> pEntityType, Level pLevel) {
         super(pEntityType, pLevel);
@@ -257,7 +256,7 @@ public class SnowWispEntity extends PathfinderMob {
 
         @Override
         public boolean canUse() {
-            if (--this.groupUpdateTime <= 0 && likedPlayer.isEmpty()) {
+            if (--this.groupUpdateTime <= 0) {
                 this.groupUpdateTime = 20;
                 List<SnowWispEntity> nearbyWisps = this.wisp.level().getEntitiesOfClass(
                         SnowWispEntity.class,
