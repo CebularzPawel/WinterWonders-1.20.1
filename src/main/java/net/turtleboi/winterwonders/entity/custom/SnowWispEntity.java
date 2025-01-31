@@ -1,24 +1,22 @@
 package net.turtleboi.winterwonders.entity.custom;
 
 import net.minecraft.core.BlockPos;
+import net.minecraft.network.chat.Component;
 import net.minecraft.network.syncher.EntityDataAccessor;
 import net.minecraft.network.syncher.EntityDataSerializers;
 import net.minecraft.network.syncher.SynchedEntityData;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
-import net.minecraft.world.effect.MobEffectInstance;
-import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.*;
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.ai.control.FlyingMoveControl;
-import net.minecraft.world.entity.ai.goal.FloatGoal;
-import net.minecraft.world.entity.ai.goal.Goal;
-import net.minecraft.world.entity.ai.goal.LookAtPlayerGoal;
-import net.minecraft.world.entity.ai.goal.RandomStrollGoal;
+import net.minecraft.world.entity.ai.goal.*;
 import net.minecraft.world.entity.ai.navigation.FlyingPathNavigation;
 import net.minecraft.world.entity.ai.navigation.PathNavigation;
+import net.minecraft.world.entity.ai.util.AirAndWaterRandomPos;
+import net.minecraft.world.entity.ai.util.LandRandomPos;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.ServerLevelAccessor;
@@ -26,13 +24,11 @@ import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraft.world.level.pathfinder.BlockPathTypes;
-import net.minecraftforge.eventbus.api.SubscribeEvent;
+import net.minecraft.world.phys.Vec3;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.EnumSet;
 import java.util.List;
-import java.util.Optional;
-import java.util.UUID;
 
 import static net.minecraft.world.entity.monster.Monster.isDarkEnoughToSpawn;
 
@@ -72,11 +68,10 @@ public class SnowWispEntity extends PathfinderMob {
 
     @Override
     protected void registerGoals() {
-        this.goalSelector.addGoal(1, new FloatGoal(this));
+        this.goalSelector.addGoal(0, new FloatGoal(this));
         this.goalSelector.addGoal(2, new SnowWispPlayGoal(this));
         this.goalSelector.addGoal(3, new SnowWispFollowPlayerGoal(this, 1.0D, 2.0F, 10.0F));
-        this.goalSelector.addGoal(4, new SnowWispGroupBehaviorGoal(this, 1.0D));
-        this.goalSelector.addGoal(5, new RandomStrollGoal(this, 1.0D));
+        this.goalSelector.addGoal(5, new RandomFlyingGoal(this, 1.0D));
         this.goalSelector.addGoal(6, new LookAtPlayerGoal(this, Player.class, 8.0F));
     }
 
@@ -214,8 +209,7 @@ public class SnowWispEntity extends PathfinderMob {
 
     @Override
     public @NotNull InteractionResult mobInteract(Player player, InteractionHand hand) {
-        if (this.isPlaying() && player.hasGlowingTag() && player == this.targetPlayer) {
-            player.removeEffect(MobEffects.GLOWING);
+        if (this.isPlaying() && player == this.targetPlayer) {
             this.setPlaying(false);
             this.setLikesPlayer(true);
             return InteractionResult.SUCCESS;
@@ -241,47 +235,15 @@ public class SnowWispEntity extends PathfinderMob {
     }
 
     // Group behavior goal
-    private static class SnowWispGroupBehaviorGoal extends Goal {
-        private final SnowWispEntity wisp;
-        private final double speedModifier;
-        private SnowWispEntity leader;
-        private int groupUpdateTime;
-
-        public SnowWispGroupBehaviorGoal(SnowWispEntity wisp, double speedModifier) {
-            this.wisp = wisp;
-            this.speedModifier = speedModifier;
-            this.setFlags(EnumSet.of(Goal.Flag.MOVE));
+    private static class RandomFlyingGoal extends RandomStrollGoal {
+        public RandomFlyingGoal(PathfinderMob pMob, double pSpeedModifier) {
+            super(pMob, pSpeedModifier, 10);
         }
 
         @Override
-        public boolean canUse() {
-            if (--this.groupUpdateTime <= 0) {
-                this.groupUpdateTime = 20;
-                List<SnowWispEntity> nearbyWisps = this.wisp.level().getEntitiesOfClass(
-                        SnowWispEntity.class,
-                        this.wisp.getBoundingBox().inflate(8.0D),
-                        entity -> entity != this.wisp
-                );
-
-                if (!nearbyWisps.isEmpty()) {
-                    this.leader = nearbyWisps.get(this.wisp.getRandom().nextInt(nearbyWisps.size()));
-                    return !this.leader.isPlaying() && !this.wisp.isPlaying();
-                }
-            }
-            return false;
-        }
-
-        @Override
-        public boolean canContinueToUse() {
-            return this.leader != null && this.leader.isAlive() &&
-                    !this.leader.isPlaying() && !this.wisp.isPlaying();
-        }
-
-        @Override
-        public void tick() {
-            if (this.wisp.distanceTo(this.leader) > 3.0D) {
-                this.wisp.getNavigation().moveTo(this.leader, this.speedModifier);
-            }
+        protected Vec3 getPosition() {
+            Vec3 randomPos = LandRandomPos.getPos(this.mob, 8, 4);
+            return randomPos != null ? randomPos : AirAndWaterRandomPos.getPos(this.mob, 8, 4, 3,this.mob.getX(),this.mob.getZ(),1.2F);
         }
     }
 
@@ -289,7 +251,13 @@ public class SnowWispEntity extends PathfinderMob {
     private static class SnowWispPlayGoal extends Goal {
         private final SnowWispEntity wisp;
         private Player targetPlayer;
-        private int cooldown = 0;
+        private int cooldown = 200;
+        private boolean isRunningAway = false;
+        private boolean hasTaggedPlayer = false;
+        private static final double CHASE_SPEED = 1.2D;
+        private static final double FLEE_SPEED = 1.5D;
+        private static final double TAG_DISTANCE = 1.5D; // Distance to tag the player
+        private static final double FLEE_DISTANCE = 10.0D;
 
         public SnowWispPlayGoal(SnowWispEntity wisp) {
             this.wisp = wisp;
@@ -299,15 +267,11 @@ public class SnowWispEntity extends PathfinderMob {
         @Override
         public boolean canUse() {
             if (this.wisp.isPlaying() || cooldown > 0 || this.wisp.likesPlayer()) {
-                if (cooldown > 0) {
-                    cooldown--;
-                }
+                if (cooldown > 0) cooldown--;
                 return false;
             }
 
-            if (this.wisp.getRandom().nextFloat() >= 0.2F) {
-                return false;
-            }
+            if (this.wisp.getRandom().nextFloat() > 0.05F) return false;
 
             List<Player> nearbyPlayers = this.wisp.level().getEntitiesOfClass(
                     Player.class,
@@ -318,7 +282,6 @@ public class SnowWispEntity extends PathfinderMob {
                 this.targetPlayer = nearbyPlayers.get(this.wisp.getRandom().nextInt(nearbyPlayers.size()));
                 return true;
             }
-
             return false;
         }
 
@@ -327,6 +290,8 @@ public class SnowWispEntity extends PathfinderMob {
             if (this.targetPlayer != null) {
                 this.wisp.setPlaying(true);
                 this.wisp.targetPlayer = this.targetPlayer;
+                this.isRunningAway = false;
+                this.hasTaggedPlayer = false;
             }
         }
 
@@ -337,10 +302,26 @@ public class SnowWispEntity extends PathfinderMob {
                 return;
             }
 
-            if (this.wisp.distanceTo(this.targetPlayer) <= 1.0D && !this.targetPlayer.hasGlowingTag()) {
-                this.targetPlayer.addEffect(new MobEffectInstance(MobEffects.GLOWING, 100, 0));
+            double distanceToPlayer = this.wisp.distanceTo(this.targetPlayer);
+
+            if (!isRunningAway) {
+                if (distanceToPlayer <= TAG_DISTANCE && !hasTaggedPlayer) {
+                    this.targetPlayer.displayClientMessage(Component.literal("You Have Been Tagged! Right-click the wisp to tag it back!"), true);
+
+                    this.hasTaggedPlayer = true;
+                    this.isRunningAway = true;
+
+                    Vec3 playerEye = new Vec3(this.targetPlayer.getX(),this.targetPlayer.getEyeY(),this.targetPlayer.getZ());
+                    Vec3 fleeDirection = this.wisp.position().subtract(playerEye).normalize();
+                    Vec3 fleeTarget = this.wisp.position().add(fleeDirection.scale(5));
+                    this.wisp.getNavigation().moveTo(fleeTarget.x, fleeTarget.y, fleeTarget.z, FLEE_SPEED);
+                } else {
+                    this.wisp.getNavigation().moveTo(this.targetPlayer, CHASE_SPEED);
+                }
             } else {
-                this.wisp.getNavigation().moveTo(this.targetPlayer, 1.2D);
+                if (distanceToPlayer >= FLEE_DISTANCE) {
+                    this.stop();
+                }
             }
         }
 
@@ -356,9 +337,12 @@ public class SnowWispEntity extends PathfinderMob {
         public void stop() {
             this.wisp.setPlaying(false);
             this.wisp.targetPlayer = null;
-            cooldown = 100;
+            this.isRunningAway = false;
+            this.hasTaggedPlayer = false;
+            cooldown = 400;
         }
     }
+
 
     // Follow liked player goal
     private static class SnowWispFollowPlayerGoal extends Goal {
@@ -402,7 +386,8 @@ public class SnowWispEntity extends PathfinderMob {
         public void tick() {
             this.wisp.getLookControl().setLookAt(this.player, 10.0F, this.wisp.getMaxHeadXRot());
             if (this.wisp.distanceTo(this.player) >= this.minDist) {
-                this.wisp.getNavigation().moveTo(this.player, this.speedModifier);
+                Vec3 playerEye = new Vec3(this.player.getX(),this.player.getEyeY(),this.player.getZ());
+                this.wisp.getNavigation().moveTo(playerEye.x(),playerEye.y(),playerEye.z(), this.speedModifier);
             }
         }
 
@@ -413,6 +398,4 @@ public class SnowWispEntity extends PathfinderMob {
                     this.wisp.distanceTo(this.player) <= this.maxDist;
         }
     }
-
-
 }
