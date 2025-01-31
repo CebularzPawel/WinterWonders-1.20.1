@@ -12,12 +12,11 @@ import net.minecraft.world.entity.*;
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.ai.control.FlyingMoveControl;
-import net.minecraft.world.entity.ai.goal.FloatGoal;
-import net.minecraft.world.entity.ai.goal.Goal;
-import net.minecraft.world.entity.ai.goal.LookAtPlayerGoal;
-import net.minecraft.world.entity.ai.goal.RandomStrollGoal;
+import net.minecraft.world.entity.ai.goal.*;
 import net.minecraft.world.entity.ai.navigation.FlyingPathNavigation;
 import net.minecraft.world.entity.ai.navigation.PathNavigation;
+import net.minecraft.world.entity.ai.util.AirAndWaterRandomPos;
+import net.minecraft.world.entity.ai.util.LandRandomPos;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.ServerLevelAccessor;
@@ -69,11 +68,10 @@ public class SnowWispEntity extends PathfinderMob {
 
     @Override
     protected void registerGoals() {
-        this.goalSelector.addGoal(1, new FloatGoal(this));
+        this.goalSelector.addGoal(0, new FloatGoal(this));
         this.goalSelector.addGoal(2, new SnowWispPlayGoal(this));
         this.goalSelector.addGoal(3, new SnowWispFollowPlayerGoal(this, 1.0D, 2.0F, 10.0F));
-        this.goalSelector.addGoal(4, new SnowWispGroupBehaviorGoal(this, 1.0D));
-        this.goalSelector.addGoal(5, new RandomStrollGoal(this, 1.0D));
+        this.goalSelector.addGoal(5, new RandomFlyingGoal(this, 1.0D));
         this.goalSelector.addGoal(6, new LookAtPlayerGoal(this, Player.class, 8.0F));
     }
 
@@ -238,47 +236,15 @@ public class SnowWispEntity extends PathfinderMob {
     }
 
     // Group behavior goal
-    private static class SnowWispGroupBehaviorGoal extends Goal {
-        private final SnowWispEntity wisp;
-        private final double speedModifier;
-        private SnowWispEntity leader;
-        private int groupUpdateTime;
-
-        public SnowWispGroupBehaviorGoal(SnowWispEntity wisp, double speedModifier) {
-            this.wisp = wisp;
-            this.speedModifier = speedModifier;
-            this.setFlags(EnumSet.of(Goal.Flag.MOVE));
+    private static class RandomFlyingGoal extends RandomStrollGoal {
+        public RandomFlyingGoal(PathfinderMob pMob, double pSpeedModifier) {
+            super(pMob, pSpeedModifier, 10);
         }
 
         @Override
-        public boolean canUse() {
-            if (--this.groupUpdateTime <= 0) {
-                this.groupUpdateTime = 20;
-                List<SnowWispEntity> nearbyWisps = this.wisp.level().getEntitiesOfClass(
-                        SnowWispEntity.class,
-                        this.wisp.getBoundingBox().inflate(8.0D),
-                        entity -> entity != this.wisp
-                );
-
-                if (!nearbyWisps.isEmpty()) {
-                    this.leader = nearbyWisps.get(this.wisp.getRandom().nextInt(nearbyWisps.size()));
-                    return !this.leader.isPlaying() && !this.wisp.isPlaying();
-                }
-            }
-            return false;
-        }
-
-        @Override
-        public boolean canContinueToUse() {
-            return this.leader != null && this.leader.isAlive() &&
-                    !this.leader.isPlaying() && !this.wisp.isPlaying();
-        }
-
-        @Override
-        public void tick() {
-            if (this.wisp.distanceTo(this.leader) > 3.0D) {
-                this.wisp.getNavigation().moveTo(this.leader, this.speedModifier);
-            }
+        protected Vec3 getPosition() {
+            Vec3 randomPos = LandRandomPos.getPos(this.mob, 8, 4);
+            return randomPos != null ? randomPos : AirAndWaterRandomPos.getPos(this.mob, 8, 4, 3,this.mob.getX(),this.mob.getZ(),1.2F);
         }
     }
 
@@ -433,6 +399,4 @@ public class SnowWispEntity extends PathfinderMob {
                     this.wisp.distanceTo(this.player) <= this.maxDist;
         }
     }
-
-
 }
