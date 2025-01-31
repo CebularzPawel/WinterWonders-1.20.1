@@ -2,10 +2,8 @@ package net.turtleboi.winterwonders.entity.custom;
 
 import net.minecraft.core.BlockPos;
 import net.minecraft.server.level.ServerLevel;
-import net.minecraft.world.entity.AgeableMob;
-import net.minecraft.world.entity.AnimationState;
-import net.minecraft.world.entity.EntityType;
-import net.minecraft.world.entity.Pose;
+import net.minecraft.util.RandomSource;
+import net.minecraft.world.entity.*;
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.ai.goal.*;
@@ -15,9 +13,12 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.level.ServerLevelAccessor;
 import net.turtleboi.winterwonders.entity.ai.SlideOnIceGoal;
 import net.turtleboi.winterwonders.init.ModEntities;
 import org.jetbrains.annotations.Nullable;
+
+import static net.minecraft.world.entity.monster.Monster.isDarkEnoughToSpawn;
 
 public class PinginEntity extends Animal {
     public PinginEntity(EntityType<? extends Animal> pEntityType, Level pLevel) {
@@ -108,6 +109,10 @@ public class PinginEntity extends Animal {
 
     public void startSliding(int duration) {
         this.slideTimer = duration;
+    }
+
+    public static boolean canSpawn(EntityType<PinginEntity> entityType, ServerLevelAccessor level, MobSpawnType spawnType, BlockPos pos, RandomSource random){
+        return checkMobSpawnRules(entityType, level, spawnType, pos, random);
     }
 
     public boolean isOnIce() {

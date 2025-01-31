@@ -10,6 +10,7 @@ import net.turtleboi.winterwonders.WinterWonders;
 import net.turtleboi.winterwonders.entity.custom.PinginEntity;
 import net.turtleboi.winterwonders.entity.custom.RevenantEntity;
 import net.turtleboi.winterwonders.entity.custom.SnowWispEntity;
+import net.turtleboi.winterwonders.entity.custom.projectile.IceSpikeProjectileEntity;
 
 public class ModEntities
 {
@@ -26,6 +27,10 @@ public class ModEntities
     public static final RegistryObject<EntityType<PinginEntity>> PINGIN =
             TYPES.register("pingin",()-> EntityType.Builder.of(PinginEntity::new, MobCategory.CREATURE)
                     .sized(0.4F, .9F).build("pingin"));
+
+    public static final RegistryObject<EntityType<IceSpikeProjectileEntity>> ICE_SPIKE =
+            TYPES.register("ice_spike",()-> EntityType.Builder.<IceSpikeProjectileEntity>of(IceSpikeProjectileEntity::new, MobCategory.MISC)
+                    .sized(0.25F, .25F).build("ice_spike"));
 
     public static void register(IEventBus eventBus)
     {

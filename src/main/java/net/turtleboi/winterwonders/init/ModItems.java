@@ -73,7 +73,7 @@ public class ModItems {
             ()-> new ForgeSpawnEggItem(ModEntities.REVENANT,0x6e6e6e,0x6c8696,new Item.Properties()));
 
     public static final RegistryObject<Item> PINGIN_SPAWN_EGG = ITEMS.register("pingin_spawn_egg",
-            ()-> new ForgeSpawnEggItem(ModEntities.PINGIN,0x11273f,0xe4ef73,new Item.Properties()));
+            ()-> new ForgeSpawnEggItem(ModEntities.PINGIN,0x374859,0xFF914A,new Item.Properties()));
 
     public static void register(IEventBus eventBus) {
         ITEMS.register(eventBus);
