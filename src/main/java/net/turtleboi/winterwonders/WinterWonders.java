@@ -22,6 +22,8 @@ import net.turtleboi.winterwonders.client.renderers.entity.SnowWispRenderer;
 import net.turtleboi.winterwonders.entity.custom.PinginEntity;
 import net.turtleboi.winterwonders.entity.custom.SnowWispEntity;
 import net.turtleboi.winterwonders.init.*;
+import net.turtleboi.winterwonders.worldgen.tree.ModFoliagePlacers;
+import net.turtleboi.winterwonders.worldgen.tree.ModTrunkPlacers;
 import org.slf4j.Logger;
 
 @Mod(WinterWonders.MOD_ID)
@@ -38,6 +40,8 @@ public class WinterWonders {
         ModEntities.register(modEventBus);
         ModParticles.register(modEventBus);
         modEventBus.addListener(this::commonSetup);
+        ModTrunkPlacers.register(modEventBus);
+        ModFoliagePlacers.register(modEventBus);
 
         MinecraftForge.EVENT_BUS.register(this);
         modEventBus.addListener(this::addCreative);

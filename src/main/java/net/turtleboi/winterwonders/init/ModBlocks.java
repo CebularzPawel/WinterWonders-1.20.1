@@ -19,7 +19,7 @@ import net.minecraftforge.registries.RegistryObject;
 import net.turtleboi.winterwonders.WinterWonders;
 import net.turtleboi.winterwonders.block.custom.IceSlushBlock;
 import net.turtleboi.winterwonders.block.custom.ModFlammableRotatedPillarBlock;
-import net.turtleboi.winterwonders.worldgen.tree.PineTreeGrower;
+import net.turtleboi.winterwonders.worldgen.tree.greypine.GreypineTreeGrower;
 
 
 import java.util.function.Supplier;
@@ -84,7 +84,7 @@ public class ModBlocks {
             });
 
     public static final RegistryObject<Block> GREYPINE_SAPLING = registerBlock("greypine_sapling",
-            () -> new SaplingBlock(new PineTreeGrower(), BlockBehaviour.Properties.copy(Blocks.SPRUCE_SAPLING)));
+            () -> new SaplingBlock(new GreypineTreeGrower(), BlockBehaviour.Properties.copy(Blocks.SPRUCE_SAPLING)));
 
     private static <T extends Block> RegistryObject<T> registerBlock(String name, Supplier<T> block) {
         RegistryObject<T> toReturn = BLOCKS.register(name, block);
