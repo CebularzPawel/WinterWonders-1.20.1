@@ -32,27 +32,16 @@ public class IceSpikeRenderer extends EntityRenderer<IceSpikeProjectileEntity> {
     public void render(IceSpikeProjectileEntity entity, float entityYaw, float partialTicks,
                        PoseStack poseStack, @NotNull MultiBufferSource bufferSource, int light) {
         poseStack.pushPose();
-
-        // 1) Interpolate angles
         float yaw = Mth.lerp(partialTicks, entity.yRotO, entity.getYRot());
         float pitch = Mth.lerp(partialTicks, entity.xRotO, entity.getXRot());
-
-        // 2) Rotate the model so its forward aligns with the entity's flight direction.
-        //    Typically, arrow-like projectiles face -Z in the model by default,
-        //    so you might do (yaw - 90) or simply yaw, depending on your model orientation.
         poseStack.mulPose(Axis.YP.rotationDegrees(yaw));
         poseStack.mulPose(Axis.ZP.rotationDegrees(pitch));
-
-        // 3) Optionally translate or scale if the model is offset.
-        // e.g. if the model center is not at (0, 0, 0)
         poseStack.translate(0.0, -1.25, 0.0);
-
-        // 4) Render
         VertexConsumer vertexConsumer = bufferSource.getBuffer(RenderType.entityCutout(TEXTURE));
         this.model.renderToBuffer(
                 poseStack,
                 vertexConsumer,
-                light,  // or LightTexture.FULL_BRIGHT if you want it always glowing
+                light,
                 OverlayTexture.NO_OVERLAY,
                 1.0F, 1.0F, 1.0F, 1.0F
         );

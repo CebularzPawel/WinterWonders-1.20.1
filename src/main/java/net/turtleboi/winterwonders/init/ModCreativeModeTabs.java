@@ -52,6 +52,7 @@ public class ModCreativeModeTabs {
 
                         pOutput.accept(ModItems.SNOW_WISP_SPAWN_EGG.get());
                         pOutput.accept(ModItems.REVENANT_SPAWN_EGG.get());
+                        pOutput.accept(ModItems.BRISK_SPAWN_EGG.get());
                         pOutput.accept(ModItems.PINGIN_SPAWN_EGG.get());
                     })
                     .build());

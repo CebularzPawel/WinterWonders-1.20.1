@@ -7,6 +7,7 @@ import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.RegistryObject;
 import net.turtleboi.winterwonders.WinterWonders;
+import net.turtleboi.winterwonders.entity.custom.BriskEntity;
 import net.turtleboi.winterwonders.entity.custom.PinginEntity;
 import net.turtleboi.winterwonders.entity.custom.RevenantEntity;
 import net.turtleboi.winterwonders.entity.custom.SnowWispEntity;
@@ -23,6 +24,10 @@ public class ModEntities
     public static final RegistryObject<EntityType<RevenantEntity>> REVENANT =
             TYPES.register("revenant",()-> EntityType.Builder.of(RevenantEntity::new, MobCategory.MONSTER)
                     .sized(0.6F, 1.95F).build("revenant"));
+
+    public static final RegistryObject<EntityType<BriskEntity>> BRISK =
+            TYPES.register("brisk",()-> EntityType.Builder.of(BriskEntity::new, MobCategory.MONSTER)
+                    .sized(0.6F, 1.95F).build("brisk"));
 
     public static final RegistryObject<EntityType<PinginEntity>> PINGIN =
             TYPES.register("pingin",()-> EntityType.Builder.of(PinginEntity::new, MobCategory.CREATURE)

@@ -72,6 +72,9 @@ public class ModItems {
     public static final RegistryObject<Item> REVENANT_SPAWN_EGG = ITEMS.register("revenant_spawn_egg",
             ()-> new ForgeSpawnEggItem(ModEntities.REVENANT,0x6e6e6e,0x6c8696,new Item.Properties()));
 
+    public static final RegistryObject<Item> BRISK_SPAWN_EGG = ITEMS.register("brisk_spawn_egg",
+            ()-> new ForgeSpawnEggItem(ModEntities.BRISK,0xBFEEF2,0xFFFFFF,new Item.Properties()));
+
     public static final RegistryObject<Item> PINGIN_SPAWN_EGG = ITEMS.register("pingin_spawn_egg",
             ()-> new ForgeSpawnEggItem(ModEntities.PINGIN,0x374859,0xFF914A,new Item.Properties()));
 

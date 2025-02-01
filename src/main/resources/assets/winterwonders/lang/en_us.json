@@ -6,6 +6,11 @@
 
   "effect.winterwonders.chilled": "Chilled",
 
+  "entity.winterwonders.snow_wisp": "Snow Wisp",
+  "entity.winterwonders.revenant": "Revenant",
+  "entity.winterwonders.brisk": "Brisk",
+  "entity.winterwonders.pingin": "Pingin",
+
   "block.winterwonders.coldsteel_block": "Coldsteel Block",
   "block.winterwonders.greypine_log": "Grey Pine Log",
   "block.winterwonders.greypine_wood": "Grey Pine Wood",
@@ -23,6 +28,7 @@
 
   "item.winterwonders.snow_wisp_spawn_egg": "Snow Wisp Spawn Egg",
   "item.winterwonders.revenant_spawn_egg": "Revenant Spawn Egg",
+  "item.winterwonders.brisk_spawn_egg": "Brisk Spawn Egg",
   "item.winterwonders.pingin_spawn_egg": "Pingin Spawn Egg",
 
   "item.winterwonders.coldsteel_sword": "Coldsteel Sword",
