@@ -37,6 +37,7 @@ public class WinterWonders {
         ModItems.register(modEventBus);
         ModBlocks.register(modEventBus);
         ModCreativeModeTabs.register(modEventBus);
+        ModEffects.register(modEventBus);
         ModEntities.register(modEventBus);
         ModParticles.register(modEventBus);
         modEventBus.addListener(this::commonSetup);
