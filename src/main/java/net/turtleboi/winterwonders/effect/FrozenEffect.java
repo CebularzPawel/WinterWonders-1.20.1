@@ -6,14 +6,14 @@ import net.minecraft.world.entity.LivingEntity;
 import net.turtleboi.winterwonders.init.ModEffects;
 
 
-public class FreezeEffect extends MobEffect {
-    public FreezeEffect(MobEffectCategory mobEffectCategory, int color) {
+public class FrozenEffect extends MobEffect {
+    public FrozenEffect(MobEffectCategory mobEffectCategory, int color) {
         super(mobEffectCategory, color);
     }
     @Override
     public void applyEffectTick(LivingEntity pLivingEntity, int pAmplifier) {
         if (!pLivingEntity.level().isClientSide()) {
-            pLivingEntity.setTicksFrozen(pLivingEntity.getTicksRequiredToFreeze() + pLivingEntity.getEffect(ModEffects.FREEZE.get()).getDuration());
+
         }
         super.applyEffectTick(pLivingEntity, pAmplifier);
     }
