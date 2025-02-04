@@ -32,14 +32,14 @@ public class ChilledEffect extends MobEffect {
 
             if (pAmplifier > 2){
                 pLivingEntity.addEffect(new MobEffectInstance(ModEffects.FROZEN.get(), 100, 0));
-                //pLivingEntity.removeEffect(ModEffects.CHILLED.get());
+                pLivingEntity.removeEffect(ModEffects.CHILLED.get());
             }
         }
         super.applyEffectTick(pLivingEntity, pAmplifier);
     }
     @Override
     public boolean isDurationEffectTick(int pDuration, int pAmplifier) {
-        return pDuration % 20 * (3 - pAmplifier) == 0;
+        return pDuration % 20 * (Math.max(0.5F, (float)(3 - (pAmplifier/2)))) == 0;
     }
 
     @Override

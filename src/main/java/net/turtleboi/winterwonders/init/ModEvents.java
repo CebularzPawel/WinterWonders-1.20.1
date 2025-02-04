@@ -2,14 +2,15 @@ package net.turtleboi.winterwonders.init;
 
 import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
-import net.minecraft.server.level.ServerLevel;
-import net.minecraft.world.entity.EquipmentSlot;
+import net.minecraft.world.effect.MobEffectInstance;
+import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.monster.Zombie;
 import net.minecraft.world.entity.monster.ZombieVillager;
-import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.biome.Biome;
 import net.minecraftforge.event.entity.living.LivingEvent;
+import net.minecraftforge.event.entity.living.MobEffectEvent;
+import net.minecraftforge.eventbus.api.Event;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.turtleboi.winterwonders.WinterWonders;
@@ -68,5 +69,16 @@ public class ModEvents {
         }
         data.putInt(TAG_COLD_TIME, coldTime);
         return coldTime;
+    }
+
+    @SubscribeEvent
+    public static void onEffectApplication (MobEffectEvent event){
+        LivingEntity livingEntity = event.getEntity();
+        MobEffectInstance mobEffectInstance = event.getEffectInstance();
+        if (mobEffectInstance != null) {
+            if (mobEffectInstance.getEffect() == ModEffects.CHILLED.get() && livingEntity.hasEffect(ModEffects.FROZEN.get())) {
+                event.setResult(Event.Result.DENY);
+            }
+        }
     }
 }

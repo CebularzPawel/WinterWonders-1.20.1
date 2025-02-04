@@ -11,6 +11,7 @@ import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.RegistryObject;
 import net.turtleboi.winterwonders.WinterWonders;
+import net.turtleboi.winterwonders.item.ModArmorItem;
 import net.turtleboi.winterwonders.item.ModArmorMaterials;
 import net.turtleboi.winterwonders.item.ModToolTiers;
 import net.turtleboi.winterwonders.item.custom.FrostbiteWandItem;
@@ -54,16 +55,16 @@ public class ModItems {
             () -> new HoeItem(ModToolTiers.COLDSTEEL, -2, -0.5f, new Item.Properties().rarity(Rarity.RARE)));
 
     public static final RegistryObject<Item> COLDSTEEL_HELMET = ITEMS.register("coldsteel_helmet",
-            () -> new ArmorItem(ModArmorMaterials.COLDSTEEL, ArmorItem.Type.HELMET, new Item.Properties().rarity(Rarity.RARE)));
+            () -> new ModArmorItem(ModArmorMaterials.COLDSTEEL, ArmorItem.Type.HELMET, new Item.Properties().rarity(Rarity.RARE)));
 
     public static final RegistryObject<Item> COLDSTEEL_CHESTPLATE = ITEMS.register("coldsteel_chestplate",
-            () -> new ArmorItem(ModArmorMaterials.COLDSTEEL, ArmorItem.Type.CHESTPLATE, new Item.Properties().rarity(Rarity.RARE)));
+            () -> new ModArmorItem(ModArmorMaterials.COLDSTEEL, ArmorItem.Type.CHESTPLATE, new Item.Properties().rarity(Rarity.RARE)));
 
     public static final RegistryObject<Item> COLDSTEEL_LEGGINGS = ITEMS.register("coldsteel_leggings",
-            () -> new ArmorItem(ModArmorMaterials.COLDSTEEL, ArmorItem.Type.LEGGINGS, new Item.Properties().rarity(Rarity.RARE)));
+            () -> new ModArmorItem(ModArmorMaterials.COLDSTEEL, ArmorItem.Type.LEGGINGS, new Item.Properties().rarity(Rarity.RARE)));
 
     public static final RegistryObject<Item> COLDSTEEL_BOOTS = ITEMS.register("coldsteel_boots",
-            () -> new ArmorItem(ModArmorMaterials.COLDSTEEL, ArmorItem.Type.BOOTS, new Item.Properties().rarity(Rarity.RARE)));
+            () -> new ModArmorItem(ModArmorMaterials.COLDSTEEL, ArmorItem.Type.BOOTS, new Item.Properties().rarity(Rarity.RARE)));
 
     public static final RegistryObject<Item> FROSTBITE_WAND = ITEMS.register("frostbite_wand",
             () -> new FrostbiteWandItem(new Item.Properties().rarity(Rarity.RARE)));

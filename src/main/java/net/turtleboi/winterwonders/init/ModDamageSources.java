@@ -27,7 +27,7 @@ public class ModDamageSources {
     }
 
     public static void hurtWithColdDamage(LivingEntity target, @Nullable Entity attacker, float percent) {
-        float damageAmount = target.getMaxHealth() * percent;
+        float damageAmount = target.getHealth() * percent;
         double resistanceModifier = 0;
         if (target.getAttribute(ModAttributes.COLD_RESISTANCE.get()) != null &&
                 target.getAttributeValue(ModAttributes.COLD_RESISTANCE.get()) > 0){

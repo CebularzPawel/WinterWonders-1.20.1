@@ -8,6 +8,7 @@ import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.RegistryObject;
 import net.turtleboi.winterwonders.WinterWonders;
 import net.turtleboi.winterwonders.effect.ChilledEffect;
+import net.turtleboi.winterwonders.effect.ColdResistanceEffect;
 import net.turtleboi.winterwonders.effect.FrozenEffect;
 
 public class ModEffects {
@@ -18,6 +19,9 @@ public class ModEffects {
 
     public static final RegistryObject<MobEffect> FROZEN = EFFECTS.register("frozen",
             () -> new FrozenEffect(MobEffectCategory.HARMFUL, 8752371));
+
+    public static final RegistryObject<MobEffect> COLD_RESIST = EFFECTS.register("cold_resist",
+            () -> new ColdResistanceEffect(MobEffectCategory.BENEFICIAL, 59903));
 
     public static void register(IEventBus eventBus) {EFFECTS.register(eventBus);}
 

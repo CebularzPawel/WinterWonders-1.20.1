@@ -1,5 +1,6 @@
 package net.turtleboi.winterwonders.entity.custom.projectile;
 
+import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.network.protocol.game.ClientboundGameEventPacket;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.sounds.SoundEvents;
@@ -33,6 +34,23 @@ public class IceSpikeProjectileEntity extends AbstractArrow {
 
     public IceSpikeProjectileEntity(Level pLevel, LivingEntity livingEntity){
         super(ModEntities.ICE_SPIKE.get(), livingEntity, pLevel);
+    }
+
+    @Override
+    public void tick() {
+        super.tick();
+        if (this.level().isClientSide){
+            for(int particles = 0; particles < 1; ++particles) {
+                this.level().addParticle(
+                        ParticleTypes.SNOWFLAKE,
+                        this.getRandomX(0.25F),
+                        this.getY(),
+                        this.getRandomZ(0.25F),
+                        0.0F,
+                        0.0F,
+                        0.0F);
+            }
+        }
     }
 
     @Override
