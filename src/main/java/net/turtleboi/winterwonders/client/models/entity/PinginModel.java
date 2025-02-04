@@ -2,7 +2,6 @@ package net.turtleboi.winterwonders.client.models.entity;
 
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
-import net.minecraft.client.model.EntityModel;
 import net.minecraft.client.model.HierarchicalModel;
 import net.minecraft.client.model.geom.ModelLayerLocation;
 import net.minecraft.client.model.geom.ModelPart;
@@ -14,43 +13,54 @@ import net.minecraft.world.entity.Entity;
 import net.turtleboi.winterwonders.WinterWonders;
 import net.turtleboi.winterwonders.entity.animations.ModAnimationDefintions;
 import net.turtleboi.winterwonders.entity.custom.PinginEntity;
-import net.turtleboi.winterwonders.entity.custom.SnowWispEntity;
 
 public class PinginModel<T extends Entity> extends HierarchicalModel<T> {
     public static final ModelLayerLocation PINGIN_LAYER = new ModelLayerLocation(new ResourceLocation(WinterWonders.MOD_ID, "pingin"), "main");
     private final ModelPart pingin;
     private final ModelPart head;
+    private final ModelPart body;
+    private final ModelPart left_arm;
+    private final ModelPart right_arm;
+    private final ModelPart tail;
+    private final ModelPart left_foot;
+    private final ModelPart right_foot;
 
 
     public PinginModel(ModelPart root) {
         this.pingin = root.getChild("pingin");
-        this.head = pingin.getChild("head");
+        this.head = this.pingin.getChild("head");
+        this.body = this.pingin.getChild("body");
+        this.left_arm = this.body.getChild("left_arm");
+        this.right_arm = this.body.getChild("right_arm");
+        this.tail = this.body.getChild("tail");
+        this.left_foot = this.pingin.getChild("left_foot");
+        this.right_foot = this.pingin.getChild("right_foot");
     }
 
     public static LayerDefinition createBodyLayer() {
         MeshDefinition meshdefinition = new MeshDefinition();
         PartDefinition partdefinition = meshdefinition.getRoot();
 
-        PartDefinition pingin = partdefinition.addOrReplaceChild("pingin", CubeListBuilder.create(), PartPose.offset(0.0F, 24.0F, 0.0F));
+        PartDefinition pingin = partdefinition.addOrReplaceChild("pingin", CubeListBuilder.create(), PartPose.offset(0.0F, 19.0F, 0.0F));
 
         PartDefinition head = pingin.addOrReplaceChild("head", CubeListBuilder.create().texOffs(0, 14).addBox(-4.0F, -6.0F, -3.0F, 8.0F, 6.0F, 6.0F, new CubeDeformation(0.0F))
-                .texOffs(8, 26).addBox(-2.0F, -2.5F, -4.0F, 4.0F, 2.0F, 1.0F, new CubeDeformation(0.0F)), PartPose.offset(0.0F, -8.5F, 0.0F));
+                .texOffs(8, 26).addBox(-2.0F, -2.5F, -4.0F, 4.0F, 2.0F, 1.0F, new CubeDeformation(0.0F)), PartPose.offset(0.0F, -3.5F, 0.0F));
 
-        PartDefinition body = pingin.addOrReplaceChild("body", CubeListBuilder.create().texOffs(0, 0).addBox(-7.0F, -8.0F, -1.0F, 8.0F, 8.0F, 6.0F, new CubeDeformation(0.0F)), PartPose.offset(3.0F, -0.5F, -2.0F));
+        PartDefinition body = pingin.addOrReplaceChild("body", CubeListBuilder.create().texOffs(0, 0).addBox(-4.0F, -4.0F, -3.0F, 8.0F, 8.0F, 6.0F, new CubeDeformation(0.0F)), PartPose.offset(0.0F, 0.5F, 0.0F));
 
-        PartDefinition left_arm = body.addOrReplaceChild("left_arm", CubeListBuilder.create().texOffs(22, 20).addBox(0.0F, 0.0F, -3.0F, 1.0F, 8.0F, 6.0F, new CubeDeformation(0.0F)), PartPose.offset(1.0F, -8.0F, 2.0F));
+        PartDefinition left_arm = body.addOrReplaceChild("left_arm", CubeListBuilder.create().texOffs(22, 20).addBox(0.0F, 0.0F, -3.0F, 1.0F, 8.0F, 6.0F, new CubeDeformation(0.0F)), PartPose.offset(4.0F, -4.0F, 0.0F));
 
-        PartDefinition right_arm = body.addOrReplaceChild("right_arm", CubeListBuilder.create().texOffs(0, 26).addBox(-1.0F, 0.0F, -3.0F, 1.0F, 8.0F, 6.0F, new CubeDeformation(0.0F)), PartPose.offset(-7.0F, -8.0F, 2.0F));
+        PartDefinition right_arm = body.addOrReplaceChild("right_arm", CubeListBuilder.create().texOffs(0, 26).addBox(-1.0F, 0.0F, -3.0F, 1.0F, 8.0F, 6.0F, new CubeDeformation(0.0F)), PartPose.offset(-4.0F, -4.0F, 0.0F));
 
-        PartDefinition tail = body.addOrReplaceChild("tail", CubeListBuilder.create(), PartPose.offset(-3.0F, -2.0F, 5.0F));
+        PartDefinition tail = body.addOrReplaceChild("tail", CubeListBuilder.create(), PartPose.offset(0.0F, 2.0F, 3.0F));
 
         PartDefinition tail_r1 = tail.addOrReplaceChild("tail_r1", CubeListBuilder.create().texOffs(18, 0).addBox(-2.0F, 0.0F, -2.0F, 4.0F, 0.0F, 4.0F, new CubeDeformation(0.0F)), PartPose.offsetAndRotation(0.0F, -0.5F, 1.75F, 0.2618F, 0.0F, 0.0F));
 
         PartDefinition left_foot = pingin.addOrReplaceChild("left_foot", CubeListBuilder.create().texOffs(0, 0).addBox(-0.5F, -1.5F, -0.5F, 1.0F, 2.0F, 1.0F, new CubeDeformation(0.0F))
-                .texOffs(18, 14).addBox(-1.5F, 0.5F, -2.5F, 3.0F, 0.0F, 4.0F, new CubeDeformation(0.0F)), PartPose.offset(2.5F, -0.5F, 0.5F));
+                .texOffs(18, 14).addBox(-1.5F, 0.5F, -2.5F, 3.0F, 0.0F, 4.0F, new CubeDeformation(0.0F)), PartPose.offset(2.5F, 4.5F, 0.5F));
 
         PartDefinition right_foot = pingin.addOrReplaceChild("right_foot", CubeListBuilder.create().texOffs(24, 4).addBox(-1.5F, 0.5F, -2.5F, 3.0F, 0.0F, 4.0F, new CubeDeformation(0.0F))
-                .texOffs(0, 3).addBox(-0.5F, -1.5F, -0.5F, 1.0F, 2.0F, 1.0F, new CubeDeformation(0.0F)), PartPose.offset(-2.5F, -0.5F, 0.5F));
+                .texOffs(0, 3).addBox(-0.5F, -1.5F, -0.5F, 1.0F, 2.0F, 1.0F, new CubeDeformation(0.0F)), PartPose.offset(-2.5F, 4.5F, 0.5F));
 
         return LayerDefinition.create(meshdefinition, 64, 64);
     }
@@ -59,9 +69,14 @@ public class PinginModel<T extends Entity> extends HierarchicalModel<T> {
     public void setupAnim(Entity entity, float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch) {
         this.root().getAllParts().forEach(ModelPart::resetPose);
 
-        this.applyHeadRotation(netHeadYaw, headPitch, ageInTicks);
-        this.animateWalk(ModAnimationDefintions.PINGIN_WALK, limbSwing, limbSwingAmount, 2f, 2.4f);
-        this.animate(((PinginEntity) entity).idleAnimationState, ModAnimationDefintions.PINGIN_IDLE, ageInTicks, 1f);
+        PinginEntity pingin = (PinginEntity) entity;
+        if (pingin.isSliding()) {
+            this.animate(pingin.slideAnimationState, ModAnimationDefintions.PINGIN_SLIDE, ageInTicks, 1f);
+        } else {
+            this.applyHeadRotation(netHeadYaw, headPitch, ageInTicks);
+            this.animateWalk(ModAnimationDefintions.PINGIN_WALK, limbSwing, limbSwingAmount, 2f, 2.4f);
+            this.animate(pingin.idleAnimationState, ModAnimationDefintions.PINGIN_IDLE, ageInTicks, 1f);
+        }
     }
 
     private void applyHeadRotation(float pNetHeadYaw, float pHeadPitch, float pAgeInTicks) {

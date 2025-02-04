@@ -1,0 +1,17 @@
+{
+  "type": "forge:add_spawns",
+  "biomes": ["minecraft:snowy_plains",
+    "minecraft:snowy_beach",
+    "minecraft:ice_spikes",
+    "minecraft:frozen_ocean",
+    "minecraft:frozen_peaks",
+    "minecraft:frozen_river"
+  ],
+
+  "spawners":{
+    "type": "winterwonders:pingin",
+    "weight": 75,
+    "minCount": 1,
+    "maxCount": 4
+  }
+}

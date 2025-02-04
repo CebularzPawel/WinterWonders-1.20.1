@@ -31,7 +31,9 @@ public class ModBlockLootTables extends BlockLootSubProvider {
         this.dropSelf(ModBlocks.STRIPPED_GREYPINE_LOG.get());
         this.dropSelf(ModBlocks.STRIPPED_GREYPINE_WOOD.get());
         this.dropSelf(ModBlocks.GREYPINE_PLANKS.get());
-
+        this.dropSelf(ModBlocks.WONDER_SHROOM.get());
+        this.dropSelf(ModBlocks.WONDER_TREE_SHROOM.get());
+        this.dropOther(ModBlocks.WONDER_TREE_SHROOM_WALL.get(),ModItems.WONDER_TREE_SHROOM.get());
         this.dropSelf(ModBlocks.GREYPINE_SAPLING.get());
 
         this.add(ModBlocks.GREYPINE_LEAVES.get(), block ->

@@ -2,7 +2,9 @@ package net.turtleboi.winterwonders.init;
 
 import com.google.common.base.Suppliers;
 import net.minecraft.ChatFormatting;
+import net.minecraft.core.Direction;
 import net.minecraft.world.item.*;
+import net.minecraft.world.level.block.Blocks;
 import net.minecraftforge.common.ForgeSpawnEggItem;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.registries.DeferredRegister;
@@ -72,8 +74,16 @@ public class ModItems {
     public static final RegistryObject<Item> REVENANT_SPAWN_EGG = ITEMS.register("revenant_spawn_egg",
             ()-> new ForgeSpawnEggItem(ModEntities.REVENANT,0x6e6e6e,0x6c8696,new Item.Properties()));
 
+    public static final RegistryObject<Item> BRISK_SPAWN_EGG = ITEMS.register("brisk_spawn_egg",
+            ()-> new ForgeSpawnEggItem(ModEntities.BRISK,0xBFEEF2,0xFFFFFF,new Item.Properties()));
+
     public static final RegistryObject<Item> PINGIN_SPAWN_EGG = ITEMS.register("pingin_spawn_egg",
-            ()-> new ForgeSpawnEggItem(ModEntities.PINGIN,0x11273f,0xe4ef73,new Item.Properties()));
+            ()-> new ForgeSpawnEggItem(ModEntities.PINGIN,0x374859,0xFF914A,new Item.Properties()));
+
+    public static final RegistryObject<Item> WONDER_TREE_SHROOM = ITEMS.register("wonder_tree_shroom",
+            () -> new StandingAndWallBlockItem(ModBlocks.WONDER_TREE_SHROOM.get(), ModBlocks.WONDER_TREE_SHROOM_WALL.get(), new Item.Properties(), Direction.DOWN));
+
+
 
     public static void register(IEventBus eventBus) {
         ITEMS.register(eventBus);

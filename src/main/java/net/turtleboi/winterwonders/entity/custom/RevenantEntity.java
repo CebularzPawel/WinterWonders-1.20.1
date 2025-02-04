@@ -21,6 +21,8 @@ import net.minecraft.world.item.Items;
 import net.minecraft.world.item.enchantment.EnchantmentHelper;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.ServerLevelAccessor;
+import net.turtleboi.winterwonders.init.ModDamageSources;
+import net.turtleboi.winterwonders.init.ModEffects;
 import net.turtleboi.winterwonders.init.ModEntities;
 import net.turtleboi.winterwonders.init.ModItems;
 
@@ -41,8 +43,13 @@ public class RevenantEntity extends Zombie {
     public boolean doHurtTarget(Entity target) {
         boolean didAttack = super.doHurtTarget(target);
 
-        if (didAttack && target instanceof LivingEntity living) {
-            living.addEffect(new MobEffectInstance(MobEffects.MOVEMENT_SLOWDOWN, 100, 0));
+        if (didAttack && target instanceof LivingEntity livingEntity) {
+            if (livingEntity.hasEffect(ModEffects.CHILLED.get())) {
+                livingEntity.addEffect(new MobEffectInstance(ModEffects.CHILLED.get(), 100,
+                        livingEntity.getEffect(ModEffects.CHILLED.get()).getAmplifier() + 1));
+            } else {
+                livingEntity.addEffect(new MobEffectInstance(ModEffects.CHILLED.get(), 100, 0));
+            }
         }
 
         return didAttack;

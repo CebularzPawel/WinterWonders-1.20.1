@@ -70,6 +70,39 @@ public class SnowWispModel<T extends Entity> extends HierarchicalModel<T> {
                 PartPose.offset(1.0F, -4.0F, 4.0F)
         );
 
+        PartDefinition left_arm = bb_main.addOrReplaceChild(
+                "left_arm",
+                CubeListBuilder.create()
+                        .texOffs(2, 1)
+                        .addBox(0.0F, 0.0F, -1.5F, 0.0F, 3.0F, 2.0F,
+                                new CubeDeformation(0.0F)),
+                PartPose.offsetAndRotation(3.0F, -2.0F, 0.5F, 0.0F, 0.0F, -0.3491F));
+
+        PartDefinition right_arm = bb_main.addOrReplaceChild(
+                "right_arm",
+                CubeListBuilder.create()
+                        .texOffs(2, 1)
+                        .mirror()
+                        .addBox(0.0F, 0.0F, -1.5F, 0.0F, 3.0F, 2.0F,
+                                new CubeDeformation(0.0F)).mirror(false),
+                PartPose.offsetAndRotation(-3.0F, -2.0F, 0.5F, 0.0F, 0.0F, 0.3491F));
+
+        PartDefinition left_leg = bb_main.addOrReplaceChild(
+                "left_leg",
+                CubeListBuilder.create()
+                        .texOffs(0, 4)
+                        .addBox(0.0F, 0.0F, -0.5F, 0.0F, 2.0F, 1.0F,
+                                new CubeDeformation(0.0F)),
+                PartPose.offsetAndRotation(1.5F, 0.0F, 0.0F, 0.0F, 1.5708F, 0.0F));
+
+        PartDefinition right_leg = bb_main.addOrReplaceChild(
+                "right_leg",
+                CubeListBuilder.create()
+                        .texOffs(0, 4)
+                        .addBox(0.0F, 0.0F, -0.5F, 0.0F, 2.0F, 1.0F,
+                                new CubeDeformation(0.0F)),
+                PartPose.offsetAndRotation(-1.5F, 0.0F, 0.0F, 0.0F, 1.5708F, 0.0F));
+
         return LayerDefinition.create(meshdefinition, 32, 32);
     }
 

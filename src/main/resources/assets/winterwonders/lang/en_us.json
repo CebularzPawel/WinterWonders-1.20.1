@@ -5,6 +5,12 @@
   "sounds.ancientcurses.deprecophobia": "Deprecophobia music plays",
 
   "effect.winterwonders.chilled": "Chilled",
+  "effect.winterwonders.frozen": "Frozen",
+
+  "entity.winterwonders.snow_wisp": "Snow Wisp",
+  "entity.winterwonders.revenant": "Revenant",
+  "entity.winterwonders.brisk": "Brisk",
+  "entity.winterwonders.pingin": "Pingin",
 
   "block.winterwonders.coldsteel_block": "Coldsteel Block",
   "block.winterwonders.greypine_log": "Grey Pine Log",
@@ -20,6 +26,11 @@
   "item.winterwonders.frozen_heart": "Frozen Heart",
   "item.winterwonders.coldsteel_scrap": "Coldsteel Scraps",
   "item.winterwonders.coldsteel_ingot": "Coldsteel Ingot",
+
+  "item.winterwonders.snow_wisp_spawn_egg": "Snow Wisp Spawn Egg",
+  "item.winterwonders.revenant_spawn_egg": "Revenant Spawn Egg",
+  "item.winterwonders.brisk_spawn_egg": "Brisk Spawn Egg",
+  "item.winterwonders.pingin_spawn_egg": "Pingin Spawn Egg",
 
   "item.winterwonders.coldsteel_sword": "Coldsteel Sword",
   "item.winterwonders.coldsteel_pickaxe": "Coldsteel Pickaxe",

@@ -5,6 +5,7 @@ import net.minecraft.nbt.CompoundTag;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.monster.Zombie;
+import net.minecraft.world.entity.monster.ZombieVillager;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.biome.Biome;
@@ -26,7 +27,7 @@ public class ModEvents {
             return;
         }
        
-        if (zombie instanceof RevenantEntity) {
+        if (zombie instanceof RevenantEntity || zombie instanceof ZombieVillager) {
             return;
         }
         
