@@ -1,7 +1,14 @@
 {
-  "variants": {
-    "": {
-      "model": "winterwonders:block/icy_vines"
+  "multipart": [
+    {
+      "apply": {
+        "model": "winterwonders:block/icy_vines"
+      }
+    },
+    {
+      "apply": {
+        "model": "winterwonders:block/icy_vines_emissive"
+      }
     }
-  }
+  ]
 }

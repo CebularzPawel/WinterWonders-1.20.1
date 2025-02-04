@@ -23,6 +23,7 @@ public class IcyVinesPlantBlock extends GrowingPlantBodyBlock {
     protected boolean mayPlaceOn(BlockState pState, BlockGetter pLevel, BlockPos pPos) {
         return pState.is(BlockTags.DIRT) || pState.is(Blocks.FARMLAND);
     }
+
     protected GrowingPlantHeadBlock getHeadBlock() {
         return (GrowingPlantHeadBlock) ModBlocks.ICY_VINES.get();
     }

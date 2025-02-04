@@ -40,11 +40,13 @@ public class ModBlocks {
 
     public static final RegistryObject<Block> STRIPPED_GREYPINE_WOOD = registerBlock("stripped_greypine_wood",
             () -> new ModFlammableRotatedPillarBlock(BlockBehaviour.Properties.copy(Blocks.SPRUCE_LOG).strength(3f)));
+
     public static final RegistryObject<Block> WONDER_SHROOM = registerBlock("wonder_shroom",
             () -> new MushroomNoGrowableBlock(BlockBehaviour.Properties.copy(Blocks.BROWN_MUSHROOM)));
 
     public static final RegistryObject<Block> WONDER_TREE_SHROOM = BLOCKS.register("wonder_tree_shroom",
             () -> new TreeMushroomBlock(BlockBehaviour.Properties.of().mapColor(MapColor.COLOR_PURPLE).noCollission().instabreak().sound(SoundType.WET_GRASS).pushReaction(PushReaction.DESTROY)));
+
     public static final RegistryObject<Block> WONDER_TREE_SHROOM_WALL = BLOCKS.register("wonder_tree_shroom_wall",
             () -> new TreeMushroomWallBlock(BlockBehaviour.Properties.of().mapColor(MapColor.COLOR_GRAY).forceSolidOn().instrument(NoteBlockInstrument.BASEDRUM).requiresCorrectToolForDrops().noCollission().instabreak().dropsLike(WONDER_SHROOM.get())));
 
@@ -56,9 +58,6 @@ public class ModBlocks {
             () -> new IcyVinesBlock(BlockBehaviour.Properties.of().mapColor(MapColor.COLOR_BLUE).noCollission().instabreak().randomTicks().sound(SoundType.VINE).pushReaction(PushReaction.DESTROY).lightLevel((p_50870_) -> {
                 return 5;
             })));
-
-
-
 
     public static final RegistryObject<Block> GREYPINE_PLANKS = registerBlock("greypine_planks",
             () -> new Block(BlockBehaviour.Properties.copy(Blocks.SPRUCE_PLANKS)){

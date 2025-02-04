@@ -3,15 +3,26 @@ package net.turtleboi.winterwonders.worldgen.tree.greypine;
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 import net.minecraft.core.BlockPos;
+import net.minecraft.core.Direction;
+import net.minecraft.tags.BlockTags;
 import net.minecraft.util.RandomSource;
 import net.minecraft.util.valueproviders.IntProvider;
 import net.minecraft.world.level.LevelSimulatedReader;
+import net.minecraft.world.level.block.state.BlockBehaviour;
+import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.levelgen.feature.TreeFeature;
 import net.minecraft.world.level.levelgen.feature.configurations.TreeConfiguration;
 import net.minecraft.world.level.levelgen.feature.foliageplacers.FoliagePlacer;
 import net.minecraft.world.level.levelgen.feature.foliageplacers.FoliagePlacerType;
+import net.turtleboi.winterwonders.block.custom.IcyVinesBlock;
+import net.turtleboi.winterwonders.block.custom.TreeMushroomWallBlock;
+import net.turtleboi.winterwonders.init.ModBlocks;
 import net.turtleboi.winterwonders.worldgen.tree.ModFoliagePlacers;
 
+import java.util.Comparator;
 import java.util.List;
+import java.util.Set;
+import java.util.stream.Collectors;
 
 public class GreypineFoliagePlacer extends FoliagePlacer {
     public static final Codec<GreypineFoliagePlacer> CODEC = RecordCodecBuilder.create(greyPineFoliagePlacerInstance
@@ -48,6 +59,56 @@ public class GreypineFoliagePlacer extends FoliagePlacer {
                     vOffset,
                     pAttachment.doubleTrunk());
         }
+
+        int lowestFoliage = rows.stream().mapToInt(row -> row[1]).min().orElse(0);
+        for (int y = lowestFoliage - 1; y >= lowestFoliage - (pMaxFreeTreeHeight - (pFoliageHeight - 4)); y--) {
+            for (Direction dir : new Direction[]{Direction.NORTH, Direction.SOUTH, Direction.EAST, Direction.WEST}) {
+                if (pRandom.nextFloat() > 0.85f) {
+                    BlockPos mushroomPos = originPos.above(y).relative(dir, 1);
+                    if (TreeFeature.validTreePos(pLevel, mushroomPos)) {
+                        pBlockSetter.set(mushroomPos,
+                                ModBlocks.WONDER_TREE_SHROOM_WALL.get().defaultBlockState()
+                                        .setValue(TreeMushroomWallBlock.FACING, dir));
+                    }
+                }
+            }
+        }
+
+        List<int[]> vineRows = rows.stream()
+                .sorted(Comparator.comparingInt(a -> a[1]))
+                .limit(3)
+                .toList();
+
+        for (int[] row : vineRows) {
+            int radius = row[0];
+            int vOffset = row[1];
+            for (int x = -radius; x <= radius; x++) {
+                for (int z = -radius; z <= radius; z++) {
+                    if (Math.max(Math.abs(x), Math.abs(z)) == radius) {
+                        if (pRandom.nextFloat() > 0.8f) {
+                            BlockPos leafPos = originPos.offset(x, vOffset, z);
+                            BlockPos vinePos = leafPos.below();
+                            if (pLevel.isStateAtPosition(leafPos, (p_284924_) -> p_284924_.is(BlockTags.LEAVES)) &&
+                                    pLevel.isStateAtPosition(vinePos, BlockBehaviour.BlockStateBase::isAir)) {
+                                pBlockSetter.set(vinePos, ModBlocks.ICY_VINES.get().defaultBlockState());
+                                if (pRandom.nextFloat() > 0.65f) {
+                                    BlockPos vine2Pos = vinePos.below();
+                                    pBlockSetter.set(vinePos, ModBlocks.ICY_VINES_PLANT.get().defaultBlockState());
+                                    pBlockSetter.set(vine2Pos, ModBlocks.ICY_VINES.get().defaultBlockState());
+                                    if (pRandom.nextFloat() > 0.65f) {
+                                        BlockPos vine3Pos = vine2Pos.below();
+                                        pBlockSetter.set(vinePos, ModBlocks.ICY_VINES_PLANT.get().defaultBlockState());
+                                        pBlockSetter.set(vine2Pos, ModBlocks.ICY_VINES_PLANT.get().defaultBlockState());
+                                        pBlockSetter.set(vine3Pos, ModBlocks.ICY_VINES.get().defaultBlockState());
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+
     }
 
     private List<int[]> getFoliageRows(int treeVariant) {
