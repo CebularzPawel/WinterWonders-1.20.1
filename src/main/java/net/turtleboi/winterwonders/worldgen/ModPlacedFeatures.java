@@ -22,7 +22,7 @@ public final class ModPlacedFeatures {
         HolderGetter<ConfiguredFeature<?, ?>> configuredFeatures = context.lookup(Registries.CONFIGURED_FEATURE);
 
         register(context, GREYPINE_PLACED_KEY, configuredFeatures.getOrThrow(ModConfiguredFeatures.GREYPINE_KEY),
-                VegetationPlacements.treePlacement(PlacementUtils.countExtra(3, 0.1f, 1),
+                VegetationPlacements.treePlacement(PlacementUtils.countExtra(3, 0.8f, 1),
                         ModBlocks.GREYPINE_SAPLING.get()));
     }
 
