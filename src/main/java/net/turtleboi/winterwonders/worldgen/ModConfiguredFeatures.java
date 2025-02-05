@@ -17,7 +17,7 @@ import net.turtleboi.winterwonders.init.ModBlocks;
 import net.turtleboi.winterwonders.worldgen.tree.greypine.GreypineFoliagePlacer;
 import net.turtleboi.winterwonders.worldgen.tree.greypine.GreypineTrunkPlacer;
 
-public class ModConfiguredFeatures {
+public final class ModConfiguredFeatures {
     public static final ResourceKey<ConfiguredFeature<?, ?>> GREYPINE_KEY = registerKey("grey_pine");
 
     public static void bootstrap(BootstapContext<ConfiguredFeature<?, ?>> context) {

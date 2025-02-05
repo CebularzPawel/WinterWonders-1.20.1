@@ -16,9 +16,8 @@ import net.turtleboi.winterwonders.init.ModBlocks;
 
 import java.util.List;
 
-public class ModPlacedFeatures {
+public final class ModPlacedFeatures {
     public static final ResourceKey<PlacedFeature> GREYPINE_PLACED_KEY = registerKey("greypine_placed");
-
     public static void bootstrap(BootstapContext<PlacedFeature> context) {
         HolderGetter<ConfiguredFeature<?, ?>> configuredFeatures = context.lookup(Registries.CONFIGURED_FEATURE);
 
