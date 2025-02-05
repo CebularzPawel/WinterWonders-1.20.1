@@ -24,7 +24,9 @@ public class OurOverworldRegion extends Region {
     public void addBiomes(Registry<Biome> registry, Consumer<Pair<Climate.ParameterPoint,
                     ResourceKey<Biome>>> mapper) {
         this.addModifiedVanillaOverworldBiomes(mapper, modifiedVanillaOverworldBuilder -> {
-            modifiedVanillaOverworldBuilder.replaceBiome(Biomes.FOREST, WinterFrostBiome.WINTER_FROST);
+            modifiedVanillaOverworldBuilder.replaceBiome(Biomes.SNOWY_TAIGA, WinterFrostBiome.WINTER_FROST);
+
+            modifiedVanillaOverworldBuilder.replaceBiome(Biomes.FROZEN_PEAKS, WinterFrostBiome.WINTER_FROST);
         });
     }
 }
