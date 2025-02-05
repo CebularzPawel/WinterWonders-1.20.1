@@ -1,4 +1,5 @@
-// 1.20.1	2025-02-01T15:48:13.9903257	Registries
+// 1.20.1	2025-02-05T23:27:18.3433709	Registries
 0877253ff5c6d2dd815cb69efddef99fb6d3647a data/winterwonders/forge/biome_modifier/add_tree_pine.json
+47b33bb0930fb3809c6d6ae280a8611d8a25da6b data/winterwonders/worldgen/biome/winter_frost.json
 501ed481b309816747aa532a90363d9196b916da data/winterwonders/worldgen/configured_feature/grey_pine.json
 7e2c1e69933f5df50569f30eae2b275bfb2496d4 data/winterwonders/worldgen/placed_feature/greypine_placed.json

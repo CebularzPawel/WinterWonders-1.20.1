@@ -1,6 +1,7 @@
 package net.turtleboi.winterwonders.entity.custom;
 
 import net.minecraft.core.BlockPos;
+import net.minecraft.network.syncher.EntityDataAccessor;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.entity.*;
@@ -41,6 +42,7 @@ public class PinginEntity extends Animal {
 
         this.goalSelector.addGoal(8, new SlideOnIceGoal(this, 1.2D));
     }
+
 
     public AnimationState idleAnimationState = new AnimationState();
     private int idleAnimationTimeout = 0;
