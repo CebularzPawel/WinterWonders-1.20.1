@@ -50,6 +50,9 @@ public class ModCreativeModeTabs {
                         pOutput.accept(ModBlocks.GREYPINE_LEAVES.get());
                         pOutput.accept(ModBlocks.GREYPINE_SAPLING.get());
 
+                        pOutput.accept(ModBlocks.WONDER_SHROOM.get());
+                        pOutput.accept(ModItems.WONDER_TREE_SHROOM.get());
+
                         pOutput.accept(ModItems.SNOW_WISP_SPAWN_EGG.get());
                         pOutput.accept(ModItems.REVENANT_SPAWN_EGG.get());
                         pOutput.accept(ModItems.BRISK_SPAWN_EGG.get());

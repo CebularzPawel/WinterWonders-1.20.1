@@ -18,6 +18,8 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.EntityHitResult;
 import net.minecraft.world.phys.Vec3;
+import net.turtleboi.winterwonders.init.ModDamageSources;
+import net.turtleboi.winterwonders.init.ModEffects;
 import net.turtleboi.winterwonders.init.ModEntities;
 
 public class IceSpikeProjectileEntity extends AbstractArrow {
@@ -39,8 +41,14 @@ public class IceSpikeProjectileEntity extends AbstractArrow {
         Entity ownerEntity = getOwner();
         if (hitEntity != ownerEntity) {
             if (hitEntity instanceof LivingEntity livingEntity) {
-                livingEntity.addEffect(new MobEffectInstance(MobEffects.MOVEMENT_SLOWDOWN, 100, 0));
-                livingEntity.hurt(level().damageSources().magic(), 4);
+                if (livingEntity.hasEffect(ModEffects.CHILLED.get())) {
+                    livingEntity.addEffect(new MobEffectInstance(ModEffects.CHILLED.get(), 100,
+                            livingEntity.getEffect(ModEffects.CHILLED.get()).getAmplifier() + 1));
+                    ModDamageSources.hurtWithColdDamage(livingEntity, getOwner(), 0.05f);
+                } else {
+                    livingEntity.addEffect(new MobEffectInstance(ModEffects.CHILLED.get(), 100, 0));
+                    ModDamageSources.hurtWithColdDamage(livingEntity, getOwner(), 0.05f);
+                }
             }
 
             this.level().playSound(

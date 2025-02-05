@@ -1,13 +1,6 @@
 package net.turtleboi.winterwonders.client.events;
 
-import net.minecraft.client.Minecraft;
-import net.minecraft.client.multiplayer.ClientLevel;
-import net.minecraft.client.renderer.entity.ArrowRenderer;
 import net.minecraft.client.renderer.entity.EntityRenderers;
-import net.minecraft.client.renderer.entity.ThrownItemRenderer;
-import net.minecraft.world.entity.Entity;
-import net.minecraft.world.entity.projectile.AbstractArrow;
-import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.client.event.EntityRenderersEvent;
 import net.minecraftforge.client.event.RegisterParticleProvidersEvent;
 import net.minecraftforge.event.entity.EntityAttributeCreationEvent;
@@ -15,6 +8,7 @@ import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
 import net.turtleboi.winterwonders.WinterWonders;
+import net.turtleboi.winterwonders.client.models.blocks.IcyVinesModel;
 import net.turtleboi.winterwonders.client.models.entity.BriskModel;
 import net.turtleboi.winterwonders.client.models.entity.PinginModel;
 import net.turtleboi.winterwonders.client.models.entity.SnowWispModel;
@@ -29,6 +23,7 @@ import net.turtleboi.winterwonders.entity.custom.BriskEntity;
 import net.turtleboi.winterwonders.entity.custom.PinginEntity;
 import net.turtleboi.winterwonders.entity.custom.RevenantEntity;
 import net.turtleboi.winterwonders.entity.custom.SnowWispEntity;
+import net.turtleboi.winterwonders.init.ModBlockEntities;
 import net.turtleboi.winterwonders.init.ModEntities;
 import net.turtleboi.winterwonders.init.ModParticles;
 
@@ -59,6 +54,12 @@ public class ModBusEvents
         event.registerLayerDefinition(PinginModel.PINGIN_LAYER, PinginModel::createBodyLayer);
         event.registerLayerDefinition(BriskModel.BRISK_LAYER, BriskModel::createBodyLayer);
         event.registerLayerDefinition(IceSpikeModel.ICE_SPIKE_LAYER, IceSpikeModel::createBodyLayer);
+        event.registerLayerDefinition(IcyVinesModel.ICY_VINES_LAYER, IcyVinesModel::createBodyLayer);
+    }
+
+    @SubscribeEvent
+    public static void registerBER(EntityRenderersEvent.RegisterRenderers event){
+        //event.registerBlockEntityRenderer(ModBlockEntities.ICY_VINES_BE.get(), IcyVinesBlockEntityRenderer::new);
     }
 
     @SubscribeEvent
