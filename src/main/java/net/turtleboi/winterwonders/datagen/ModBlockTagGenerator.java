@@ -22,9 +22,14 @@ public class ModBlockTagGenerator extends BlockTagsProvider {
                 .add(ModBlocks.GREYPINE_LOG.get())
                 .add(ModBlocks.GREYPINE_WOOD.get())
                 .add(ModBlocks.STRIPPED_GREYPINE_LOG.get())
-                .add(ModBlocks.STRIPPED_GREYPINE_WOOD.get());
+                .add(ModBlocks.STRIPPED_GREYPINE_WOOD.get())
+                .add(ModBlocks.MYST_WILLOW_LOG.get())
+                .add(ModBlocks.MYST_WILLOW_WOOD.get())
+                .add(ModBlocks.STRIPPED_MYST_WILLOW_LOG.get())
+                .add(ModBlocks.STRIPPED_MYST_WILLOW_WOOD.get());
 
         this.tag(BlockTags.PLANKS)
-                .add(ModBlocks.GREYPINE_PLANKS.get());
+                .add(ModBlocks.GREYPINE_PLANKS.get())
+                .add(ModBlocks.MYST_WILLOW_PLANKS.get());
     }
 }

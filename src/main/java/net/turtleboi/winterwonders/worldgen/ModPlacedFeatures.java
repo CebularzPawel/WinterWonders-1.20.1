@@ -18,12 +18,17 @@ import java.util.List;
 
 public final class ModPlacedFeatures {
     public static final ResourceKey<PlacedFeature> GREYPINE_PLACED_KEY = registerKey("greypine_placed");
+    public static final ResourceKey<PlacedFeature> MYST_WILLOW_PLACED_KEY = registerKey("myst_willow_placed");
     public static void bootstrap(BootstapContext<PlacedFeature> context) {
         HolderGetter<ConfiguredFeature<?, ?>> configuredFeatures = context.lookup(Registries.CONFIGURED_FEATURE);
 
         register(context, GREYPINE_PLACED_KEY, configuredFeatures.getOrThrow(ModConfiguredFeatures.GREYPINE_KEY),
                 VegetationPlacements.treePlacement(PlacementUtils.countExtra(8, 0.5f, 4),
                         ModBlocks.GREYPINE_SAPLING.get()));
+
+        register(context, MYST_WILLOW_PLACED_KEY, configuredFeatures.getOrThrow(ModConfiguredFeatures.MYST_WILLOW_KEY),
+                VegetationPlacements.treePlacement(PlacementUtils.countExtra(8, 0.5f, 4),
+                        ModBlocks.MYST_WILLOW_SAPLING.get()));
     }
 
     private static ResourceKey<PlacedFeature> registerKey(String name) {

@@ -1,0 +1,7 @@
+{
+  "parent": "minecraft:block/cube_column_horizontal",
+  "textures": {
+    "end": "winterwonders:block/myst_willow_log",
+    "side": "winterwonders:block/myst_willow_log"
+  }
+}

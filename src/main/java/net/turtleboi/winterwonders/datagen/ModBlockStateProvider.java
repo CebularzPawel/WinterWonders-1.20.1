@@ -38,6 +38,24 @@ public class ModBlockStateProvider extends BlockStateProvider {
         leavesBlock(ModBlocks.GREYPINE_LEAVES);
 
         saplingBlock(ModBlocks.GREYPINE_SAPLING);
+
+        logBlock(((RotatedPillarBlock) ModBlocks.MYST_WILLOW_LOG.get()));
+        axisBlock(((RotatedPillarBlock) ModBlocks.MYST_WILLOW_WOOD.get()), blockTexture(ModBlocks.MYST_WILLOW_LOG.get()), blockTexture(ModBlocks.MYST_WILLOW_LOG.get()));
+
+        axisBlock(((RotatedPillarBlock) ModBlocks.STRIPPED_MYST_WILLOW_LOG.get()), blockTexture(ModBlocks.STRIPPED_MYST_WILLOW_LOG.get()),
+                new ResourceLocation(WinterWonders.MOD_ID, "block/stripped_myst_willow_log_top"));
+        axisBlock(((RotatedPillarBlock) ModBlocks.STRIPPED_MYST_WILLOW_WOOD.get()), blockTexture(ModBlocks.STRIPPED_MYST_WILLOW_LOG.get()), blockTexture(ModBlocks.STRIPPED_MYST_WILLOW_LOG.get()));
+
+        blockItem(ModBlocks.MYST_WILLOW_LOG);
+        blockItem(ModBlocks.MYST_WILLOW_WOOD);
+        blockItem(ModBlocks.STRIPPED_MYST_WILLOW_LOG);
+        blockItem(ModBlocks.STRIPPED_MYST_WILLOW_WOOD);
+
+        blockWithItem(ModBlocks.MYST_WILLOW_PLANKS);
+
+        leavesBlock(ModBlocks.MYST_WILLOW_LEAVES);
+
+        saplingBlock(ModBlocks.MYST_WILLOW_SAPLING);
     }
 
     private void saplingBlock(RegistryObject<Block> blockRegistryObject) {

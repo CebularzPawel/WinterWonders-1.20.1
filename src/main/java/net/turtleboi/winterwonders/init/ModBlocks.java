@@ -18,6 +18,7 @@ import net.minecraftforge.registries.RegistryObject;
 import net.turtleboi.winterwonders.WinterWonders;
 import net.turtleboi.winterwonders.block.custom.*;
 import net.turtleboi.winterwonders.worldgen.tree.greypine.GreypineTreeGrower;
+import net.turtleboi.winterwonders.worldgen.tree.greypine.MystWillowTreeGrower;
 
 
 import java.util.function.Supplier;
@@ -39,6 +40,18 @@ public class ModBlocks {
             () -> new ModFlammableRotatedPillarBlock(BlockBehaviour.Properties.copy(Blocks.SPRUCE_LOG).strength(3f)));
 
     public static final RegistryObject<Block> STRIPPED_GREYPINE_WOOD = registerBlock("stripped_greypine_wood",
+            () -> new ModFlammableRotatedPillarBlock(BlockBehaviour.Properties.copy(Blocks.SPRUCE_LOG).strength(3f)));
+
+    public static final RegistryObject<Block> MYST_WILLOW_LOG = registerBlock("myst_willow_log",
+            () -> new ModFlammableRotatedPillarBlock(BlockBehaviour.Properties.copy(Blocks.SPRUCE_LOG).strength(3f)));
+
+    public static final RegistryObject<Block> MYST_WILLOW_WOOD = registerBlock("myst_willow_wood",
+            () -> new ModFlammableRotatedPillarBlock(BlockBehaviour.Properties.copy(Blocks.SPRUCE_LOG).strength(3f)));
+
+    public static final RegistryObject<Block> STRIPPED_MYST_WILLOW_LOG = registerBlock("stripped_myst_willow_log",
+            () -> new ModFlammableRotatedPillarBlock(BlockBehaviour.Properties.copy(Blocks.SPRUCE_LOG).strength(3f)));
+
+    public static final RegistryObject<Block> STRIPPED_MYST_WILLOW_WOOD = registerBlock("stripped_myst_willow_wood",
             () -> new ModFlammableRotatedPillarBlock(BlockBehaviour.Properties.copy(Blocks.SPRUCE_LOG).strength(3f)));
 
     public static final RegistryObject<Block> WONDER_SHROOM = registerBlock("wonder_shroom",
@@ -77,6 +90,23 @@ public class ModBlocks {
                 }
             });
 
+    public static final RegistryObject<Block> MYST_WILLOW_PLANKS = registerBlock("myst_willow_planks",
+            () -> new Block(BlockBehaviour.Properties.copy(Blocks.SPRUCE_PLANKS)){
+                @Override
+                public boolean isFlammable(BlockState state, BlockGetter level, BlockPos pos, Direction direction) {
+                    return true;
+                }
+
+                @Override
+                public int getFlammability(BlockState state, BlockGetter level, BlockPos pos, Direction direction) {
+                    return 20;
+                }
+
+                @Override
+                public int getFireSpreadSpeed(BlockState state, BlockGetter level, BlockPos pos, Direction direction) {
+                    return 5;
+                }
+            });
 
     public static final RegistryObject<Block> ICE_SLUSH = registerBlock("ice_slush",
             ()-> new IceSlushBlock(BlockBehaviour.Properties.copy(Blocks.ICE).mapColor(MapColor.ICE).replaceable().strength(0.2F).friction(0.98F)));
@@ -99,8 +129,29 @@ public class ModBlocks {
                 }
             });
 
+    public static final RegistryObject<Block> MYST_WILLOW_LEAVES = registerBlock("myst_willow_leaves",
+            () -> new LeavesBlock(BlockBehaviour.Properties.copy(Blocks.SPRUCE_LEAVES)){
+                @Override
+                public boolean isFlammable(BlockState state, BlockGetter level, BlockPos pos, Direction direction) {
+                    return true;
+                }
+
+                @Override
+                public int getFlammability(BlockState state, BlockGetter level, BlockPos pos, Direction direction) {
+                    return 60;
+                }
+
+                @Override
+                public int getFireSpreadSpeed(BlockState state, BlockGetter level, BlockPos pos, Direction direction) {
+                    return 30;
+                }
+            });
+
     public static final RegistryObject<Block> GREYPINE_SAPLING = registerBlock("greypine_sapling",
             () -> new SaplingBlock(new GreypineTreeGrower(), BlockBehaviour.Properties.copy(Blocks.SPRUCE_SAPLING)));
+
+    public static final RegistryObject<Block> MYST_WILLOW_SAPLING = registerBlock("myst_willow_sapling",
+            () -> new SaplingBlock(new MystWillowTreeGrower(), BlockBehaviour.Properties.copy(Blocks.SPRUCE_SAPLING)));
 
     private static <T extends Block> RegistryObject<T> registerBlock(String name, Supplier<T> block) {
         RegistryObject<T> toReturn = BLOCKS.register(name, block);
