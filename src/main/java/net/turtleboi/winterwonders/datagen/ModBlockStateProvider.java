@@ -38,6 +38,7 @@ public class ModBlockStateProvider extends BlockStateProvider {
         leavesBlock(ModBlocks.GREYPINE_LEAVES);
 
         saplingBlock(ModBlocks.GREYPINE_SAPLING);
+        saplingBlock(ModBlocks.MYST_WILLOW_SAPLING);
     }
 
     private void saplingBlock(RegistryObject<Block> blockRegistryObject) {

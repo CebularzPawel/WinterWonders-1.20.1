@@ -35,11 +35,14 @@ public class ModBlockLootTables extends BlockLootSubProvider {
         this.dropSelf(ModBlocks.WONDER_TREE_SHROOM.get());
         this.dropOther(ModBlocks.WONDER_TREE_SHROOM_WALL.get(),ModItems.WONDER_TREE_SHROOM.get());
         this.dropSelf(ModBlocks.GREYPINE_SAPLING.get());
+        this.dropSelf(ModBlocks.MYST_WILLOW_SAPLING.get());
 
         this.add(ModBlocks.GREYPINE_LEAVES.get(), block ->
                 createLeavesDrops(block, ModBlocks.GREYPINE_SAPLING.get(), NORMAL_LEAVES_SAPLING_CHANCES));
 
         this.dropWhenSilkTouch(ModBlocks.ICE_SLUSH.get());
+        this.dropWhenSilkTouch(ModBlocks.ICY_VINES.get());
+        this.dropWhenSilkTouch(ModBlocks.ICY_VINES_PLANT.get());
     }
 
     protected LootTable.Builder createCopperLikeOreDrops(Block pBlock, Item item) {

@@ -18,6 +18,7 @@ import net.minecraftforge.registries.RegistryObject;
 import net.turtleboi.winterwonders.WinterWonders;
 import net.turtleboi.winterwonders.block.custom.*;
 import net.turtleboi.winterwonders.worldgen.tree.greypine.GreypineTreeGrower;
+import net.turtleboi.winterwonders.worldgen.tree.greypine.MystWillowTreeGrower;
 
 
 import java.util.function.Supplier;
@@ -101,6 +102,9 @@ public class ModBlocks {
 
     public static final RegistryObject<Block> GREYPINE_SAPLING = registerBlock("greypine_sapling",
             () -> new SaplingBlock(new GreypineTreeGrower(), BlockBehaviour.Properties.copy(Blocks.SPRUCE_SAPLING)));
+
+    public static final RegistryObject<Block> MYST_WILLOW_SAPLING = registerBlock("myst_willow_sapling",
+            () -> new SaplingBlock(new MystWillowTreeGrower(), BlockBehaviour.Properties.copy(Blocks.SPRUCE_SAPLING)));
 
     private static <T extends Block> RegistryObject<T> registerBlock(String name, Supplier<T> block) {
         RegistryObject<T> toReturn = BLOCKS.register(name, block);

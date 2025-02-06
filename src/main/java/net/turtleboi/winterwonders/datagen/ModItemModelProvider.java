@@ -55,6 +55,7 @@ public class ModItemModelProvider extends ItemModelProvider {
         handheldItem(ModItems.FROSTBITE_WAND);
 
         saplingItem(ModBlocks.GREYPINE_SAPLING);
+        saplingItem(ModBlocks.MYST_WILLOW_SAPLING);
 
         trimmedArmorItem(ModItems.COLDSTEEL_HELMET);
         trimmedArmorItem(ModItems.COLDSTEEL_CHESTPLATE);
