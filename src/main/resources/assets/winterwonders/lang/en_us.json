@@ -13,6 +13,7 @@
   "entity.winterwonders.pingin": "Pingin",
 
   "block.winterwonders.coldsteel_block": "Coldsteel Block",
+
   "block.winterwonders.greypine_log": "Grey Pine Log",
   "block.winterwonders.greypine_wood": "Grey Pine Wood",
   "block.winterwonders.stripped_greypine_log": "Stripped Grey Pine Log",
@@ -20,6 +21,14 @@
   "block.winterwonders.greypine_leaves": "Grey Pine Leaves",
   "block.winterwonders.greypine_planks": "Grey Pine Planks",
   "block.winterwonders.greypine_sapling": "Grey Pine Sapling",
+
+  "block.winterwonders.myst_willow_log": "Myst Willow Log",
+  "block.winterwonders.myst_willow_wood": "Myst Willow Wood",
+  "block.winterwonders.stripped_myst_willow_log": "Stripped Myst Willow Log",
+  "block.winterwonders.stripped_myst_willow_wood": "Stripped Myst Willow Wood",
+  "block.winterwonders.myst_willow_leaves": "Myst Willow Leaves",
+  "block.winterwonders.myst_willow_planks": "Myst Willow Planks",
+  "block.winterwonders.myst_willow_sapling": "Myst Willow Sapling",
 
   "item.winterwonders.frost_essence": "Frost Essence",
   "item.winterwonders.trueice_shard": "True Ice Shard",

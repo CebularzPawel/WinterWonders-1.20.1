@@ -37,9 +37,9 @@ public final class ModConfiguredFeatures {
                 new TwoLayersFeatureSize(1, 0, 2)).build());
 
         register(context, MYST_WILLOW_KEY, Feature.TREE, new TreeConfiguration.TreeConfigurationBuilder(
-                BlockStateProvider.simple(ModBlocks.GREYPINE_LOG.get()),
+                BlockStateProvider.simple(ModBlocks.MYST_WILLOW_LOG.get()),
                 new DarkOakTrunkPlacer(4, 2, 1),
-                BlockStateProvider.simple(ModBlocks.GREYPINE_LEAVES.get()),
+                BlockStateProvider.simple(ModBlocks.MYST_WILLOW_LEAVES.get()),
                 new DarkOakFoliagePlacer(ConstantInt.of(3), ConstantInt.of(2)),
                 new TwoLayersFeatureSize(1, 0, 2)).build());
     }

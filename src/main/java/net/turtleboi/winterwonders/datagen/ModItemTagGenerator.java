@@ -26,10 +26,14 @@ public class ModItemTagGenerator extends ItemTagsProvider {
                 .add(ModBlocks.GREYPINE_LOG.get().asItem())
                 .add(ModBlocks.GREYPINE_WOOD.get().asItem())
                 .add(ModBlocks.STRIPPED_GREYPINE_LOG.get().asItem())
-                .add(ModBlocks.STRIPPED_GREYPINE_WOOD.get().asItem());
+                .add(ModBlocks.STRIPPED_GREYPINE_WOOD.get().asItem())
+                .add(ModBlocks.MYST_WILLOW_LOG.get().asItem())
+                .add(ModBlocks.MYST_WILLOW_WOOD.get().asItem())
+                .add(ModBlocks.STRIPPED_MYST_WILLOW_LOG.get().asItem())
+                .add(ModBlocks.STRIPPED_MYST_WILLOW_WOOD.get().asItem());
 
         this.tag(ItemTags.PLANKS)
-                .add(ModBlocks.GREYPINE_PLANKS.get().asItem());
+                .add(ModBlocks.MYST_WILLOW_PLANKS.get().asItem());
 
         this.tag(ItemTags.TRIMMABLE_ARMOR)
                 .add(ModItems.COLDSTEEL_HELMET.get())
