@@ -3,6 +3,7 @@ package net.turtleboi.winterwonders.init;
 import com.google.common.base.Suppliers;
 import net.minecraft.ChatFormatting;
 import net.minecraft.core.Direction;
+import net.minecraft.world.food.FoodProperties;
 import net.minecraft.world.item.*;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraftforge.common.ForgeSpawnEggItem;
@@ -84,7 +85,9 @@ public class ModItems {
     public static final RegistryObject<Item> WONDER_TREE_SHROOM = ITEMS.register("wonder_tree_shroom",
             () -> new StandingAndWallBlockItem(ModBlocks.WONDER_TREE_SHROOM.get(), ModBlocks.WONDER_TREE_SHROOM_WALL.get(), new Item.Properties(), Direction.DOWN));
 
-
+    public static final RegistryObject<Item> PUCKERBERRY = ITEMS.register("puckerberry",
+            () -> new ItemNameBlockItem(ModBlocks.PUCKERBERRY_BUSH.get(), new Item.Properties().rarity(Rarity.COMMON)
+                    .food(new FoodProperties.Builder().nutrition(2).saturationMod(0.1F).build())));
 
     public static void register(IEventBus eventBus) {
         ITEMS.register(eventBus);

@@ -1,5 +1,6 @@
 package net.turtleboi.winterwonders.datagen.loot;
 
+import net.minecraft.advancements.critereon.StatePropertiesPredicate;
 import net.minecraft.data.loot.BlockLootSubProvider;
 import net.minecraft.world.flag.FeatureFlags;
 import net.minecraft.world.item.Item;
@@ -10,9 +11,12 @@ import net.minecraft.world.level.storage.loot.LootTable;
 import net.minecraft.world.level.storage.loot.entries.LootItem;
 import net.minecraft.world.level.storage.loot.functions.ApplyBonusCount;
 import net.minecraft.world.level.storage.loot.functions.SetItemCountFunction;
+import net.minecraft.world.level.storage.loot.predicates.LootItemBlockStatePropertyCondition;
+import net.minecraft.world.level.storage.loot.predicates.LootItemCondition;
 import net.minecraft.world.level.storage.loot.providers.number.UniformGenerator;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.registries.RegistryObject;
+import net.turtleboi.winterwonders.block.custom.PuckerberryBushBlock;
 import net.turtleboi.winterwonders.init.ModBlocks;
 import net.turtleboi.winterwonders.init.ModItems;
 
@@ -52,6 +56,20 @@ public class ModBlockLootTables extends BlockLootSubProvider {
         this.dropOther(ModBlocks.WONDER_TREE_SHROOM_WALL.get(),ModItems.WONDER_TREE_SHROOM.get());
         this.dropWhenSilkTouch(ModBlocks.ICY_VINES.get());
         this.dropWhenSilkTouch(ModBlocks.ICY_VINES_PLANT.get());
+
+        LootItemCondition.Builder lootitemcondition$builder2 = LootItemBlockStatePropertyCondition
+                .hasBlockStateProperties(ModBlocks.PUCKERBERRY_BUSH.get())
+                .setProperties(StatePropertiesPredicate.Builder.properties().hasProperty(PuckerberryBushBlock.AGE, 2))
+                .or(LootItemBlockStatePropertyCondition
+                        .hasBlockStateProperties(ModBlocks.PUCKERBERRY_BUSH.get())
+                        .setProperties(StatePropertiesPredicate.Builder.properties().hasProperty(PuckerberryBushBlock.AGE,3)));
+
+        this.add(ModBlocks.PUCKERBERRY_BUSH.get(),
+                createCropDrops(
+                        ModBlocks.PUCKERBERRY_BUSH.get(),
+                        ModItems.PUCKERBERRY.get(),
+                        ModItems.PUCKERBERRY.get(),
+                        lootitemcondition$builder2));
     }
 
     protected LootTable.Builder createCopperLikeOreDrops(Block pBlock, Item item) {

@@ -3,14 +3,21 @@ package net.turtleboi.winterwonders.datagen;
 import net.minecraft.data.PackOutput;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.BushBlock;
+import net.minecraft.world.level.block.CropBlock;
 import net.minecraft.world.level.block.RotatedPillarBlock;
+import net.minecraft.world.level.block.state.BlockState;
 import net.minecraftforge.client.model.generators.BlockStateProvider;
+import net.minecraftforge.client.model.generators.ConfiguredModel;
 import net.minecraftforge.client.model.generators.ModelFile;
 import net.minecraftforge.common.data.ExistingFileHelper;
 import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.RegistryObject;
 import net.turtleboi.winterwonders.WinterWonders;
+import net.turtleboi.winterwonders.block.custom.PuckerberryBushBlock;
 import net.turtleboi.winterwonders.init.ModBlocks;
+
+import java.util.function.Function;
 
 public class ModBlockStateProvider extends BlockStateProvider {
     public ModBlockStateProvider(PackOutput output, ExistingFileHelper exFileHelper) {
@@ -56,6 +63,21 @@ public class ModBlockStateProvider extends BlockStateProvider {
         leavesBlock(ModBlocks.MYST_WILLOW_LEAVES);
 
         saplingBlock(ModBlocks.MYST_WILLOW_SAPLING);
+
+        makeBerryBush((BushBlock) ModBlocks.PUCKERBERRY_BUSH.get(), "puckerberry_stage", "puckerberry_stage");
+    }
+
+    public void makeBerryBush(BushBlock block, String modelName, String textureName) {
+        Function<BlockState, ConfiguredModel[]> function = state -> bushStates(state, block, modelName, textureName);
+        getVariantBuilder(block).forAllStates(function);
+    }
+
+    private ConfiguredModel[] bushStates(BlockState state, BushBlock block, String modelName, String textureName) {
+        ConfiguredModel[] models = new ConfiguredModel[1];
+        models[0] = new ConfiguredModel(models().cross(modelName + ((PuckerberryBushBlock) block).getAge(state),
+                new ResourceLocation(WinterWonders.MOD_ID, "block/" + textureName + ((PuckerberryBushBlock) block).getAge(state))).renderType("cutout"));
+
+        return models;
     }
 
     private void saplingBlock(RegistryObject<Block> blockRegistryObject) {

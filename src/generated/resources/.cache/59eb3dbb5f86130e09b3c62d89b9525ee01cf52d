@@ -1,4 +1,4 @@
-// 1.20.1	2025-02-06T10:46:24.4158816	Loot Tables
+// 1.20.1	2025-02-06T15:25:06.6710483	Loot Tables
 6385a076e85b8fea7847dba01087ba5f1fba2dfe data/winterwonders/loot_tables/blocks/coldsteel_block.json
 667387fcc134a2660d144be2d7ea21274d7a3d56 data/winterwonders/loot_tables/blocks/greypine_leaves.json
 b7837c9689a861c248ee3bdc2bd93c970b4c5ac2 data/winterwonders/loot_tables/blocks/greypine_log.json
@@ -13,6 +13,7 @@ c5d543912b501d17ebe5517067e40c1eb71c78e5 data/winterwonders/loot_tables/blocks/m
 44af643a384150258a4757d85465dba4544c685e data/winterwonders/loot_tables/blocks/myst_willow_planks.json
 2a863c8e10d6969f80fb56ef54c1cba9951e0013 data/winterwonders/loot_tables/blocks/myst_willow_sapling.json
 b5a1e47895819429b8afb236b7ad45a5b8506a21 data/winterwonders/loot_tables/blocks/myst_willow_wood.json
+e78e01a5bc093d254f69d11bd59571904f8df4bc data/winterwonders/loot_tables/blocks/puckerberry_bush.json
 234aec24a404382ff27812909d61a6f79fc01b16 data/winterwonders/loot_tables/blocks/stripped_greypine_log.json
 ecbc65a086d3566fef5068c04f7199026090f4c7 data/winterwonders/loot_tables/blocks/stripped_greypine_wood.json
 e2fdc867fc7945a5394dcf800ce208b13ddb0d25 data/winterwonders/loot_tables/blocks/stripped_myst_willow_log.json
