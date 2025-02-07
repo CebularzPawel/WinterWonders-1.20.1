@@ -1,14 +1,7 @@
 {
-  "multipart": [
-    {
-      "apply": {
-        "model": "winterwonders:block/icy_vines_plant"
-      }
-    },
-    {
-      "apply": {
-        "model": "winterwonders:block/icy_vines_plant_emissive"
-      }
+  "variants": {
+    "": {
+      "model": "winterwonders:block/icy_vines_plant"
     }
-  ]
+  }
 }

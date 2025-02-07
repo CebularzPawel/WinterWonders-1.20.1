@@ -11,35 +11,40 @@ import net.minecraft.client.renderer.RenderType;
 import net.minecraft.resources.ResourceLocation;
 import net.turtleboi.winterwonders.WinterWonders;
 
-import java.util.function.Function;
-
 public class IcyVinesModel extends Model {
     public static final ModelLayerLocation ICY_VINES_LAYER = new ModelLayerLocation(new ResourceLocation(WinterWonders.MOD_ID, "icy_vines"), "main");
+    private final ModelPart part1;
+    private final ModelPart part2;
 
-    private final ModelPart root;
-
-    public IcyVinesModel(Function<ResourceLocation, RenderType> pRenderType, ModelPart root) {
-        super(pRenderType);
-        this.root = root;
+    public IcyVinesModel(ModelPart root) {
+        super(RenderType::entityCutout);
+        this.part1 = root.getChild("part1");
+        this.part2 = root.getChild("part2");
     }
-
 
     @Override
     public void renderToBuffer(PoseStack poseStack, VertexConsumer vertexConsumer, int light, int overlay,
                                float red, float green, float blue, float alpha) {
-        root.render(poseStack, vertexConsumer, light, overlay, red, green, blue, alpha);
+        part1.render(poseStack, vertexConsumer, light, overlay, red, green, blue, alpha);
+        part2.render(poseStack, vertexConsumer, light, overlay, red, green, blue, alpha);
     }
 
     public static LayerDefinition createBodyLayer() {
         MeshDefinition meshDefinition = new MeshDefinition();
-        PartDefinition rootPart = meshDefinition.getRoot();
-        rootPart.addOrReplaceChild("root",
+        PartDefinition partDefinition = meshDefinition.getRoot();
+        PartDefinition part1 = partDefinition.addOrReplaceChild("part1",
                 CubeListBuilder.create()
-                        .texOffs(0, 0)
-                        .addBox(-8.0F, -8.0F, -0.5F, 16.0F, 16.0F, 1.0F),
-                PartPose.offset(0.0F, 16.0F, 0.0F)
-        );
+                        .texOffs(0, -19)
+                        .addBox(0.0F, -8.0F, -9.5F, 0.0F, 16.0F, 19.0F,
+                                new CubeDeformation(0.0F)),
+                PartPose.offsetAndRotation(8F, 16.0F, 8F, 0.0F, 0.7854F, 0.0F));
+        PartDefinition part2 = partDefinition.addOrReplaceChild("part2",
+                CubeListBuilder.create()
+                        .texOffs(0, -19)
+                        .addBox(0.0F, -8.0F, -9.5F, 0.0F, 16.0F, 19.0F,
+                                new CubeDeformation(0.0F)),
+                PartPose.offsetAndRotation(8F, 16.0F, 8F, 0.0F, -0.7854F, 0.0F));
 
-        return LayerDefinition.create(meshDefinition, 32, 32);
+        return LayerDefinition.create(meshDefinition, 16, 16);
     }
 }
