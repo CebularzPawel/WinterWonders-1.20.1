@@ -31,6 +31,30 @@ public class ModBlockLootTables extends BlockLootSubProvider {
     protected void generate() {
         this.dropSelf(ModBlocks.COLDSTEEL_BLOCK.get());
 
+        this.dropSelf(ModBlocks.COBBLED_ICE_STONE.get());
+        this.add(ModBlocks.COBBLED_ICE_STONE_SLAB.get(),
+                block -> createSlabItemTable(ModBlocks.COBBLED_ICE_STONE_SLAB.get()));
+        this.dropSelf(ModBlocks.COBBLED_ICE_STONE_STAIRS.get());
+        this.dropSelf(ModBlocks.COBBLED_ICE_STONE_WALL.get());
+
+        this.dropSelf(ModBlocks.ICE_STONE_BRICKS.get());
+        this.add(ModBlocks.ICE_STONE_BRICKS_SLAB.get(),
+                block -> createSlabItemTable(ModBlocks.ICE_STONE_BRICKS_SLAB.get()));
+        this.dropSelf(ModBlocks.ICE_STONE_BRICKS_STAIRS.get());
+        this.dropSelf(ModBlocks.ICE_STONE_BRICKS_WALL.get());
+
+        this.dropSelf(ModBlocks.ICE_STONE_TILES.get());
+        this.add(ModBlocks.ICE_STONE_TILES_SLAB.get(),
+                block -> createSlabItemTable(ModBlocks.ICE_STONE_TILES_SLAB.get()));
+        this.dropSelf(ModBlocks.ICE_STONE_TILES_STAIRS.get());
+        this.dropSelf(ModBlocks.ICE_STONE_TILES_WALL.get());
+
+        this.dropSelf(ModBlocks.POLISHED_ICE_STONE.get());
+        this.add(ModBlocks.POLISHED_ICE_STONE_SLAB.get(),
+                block -> createSlabItemTable(ModBlocks.POLISHED_ICE_STONE_SLAB.get()));
+        this.dropSelf(ModBlocks.POLISHED_ICE_STONE_STAIRS.get());
+        this.dropSelf(ModBlocks.POLISHED_ICE_STONE_WALL.get());
+
         this.dropSelf(ModBlocks.GREYPINE_LOG.get());
         this.dropSelf(ModBlocks.GREYPINE_WOOD.get());
         this.dropSelf(ModBlocks.STRIPPED_GREYPINE_LOG.get());

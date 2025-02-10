@@ -58,6 +58,27 @@ public class ModCreativeModeTabs {
                         pOutput.accept(ModBlocks.MYST_WILLOW_LEAVES.get());
                         pOutput.accept(ModBlocks.MYST_WILLOW_SAPLING.get());
 
+                        pOutput.accept(ModBlocks.COBBLED_ICE_STONE.get());
+                        pOutput.accept(ModBlocks.COBBLED_ICE_STONE_STAIRS.get());
+                        pOutput.accept(ModBlocks.COBBLED_ICE_STONE_SLAB.get());
+                        pOutput.accept(ModBlocks.COBBLED_ICE_STONE_WALL.get());
+
+
+                        pOutput.accept(ModBlocks.ICE_STONE_BRICKS.get());
+                        pOutput.accept(ModBlocks.ICE_STONE_BRICKS_STAIRS.get());
+                        pOutput.accept(ModBlocks.ICE_STONE_BRICKS_SLAB.get());
+                        pOutput.accept(ModBlocks.ICE_STONE_BRICKS_WALL.get());
+
+                        pOutput.accept(ModBlocks.ICE_STONE_TILES.get());
+                        pOutput.accept(ModBlocks.ICE_STONE_TILES_STAIRS.get());
+                        pOutput.accept(ModBlocks.ICE_STONE_TILES_SLAB.get());
+                        pOutput.accept(ModBlocks.ICE_STONE_TILES_WALL.get());
+
+                        pOutput.accept(ModBlocks.POLISHED_ICE_STONE.get());
+                        pOutput.accept(ModBlocks.POLISHED_ICE_STONE_STAIRS.get());
+                        pOutput.accept(ModBlocks.POLISHED_ICE_STONE_SLAB.get());
+                        pOutput.accept(ModBlocks.POLISHED_ICE_STONE_WALL.get());
+
                         pOutput.accept(ModBlocks.WONDER_SHROOM.get());
                         pOutput.accept(ModItems.WONDER_TREE_SHROOM.get());
 

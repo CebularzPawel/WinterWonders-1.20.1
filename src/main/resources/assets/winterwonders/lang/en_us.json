@@ -14,6 +14,29 @@
 
   "block.winterwonders.coldsteel_block": "Coldsteel Block",
 
+  "block.winterwonders.cobbled_ice_stone": "Cobbled Ice Stone",
+  "block.winterwonders.cobbled_ice_stone_wall": "Cobbled Ice Stone Wall",
+  "block.winterwonders.cobbled_ice_stone_slab": "Cobbled Ice Stone Slab",
+  "block.winterwonders.cobbled_ice_stone_stairs": "Cobbled Ice Stone Stairs",
+
+  "block.winterwonders.ice_stone_bricks": "Ice Stone Bricks",
+  "block.winterwonders.ice_stone_bricks_wall": "Ice Stone Bricks Wall",
+  "block.winterwonders.ice_stone_bricks_slab": "Ice Stone Bricks Slab",
+  "block.winterwonders.ice_stone_bricks_stairs": "Ice Stone Bricks Stairs",
+
+  "block.winterwonders.ice_stone_tiles": "Ice Stone Tiles",
+  "block.winterwonders.ice_stone_tiles_wall": "Ice Stone Tiles Wall",
+  "block.winterwonders.ice_stone_tiles_slab": "Ice Stone Tiles Slab",
+  "block.winterwonders.ice_stone_tiles_stairs": "Ice Stone Tiles Stairs",
+
+  "block.winterwonders.polished_ice_stone": "Polished Ice Stone",
+  "block.winterwonders.polished_ice_stone_wall": "Polished Ice Stone Wall",
+  "block.winterwonders.polished_ice_stone_slab": "Polished Ice Stone Slab",
+  "block.winterwonders.polished_ice_stone_stairs": "Polished Ice Stone Stairs",
+
+  "block.winterwonders.wonder_shroom": "Wonder Shroom",
+  "block.winterwonders.wonder_tree_shroom": "Wonder Tree Shroom",
+
   "block.winterwonders.greypine_log": "Grey Pine Log",
   "block.winterwonders.greypine_wood": "Grey Pine Wood",
   "block.winterwonders.stripped_greypine_log": "Stripped Grey Pine Log",

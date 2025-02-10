@@ -1,0 +1,8 @@
+{
+  "parent": "minecraft:block/slab",
+  "textures": {
+    "bottom": "winterwonders:block/cobbled_ice_stone",
+    "side": "winterwonders:block/cobbled_ice_stone",
+    "top": "winterwonders:block/cobbled_ice_stone"
+  }
+}

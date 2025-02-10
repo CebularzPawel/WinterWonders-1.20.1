@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:block/wall_inventory",
+  "textures": {
+    "wall": "winterwonders:block/cobbled_ice_stone"
+  }
+}

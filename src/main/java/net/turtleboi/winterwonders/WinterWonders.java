@@ -35,7 +35,7 @@ public class WinterWonders {
 
     public WinterWonders() {
         IEventBus modEventBus = FMLJavaModLoadingContext.get().getModEventBus();
-
+        ModFeatures.DEF_REG.register(modEventBus);
         ModItems.register(modEventBus);
         ModBlocks.register(modEventBus);
         ModCreativeModeTabs.register(modEventBus);

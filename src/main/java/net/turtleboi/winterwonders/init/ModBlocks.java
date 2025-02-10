@@ -19,6 +19,7 @@ import net.turtleboi.winterwonders.WinterWonders;
 import net.turtleboi.winterwonders.block.custom.*;
 import net.turtleboi.winterwonders.worldgen.tree.greypine.GreypineTreeGrower;
 import net.turtleboi.winterwonders.worldgen.tree.greypine.MystWillowTreeGrower;
+import org.stringtemplate.v4.ST;
 
 
 import java.util.function.Supplier;
@@ -29,6 +30,43 @@ public class ModBlocks {
 
     public static final RegistryObject<Block> COLDSTEEL_BLOCK = registerBlock("coldsteel_block",
             () -> new Block(BlockBehaviour.Properties.copy(Blocks.IRON_BLOCK).noOcclusion()));
+    public static final RegistryObject<Block> COBBLED_ICE_STONE = registerBlock("cobbled_ice_stone",
+            () -> new Block(BlockBehaviour.Properties.copy(Blocks.COBBLESTONE)));
+    public static final RegistryObject<Block> COBBLED_ICE_STONE_SLAB = registerBlock("cobbled_ice_stone_slab",
+            () -> new SlabBlock(BlockBehaviour.Properties.copy(Blocks.COBBLESTONE)));
+    public static final RegistryObject<Block> COBBLED_ICE_STONE_STAIRS = registerBlock("cobbled_ice_stone_stairs",
+            () -> new StairBlock(()-> ModBlocks.COBBLED_ICE_STONE.get().defaultBlockState(),BlockBehaviour.Properties.copy(Blocks.COBBLESTONE)));
+    public static final RegistryObject<Block> COBBLED_ICE_STONE_WALL = registerBlock("cobbled_ice_stone_wall",
+            () -> new WallBlock(BlockBehaviour.Properties.copy(Blocks.COBBLESTONE)));
+
+    public static final RegistryObject<Block> ICE_STONE_BRICKS = registerBlock("ice_stone_bricks",
+            () -> new Block(BlockBehaviour.Properties.copy(Blocks.STONE_BRICKS)));
+    public static final RegistryObject<Block> ICE_STONE_BRICKS_SLAB = registerBlock("ice_stone_bricks_slab",
+            () -> new SlabBlock(BlockBehaviour.Properties.copy(Blocks.STONE_BRICKS)));
+    public static final RegistryObject<Block> ICE_STONE_BRICKS_STAIRS = registerBlock("ice_stone_bricks_stairs",
+            () -> new StairBlock(()-> ModBlocks.ICE_STONE_BRICKS.get().defaultBlockState(),BlockBehaviour.Properties.copy(Blocks.STONE_BRICKS)));
+    public static final RegistryObject<Block> ICE_STONE_BRICKS_WALL = registerBlock("ice_stone_bricks_wall",
+            () -> new WallBlock(BlockBehaviour.Properties.copy(Blocks.STONE_BRICKS)));
+
+
+    public static final RegistryObject<Block> ICE_STONE_TILES = registerBlock("ice_stone_tiles",
+            () -> new Block(BlockBehaviour.Properties.copy(Blocks.STONE_BRICKS)));
+    public static final RegistryObject<Block> ICE_STONE_TILES_SLAB = registerBlock("ice_stone_tiles_slab",
+            () -> new SlabBlock(BlockBehaviour.Properties.copy(Blocks.STONE_BRICKS)));
+    public static final RegistryObject<Block> ICE_STONE_TILES_STAIRS = registerBlock("ice_stone_tiles_stairs",
+            () -> new StairBlock(()-> ModBlocks.ICE_STONE_TILES.get().defaultBlockState(),BlockBehaviour.Properties.copy(Blocks.STONE_BRICKS)));
+    public static final RegistryObject<Block> ICE_STONE_TILES_WALL = registerBlock("ice_stone_tiles_wall",
+            () -> new WallBlock(BlockBehaviour.Properties.copy(Blocks.STONE_BRICKS)));
+
+    public static final RegistryObject<Block> POLISHED_ICE_STONE = registerBlock("polished_ice_stone",
+            () -> new Block(BlockBehaviour.Properties.copy(Blocks.STONE_BRICKS)));
+    public static final RegistryObject<Block> POLISHED_ICE_STONE_SLAB = registerBlock("polished_ice_stone_slab",
+            () -> new SlabBlock(BlockBehaviour.Properties.copy(Blocks.STONE_BRICKS)));
+    public static final RegistryObject<Block> POLISHED_ICE_STONE_STAIRS = registerBlock("polished_ice_stone_stairs",
+            () -> new StairBlock(()-> ModBlocks.POLISHED_ICE_STONE.get().defaultBlockState(),BlockBehaviour.Properties.copy(Blocks.STONE_BRICKS)));
+    public static final RegistryObject<Block> POLISHED_ICE_STONE_WALL = registerBlock("polished_ice_stone_wall",
+            () -> new WallBlock(BlockBehaviour.Properties.copy(Blocks.STONE_BRICKS)));
+
 
     public static final RegistryObject<Block> GREYPINE_LOG = registerBlock("greypine_log",
             () -> new ModFlammableRotatedPillarBlock(BlockBehaviour.Properties.copy(Blocks.SPRUCE_LOG).strength(3f)));
@@ -58,18 +96,18 @@ public class ModBlocks {
             () -> new MushroomNoGrowableBlock(BlockBehaviour.Properties.copy(Blocks.BROWN_MUSHROOM)));
 
     public static final RegistryObject<Block> WONDER_TREE_SHROOM = BLOCKS.register("wonder_tree_shroom",
-            () -> new TreeMushroomBlock(BlockBehaviour.Properties.of().mapColor(MapColor.COLOR_PURPLE).noCollission().instabreak().sound(SoundType.WET_GRASS).pushReaction(PushReaction.DESTROY)));
+            () -> new TreeMushroomBlock(BlockBehaviour.Properties.of().mapColor(MapColor.COLOR_PURPLE).noCollission().instabreak().sound(SoundType.GRASS).pushReaction(PushReaction.DESTROY)));
 
     public static final RegistryObject<Block> WONDER_TREE_SHROOM_WALL = BLOCKS.register("wonder_tree_shroom_wall",
-            () -> new TreeMushroomWallBlock(BlockBehaviour.Properties.of().mapColor(MapColor.COLOR_GRAY).forceSolidOn().instrument(NoteBlockInstrument.BASEDRUM).requiresCorrectToolForDrops().noCollission().instabreak().dropsLike(WONDER_SHROOM.get())));
+            () -> new TreeMushroomWallBlock(BlockBehaviour.Properties.of().mapColor(MapColor.COLOR_GRAY).forceSolidOn().sound(SoundType.GRASS).instrument(NoteBlockInstrument.BASEDRUM).requiresCorrectToolForDrops().noCollission().instabreak().dropsLike(WONDER_SHROOM.get())));
 
     public static final RegistryObject<Block> ICY_VINES_PLANT = BLOCKS.register("icy_vines_plant",
             () -> new IcyVinesPlantBlock(BlockBehaviour.Properties.of().mapColor(MapColor.COLOR_BLUE).noCollission().instabreak().sound(SoundType.VINE).pushReaction(PushReaction.DESTROY).lightLevel((p_50870_) -> {
-                return 4;
+                return 6;
             })));
     public static final RegistryObject<Block> ICY_VINES = registerBlock("icy_vines",
             () -> new IcyVinesBlock(BlockBehaviour.Properties.of().mapColor(MapColor.COLOR_BLUE).noCollission().instabreak().randomTicks().sound(SoundType.VINE).pushReaction(PushReaction.DESTROY).lightLevel((p_50870_) -> {
-                return 5;
+                return 8;
             })));
 
     public static final RegistryObject<Block> GREYPINE_PLANKS = registerBlock("greypine_planks",

@@ -2,10 +2,7 @@ package net.turtleboi.winterwonders.datagen;
 
 import net.minecraft.data.PackOutput;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraft.world.level.block.Block;
-import net.minecraft.world.level.block.BushBlock;
-import net.minecraft.world.level.block.CropBlock;
-import net.minecraft.world.level.block.RotatedPillarBlock;
+import net.minecraft.world.level.block.*;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraftforge.client.model.generators.BlockStateProvider;
 import net.minecraftforge.client.model.generators.ConfiguredModel;
@@ -27,6 +24,26 @@ public class ModBlockStateProvider extends BlockStateProvider {
     @Override
     protected void registerStatesAndModels() {
         blockWithItem(ModBlocks.COLDSTEEL_BLOCK);
+
+        blockWithItem(ModBlocks.COBBLED_ICE_STONE);
+        stairsBlock(((StairBlock) ModBlocks.COBBLED_ICE_STONE_STAIRS.get()),blockTexture(ModBlocks.COBBLED_ICE_STONE.get()));
+        slabBlock(((SlabBlock) ModBlocks.COBBLED_ICE_STONE_SLAB.get()),blockTexture(ModBlocks.COBBLED_ICE_STONE.get()),blockTexture(ModBlocks.COBBLED_ICE_STONE.get()));
+        wallBlock(((WallBlock) ModBlocks.COBBLED_ICE_STONE_WALL.get()),blockTexture(ModBlocks.COBBLED_ICE_STONE.get()));
+
+        blockWithItem(ModBlocks.ICE_STONE_BRICKS);
+        stairsBlock(((StairBlock) ModBlocks.ICE_STONE_BRICKS_STAIRS.get()),blockTexture(ModBlocks.ICE_STONE_BRICKS.get()));
+        slabBlock(((SlabBlock) ModBlocks.ICE_STONE_BRICKS_SLAB.get()),blockTexture(ModBlocks.ICE_STONE_BRICKS.get()),blockTexture(ModBlocks.ICE_STONE_BRICKS.get()));
+        wallBlock(((WallBlock) ModBlocks.ICE_STONE_BRICKS_WALL.get()),blockTexture(ModBlocks.ICE_STONE_BRICKS.get()));
+
+        blockWithItem(ModBlocks.ICE_STONE_TILES);
+        stairsBlock(((StairBlock) ModBlocks.ICE_STONE_TILES_STAIRS.get()),blockTexture(ModBlocks.ICE_STONE_TILES.get()));
+        slabBlock(((SlabBlock) ModBlocks.ICE_STONE_TILES_SLAB.get()),blockTexture(ModBlocks.ICE_STONE_TILES.get()),blockTexture(ModBlocks.ICE_STONE_TILES.get()));
+        wallBlock(((WallBlock) ModBlocks.ICE_STONE_TILES_WALL.get()),blockTexture(ModBlocks.ICE_STONE_TILES.get()));
+
+        blockWithItem(ModBlocks.POLISHED_ICE_STONE);
+        stairsBlock(((StairBlock) ModBlocks.POLISHED_ICE_STONE_STAIRS.get()),blockTexture(ModBlocks.POLISHED_ICE_STONE.get()));
+        slabBlock(((SlabBlock) ModBlocks.POLISHED_ICE_STONE_SLAB.get()),blockTexture(ModBlocks.POLISHED_ICE_STONE.get()),blockTexture(ModBlocks.POLISHED_ICE_STONE.get()));
+        wallBlock(((WallBlock) ModBlocks.POLISHED_ICE_STONE_WALL.get()),blockTexture(ModBlocks.POLISHED_ICE_STONE.get()));
 
         logBlock(((RotatedPillarBlock) ModBlocks.GREYPINE_LOG.get()));
         axisBlock(((RotatedPillarBlock) ModBlocks.GREYPINE_WOOD.get()), blockTexture(ModBlocks.GREYPINE_LOG.get()), blockTexture(ModBlocks.GREYPINE_LOG.get()));

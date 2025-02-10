@@ -5,6 +5,7 @@ import net.minecraft.core.registries.Registries;
 import net.minecraft.data.worldgen.BiomeDefaultFeatures;
 import net.minecraft.data.worldgen.BootstapContext;
 import net.minecraft.data.worldgen.biome.OverworldBiomes;
+import net.minecraft.data.worldgen.placement.MiscOverworldPlacements;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.MobCategory;
@@ -50,11 +51,12 @@ public final class WinterFrostBiome {
                 context.lookup(Registries.CONFIGURED_CARVER));
 
         globalOverworldGeneration(settings);
-        BiomeDefaultFeatures.addMossyStoneBlock(settings);
+        settings.addFeature(GenerationStep.Decoration.LOCAL_MODIFICATIONS, ModPlacedFeatures.ICE_STONE_SPIKE_KEY);
         BiomeDefaultFeatures.addDefaultOres(settings);
         BiomeDefaultFeatures.addFerns(settings);
         BiomeDefaultFeatures.addDefaultFlowers(settings);
         settings.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, ModPlacedFeatures.GREYPINE_PLACED_KEY);
+
 
         return new Biome.BiomeBuilder()
                 .hasPrecipitation(true)

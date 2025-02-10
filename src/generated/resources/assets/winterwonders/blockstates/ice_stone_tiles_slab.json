@@ -1,0 +1,13 @@
+{
+  "variants": {
+    "type=bottom": {
+      "model": "winterwonders:block/ice_stone_tiles_slab"
+    },
+    "type=double": {
+      "model": "winterwonders:block/ice_stone_tiles"
+    },
+    "type=top": {
+      "model": "winterwonders:block/ice_stone_tiles_slab_top"
+    }
+  }
+}

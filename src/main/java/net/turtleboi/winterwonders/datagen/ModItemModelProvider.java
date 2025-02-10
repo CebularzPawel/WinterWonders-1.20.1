@@ -13,6 +13,7 @@ import net.minecraftforge.client.model.generators.ItemModelBuilder;
 import net.minecraftforge.client.model.generators.ItemModelProvider;
 import net.minecraftforge.client.model.generators.ModelFile;
 import net.minecraftforge.common.data.ExistingFileHelper;
+import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.RegistryObject;
 import net.turtleboi.winterwonders.WinterWonders;
 import net.turtleboi.winterwonders.init.ModBlocks;
@@ -46,6 +47,22 @@ public class ModItemModelProvider extends ItemModelProvider {
         simpleItem(ModItems.FROZEN_HEART);
         simpleItem(ModItems.COLDSTEEL_SCRAP);
         simpleItem(ModItems.COLDSTEEL_INGOT);
+
+        wallItem(ModBlocks.COBBLED_ICE_STONE_WALL, ModBlocks.COBBLED_ICE_STONE);
+        evenSimplerBlockItem(ModBlocks.COBBLED_ICE_STONE_STAIRS);
+        evenSimplerBlockItem(ModBlocks.COBBLED_ICE_STONE_SLAB);
+
+        wallItem(ModBlocks.ICE_STONE_BRICKS_WALL, ModBlocks.ICE_STONE_BRICKS);
+        evenSimplerBlockItem(ModBlocks.ICE_STONE_BRICKS_STAIRS);
+        evenSimplerBlockItem(ModBlocks.ICE_STONE_BRICKS_SLAB);
+
+        wallItem(ModBlocks.ICE_STONE_TILES_WALL, ModBlocks.ICE_STONE_TILES);
+        evenSimplerBlockItem(ModBlocks.ICE_STONE_TILES_STAIRS);
+        evenSimplerBlockItem(ModBlocks.ICE_STONE_TILES_SLAB);
+
+        wallItem(ModBlocks.POLISHED_ICE_STONE_WALL, ModBlocks.POLISHED_ICE_STONE);
+        evenSimplerBlockItem(ModBlocks.POLISHED_ICE_STONE_STAIRS);
+        evenSimplerBlockItem(ModBlocks.POLISHED_ICE_STONE_SLAB);
 
         handheldItem(ModItems.COLDSTEEL_SWORD);
         handheldItem(ModItems.COLDSTEEL_PICKAXE);
@@ -128,5 +145,13 @@ public class ModItemModelProvider extends ItemModelProvider {
         return withExistingParent(item.getId().getPath(),
                 new ResourceLocation("item/generated")).texture("layer0",
                 new ResourceLocation(WinterWonders.MOD_ID,"item/" + item.getId().getPath()));
+    }
+    public void evenSimplerBlockItem(RegistryObject<Block> block) {
+        this.withExistingParent(WinterWonders.MOD_ID + ":" + ForgeRegistries.BLOCKS.getKey(block.get()).getPath(),
+                modLoc("block/" + ForgeRegistries.BLOCKS.getKey(block.get()).getPath()));
+    }
+    public void wallItem(RegistryObject<Block> block, RegistryObject<Block> baseBlock) {
+        this.withExistingParent(ForgeRegistries.BLOCKS.getKey(block.get()).getPath(), mcLoc("block/wall_inventory"))
+                .texture("wall",  new ResourceLocation(WinterWonders.MOD_ID, "block/" + ForgeRegistries.BLOCKS.getKey(baseBlock.get()).getPath()));
     }
 }
