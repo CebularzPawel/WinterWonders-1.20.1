@@ -150,7 +150,7 @@ public class ModBlocks {
             ()-> new IceSlushBlock(BlockBehaviour.Properties.copy(Blocks.ICE).mapColor(MapColor.ICE).replaceable().strength(0.2F).friction(0.98F)));
 
     public static final RegistryObject<Block> GREYPINE_LEAVES = registerBlock("greypine_leaves",
-            () -> new LeavesBlock(BlockBehaviour.Properties.copy(Blocks.SPRUCE_LEAVES)){
+            () -> new GreypineLeavesBlock(BlockBehaviour.Properties.copy(Blocks.SPRUCE_LEAVES)){
                 @Override
                 public boolean isFlammable(BlockState state, BlockGetter level, BlockPos pos, Direction direction) {
                     return true;

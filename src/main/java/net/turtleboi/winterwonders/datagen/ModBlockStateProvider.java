@@ -59,7 +59,7 @@ public class ModBlockStateProvider extends BlockStateProvider {
 
         blockWithItem(ModBlocks.GREYPINE_PLANKS);
 
-        leavesBlock(ModBlocks.GREYPINE_LEAVES);
+        //leavesBlock(ModBlocks.GREYPINE_LEAVES);
 
         saplingBlock(ModBlocks.GREYPINE_SAPLING);
 

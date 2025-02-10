@@ -1,0 +1,10 @@
+{
+  "variants": {
+    "snowy=false": {
+      "model": "winterwonders:block/greypine_leaves"
+    },
+    "snowy=true": {
+      "model": "winterwonders:block/greypine_leaves_snowy"
+    }
+  }
+}

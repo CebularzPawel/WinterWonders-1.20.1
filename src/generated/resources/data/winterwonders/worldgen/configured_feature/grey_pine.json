@@ -19,9 +19,10 @@
       "state": {
         "Name": "winterwonders:greypine_leaves",
         "Properties": {
-          "distance": "7",
-          "persistent": "false",
-          "waterlogged": "false"
+          "distance": "1",
+          "persistent": "true",
+          "snowy": "false",
+          "waterlogged": "true"
         }
       }
     },
