@@ -9,12 +9,14 @@ import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
 import net.turtleboi.winterwonders.WinterWonders;
 import net.turtleboi.winterwonders.client.models.blocks.IcyVinesModel;
+import net.turtleboi.winterwonders.client.models.blocks.IcyVinesPlantModel;
 import net.turtleboi.winterwonders.client.models.entity.BriskModel;
 import net.turtleboi.winterwonders.client.models.entity.PinginModel;
 import net.turtleboi.winterwonders.client.models.entity.SnowWispModel;
 import net.turtleboi.winterwonders.client.models.entity.projectile.IceSpikeModel;
 import net.turtleboi.winterwonders.client.particles.AuroraParticle;
 import net.turtleboi.winterwonders.client.renderers.block.IcyVinesBlockEntityRenderer;
+import net.turtleboi.winterwonders.client.renderers.block.IcyVinesPlantBlockEntityRenderer;
 import net.turtleboi.winterwonders.client.renderers.entity.BriskRenderer;
 import net.turtleboi.winterwonders.client.renderers.entity.PinginRenderer;
 import net.turtleboi.winterwonders.client.renderers.entity.RevenantRenderer;
@@ -56,11 +58,13 @@ public class ModBusEvents
         event.registerLayerDefinition(BriskModel.BRISK_LAYER, BriskModel::createBodyLayer);
         event.registerLayerDefinition(IceSpikeModel.ICE_SPIKE_LAYER, IceSpikeModel::createBodyLayer);
         event.registerLayerDefinition(IcyVinesModel.ICY_VINES_LAYER, IcyVinesModel::createBodyLayer);
+        event.registerLayerDefinition(IcyVinesPlantModel.ICY_VINES_PLANT_LAYER, IcyVinesModel::createBodyLayer);
     }
 
     @SubscribeEvent
     public static void registerBER(EntityRenderersEvent.RegisterRenderers event){
         event.registerBlockEntityRenderer(ModBlockEntities.ICY_VINES_BE.get(), IcyVinesBlockEntityRenderer::new);
+        event.registerBlockEntityRenderer(ModBlockEntities.ICY_VINES_PLANT_BE.get(), IcyVinesPlantBlockEntityRenderer::new);
     }
 
     @SubscribeEvent

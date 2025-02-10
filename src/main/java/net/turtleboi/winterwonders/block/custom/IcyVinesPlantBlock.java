@@ -11,6 +11,7 @@ import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.shapes.VoxelShape;
 import net.turtleboi.winterwonders.block.entity.IcyVinesBlockEntity;
+import net.turtleboi.winterwonders.block.entity.IcyVinesPlantBlockEntity;
 import net.turtleboi.winterwonders.init.ModBlocks;
 import org.jetbrains.annotations.Nullable;
 
@@ -46,6 +47,6 @@ public class IcyVinesPlantBlock extends GrowingPlantBodyBlock implements EntityB
 
     @Override
     public @Nullable BlockEntity newBlockEntity(BlockPos blockPos, BlockState blockState) {
-        return null;
+        return new IcyVinesPlantBlockEntity(blockPos, blockState);
     }
 }

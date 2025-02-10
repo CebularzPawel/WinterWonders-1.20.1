@@ -22,7 +22,7 @@ public class IcyVinesBlock extends GrowingPlantHeadBlock implements EntityBlock{
     public IcyVinesBlock(Properties p_154975_) {
         super(p_154975_, Direction.DOWN, SHAPE, false,0.1);
     }
-    protected static final VoxelShape SHAPE = Block.box(4.0, 9.0, 4.0, 12.0, 16.0, 12.0);
+    public static final VoxelShape SHAPE = Block.box(1.0, 0.0, 1.0, 15.0, 16.0, 15.0);
 
     protected int getBlocksToGrowWhenBonemealed(RandomSource p_222680_) {
         return NetherVines.getBlocksToGrowWhenBonemealed(p_222680_);

@@ -4,25 +4,27 @@ import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
 import com.mojang.math.Axis;
 import net.minecraft.client.renderer.MultiBufferSource;
+import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.blockentity.BlockEntityRenderer;
 import net.minecraft.client.renderer.blockentity.BlockEntityRendererProvider;
-import net.minecraft.client.renderer.RenderType;
 import net.minecraft.resources.ResourceLocation;
 import net.turtleboi.winterwonders.WinterWonders;
 import net.turtleboi.winterwonders.block.entity.IcyVinesBlockEntity;
+import net.turtleboi.winterwonders.block.entity.IcyVinesPlantBlockEntity;
 import net.turtleboi.winterwonders.client.models.blocks.IcyVinesModel;
+import net.turtleboi.winterwonders.client.models.blocks.IcyVinesPlantModel;
 
-public class IcyVinesBlockEntityRenderer implements BlockEntityRenderer<IcyVinesBlockEntity> {
-    private final IcyVinesModel model;
-    private static final ResourceLocation BASE_TEXTURE = new ResourceLocation(WinterWonders.MOD_ID, "textures/block/icy_vines.png");
-    private static final ResourceLocation EMISSIVE_TEXTURE = new ResourceLocation(WinterWonders.MOD_ID, "textures/block/icy_vines_emissive.png");
+public class IcyVinesPlantBlockEntityRenderer implements BlockEntityRenderer<IcyVinesPlantBlockEntity> {
+    private final IcyVinesPlantModel model;
+    private static final ResourceLocation BASE_TEXTURE = new ResourceLocation(WinterWonders.MOD_ID, "textures/block/icy_vines_plant.png");
+    private static final ResourceLocation EMISSIVE_TEXTURE = new ResourceLocation(WinterWonders.MOD_ID, "textures/block/icy_vines_plant_emissive.png");
 
-    public IcyVinesBlockEntityRenderer(BlockEntityRendererProvider.Context context) {
-        this.model = new IcyVinesModel(context.bakeLayer(IcyVinesModel.ICY_VINES_LAYER));
+    public IcyVinesPlantBlockEntityRenderer(BlockEntityRendererProvider.Context context) {
+        this.model = new IcyVinesPlantModel(context.bakeLayer(IcyVinesPlantModel.ICY_VINES_PLANT_LAYER));
     }
 
     @Override
-    public void render(IcyVinesBlockEntity pBlock, float pPartialTick, PoseStack pPoseStack, MultiBufferSource pBuffer, int pPackedLight, int pPackedOverlay) {
+    public void render(IcyVinesPlantBlockEntity pBlock, float pPartialTick, PoseStack pPoseStack, MultiBufferSource pBuffer, int pPackedLight, int pPackedOverlay) {
         pPoseStack.pushPose();
         pPoseStack.mulPose(Axis.XP.rotationDegrees(180));
         pPoseStack.mulPose(Axis.YP.rotationDegrees(180));

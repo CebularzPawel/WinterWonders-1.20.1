@@ -11,12 +11,12 @@ import net.minecraft.client.renderer.RenderType;
 import net.minecraft.resources.ResourceLocation;
 import net.turtleboi.winterwonders.WinterWonders;
 
-public class IcyVinesModel extends Model {
-    public static final ModelLayerLocation ICY_VINES_LAYER = new ModelLayerLocation(new ResourceLocation(WinterWonders.MOD_ID, "icy_vines"), "main");
+public class IcyVinesPlantModel extends Model {
+    public static final ModelLayerLocation ICY_VINES_PLANT_LAYER = new ModelLayerLocation(new ResourceLocation(WinterWonders.MOD_ID, "icy_vines_plant"), "main");
     private final ModelPart part1;
     private final ModelPart part2;
 
-    public IcyVinesModel(ModelPart root) {
+    public IcyVinesPlantModel(ModelPart root) {
         super(RenderType::entityCutout);
         this.part1 = root.getChild("part1");
         this.part2 = root.getChild("part2");
