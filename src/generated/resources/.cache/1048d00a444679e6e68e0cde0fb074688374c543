@@ -1,4 +1,4 @@
-// 1.20.1	2025-02-09T22:10:21.9712561	Item Models: winterwonders
+// 1.20.1	2025-02-11T18:42:39.541643	Item Models: winterwonders
 63ec6c618a3a23eab4cab9c52d7d3250de9b516e assets/winterwonders/models/item/brisk_spawn_egg.json
 36283cf1fd87e09ccafb94da1e65ddd0046bd737 assets/winterwonders/models/item/cobbled_ice_stone_slab.json
 8c3d20040eb3cd4a2c23407f5b22ce592e8f7f2a assets/winterwonders/models/item/cobbled_ice_stone_stairs.json
@@ -64,6 +64,7 @@ c593b4781475a0f22f9bb82ed8d88ee7b34fb7d3 assets/winterwonders/models/item/ice_st
 7a45fd97bcec086de80b163b659285127daa2c66 assets/winterwonders/models/item/ice_stone_tiles_slab.json
 a9a66a6f695fb43f98ab00c4284511f75d408767 assets/winterwonders/models/item/ice_stone_tiles_stairs.json
 1a6abeabc749e03f0730a281cbfce967b47b3344 assets/winterwonders/models/item/ice_stone_tiles_wall.json
+e3cb37c58b5cab6cc60c7730819a61e877f4c4ab assets/winterwonders/models/item/magical_rose.json
 7592a7d9a8326f68c6be9447512ae987f379cb42 assets/winterwonders/models/item/myst_willow_sapling.json
 63ec6c618a3a23eab4cab9c52d7d3250de9b516e assets/winterwonders/models/item/pingin_spawn_egg.json
 1984f65895fcda86aa8003442010a410f215c43b assets/winterwonders/models/item/polished_ice_stone_slab.json

@@ -45,6 +45,11 @@ public class ModBlockStateProvider extends BlockStateProvider {
         slabBlock(((SlabBlock) ModBlocks.POLISHED_ICE_STONE_SLAB.get()),blockTexture(ModBlocks.POLISHED_ICE_STONE.get()),blockTexture(ModBlocks.POLISHED_ICE_STONE.get()));
         wallBlock(((WallBlock) ModBlocks.POLISHED_ICE_STONE_WALL.get()),blockTexture(ModBlocks.POLISHED_ICE_STONE.get()));
 
+        simpleBlockWithItem(ModBlocks.MAGICAL_ROSE.get(), models().cross(blockTexture(ModBlocks.MAGICAL_ROSE.get()).getPath(),
+                blockTexture(ModBlocks.MAGICAL_ROSE.get())).renderType("cutout"));
+        simpleBlockWithItem(ModBlocks.POTTED_MAGICAL_ROSE.get(), models().singleTexture("potted_magical_rose", new ResourceLocation("flower_pot_cross"), "plant",
+                blockTexture(ModBlocks.MAGICAL_ROSE.get())).renderType("cutout"));
+
         logBlock(((RotatedPillarBlock) ModBlocks.GREYPINE_LOG.get()));
         axisBlock(((RotatedPillarBlock) ModBlocks.GREYPINE_WOOD.get()), blockTexture(ModBlocks.GREYPINE_LOG.get()), blockTexture(ModBlocks.GREYPINE_LOG.get()));
 
@@ -62,6 +67,7 @@ public class ModBlockStateProvider extends BlockStateProvider {
         //leavesBlock(ModBlocks.GREYPINE_LEAVES);
 
         saplingBlock(ModBlocks.GREYPINE_SAPLING);
+
 
         logBlock(((RotatedPillarBlock) ModBlocks.MYST_WILLOW_LOG.get()));
         axisBlock(((RotatedPillarBlock) ModBlocks.MYST_WILLOW_WOOD.get()), blockTexture(ModBlocks.MYST_WILLOW_LOG.get()), blockTexture(ModBlocks.MYST_WILLOW_LOG.get()));

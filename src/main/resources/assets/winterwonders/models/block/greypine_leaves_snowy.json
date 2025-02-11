@@ -1,7 +1,9 @@
 {
-  "parent": "minecraft:block/leaves",
+  "parent": "winterwonders:block/snowy_leaves",
   "render_type": "minecraft:cutout",
   "textures": {
-    "all": "winterwonders:block/greypine_leaves_snowy"
+    "top": "winterwonders:block/greypine_leaves_snowy",
+    "side": "winterwonders:block/greypine_leaves_snowy",
+    "down": "winterwonders:block/greypine_leaves"
   }
 }

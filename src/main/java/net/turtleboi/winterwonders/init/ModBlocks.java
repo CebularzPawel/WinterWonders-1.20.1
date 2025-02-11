@@ -110,6 +110,15 @@ public class ModBlocks {
                 return 8;
             })));
 
+
+    public static final RegistryObject<Block> MAGICAL_ROSE = registerBlock("magical_rose",
+            () -> new FlowerBlock(() -> ModEffects.COLD_RESIST.get(),5,
+                    BlockBehaviour.Properties.copy(Blocks.ALLIUM).noOcclusion().noCollission()));
+
+    public static final RegistryObject<Block> POTTED_MAGICAL_ROSE = BLOCKS.register("potted_magical_rose",
+            () -> new FlowerPotBlock(() -> ((FlowerPotBlock) Blocks.FLOWER_POT),ModBlocks.MAGICAL_ROSE,
+                    BlockBehaviour.Properties.copy(Blocks.POTTED_ALLIUM).noOcclusion()));
+
     public static final RegistryObject<Block> GREYPINE_PLANKS = registerBlock("greypine_planks",
             () -> new Block(BlockBehaviour.Properties.copy(Blocks.SPRUCE_PLANKS)){
                 @Override

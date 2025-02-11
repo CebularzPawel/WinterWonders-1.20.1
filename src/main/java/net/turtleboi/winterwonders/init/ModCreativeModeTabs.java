@@ -82,6 +82,8 @@ public class ModCreativeModeTabs {
                         pOutput.accept(ModBlocks.WONDER_SHROOM.get());
                         pOutput.accept(ModItems.WONDER_TREE_SHROOM.get());
 
+                        pOutput.accept(ModBlocks.MAGICAL_ROSE.get());
+
                         pOutput.accept(ModItems.PUCKERBERRY.get());
 
                         pOutput.accept(ModItems.SNOW_WISP_SPAWN_EGG.get());
