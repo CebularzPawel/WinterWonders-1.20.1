@@ -50,6 +50,11 @@ public class ModBlockStateProvider extends BlockStateProvider {
         simpleBlockWithItem(ModBlocks.POTTED_MAGICAL_ROSE.get(), models().singleTexture("potted_magical_rose", new ResourceLocation("flower_pot_cross"), "plant",
                 blockTexture(ModBlocks.MAGICAL_ROSE.get())).renderType("cutout"));
 
+        simpleBlockWithItem(ModBlocks.ICE_FLOWER.get(), models().cross(blockTexture(ModBlocks.ICE_FLOWER.get()).getPath(),
+                blockTexture(ModBlocks.ICE_FLOWER.get())).renderType("cutout"));
+        simpleBlockWithItem(ModBlocks.POTTED_ICE_FLOWER.get(), models().singleTexture("potted_ice_flower", new ResourceLocation("flower_pot_cross"), "plant",
+                blockTexture(ModBlocks.ICE_FLOWER.get())).renderType("cutout"));
+
         logBlock(((RotatedPillarBlock) ModBlocks.GREYPINE_LOG.get()));
         axisBlock(((RotatedPillarBlock) ModBlocks.GREYPINE_WOOD.get()), blockTexture(ModBlocks.GREYPINE_LOG.get()), blockTexture(ModBlocks.GREYPINE_LOG.get()));
 

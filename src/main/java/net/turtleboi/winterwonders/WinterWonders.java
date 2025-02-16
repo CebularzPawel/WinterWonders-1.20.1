@@ -63,6 +63,7 @@ public class WinterWonders {
             SurfaceRuleManager.addSurfaceRules(SurfaceRuleManager.RuleCategory.OVERWORLD,MOD_ID, WWSurfaceRules.makeRules());
 
             ((FlowerPotBlock) Blocks.FLOWER_POT).addPlant(ModBlocks.MAGICAL_ROSE.getId(),ModBlocks.POTTED_MAGICAL_ROSE);
+            ((FlowerPotBlock) Blocks.FLOWER_POT).addPlant(ModBlocks.ICE_FLOWER.getId(),ModBlocks.POTTED_ICE_FLOWER);
         });
     }
 

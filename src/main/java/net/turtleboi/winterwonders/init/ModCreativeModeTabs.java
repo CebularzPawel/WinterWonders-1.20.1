@@ -83,6 +83,7 @@ public class ModCreativeModeTabs {
                         pOutput.accept(ModItems.WONDER_TREE_SHROOM.get());
 
                         pOutput.accept(ModBlocks.MAGICAL_ROSE.get());
+                        pOutput.accept(ModBlocks.ICE_FLOWER.get());
 
                         pOutput.accept(ModItems.PUCKERBERRY.get());
 

@@ -2,6 +2,7 @@ package net.turtleboi.winterwonders.init;
 
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
+import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.BlockGetter;
@@ -112,11 +113,19 @@ public class ModBlocks {
 
 
     public static final RegistryObject<Block> MAGICAL_ROSE = registerBlock("magical_rose",
-            () -> new FlowerBlock(() -> ModEffects.COLD_RESIST.get(),5,
+            () -> new FlowerBlock(() -> MobEffects.NIGHT_VISION,5,
                     BlockBehaviour.Properties.copy(Blocks.ALLIUM).noOcclusion().noCollission()));
 
     public static final RegistryObject<Block> POTTED_MAGICAL_ROSE = BLOCKS.register("potted_magical_rose",
             () -> new FlowerPotBlock(() -> ((FlowerPotBlock) Blocks.FLOWER_POT),ModBlocks.MAGICAL_ROSE,
+                    BlockBehaviour.Properties.copy(Blocks.POTTED_ALLIUM).noOcclusion()));
+
+    public static final RegistryObject<Block> ICE_FLOWER = registerBlock("ice_flower",
+            () -> new FlowerBlock(() -> ModEffects.COLD_RESIST.get(),5,
+                    BlockBehaviour.Properties.copy(Blocks.ALLIUM).noOcclusion().noCollission()));
+
+    public static final RegistryObject<Block> POTTED_ICE_FLOWER = BLOCKS.register("potted_ice_flower",
+            () -> new FlowerPotBlock(() -> ((FlowerPotBlock) Blocks.FLOWER_POT),ModBlocks.ICE_FLOWER,
                     BlockBehaviour.Properties.copy(Blocks.POTTED_ALLIUM).noOcclusion()));
 
     public static final RegistryObject<Block> GREYPINE_PLANKS = registerBlock("greypine_planks",

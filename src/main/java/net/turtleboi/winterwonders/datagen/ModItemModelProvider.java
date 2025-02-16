@@ -87,6 +87,8 @@ public class ModItemModelProvider extends ItemModelProvider {
         simpleItem(ModItems.PUCKERBERRY);
 
         simpleBlockItemBlockTexture(ModBlocks.MAGICAL_ROSE);
+        simpleBlockItemBlockTexture(ModBlocks.ICE_FLOWER);
+
     }
 
     private void trimmedArmorItem(RegistryObject<Item> itemRegistryObject) {

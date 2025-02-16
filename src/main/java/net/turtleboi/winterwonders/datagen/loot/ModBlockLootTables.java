@@ -83,6 +83,8 @@ public class ModBlockLootTables extends BlockLootSubProvider {
 
         this.dropSelf(ModBlocks.MAGICAL_ROSE.get());
         this.add(ModBlocks.POTTED_MAGICAL_ROSE.get(),createPotFlowerItemTable(ModBlocks.MAGICAL_ROSE.get()));
+        this.dropSelf(ModBlocks.ICE_FLOWER.get());
+        this.add(ModBlocks.POTTED_ICE_FLOWER.get(),createPotFlowerItemTable(ModBlocks.ICE_FLOWER.get()));
 
         LootItemCondition.Builder lootitemcondition$builder2 = LootItemBlockStatePropertyCondition
                 .hasBlockStateProperties(ModBlocks.PUCKERBERRY_BUSH.get())
