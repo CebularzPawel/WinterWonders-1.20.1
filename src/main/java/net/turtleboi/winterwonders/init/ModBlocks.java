@@ -68,6 +68,8 @@ public class ModBlocks {
     public static final RegistryObject<Block> POLISHED_ICE_STONE_WALL = registerBlock("polished_ice_stone_wall",
             () -> new WallBlock(BlockBehaviour.Properties.copy(Blocks.STONE_BRICKS)));
 
+    public static final RegistryObject<Block> ICE_STONE_PILLAR = registerBlock("ice_stone_pillar",
+            ()-> new RotatedPillarBlock(BlockBehaviour.Properties.copy(Blocks.STONE_BRICKS).requiresCorrectToolForDrops()));
 
     public static final RegistryObject<Block> GREYPINE_LOG = registerBlock("greypine_log",
             () -> new ModFlammableRotatedPillarBlock(BlockBehaviour.Properties.copy(Blocks.SPRUCE_LOG).strength(3f)));

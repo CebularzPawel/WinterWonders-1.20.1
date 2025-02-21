@@ -80,6 +80,7 @@ public class ModBlockLootTables extends BlockLootSubProvider {
         this.dropOther(ModBlocks.WONDER_TREE_SHROOM_WALL.get(),ModItems.WONDER_TREE_SHROOM.get());
         this.dropWhenSilkTouch(ModBlocks.ICY_VINES.get());
         this.dropWhenSilkTouch(ModBlocks.ICY_VINES_PLANT.get());
+        this.dropSelf(ModBlocks.ICE_STONE_PILLAR.get());
 
         this.dropSelf(ModBlocks.MAGICAL_ROSE.get());
         this.add(ModBlocks.POTTED_MAGICAL_ROSE.get(),createPotFlowerItemTable(ModBlocks.MAGICAL_ROSE.get()));

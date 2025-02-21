@@ -1,4 +1,4 @@
-// 1.20.1	2025-02-16T16:54:01.9009431	Loot Tables
+// 1.20.1	2025-02-19T14:05:02.3146159	Loot Tables
 a0c137ed9e5d1bcf0e2309ad3995a104570ab04e data/winterwonders/loot_tables/blocks/cobbled_ice_stone.json
 0fa0a0a461277ea1c1c1ac779131e4db92765524 data/winterwonders/loot_tables/blocks/cobbled_ice_stone_slab.json
 0855a42e4837677df20337ee1b6a5644d6e2334f data/winterwonders/loot_tables/blocks/cobbled_ice_stone_stairs.json
@@ -15,6 +15,7 @@ f54d8c7384f5b3f5ef2b057eeb55ff58902d854c data/winterwonders/loot_tables/blocks/i
 9fd13eeaa10de6e2a797b2d5b5beb9ebb8f6253a data/winterwonders/loot_tables/blocks/ice_stone_bricks_slab.json
 e034a6db743719ad0b196d4fe5570cc29c21272b data/winterwonders/loot_tables/blocks/ice_stone_bricks_stairs.json
 d0b1c28918cf741ba5572cbfe0cbb05fc6190304 data/winterwonders/loot_tables/blocks/ice_stone_bricks_wall.json
+a0c8596bd5f0c5a779ab122a0d0395d8367d8ec1 data/winterwonders/loot_tables/blocks/ice_stone_pillar.json
 45655bf25c5e3d1efe975a535ccf9f759d61a4b6 data/winterwonders/loot_tables/blocks/ice_stone_tiles.json
 2c0a03ff66d0443acc2b2d84c5d1f3f3f0e734be data/winterwonders/loot_tables/blocks/ice_stone_tiles_slab.json
 4a6642085312eca3e9647b0c4926d09115a6a948 data/winterwonders/loot_tables/blocks/ice_stone_tiles_stairs.json

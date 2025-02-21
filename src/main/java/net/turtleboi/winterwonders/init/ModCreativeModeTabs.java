@@ -79,6 +79,8 @@ public class ModCreativeModeTabs {
                         pOutput.accept(ModBlocks.POLISHED_ICE_STONE_SLAB.get());
                         pOutput.accept(ModBlocks.POLISHED_ICE_STONE_WALL.get());
 
+                        pOutput.accept(ModBlocks.ICE_STONE_PILLAR.get());
+
                         pOutput.accept(ModBlocks.WONDER_SHROOM.get());
                         pOutput.accept(ModItems.WONDER_TREE_SHROOM.get());
 

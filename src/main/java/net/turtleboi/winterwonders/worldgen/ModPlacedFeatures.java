@@ -30,8 +30,11 @@ public final class ModPlacedFeatures {
     public static final ResourceKey<PlacedFeature> WONDER_SHROOM_PATCH_KEY = registerKey("wonder_shroom_patch");
 
     public static void bootstrap(BootstapContext<PlacedFeature> context) {
+
+
         HolderGetter<ConfiguredFeature<?, ?>> configuredFeatures = context.lookup(Registries.CONFIGURED_FEATURE);
 
+        PlacementUtils.register(context,WONDER_SHROOM_PATCH_KEY,configuredFeatures.getOrThrow(ModConfiguredFeatures.WONDER_SHROOM_KEY), new PlacementModifier[]{CountPlacement.of(3), InSquarePlacement.spread(), PlacementUtils.HEIGHTMAP, BiomeFilter.biome()});
         register(context, GREYPINE_PLACED_KEY, configuredFeatures.getOrThrow(ModConfiguredFeatures.GREYPINE_KEY),
                 VegetationPlacements.treePlacement(PlacementUtils.countExtra(8, 0.5f, 4),
                         ModBlocks.GREYPINE_SAPLING.get()));

@@ -56,6 +56,7 @@ public final class WinterFrostBiome {
         BiomeDefaultFeatures.addFerns(settings);
         BiomeDefaultFeatures.addDefaultFlowers(settings);
         settings.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, ModPlacedFeatures.GREYPINE_PLACED_KEY);
+        settings.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, ModPlacedFeatures.WONDER_SHROOM_PATCH_KEY);
 
 
         return new Biome.BiomeBuilder()

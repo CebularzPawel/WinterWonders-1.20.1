@@ -55,6 +55,10 @@ public class ModBlockStateProvider extends BlockStateProvider {
         simpleBlockWithItem(ModBlocks.POTTED_ICE_FLOWER.get(), models().singleTexture("potted_ice_flower", new ResourceLocation("flower_pot_cross"), "plant",
                 blockTexture(ModBlocks.ICE_FLOWER.get())).renderType("cutout"));
 
+        axisBlock(((RotatedPillarBlock) ModBlocks.ICE_STONE_PILLAR.get()), blockTexture(ModBlocks.ICE_STONE_PILLAR.get()),
+                new ResourceLocation(WinterWonders.MOD_ID, "block/ice_stone_pillar_end"));
+        blockItem(ModBlocks.ICE_STONE_PILLAR);
+
         logBlock(((RotatedPillarBlock) ModBlocks.GREYPINE_LOG.get()));
         axisBlock(((RotatedPillarBlock) ModBlocks.GREYPINE_WOOD.get()), blockTexture(ModBlocks.GREYPINE_LOG.get()), blockTexture(ModBlocks.GREYPINE_LOG.get()));
 

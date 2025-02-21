@@ -3,12 +3,16 @@ package net.turtleboi.winterwonders.worldgen;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.data.worldgen.BootstapContext;
 import net.minecraft.data.worldgen.features.FeatureUtils;
+import net.minecraft.data.worldgen.placement.PlacementUtils;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.valueproviders.ConstantInt;
+import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.levelgen.feature.ConfiguredFeature;
 import net.minecraft.world.level.levelgen.feature.Feature;
 import net.minecraft.world.level.levelgen.feature.configurations.FeatureConfiguration;
+import net.minecraft.world.level.levelgen.feature.configurations.RandomPatchConfiguration;
+import net.minecraft.world.level.levelgen.feature.configurations.SimpleBlockConfiguration;
 import net.minecraft.world.level.levelgen.feature.configurations.TreeConfiguration;
 import net.minecraft.world.level.levelgen.feature.featuresize.TwoLayersFeatureSize;
 import net.minecraft.world.level.levelgen.feature.foliageplacers.DarkOakFoliagePlacer;
@@ -20,16 +24,25 @@ import net.turtleboi.winterwonders.init.ModFeatures;
 import net.turtleboi.winterwonders.worldgen.tree.greypine.GreypineFoliagePlacer;
 import net.turtleboi.winterwonders.worldgen.tree.greypine.GreypineTrunkPlacer;
 
+import java.util.List;
+
 public final class ModConfiguredFeatures {
     public static final ResourceKey<ConfiguredFeature<?, ?>> GREYPINE_KEY = registerKey("grey_pine");
     public static final ResourceKey<ConfiguredFeature<?, ?>> MYST_WILLOW_KEY = registerKey("myst_willow");
 
     public static final ResourceKey<ConfiguredFeature<?,?>> ICE_STONE_SPIKE_KEY = registerKey("ice_stone_spike");
 
+    public static final ResourceKey<ConfiguredFeature<?,?>> WONDER_SHROOM_KEY = registerKey("wonder_shroom");
+
 
     public static void bootstrap(BootstapContext<ConfiguredFeature<?, ?>> context) {
         FeatureUtils.register(context, ICE_STONE_SPIKE_KEY, ModFeatures.ICE_STONE_SPIKE.get());
 
+        register(context,WONDER_SHROOM_KEY,Feature.RANDOM_PATCH, new RandomPatchConfiguration(32, 7, 3, PlacementUtils.onlyWhenEmpty(
+                        Feature.SIMPLE_BLOCK,
+                        new SimpleBlockConfiguration(BlockStateProvider.simple(ModBlocks.WONDER_SHROOM.get())))
+                )
+        );
 
         register(context, GREYPINE_KEY, Feature.TREE, new TreeConfiguration.TreeConfigurationBuilder(
                 BlockStateProvider.simple(ModBlocks.GREYPINE_LOG.get()),

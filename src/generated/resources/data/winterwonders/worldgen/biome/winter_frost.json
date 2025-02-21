@@ -66,7 +66,8 @@
       "minecraft:glow_lichen",
       "minecraft:patch_large_fern",
       "minecraft:flower_default",
-      "winterwonders:greypine_placed"
+      "winterwonders:greypine_placed",
+      "winterwonders:wonder_shroom_patch"
     ],
     [
       "minecraft:freeze_top_layer"

@@ -1,9 +1,11 @@
-// 1.20.1	2025-02-10T15:41:16.4818192	Registries
+// 1.20.1	2025-02-17T14:36:34.0454713	Registries
 0877253ff5c6d2dd815cb69efddef99fb6d3647a data/winterwonders/forge/biome_modifier/add_tree_pine.json
-1994a81a64e2d675eca6dd7fec72c50954dfc45e data/winterwonders/worldgen/biome/winter_frost.json
+66e20502ab1574e5b42d8d561865c71ea38781c5 data/winterwonders/worldgen/biome/winter_frost.json
 42e2366f35691e022e041002c738debc916433bc data/winterwonders/worldgen/configured_feature/grey_pine.json
 22f80e02b27444ffa4d1f9a106eec85e25faffae data/winterwonders/worldgen/configured_feature/ice_stone_spike.json
 cac8b1cceb97064ce9f91a0bc1424451b1532b7a data/winterwonders/worldgen/configured_feature/myst_willow.json
+c6fad98b5c1447ee1bc7f3dbb2d2228069011b31 data/winterwonders/worldgen/configured_feature/wonder_shroom.json
 b37d827f18c4d17bc7ebef91b78994649484f9e6 data/winterwonders/worldgen/placed_feature/greypine_placed.json
 6fb4cdd10998aa1bfa18a04ad15fa346706fe1dd data/winterwonders/worldgen/placed_feature/ice_stone_spike.json
 8091654f76c5ec7db8bdb7abb0e7f363b55da817 data/winterwonders/worldgen/placed_feature/myst_willow_placed.json
+54de8a89f8566c9f08312ba89759c283f8712e9b data/winterwonders/worldgen/placed_feature/wonder_shroom_patch.json
