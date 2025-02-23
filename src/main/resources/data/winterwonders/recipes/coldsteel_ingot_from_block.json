@@ -1,0 +1,13 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "ingredients": [
+    {
+      "item": "winterwonders:coldsteel_block"
+    }
+  ],
+  "result": {
+    "count": 9,
+    "item": "winterwonders:coldsteel_ingot"
+  }
+}

@@ -10,6 +10,7 @@ import net.minecraftforge.fml.common.Mod;
 import net.turtleboi.winterwonders.WinterWonders;
 import net.turtleboi.winterwonders.init.ModBlocks;
 import net.turtleboi.winterwonders.init.ModItems;
+import net.turtleboi.winterwonders.init.ModTags;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.concurrent.CompletableFuture;
@@ -33,12 +34,16 @@ public class ModItemTagGenerator extends ItemTagsProvider {
                 .add(ModBlocks.STRIPPED_MYST_WILLOW_WOOD.get().asItem());
 
         this.tag(ItemTags.PLANKS)
-                .add(ModBlocks.MYST_WILLOW_PLANKS.get().asItem());
+                .add(ModBlocks.MYST_WILLOW_PLANKS.get().asItem())
+                .add(ModBlocks.GREYPINE_PLANKS.get().asItem());
 
         this.tag(ItemTags.TRIMMABLE_ARMOR)
                 .add(ModItems.COLDSTEEL_HELMET.get())
                 .add(ModItems.COLDSTEEL_CHESTPLATE.get())
                 .add(ModItems.COLDSTEEL_LEGGINGS.get())
                 .add(ModItems.COLDSTEEL_BOOTS.get());
+        this.tag(ModTags.Blocks.GREYPINE_LOGS)
+                .add(ModBlocks.GREYPINE_LOG.get().asItem())
+                .add(ModBlocks.STRIPPED_GREYPINE_LOG.get().asItem());
     }
 }

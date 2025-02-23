@@ -8,6 +8,7 @@ import net.minecraftforge.common.data.ExistingFileHelper;
 import net.minecraftforge.fml.common.Mod;
 import net.turtleboi.winterwonders.WinterWonders;
 import net.turtleboi.winterwonders.init.ModBlocks;
+import net.turtleboi.winterwonders.init.ModTags;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.concurrent.CompletableFuture;
@@ -58,5 +59,6 @@ public class ModBlockTagGenerator extends BlockTagsProvider {
                 .add(ModBlocks.ICE_STONE_BRICKS_WALL.get())
                 .add(ModBlocks.ICE_STONE_TILES_WALL.get())
                 .add(ModBlocks.POLISHED_ICE_STONE_WALL.get());
+
     }
 }

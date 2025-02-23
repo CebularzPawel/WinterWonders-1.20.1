@@ -1,0 +1,14 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "building",
+  "group": "planks",
+  "ingredients": [
+    {
+      "tag": "winterwonders:greypine_logs"
+    }
+  ],
+  "result": {
+    "count": 4,
+    "item": "winterwonders:greypine_planks"
+  }
+}
