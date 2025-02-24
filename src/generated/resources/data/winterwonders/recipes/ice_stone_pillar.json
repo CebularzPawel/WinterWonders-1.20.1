@@ -1,0 +1,19 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "M": {
+      "item": "winterwonders:cobbled_ice_stone_slab"
+    }
+  },
+  "pattern": [
+    "M  ",
+    "M  ",
+    "   "
+  ],
+  "result": {
+    "count": 2,
+    "item": "winterwonders:ice_stone_pillar"
+  },
+  "show_notification": true
+}

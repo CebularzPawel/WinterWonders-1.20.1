@@ -1,0 +1,19 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "M": {
+      "item": "winterwonders:ice_stone_bricks"
+    }
+  },
+  "pattern": [
+    "   ",
+    "   ",
+    "MMM"
+  ],
+  "result": {
+    "count": 6,
+    "item": "winterwonders:ice_stone_bricks_slab"
+  },
+  "show_notification": true
+}

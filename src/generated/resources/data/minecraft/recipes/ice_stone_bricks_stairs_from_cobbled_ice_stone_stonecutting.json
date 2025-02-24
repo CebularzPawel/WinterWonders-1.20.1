@@ -1,0 +1,8 @@
+{
+  "type": "minecraft:stonecutting",
+  "count": 1,
+  "ingredient": {
+    "item": "winterwonders:cobbled_ice_stone"
+  },
+  "result": "winterwonders:ice_stone_bricks_stairs"
+}
