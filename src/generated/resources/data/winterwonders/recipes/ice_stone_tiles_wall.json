@@ -1,0 +1,19 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "M": {
+      "item": "winterwonders:ice_stone_tiles"
+    }
+  },
+  "pattern": [
+    "   ",
+    "MMM",
+    "MMM"
+  ],
+  "result": {
+    "count": 6,
+    "item": "winterwonders:ice_stone_tiles_wall"
+  },
+  "show_notification": true
+}

@@ -1,0 +1,7 @@
+{
+  "parent": "minecraft:block/cube_column_horizontal",
+  "textures": {
+    "end": "winterwonders:block/ice_stone_pillar_end",
+    "side": "winterwonders:block/ice_stone_pillar"
+  }
+}
