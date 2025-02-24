@@ -1,0 +1,8 @@
+{
+  "render_type": "minecraft:cutout",
+  "parent": "minecraft:block/flowerbed_3",
+  "textures": {
+    "flowerbed": "winterwonders:block/magical_flowers",
+    "stem": "winterwonders:block/magical_flowers_stem"
+  }
+}
