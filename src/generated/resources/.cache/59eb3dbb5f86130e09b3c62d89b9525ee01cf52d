@@ -1,4 +1,4 @@
-// 1.20.1	2025-02-24T17:21:13.973701	Loot Tables
+// 1.20.1	2025-02-25T02:42:18.5435739	Loot Tables
 a0c137ed9e5d1bcf0e2309ad3995a104570ab04e data/winterwonders/loot_tables/blocks/cobbled_ice_stone.json
 0fa0a0a461277ea1c1c1ac779131e4db92765524 data/winterwonders/loot_tables/blocks/cobbled_ice_stone_slab.json
 0855a42e4837677df20337ee1b6a5644d6e2334f data/winterwonders/loot_tables/blocks/cobbled_ice_stone_stairs.json
@@ -22,7 +22,7 @@ a0c8596bd5f0c5a779ab122a0d0395d8367d8ec1 data/winterwonders/loot_tables/blocks/i
 e9aac5414883678af0cef3d9d0e87e02318feb12 data/winterwonders/loot_tables/blocks/ice_stone_tiles_wall.json
 7a8fc7156643b3819db3b959913cb6c3d88b7ad8 data/winterwonders/loot_tables/blocks/icy_vines.json
 cf12c6a1479972b6ce4abaa15c469c8bc92f7c77 data/winterwonders/loot_tables/blocks/icy_vines_plant.json
-883044302ec5c49f7161a55ac3f7864dad09435b data/winterwonders/loot_tables/blocks/magical_flowers.json
+d568b1836fc1e6f387738422540aab13516acd8f data/winterwonders/loot_tables/blocks/magical_flowers.json
 bd0469304c42bf36dcf839053a9b6fa051aea5bb data/winterwonders/loot_tables/blocks/magical_rose.json
 544cd4b7b004b5ca9cc713997a28f41d99102790 data/winterwonders/loot_tables/blocks/myst_willow_leaves.json
 c5d543912b501d17ebe5517067e40c1eb71c78e5 data/winterwonders/loot_tables/blocks/myst_willow_log.json

@@ -115,7 +115,6 @@ public class ModBlocks {
     public static final RegistryObject<Block> MAGICAL_FLOWERS = registerBlock("magical_flowers",
             () -> new PinkPetalsBlock(BlockBehaviour.Properties.copy(Blocks.PINK_PETALS)));
 
-
     public static final RegistryObject<Block> MAGICAL_ROSE = registerBlock("magical_rose",
             () -> new FlowerBlock(() -> MobEffects.NIGHT_VISION,5,
                     BlockBehaviour.Properties.copy(Blocks.ALLIUM).noOcclusion().noCollission()));

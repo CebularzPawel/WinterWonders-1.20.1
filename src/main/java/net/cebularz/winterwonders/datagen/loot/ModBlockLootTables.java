@@ -98,6 +98,9 @@ public class ModBlockLootTables extends BlockLootSubProvider {
                         ModItems.PUCKERBERRY.get(),
                         ModItems.PUCKERBERRY.get(),
                         lootitemcondition$builder2));
+
+        this.add(ModBlocks.MAGICAL_FLOWERS.get(),
+                createPetalsDrops(ModBlocks.MAGICAL_FLOWERS.get()));
     }
 
     protected LootTable.Builder createCopperLikeOreDrops(Block pBlock, Item item) {
