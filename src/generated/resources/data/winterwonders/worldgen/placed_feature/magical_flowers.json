@@ -1,0 +1,21 @@
+{
+  "feature": "winterwonders:magical_flowers",
+  "placement": [
+    {
+      "type": "minecraft:noise_threshold_count",
+      "above_noise": 5,
+      "below_noise": 2,
+      "noise_level": 3.0
+    },
+    {
+      "type": "minecraft:in_square"
+    },
+    {
+      "type": "minecraft:heightmap",
+      "heightmap": "MOTION_BLOCKING"
+    },
+    {
+      "type": "minecraft:biome"
+    }
+  ]
+}
