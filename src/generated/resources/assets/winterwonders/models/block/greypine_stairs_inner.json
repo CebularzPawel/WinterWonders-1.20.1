@@ -1,0 +1,8 @@
+{
+  "parent": "minecraft:block/inner_stairs",
+  "textures": {
+    "bottom": "winterwonders:block/greypine_planks",
+    "side": "winterwonders:block/greypine_planks",
+    "top": "winterwonders:block/greypine_planks"
+  }
+}

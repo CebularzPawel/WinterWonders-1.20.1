@@ -13,6 +13,7 @@ import net.minecraft.world.level.storage.loot.functions.SetItemCountFunction;
 import net.minecraft.world.level.storage.loot.predicates.LootItemBlockStatePropertyCondition;
 import net.minecraft.world.level.storage.loot.predicates.LootItemCondition;
 import net.minecraft.world.level.storage.loot.providers.number.UniformGenerator;
+import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.registries.RegistryObject;
 import net.cebularz.winterwonders.block.custom.PuckerberryBushBlock;
 import net.cebularz.winterwonders.init.ModBlocks;
@@ -57,10 +58,21 @@ public class ModBlockLootTables extends BlockLootSubProvider {
         this.dropSelf(ModBlocks.GREYPINE_WOOD.get());
         this.dropSelf(ModBlocks.STRIPPED_GREYPINE_LOG.get());
         this.dropSelf(ModBlocks.STRIPPED_GREYPINE_WOOD.get());
-        this.dropSelf(ModBlocks.GREYPINE_PLANKS.get());
         this.dropSelf(ModBlocks.GREYPINE_SAPLING.get());
         this.add(ModBlocks.GREYPINE_LEAVES.get(), block ->
                 createLeavesDrops(block, ModBlocks.GREYPINE_SAPLING.get(), NORMAL_LEAVES_SAPLING_CHANCES));
+
+        this.dropSelf(ModBlocks.GREYPINE_PLANKS.get());
+        this.add(ModBlocks.GREYPINE_SLAB.get(),
+                block -> createSlabItemTable(ModBlocks.GREYPINE_SLAB.get()));
+        this.dropSelf(ModBlocks.GREYPINE_STAIRS.get());
+        this.dropSelf(ModBlocks.GREYPINE_BUTTON.get());
+        this.dropSelf(ModBlocks.GREYPINE_PRESSURE_PLATE.get());
+        this.add(ModBlocks.GREYPINE_DOOR.get(),
+                block -> createDoorTable(ModBlocks.GREYPINE_DOOR.get()));
+        this.dropSelf(ModBlocks.GREYPINE_TRAPDOOR.get());
+        this.dropSelf(ModBlocks.GREYPINE_FENCE.get());
+        this.dropSelf(ModBlocks.GREYPINE_FENCE_GATE.get());
 
         this.dropSelf(ModBlocks.MYST_WILLOW_LOG.get());
         this.dropSelf(ModBlocks.MYST_WILLOW_WOOD.get());

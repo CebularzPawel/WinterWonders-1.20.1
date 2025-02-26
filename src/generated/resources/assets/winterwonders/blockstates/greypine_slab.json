@@ -1,0 +1,13 @@
+{
+  "variants": {
+    "type=bottom": {
+      "model": "winterwonders:block/greypine_slab"
+    },
+    "type=double": {
+      "model": "winterwonders:block/greypine_planks"
+    },
+    "type=top": {
+      "model": "winterwonders:block/greypine_slab_top"
+    }
+  }
+}

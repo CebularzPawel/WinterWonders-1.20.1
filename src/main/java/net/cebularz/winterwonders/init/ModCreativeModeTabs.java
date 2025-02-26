@@ -41,17 +41,25 @@ public class ModCreativeModeTabs {
                         pOutput.accept(ModBlocks.GREYPINE_WOOD.get());
                         pOutput.accept(ModBlocks.STRIPPED_GREYPINE_LOG.get());
                         pOutput.accept(ModBlocks.STRIPPED_GREYPINE_WOOD.get());
-                        pOutput.accept(ModBlocks.GREYPINE_PLANKS.get());
                         pOutput.accept(ModBlocks.GREYPINE_LEAVES.get());
                         pOutput.accept(ModBlocks.GREYPINE_SAPLING.get());
+                        pOutput.accept(ModBlocks.GREYPINE_PLANKS.get());
+                        pOutput.accept(ModBlocks.GREYPINE_SLAB.get());
+                        pOutput.accept(ModBlocks.GREYPINE_STAIRS.get());
+                        pOutput.accept(ModBlocks.GREYPINE_DOOR.get());
+                        pOutput.accept(ModBlocks.GREYPINE_TRAPDOOR.get());
+                        pOutput.accept(ModBlocks.GREYPINE_FENCE.get());
+                        pOutput.accept(ModBlocks.GREYPINE_FENCE_GATE.get());
+                        pOutput.accept(ModBlocks.GREYPINE_BUTTON.get());
+                        pOutput.accept(ModBlocks.GREYPINE_PRESSURE_PLATE.get());
 
                         pOutput.accept(ModBlocks.MYST_WILLOW_LOG.get());
                         pOutput.accept(ModBlocks.MYST_WILLOW_WOOD.get());
                         pOutput.accept(ModBlocks.STRIPPED_MYST_WILLOW_LOG.get());
                         pOutput.accept(ModBlocks.STRIPPED_MYST_WILLOW_WOOD.get());
-                        pOutput.accept(ModBlocks.MYST_WILLOW_PLANKS.get());
                         pOutput.accept(ModBlocks.MYST_WILLOW_LEAVES.get());
                         pOutput.accept(ModBlocks.MYST_WILLOW_SAPLING.get());
+                        pOutput.accept(ModBlocks.MYST_WILLOW_PLANKS.get());
 
                         pOutput.accept(ModBlocks.COBBLED_ICE_STONE.get());
                         pOutput.accept(ModBlocks.COBBLED_ICE_STONE_STAIRS.get());

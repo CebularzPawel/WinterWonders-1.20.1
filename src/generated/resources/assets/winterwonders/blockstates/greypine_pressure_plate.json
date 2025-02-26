@@ -1,0 +1,10 @@
+{
+  "variants": {
+    "powered=false": {
+      "model": "winterwonders:block/greypine_pressure_plate"
+    },
+    "powered=true": {
+      "model": "winterwonders:block/greypine_pressure_plate_down"
+    }
+  }
+}

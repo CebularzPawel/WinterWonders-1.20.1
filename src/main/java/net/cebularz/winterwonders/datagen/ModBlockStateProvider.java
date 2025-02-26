@@ -72,7 +72,16 @@ public class ModBlockStateProvider extends BlockStateProvider {
         blockItem(ModBlocks.STRIPPED_GREYPINE_WOOD);
 
         blockWithItem(ModBlocks.GREYPINE_PLANKS);
-
+        stairsBlock((StairBlock) ModBlocks.GREYPINE_STAIRS.get(), blockTexture(ModBlocks.GREYPINE_PLANKS.get()));
+        slabBlock((SlabBlock) ModBlocks.GREYPINE_SLAB.get(), blockTexture(ModBlocks.GREYPINE_PLANKS.get()), blockTexture(ModBlocks.GREYPINE_PLANKS.get()));
+        buttonBlock((ButtonBlock) ModBlocks.GREYPINE_BUTTON.get(), blockTexture(ModBlocks.GREYPINE_PLANKS.get()));
+        pressurePlateBlock((PressurePlateBlock) ModBlocks.GREYPINE_PRESSURE_PLATE.get(), blockTexture(ModBlocks.GREYPINE_PLANKS.get()));
+        fenceBlock((FenceBlock) ModBlocks.GREYPINE_FENCE.get(), blockTexture(ModBlocks.GREYPINE_PLANKS.get()));
+        fenceGateBlock((FenceGateBlock) ModBlocks.GREYPINE_FENCE_GATE.get(), blockTexture(ModBlocks.GREYPINE_PLANKS.get()));
+        doorBlockWithRenderType((DoorBlock) ModBlocks.GREYPINE_DOOR.get(), modLoc("block/greypine_door_bottom"),
+                modLoc("block/greypine_door_top"), "cutout");
+        trapdoorBlockWithRenderType((TrapDoorBlock) ModBlocks.GREYPINE_TRAPDOOR.get(), modLoc("block/greypine_trapdoor"),
+                true, "cutout");
         //leavesBlock(ModBlocks.GREYPINE_LEAVES);
 
         saplingBlock(ModBlocks.GREYPINE_SAPLING);

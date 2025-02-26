@@ -72,6 +72,15 @@ public class ModItemModelProvider extends ItemModelProvider {
         handheldItem(ModItems.FROSTBITE_WAND);
 
         saplingItem(ModBlocks.GREYPINE_SAPLING);
+        evenSimplerBlockItem(ModBlocks.GREYPINE_SLAB);
+        evenSimplerBlockItem(ModBlocks.GREYPINE_STAIRS);
+        simpleBlockItem(ModBlocks.GREYPINE_DOOR);
+        trapdoorItem(ModBlocks.GREYPINE_TRAPDOOR);
+        fenceItem(ModBlocks.GREYPINE_FENCE, ModBlocks.GREYPINE_PLANKS);
+        evenSimplerBlockItem(ModBlocks.GREYPINE_FENCE_GATE);
+        buttonItem(ModBlocks.GREYPINE_BUTTON, ModBlocks.GREYPINE_PLANKS);
+        evenSimplerBlockItem(ModBlocks.GREYPINE_PRESSURE_PLATE);
+
         saplingItem(ModBlocks.MYST_WILLOW_SAPLING);
 
         trimmedArmorItem(ModItems.COLDSTEEL_HELMET);
@@ -150,19 +159,41 @@ public class ModItemModelProvider extends ItemModelProvider {
                 new ResourceLocation("item/generated")).texture("layer0",
                 new ResourceLocation(WinterWonders.MOD_ID,"item/" + item.getId().getPath()));
     }
+
     public void evenSimplerBlockItem(RegistryObject<Block> block) {
         this.withExistingParent(WinterWonders.MOD_ID + ":" + ForgeRegistries.BLOCKS.getKey(block.get()).getPath(),
                 modLoc("block/" + ForgeRegistries.BLOCKS.getKey(block.get()).getPath()));
     }
+
     public void wallItem(RegistryObject<Block> block, RegistryObject<Block> baseBlock) {
         this.withExistingParent(ForgeRegistries.BLOCKS.getKey(block.get()).getPath(), mcLoc("block/wall_inventory"))
                 .texture("wall",  new ResourceLocation(WinterWonders.MOD_ID, "block/" + ForgeRegistries.BLOCKS.getKey(baseBlock.get()).getPath()));
     }
 
+    public void trapdoorItem(RegistryObject<Block> block) {
+        this.withExistingParent(ForgeRegistries.BLOCKS.getKey(block.get()).getPath(),
+                modLoc("block/" + ForgeRegistries.BLOCKS.getKey(block.get()).getPath() + "_bottom"));
+    }
+
+    public void fenceItem(RegistryObject<Block> block, RegistryObject<Block> baseBlock) {
+        this.withExistingParent(ForgeRegistries.BLOCKS.getKey(block.get()).getPath(), mcLoc("block/fence_inventory"))
+                .texture("texture",  new ResourceLocation(WinterWonders.MOD_ID, "block/" + ForgeRegistries.BLOCKS.getKey(baseBlock.get()).getPath()));
+    }
+
+    public void buttonItem(RegistryObject<Block> block, RegistryObject<Block> baseBlock) {
+        this.withExistingParent(ForgeRegistries.BLOCKS.getKey(block.get()).getPath(), mcLoc("block/button_inventory"))
+                .texture("texture",  new ResourceLocation(WinterWonders.MOD_ID, "block/" + ForgeRegistries.BLOCKS.getKey(baseBlock.get()).getPath()));
+    }
 
     private ItemModelBuilder simpleBlockItemBlockTexture(RegistryObject<Block> item) {
         return withExistingParent(item.getId().getPath(),
                 new ResourceLocation("item/generated")).texture("layer0",
                 new ResourceLocation(WinterWonders.MOD_ID,"block/" + item.getId().getPath()));
+    }
+
+    private ItemModelBuilder simpleBlockItem(RegistryObject<Block> item) {
+        return withExistingParent(item.getId().getPath(),
+                new ResourceLocation("item/generated")).texture("layer0",
+                new ResourceLocation(WinterWonders.MOD_ID,"item/" + item.getId().getPath()));
     }
 }

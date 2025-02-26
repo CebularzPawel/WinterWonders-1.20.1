@@ -7,6 +7,7 @@ import net.minecraftforge.common.data.BlockTagsProvider;
 import net.minecraftforge.common.data.ExistingFileHelper;
 import net.cebularz.winterwonders.WinterWonders;
 import net.cebularz.winterwonders.init.ModBlocks;
+import net.minecraftforge.fml.common.Mod;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.concurrent.CompletableFuture;
@@ -33,7 +34,6 @@ public class ModBlockTagGenerator extends BlockTagsProvider {
                 .add(ModBlocks.MYST_WILLOW_PLANKS.get());
 
         this.tag(BlockTags.MINEABLE_WITH_PICKAXE)
-
                 .add(ModBlocks.COLDSTEEL_BLOCK.get())
                 .add(ModBlocks.COBBLED_ICE_STONE.get())
                 .add(ModBlocks.COBBLED_ICE_STONE_STAIRS.get())
@@ -52,11 +52,17 @@ public class ModBlockTagGenerator extends BlockTagsProvider {
                 .add(ModBlocks.POLISHED_ICE_STONE_SLAB.get())
                 .add(ModBlocks.POLISHED_ICE_STONE_WALL.get())
                 .add(ModBlocks.ICE_STONE_PILLAR.get());
+
         this.tag(BlockTags.WALLS)
                 .add(ModBlocks.COBBLED_ICE_STONE_WALL.get())
                 .add(ModBlocks.ICE_STONE_BRICKS_WALL.get())
                 .add(ModBlocks.ICE_STONE_TILES_WALL.get())
                 .add(ModBlocks.POLISHED_ICE_STONE_WALL.get());
+
+        this.tag(BlockTags.FENCES)
+                .add(ModBlocks.GREYPINE_FENCE.get());
+        this.tag(BlockTags.FENCE_GATES)
+                .add(ModBlocks.GREYPINE_FENCE_GATE.get());
 
     }
 }

@@ -2,6 +2,8 @@ package net.cebularz.winterwonders.init;
 
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
+import net.minecraft.sounds.SoundEvent;
+import net.minecraft.sounds.SoundEvents;
 import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.Item;
@@ -9,6 +11,7 @@ import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.block.*;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.block.state.properties.BlockSetType;
 import net.minecraft.world.level.block.state.properties.NoteBlockInstrument;
 import net.minecraft.world.level.material.MapColor;
 import net.minecraft.world.level.material.PushReaction;
@@ -148,6 +151,33 @@ public class ModBlocks {
                     return 5;
                 }
             });
+
+    public static final RegistryObject<Block> GREYPINE_SLAB = registerBlock("greypine_slab",
+            () -> new SlabBlock(BlockBehaviour.Properties.copy(Blocks.SPRUCE_PLANKS)));
+
+    public static final RegistryObject<Block> GREYPINE_STAIRS = registerBlock("greypine_stairs",
+            () -> new StairBlock(() -> ModBlocks.GREYPINE_PLANKS.get().defaultBlockState(),
+                    BlockBehaviour.Properties.copy(Blocks.SPRUCE_PLANKS)));
+
+    public static final RegistryObject<Block> GREYPINE_BUTTON = registerBlock("greypine_button",
+            () -> new ButtonBlock(BlockBehaviour.Properties.copy(Blocks.SPRUCE_BUTTON),
+                    BlockSetType.SPRUCE, 20, true));
+
+    public static final RegistryObject<Block> GREYPINE_PRESSURE_PLATE = registerBlock("greypine_pressure_plate",
+            () -> new PressurePlateBlock(PressurePlateBlock.Sensitivity.EVERYTHING, BlockBehaviour.Properties.copy(Blocks.SPRUCE_PLANKS),
+                    BlockSetType.SPRUCE));
+
+    public static final RegistryObject<Block> GREYPINE_FENCE = registerBlock("greypine_fence",
+            () -> new FenceBlock(BlockBehaviour.Properties.copy(Blocks.SPRUCE_PLANKS)));
+
+    public static final RegistryObject<Block> GREYPINE_FENCE_GATE = registerBlock("greypine_fence_gate",
+            () -> new FenceGateBlock(BlockBehaviour.Properties.copy(Blocks.SPRUCE_PLANKS), SoundEvents.WOODEN_DOOR_OPEN, SoundEvents.WOODEN_DOOR_CLOSE));
+
+    public static final RegistryObject<Block> GREYPINE_DOOR = registerBlock("greypine_door",
+            () -> new DoorBlock(BlockBehaviour.Properties.copy(Blocks.SPRUCE_DOOR), BlockSetType.SPRUCE));
+
+    public static final RegistryObject<Block> GREYPINE_TRAPDOOR = registerBlock("greypine_trapdoor",
+            () -> new TrapDoorBlock(BlockBehaviour.Properties.copy(Blocks.SPRUCE_TRAPDOOR), BlockSetType.SPRUCE));
 
     public static final RegistryObject<Block> MYST_WILLOW_PLANKS = registerBlock("myst_willow_planks",
             () -> new Block(BlockBehaviour.Properties.copy(Blocks.SPRUCE_PLANKS)){
