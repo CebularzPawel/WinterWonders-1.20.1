@@ -23,23 +23,23 @@ public class ChilledEffect extends MobEffect {
                     pLivingEntity,
                     Attributes.MOVEMENT_SPEED,
                     "chilled_movement_speed",
-                    -0.25 * (1 + pAmplifier),
+                    -0.2 * (1 + pAmplifier),
                     AttributeModifier.Operation.MULTIPLY_TOTAL);
 
-            if (pAmplifier > 0){
-                ModDamageSources.hurtWithColdDamage(pLivingEntity, null, 0.05f * (1 + pAmplifier));
-            }
+            ModDamageSources.hurtWithColdDamage(pLivingEntity, null, 0.05f * (1 + pAmplifier));
 
-            if (pAmplifier > 2){
+            if (pAmplifier > 4){
                 pLivingEntity.addEffect(new MobEffectInstance(ModEffects.FROZEN.get(), 100, 0));
                 pLivingEntity.removeEffect(ModEffects.CHILLED.get());
             }
         }
         super.applyEffectTick(pLivingEntity, pAmplifier);
     }
+
     @Override
     public boolean isDurationEffectTick(int pDuration, int pAmplifier) {
-        return pDuration % 20 * (Math.max(0.5F, (float)(3 - (pAmplifier/2)))) == 0;
+        int interval = Math.max(10, 80 / (int) Math.pow(2, Math.min(pAmplifier, 3)));
+        return pDuration % interval == 0;
     }
 
     @Override
