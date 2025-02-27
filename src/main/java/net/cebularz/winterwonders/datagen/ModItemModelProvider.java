@@ -98,6 +98,9 @@ public class ModItemModelProvider extends ItemModelProvider {
         simpleBlockItemBlockTexture(ModBlocks.MAGICAL_ROSE);
         simpleBlockItemBlockTexture(ModBlocks.ICE_FLOWER);
 
+        simpleItem(ModItems.PINGIN_FEATHER);
+        simpleItem(ModItems.PINGIN_MEAT);
+        simpleItem(ModItems.COOKED_PINGIN_MEAT);
     }
 
     private void trimmedArmorItem(RegistryObject<Item> itemRegistryObject) {

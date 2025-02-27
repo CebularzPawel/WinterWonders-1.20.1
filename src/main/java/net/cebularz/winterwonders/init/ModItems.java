@@ -2,6 +2,8 @@ package net.cebularz.winterwonders.init;
 
 import net.minecraft.ChatFormatting;
 import net.minecraft.core.Direction;
+import net.minecraft.world.effect.MobEffectInstance;
+import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.food.FoodProperties;
 import net.minecraft.world.item.*;
 import net.minecraftforge.common.ForgeSpawnEggItem;
@@ -84,6 +86,13 @@ public class ModItems {
     public static final RegistryObject<Item> PUCKERBERRY = ITEMS.register("puckerberry",
             () -> new ItemNameBlockItem(ModBlocks.PUCKERBERRY_BUSH.get(), new Item.Properties().rarity(Rarity.COMMON)
                     .food(new FoodProperties.Builder().nutrition(2).saturationMod(0.1F).build())));
+    public static final RegistryObject<Item> PINGIN_FEATHER = ITEMS.register("pingin_feather",
+            () -> new Item(new Item.Properties()));
+    public static final RegistryObject<Item> PINGIN_MEAT = ITEMS.register("pingin_meat",
+            () -> new Item(new Item.Properties().food(new FoodProperties.Builder().nutrition(2).saturationMod(0.3F).effect(new MobEffectInstance(MobEffects.HUNGER, 600, 0), 0.3F).meat().build())));
+    public static final RegistryObject<Item> COOKED_PINGIN_MEAT = ITEMS.register("cooked_pingin_meat",
+            () -> new Item(new Item.Properties().food(new FoodProperties.Builder().nutrition(6).saturationMod(0.6F).meat().build())));
+
 
     public static void register(IEventBus eventBus) {
         ITEMS.register(eventBus);

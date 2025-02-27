@@ -1,4 +1,4 @@
-// 1.20.1	2025-02-26T09:23:47.4730212	Item Models: winterwonders
+// 1.20.1	2025-02-27T12:48:29.1176772	Item Models: winterwonders
 63ec6c618a3a23eab4cab9c52d7d3250de9b516e assets/winterwonders/models/item/brisk_spawn_egg.json
 36283cf1fd87e09ccafb94da1e65ddd0046bd737 assets/winterwonders/models/item/cobbled_ice_stone_slab.json
 8c3d20040eb3cd4a2c23407f5b22ce592e8f7f2a assets/winterwonders/models/item/cobbled_ice_stone_stairs.json
@@ -54,6 +54,7 @@ f695e13c2d4fecbdf28277b497ea53b851c11674 assets/winterwonders/models/item/coldst
 fb3d9d3aa99cc8f2b464f49207bbd89df45ce796 assets/winterwonders/models/item/coldsteel_scrap.json
 a510a8d8a22406f16064217653b1354b1d7cfff9 assets/winterwonders/models/item/coldsteel_shovel.json
 87b8878c36a65455da0fecbe4e9b565add9cec58 assets/winterwonders/models/item/coldsteel_sword.json
+4e056b3550a2e82a6267020224a57afb91607048 assets/winterwonders/models/item/cooked_pingin_meat.json
 c7bb864c14a4ba54b2bd194c8060005c92af996b assets/winterwonders/models/item/frostbite_wand.json
 14dec54b47871d3346f65262045e36c49111fba9 assets/winterwonders/models/item/frost_essence.json
 001800a2b27d7fddce6777e7e4c36793a3832391 assets/winterwonders/models/item/frozen_heart.json
@@ -75,6 +76,8 @@ a9a66a6f695fb43f98ab00c4284511f75d408767 assets/winterwonders/models/item/ice_st
 1a6abeabc749e03f0730a281cbfce967b47b3344 assets/winterwonders/models/item/ice_stone_tiles_wall.json
 e3cb37c58b5cab6cc60c7730819a61e877f4c4ab assets/winterwonders/models/item/magical_rose.json
 7592a7d9a8326f68c6be9447512ae987f379cb42 assets/winterwonders/models/item/myst_willow_sapling.json
+2e10d686a0612ab7a64f9e73b05cdc93dc37e3b3 assets/winterwonders/models/item/pingin_feather.json
+69937872e0753e623de5a25c59e6aa3640cb0ae3 assets/winterwonders/models/item/pingin_meat.json
 63ec6c618a3a23eab4cab9c52d7d3250de9b516e assets/winterwonders/models/item/pingin_spawn_egg.json
 1984f65895fcda86aa8003442010a410f215c43b assets/winterwonders/models/item/polished_ice_stone_slab.json
 eedc60e8b014f5bc386a170a8ed823d2d7427ea4 assets/winterwonders/models/item/polished_ice_stone_stairs.json

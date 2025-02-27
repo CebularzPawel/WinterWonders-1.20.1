@@ -92,6 +92,10 @@ public class ModCreativeModeTabs {
 
                         pOutput.accept(ModItems.PUCKERBERRY.get());
 
+                        pOutput.accept(ModItems.PINGIN_FEATHER.get());
+                        pOutput.accept(ModItems.PINGIN_MEAT.get());
+                        pOutput.accept(ModItems.COOKED_PINGIN_MEAT.get());
+
                         pOutput.accept(ModItems.SNOW_WISP_SPAWN_EGG.get());
                         pOutput.accept(ModItems.REVENANT_SPAWN_EGG.get());
                         pOutput.accept(ModItems.BRISK_SPAWN_EGG.get());
