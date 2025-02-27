@@ -26,7 +26,7 @@ public class ChilledEffect extends MobEffect {
                     -0.2 * (1 + pAmplifier),
                     AttributeModifier.Operation.MULTIPLY_TOTAL);
 
-            ModDamageSources.hurtWithColdDamage(pLivingEntity, null, 0.05f * (1 + pAmplifier));
+           //ModDamageSources.hurtWithColdDamage(pLivingEntity, null, 0.05f * (1 + pAmplifier));
 
             if (pAmplifier > 4){
                 pLivingEntity.addEffect(new MobEffectInstance(ModEffects.FROZEN.get(), 100, 0));

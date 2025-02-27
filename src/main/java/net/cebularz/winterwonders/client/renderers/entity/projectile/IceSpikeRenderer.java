@@ -5,6 +5,7 @@ import com.mojang.blaze3d.vertex.VertexConsumer;
 import com.mojang.math.Axis;
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.RenderType;
+import net.minecraft.client.renderer.entity.ArrowRenderer;
 import net.minecraft.client.renderer.entity.EntityRenderer;
 import net.minecraft.client.renderer.entity.EntityRendererProvider;
 import net.minecraft.client.renderer.texture.OverlayTexture;
@@ -24,25 +25,23 @@ public class IceSpikeRenderer extends EntityRenderer<IceSpikeProjectileEntity> {
     }
 
     @Override
-    public void render(IceSpikeProjectileEntity entity, float entityYaw, float partialTicks,
-                       PoseStack poseStack, @NotNull MultiBufferSource bufferSource, int light) {
-        poseStack.pushPose();
-        float yaw = Mth.lerp(partialTicks, entity.yRotO, entity.getYRot());
-        float pitch = Mth.lerp(partialTicks, entity.xRotO, entity.getXRot());
-        poseStack.mulPose(Axis.YP.rotationDegrees(yaw));
-        poseStack.mulPose(Axis.ZP.rotationDegrees(pitch));
-        poseStack.translate(0.0, -1.25, 0.0);
-        VertexConsumer vertexConsumer = bufferSource.getBuffer(RenderType.entityCutout(TEXTURE));
+    public void render(IceSpikeProjectileEntity pEntity, float pEntityYaw, float pPartialTicks,
+                       PoseStack pPoseStack, @NotNull MultiBufferSource pBuffer, int pPackedLight) {
+        pPoseStack.pushPose();
+        pPoseStack.mulPose(Axis.YP.rotationDegrees(Mth.lerp(pPartialTicks, pEntity.yRotO, pEntity.getYRot()) - 180.0F));
+        pPoseStack.mulPose(Axis.XP.rotationDegrees(Mth.lerp(pPartialTicks, pEntity.xRotO, pEntity.getXRot())));
+        pPoseStack.translate(0.0, -1, 0.0);
+        VertexConsumer vertexConsumer = pBuffer.getBuffer(RenderType.entityCutout(TEXTURE));
         this.model.renderToBuffer(
-                poseStack,
+                pPoseStack,
                 vertexConsumer,
-                light,
+                pPackedLight,
                 OverlayTexture.NO_OVERLAY,
                 1.0F, 1.0F, 1.0F, 1.0F
         );
 
-        poseStack.popPose();
-        super.render(entity, entityYaw, partialTicks, poseStack, bufferSource, light);
+        pPoseStack.popPose();
+        super.render(pEntity, pEntityYaw, pPartialTicks, pPoseStack, pBuffer, pPackedLight);
     }
 
 

@@ -1,5 +1,6 @@
 package net.cebularz.winterwonders.init;
 
+import net.cebularz.winterwonders.entity.custom.projectile.ChillingSnowballEntity;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.MobCategory;
 import net.minecraftforge.eventbus.api.IEventBus;
@@ -36,6 +37,10 @@ public class ModEntities
     public static final RegistryObject<EntityType<IceSpikeProjectileEntity>> ICE_SPIKE =
             TYPES.register("ice_spike",()-> EntityType.Builder.<IceSpikeProjectileEntity>of(IceSpikeProjectileEntity::new, MobCategory.MISC)
                     .sized(0.25F, .25F).build("ice_spike"));
+
+    public static final RegistryObject<EntityType<ChillingSnowballEntity>> CHILLING_SNOWBALL =
+            TYPES.register("chilling_snowball",()-> EntityType.Builder.<ChillingSnowballEntity>of(ChillingSnowballEntity::new, MobCategory.MISC)
+                    .sized(0.25F, .25F).build("chilling_snowball"));
 
     public static void register(IEventBus eventBus)
     {

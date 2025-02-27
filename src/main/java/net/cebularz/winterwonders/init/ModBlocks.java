@@ -127,7 +127,7 @@ public class ModBlocks {
                     BlockBehaviour.Properties.copy(Blocks.POTTED_ALLIUM).noOcclusion()));
 
     public static final RegistryObject<Block> ICE_FLOWER = registerBlock("ice_flower",
-            () -> new FlowerBlock(() -> ModEffects.COLD_RESIST.get(),5,
+            () -> new FlowerBlock(ModEffects.COLD_RESIST,5,
                     BlockBehaviour.Properties.copy(Blocks.ALLIUM).noOcclusion().noCollission()));
 
     public static final RegistryObject<Block> POTTED_ICE_FLOWER = BLOCKS.register("potted_ice_flower",

@@ -26,8 +26,8 @@ public class IceSpikeProjectileEntity extends AbstractArrow {
         super(ModEntities.ICE_SPIKE.get(), pLevel);
     }
 
-    public IceSpikeProjectileEntity(Level pLevel, LivingEntity livingEntity){
-        super(ModEntities.ICE_SPIKE.get(), livingEntity, pLevel);
+    public IceSpikeProjectileEntity(Level pLevel, LivingEntity pLivingEntity){
+        super(ModEntities.ICE_SPIKE.get(), pLivingEntity, pLevel);
     }
 
     @Override
@@ -54,11 +54,10 @@ public class IceSpikeProjectileEntity extends AbstractArrow {
         if (hitEntity != ownerEntity) {
             if (hitEntity instanceof LivingEntity livingEntity) {
                 if (livingEntity.hasEffect(ModEffects.CHILLED.get())) {
-                    livingEntity.addEffect(new MobEffectInstance(ModEffects.CHILLED.get(), 100,
-                            livingEntity.getEffect(ModEffects.CHILLED.get()).getAmplifier() + 1));
-                    ModDamageSources.hurtWithColdDamage(livingEntity, getOwner(), 0.05f);
+                    int chilledAmplifier = livingEntity.getEffect(ModEffects.CHILLED.get()).getAmplifier() + 1;
+                    //System.out.println("Hit target with " + chilledAmplifier + "Chilled");
+                    ModDamageSources.hurtWithColdDamage(livingEntity, getOwner(), 0.05f * chilledAmplifier);
                 } else {
-                    livingEntity.addEffect(new MobEffectInstance(ModEffects.CHILLED.get(), 100, 0));
                     ModDamageSources.hurtWithColdDamage(livingEntity, getOwner(), 0.05f);
                 }
             }

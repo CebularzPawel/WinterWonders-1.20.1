@@ -26,11 +26,11 @@ public class IceSpikeModel <T extends Entity> extends EntityModel<T> {
 
         PartDefinition bb_main = partdefinition.addOrReplaceChild("bb_main", CubeListBuilder.create(), PartPose.offset(0.0F, 24.0F, 0.0F));
 
-        PartDefinition face2_r1 = bb_main.addOrReplaceChild("face2_r1", CubeListBuilder.create().texOffs(0, -4).addBox(0.0F, -2.0F, -4.0F, 0.0F, 4.0F, 8.0F, new CubeDeformation(0.0F)), PartPose.offsetAndRotation(0.0F, -1.4F, 0.0F, 0.0F, 0.0F, 0.7854F));
+        PartDefinition face2_r1 = bb_main.addOrReplaceChild("face2_r1", CubeListBuilder.create().texOffs(0, -8).addBox(0.0F, -2.0F, -6.0F, 0.0F, 4.0F, 12.0F, new CubeDeformation(0.0F)), PartPose.offsetAndRotation(0.0F, -8.0F, 0.0F, -3.1416F, 0.0F, 2.3562F));
 
-        PartDefinition face1_r1 = bb_main.addOrReplaceChild("face1_r1", CubeListBuilder.create().texOffs(0, -8).mirror().addBox(0.0F, -2.0F, -4.0F, 0.0F, 4.0F, 8.0F, new CubeDeformation(0.0F)).mirror(false), PartPose.offsetAndRotation(0.0F, -1.4F, 0.0F, 0.0F, 0.0F, -0.7854F));
+        PartDefinition face1_r1 = bb_main.addOrReplaceChild("face1_r1", CubeListBuilder.create().texOffs(0, -12).addBox(0.0F, -2.0F, -6.0F, 0.0F, 4.0F, 12.0F, new CubeDeformation(0.0F)), PartPose.offsetAndRotation(0.0F, -8.0F, 0.0F, -3.1416F, 0.0F, -2.3562F));
 
-        return LayerDefinition.create(meshdefinition, 16, 16);
+        return LayerDefinition.create(meshdefinition, 32, 32);
     }
 
     @Override
