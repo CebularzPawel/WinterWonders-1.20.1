@@ -7,11 +7,10 @@ import net.minecraft.world.effect.MobEffectCategory;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.ai.attributes.AttributeMap;
 import net.minecraft.world.entity.ai.attributes.AttributeModifier;
-import org.spongepowered.asm.mixin.injection.At;
 
 
-public class ColdResistanceEffect extends MobEffect {
-    public ColdResistanceEffect(MobEffectCategory mobEffectCategory, int color) {
+public class FrostResistanceEffect extends MobEffect {
+    public FrostResistanceEffect(MobEffectCategory mobEffectCategory, int color) {
         super(mobEffectCategory, color);
     }
     @Override
@@ -19,8 +18,8 @@ public class ColdResistanceEffect extends MobEffect {
         if (!pLivingEntity.level().isClientSide()) {
             AttributeModifierUtil.applyPermanentModifier(
                     pLivingEntity,
-                    ModAttributes.COLD_RESISTANCE.get(),
-                    "cold_resistance",
+                    ModAttributes.FROST_RESISTANCE.get(),
+                    "frost_resistance",
                     20 * (1 + pAmplifier),
                     AttributeModifier.Operation.ADDITION
             );
@@ -39,8 +38,8 @@ public class ColdResistanceEffect extends MobEffect {
         if (!pLivingEntity.level().isClientSide()) {
             AttributeModifierUtil.removeModifier(
                     pLivingEntity,
-                    ModAttributes.COLD_RESISTANCE.get(),
-                    "cold_resistance"
+                    ModAttributes.FROST_RESISTANCE.get(),
+                    "frost_resistance"
             );
         }
     }

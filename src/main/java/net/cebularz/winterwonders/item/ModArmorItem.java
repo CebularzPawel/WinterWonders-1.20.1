@@ -21,9 +21,9 @@ public class ModArmorItem extends ArmorItem {
             int pieces = countArmorPieces(player, this.getMaterial());
             if (pieces >= 2) {
                 int amplifier = pieces == 4 ? 2 : 1;
-                MobEffectInstance effect = new MobEffectInstance(ModEffects.COLD_RESIST.get(), 200, amplifier - 1, true, false, true);
-                if (!player.hasEffect(ModEffects.COLD_RESIST.get()) ||
-                        player.getEffect(ModEffects.COLD_RESIST.get()).getAmplifier() < amplifier - 1) {
+                MobEffectInstance effect = new MobEffectInstance(ModEffects.FROST_RESISTANCE.get(), 200, amplifier - 1, true, false, true);
+                if (!player.hasEffect(ModEffects.FROST_RESISTANCE.get()) ||
+                        player.getEffect(ModEffects.FROST_RESISTANCE.get()).getAmplifier() < amplifier - 1) {
                     player.addEffect(effect);
                 }
             }

@@ -1,5 +1,8 @@
 package net.cebularz.winterwonders.client.events;
 
+import net.cebularz.winterwonders.client.models.entity.LichModel;
+import net.cebularz.winterwonders.client.renderers.entity.*;
+import net.cebularz.winterwonders.entity.custom.*;
 import net.minecraft.client.renderer.entity.EntityRenderers;
 import net.minecraftforge.client.event.EntityRenderersEvent;
 import net.minecraftforge.client.event.RegisterParticleProvidersEvent;
@@ -17,15 +20,7 @@ import net.cebularz.winterwonders.client.models.entity.projectile.IceSpikeModel;
 import net.cebularz.winterwonders.client.particles.AuroraParticle;
 import net.cebularz.winterwonders.client.renderers.block.IcyVinesBlockEntityRenderer;
 import net.cebularz.winterwonders.client.renderers.block.IcyVinesPlantBlockEntityRenderer;
-import net.cebularz.winterwonders.client.renderers.entity.BriskRenderer;
-import net.cebularz.winterwonders.client.renderers.entity.PinginRenderer;
-import net.cebularz.winterwonders.client.renderers.entity.RevenantRenderer;
-import net.cebularz.winterwonders.client.renderers.entity.SnowWispRenderer;
 import net.cebularz.winterwonders.client.renderers.entity.projectile.IceSpikeRenderer;
-import net.cebularz.winterwonders.entity.custom.BriskEntity;
-import net.cebularz.winterwonders.entity.custom.PinginEntity;
-import net.cebularz.winterwonders.entity.custom.RevenantEntity;
-import net.cebularz.winterwonders.entity.custom.SnowWispEntity;
 import net.cebularz.winterwonders.init.ModBlockEntities;
 import net.cebularz.winterwonders.init.ModEntities;
 import net.cebularz.winterwonders.init.ModParticles;
@@ -39,6 +34,7 @@ public class ModBusEvents
         EntityRenderers.register(ModEntities.SNOW_WISP.get(), SnowWispRenderer::new);
         EntityRenderers.register(ModEntities.REVENANT.get(), RevenantRenderer::new);
         EntityRenderers.register(ModEntities.PINGIN.get(), PinginRenderer::new);
+        EntityRenderers.register(ModEntities.LICH.get(), LichRenderer::new);
         EntityRenderers.register(ModEntities.BRISK.get(), BriskRenderer::new);
         EntityRenderers.register(ModEntities.ICE_SPIKE.get(), IceSpikeRenderer::new);
     }
@@ -49,6 +45,7 @@ public class ModBusEvents
         event.put(ModEntities.REVENANT.get(), RevenantEntity.createAttributes().build());
         event.put(ModEntities.PINGIN.get(), PinginEntity.createAttributes().build());
         event.put(ModEntities.BRISK.get(), BriskEntity.createAttributes().build());
+        event.put(ModEntities.LICH.get(), LichEntity.createMobAttributes().build());
     }
 
     @SubscribeEvent
@@ -56,6 +53,7 @@ public class ModBusEvents
         event.registerLayerDefinition(SnowWispModel.SNOW_WISP_LAYER, SnowWispModel::createBodyLayer);
         event.registerLayerDefinition(PinginModel.PINGIN_LAYER, PinginModel::createBodyLayer);
         event.registerLayerDefinition(BriskModel.BRISK_LAYER, BriskModel::createBodyLayer);
+        event.registerLayerDefinition(LichModel.LAYER_LOCATION, LichModel::createBodyLayer);
         event.registerLayerDefinition(IceSpikeModel.ICE_SPIKE_LAYER, IceSpikeModel::createBodyLayer);
         event.registerLayerDefinition(IcyVinesModel.ICY_VINES_LAYER, IcyVinesModel::createBodyLayer);
         event.registerLayerDefinition(IcyVinesPlantModel.ICY_VINES_PLANT_LAYER, IcyVinesModel::createBodyLayer);

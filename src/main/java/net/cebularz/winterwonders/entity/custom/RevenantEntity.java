@@ -1,5 +1,6 @@
 package net.cebularz.winterwonders.entity.custom;
 
+import net.cebularz.winterwonders.init.ModAttributes;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.server.level.ServerLevel;
@@ -51,7 +52,8 @@ public class RevenantEntity extends Zombie {
     }
 
     public static AttributeSupplier.Builder createAttributes() {
-        return Zombie.createAttributes();
+        return Zombie.createAttributes()
+                .add(ModAttributes.FROST_RESISTANCE.get(), 50.0F);
     }
 
     @Override

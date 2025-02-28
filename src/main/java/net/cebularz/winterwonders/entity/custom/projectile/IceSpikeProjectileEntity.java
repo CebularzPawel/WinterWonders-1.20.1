@@ -3,7 +3,6 @@ package net.cebularz.winterwonders.entity.custom.projectile;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
-import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
@@ -56,9 +55,9 @@ public class IceSpikeProjectileEntity extends AbstractArrow {
                 if (livingEntity.hasEffect(ModEffects.CHILLED.get())) {
                     int chilledAmplifier = livingEntity.getEffect(ModEffects.CHILLED.get()).getAmplifier() + 1;
                     //System.out.println("Hit target with " + chilledAmplifier + "Chilled");
-                    ModDamageSources.hurtWithColdDamage(livingEntity, getOwner(), 0.05f * chilledAmplifier);
+                    ModDamageSources.hurtWithFrostDamage(livingEntity, getOwner(), 0.05f * chilledAmplifier);
                 } else {
-                    ModDamageSources.hurtWithColdDamage(livingEntity, getOwner(), 0.05f);
+                    ModDamageSources.hurtWithFrostDamage(livingEntity, getOwner(), 0.05f);
                 }
             }
 

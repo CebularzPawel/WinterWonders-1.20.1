@@ -16,27 +16,27 @@ import net.cebularz.winterwonders.WinterWonders;
 import org.jetbrains.annotations.Nullable;
 
 public class ModDamageSources {
-    public static final ResourceLocation COLD_DAMAGE_ID = new ResourceLocation(WinterWonders.MOD_ID, "cold");
+    public static final ResourceLocation FROST_DAMAGE_ID = new ResourceLocation(WinterWonders.MOD_ID, "frost");
 
-    public static DamageSource coldDamage(Level level, @Nullable Entity attacker, @Nullable Entity directCause) {
-        Holder<DamageType> holder = coldDamageType(level);
+    public static DamageSource frostDamage(Level level, @Nullable Entity attacker, @Nullable Entity directCause) {
+        Holder<DamageType> holder = frostDamageType(level);
         return new DamageSource(holder, attacker, directCause, attacker != null ? attacker.position() : null);
     }
 
-    public static Holder<DamageType> coldDamageType(Level level) {
+    public static Holder<DamageType> frostDamageType(Level level) {
         return level.registryAccess()
                 .registryOrThrow(Registries.DAMAGE_TYPE)
-                .getHolderOrThrow(ResourceKey.create(Registries.DAMAGE_TYPE, COLD_DAMAGE_ID));
+                .getHolderOrThrow(ResourceKey.create(Registries.DAMAGE_TYPE, FROST_DAMAGE_ID));
     }
 
-    public static void hurtWithColdDamage(LivingEntity target, @Nullable Entity attacker, float percent) {
+    public static void hurtWithFrostDamage(LivingEntity target, @Nullable Entity attacker, float percent) {
         float damageAmount = target.getMaxHealth() * percent;
         double resistanceModifier = 1.0;
 
-        AttributeInstance damageResistanceAttribute = target.getAttribute(ModAttributes.COLD_RESISTANCE.get());
+        AttributeInstance damageResistanceAttribute = target.getAttribute(ModAttributes.FROST_RESISTANCE.get());
         if (damageResistanceAttribute != null && damageResistanceAttribute.getValue() > 0) {
             resistanceModifier = (100 - damageResistanceAttribute.getValue()) / 100.0;
-            //System.out.println("Current cold resistance: " + damageResistanceAttribute.getValue() + "%");
+            //System.out.println("Current Frost Resistance: " + damageResistanceAttribute.getValue() + "%");
             //System.out.println("Taking " + (resistanceModifier * 100) + "% of the original damage");
         }
 
@@ -48,7 +48,7 @@ public class ModDamageSources {
             spawnSnowParticles(target.getServer().getLevel(target.level().dimension()), target.getX(), target.getY(), target.getZ());
         }
 
-        DamageSource damageSource = coldDamage(target.level(), attacker, null);
+        DamageSource damageSource = frostDamage(target.level(), attacker, null);
         target.hurt(damageSource, reducedDamage);
     }
 

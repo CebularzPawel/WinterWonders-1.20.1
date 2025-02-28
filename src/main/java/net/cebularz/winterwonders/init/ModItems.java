@@ -1,5 +1,6 @@
 package net.cebularz.winterwonders.init;
 
+import net.cebularz.winterwonders.item.custom.BlizzardStaffItem;
 import net.minecraft.ChatFormatting;
 import net.minecraft.core.Direction;
 import net.minecraft.world.effect.MobEffectInstance;
@@ -68,6 +69,9 @@ public class ModItems {
     public static final RegistryObject<Item> FROSTBITE_WAND = ITEMS.register("frostbite_wand",
             () -> new FrostbiteWandItem(new Item.Properties().rarity(Rarity.RARE)));
 
+    public static final RegistryObject<Item> BLIZZARD_STAFF = ITEMS.register("blizzard_staff",
+            () -> new BlizzardStaffItem(new Item.Properties().rarity(Rarity.EPIC)));
+
     public static final RegistryObject<Item> SNOW_WISP_SPAWN_EGG = ITEMS.register("snow_wisp_spawn_egg",
             ()-> new ForgeSpawnEggItem(ModEntities.SNOW_WISP,0xffffff,0xc5ebeb,new Item.Properties()));
 
@@ -86,12 +90,18 @@ public class ModItems {
     public static final RegistryObject<Item> PUCKERBERRY = ITEMS.register("puckerberry",
             () -> new ItemNameBlockItem(ModBlocks.PUCKERBERRY_BUSH.get(), new Item.Properties().rarity(Rarity.COMMON)
                     .food(new FoodProperties.Builder().nutrition(2).saturationMod(0.1F).build())));
+
     public static final RegistryObject<Item> PINGIN_FEATHER = ITEMS.register("pingin_feather",
             () -> new Item(new Item.Properties()));
+
     public static final RegistryObject<Item> PINGIN_MEAT = ITEMS.register("pingin_meat",
-            () -> new Item(new Item.Properties().food(new FoodProperties.Builder().nutrition(2).saturationMod(0.3F).effect(new MobEffectInstance(MobEffects.HUNGER, 600, 0), 0.3F).meat().build())));
+            () -> new Item(new Item.Properties().food(
+                    new FoodProperties.Builder().nutrition(2).saturationMod(0.3F)
+                            .effect(new MobEffectInstance(MobEffects.HUNGER, 600, 0), 0.3F).meat().build())));
+
     public static final RegistryObject<Item> COOKED_PINGIN_MEAT = ITEMS.register("cooked_pingin_meat",
-            () -> new Item(new Item.Properties().food(new FoodProperties.Builder().nutrition(6).saturationMod(0.6F).meat().build())));
+            () -> new Item(new Item.Properties().food(
+                    new FoodProperties.Builder().nutrition(6).saturationMod(0.6F).meat().build())));
 
 
     public static void register(IEventBus eventBus) {

@@ -36,6 +36,7 @@ public class ModCreativeModeTabs {
                         pOutput.accept(ModItems.COLDSTEEL_BOOTS.get());
 
                         pOutput.accept(ModItems.FROSTBITE_WAND.get());
+                        pOutput.accept(ModItems.BLIZZARD_STAFF.get());
 
                         pOutput.accept(ModBlocks.GREYPINE_LOG.get());
                         pOutput.accept(ModBlocks.GREYPINE_WOOD.get());

@@ -90,9 +90,13 @@
   "item.winterwonders.coldsteel_boots": "Coldsteel Boots",
 
   "item.winterwonders.frostbite_wand": "Frostbite Wand",
+  "item.winterwonders.blizzard_staff": "Blizzard Staff",
 
   "item.winterwonders.pingin_feather": "Pingin Feather",
   "item.winterwonders.pingin_meat": "Pingin Meat",
-  "item.winterwonders.cooked_pingin_meat": "Cooked Pingin Meat"
+  "item.winterwonders.cooked_pingin_meat": "Cooked Pingin Meat",
 
+  "death.attack.frost": "%s froze to death",
+  "death.attack.frost.item": "%s was frozen by %s using %s",
+  "death.attack.frost.player": "%s's frozen body shattered whilst trying to escape %s"
 }
