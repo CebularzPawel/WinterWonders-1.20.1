@@ -69,7 +69,6 @@ public class ModItemModelProvider extends ItemModelProvider {
         handheldItem(ModItems.COLDSTEEL_AXE);
         handheldItem(ModItems.COLDSTEEL_SHOVEL);
         handheldItem(ModItems.COLDSTEEL_HOE);
-
         handheldItem(ModItems.FROSTBITE_WAND);
 
         saplingItem(ModBlocks.GREYPINE_SAPLING);
@@ -98,6 +97,7 @@ public class ModItemModelProvider extends ItemModelProvider {
 
         simpleBlockItemBlockTexture(ModBlocks.MAGICAL_ROSE);
         simpleBlockItemBlockTexture(ModBlocks.ICE_FLOWER);
+
     }
 
     private void trimmedArmorItem(RegistryObject<Item> itemRegistryObject) {
