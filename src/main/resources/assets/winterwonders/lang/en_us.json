@@ -4,6 +4,7 @@
   "creativetab.winterwonders_block_tab": "Winter Wonders Block Tab",
 
   "effect.winterwonders.chilled": "Chilled",
+  "effect.winterwonders.frost_resistance": "Frost Resistance",
   "effect.winterwonders.frozen": "Frozen",
 
   "entity.winterwonders.snow_wisp": "Snow Wisp",
@@ -40,8 +41,6 @@
 
   "block.winterwonders.magical_rose": "Magical Rose",
   "block.winterwonders.ice_flower": "Ice Flower",
-
-
 
   "block.winterwonders.greypine_log": "Grey Pine Log",
   "block.winterwonders.greypine_wood": "Grey Pine Wood",
@@ -89,5 +88,10 @@
   "item.winterwonders.coldsteel_leggings": "Coldsteel Leggings",
   "item.winterwonders.coldsteel_boots": "Coldsteel Boots",
 
-  "item.winterwonders.frostbite_wand": "Frostbite Wand"
+  "item.winterwonders.frostbite_wand": "Frostbite Wand",
+  "item.winterwonders.blizzard_staff": "Blizzard Staff",
+
+  "death.attack.frost": "%s froze to death",
+  "death.attack.frost.item": "%s was frozen by %s using %s",
+  "death.attack.frost.player": "%s's frozen body shattered whilst trying to escape %s"
 }

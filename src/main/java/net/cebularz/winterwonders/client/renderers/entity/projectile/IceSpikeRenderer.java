@@ -39,7 +39,6 @@ public class IceSpikeRenderer extends EntityRenderer<IceSpikeProjectileEntity> {
                 OverlayTexture.NO_OVERLAY,
                 1.0F, 1.0F, 1.0F, 1.0F
         );
-
         pPoseStack.popPose();
         super.render(pEntity, pEntityYaw, pPartialTicks, pPoseStack, pBuffer, pPackedLight);
     }

@@ -2,13 +2,16 @@ package net.cebularz.winterwonders.entity.custom;
 
 import net.cebularz.winterwonders.entity.custom.projectile.ChillingSnowballEntity;
 import net.cebularz.winterwonders.entity.custom.projectile.IceSpikeProjectileEntity;
+import net.cebularz.winterwonders.init.ModAttributes;
 import net.cebularz.winterwonders.init.ModEffects;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.network.syncher.EntityDataAccessor;
 import net.minecraft.network.syncher.EntityDataSerializers;
 import net.minecraft.network.syncher.SynchedEntityData;
+import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
+import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.AnimationState;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
@@ -17,11 +20,8 @@ import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.ai.goal.*;
 import net.minecraft.world.entity.ai.goal.target.HurtByTargetGoal;
 import net.minecraft.world.entity.ai.goal.target.NearestAttackableTargetGoal;
-import net.minecraft.world.entity.monster.Blaze;
 import net.minecraft.world.entity.monster.Monster;
 import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.entity.projectile.SmallFireball;
-import net.minecraft.world.entity.projectile.Snowball;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.pathfinder.BlockPathTypes;
 import net.minecraft.world.phys.Vec3;
@@ -29,6 +29,8 @@ import net.minecraft.world.phys.Vec3;
 import java.util.EnumSet;
 
 public class BriskEntity extends Monster {
+    private float allowedHeightOffset = 0.5F;
+    private int nextHeightOffsetChangeTick;
     private static final EntityDataAccessor<Byte> DATA_FLAGS_ID;
 
     public BriskEntity(EntityType<? extends BriskEntity> pEntityType, Level pLevel) {
@@ -38,6 +40,8 @@ public class BriskEntity extends Monster {
         this.setPathfindingMalus(BlockPathTypes.WATER,-1.0F);
         this.setPathfindingMalus(BlockPathTypes.POWDER_SNOW,-1.0F);
         this.setPathfindingMalus(BlockPathTypes.DANGER_POWDER_SNOW,-1.0F);
+        this.xpReward = 25;
+        this.setMaxUpStep(1.0F);
     }
 
     public AnimationState idleAnimationState = new AnimationState();
@@ -67,16 +71,26 @@ public class BriskEntity extends Monster {
         return Monster.createMonsterAttributes()
                 .add(Attributes.ATTACK_DAMAGE, 6.0F)
                 .add(Attributes.MOVEMENT_SPEED, 0.175F)
-                .add(Attributes.FOLLOW_RANGE, 48.0F);
+                .add(Attributes.FOLLOW_RANGE, 48.0F)
+                .add(ModAttributes.FROST_RESISTANCE.get(), 50.0F);
     }
 
     @Override
     public void aiStep() {
+        if (!this.onGround() && this.getDeltaMovement().y < (double)0.0F) {
+            this.setDeltaMovement(this.getDeltaMovement().multiply(1.0F, 0.25, 1.0F));
+        }
+
         super.aiStep();
         if (this.level().isClientSide){
             setupAnimationStates();
+            int particleMax = 2;
 
-            for(int particles = 0; particles < 2; ++particles) {
+            if (isSuperCharged()){
+                particleMax = 5;
+            }
+
+            for(int particles = 0; particles < particleMax; ++particles) {
                 this.level().addParticle(
                         ParticleTypes.SNOWFLAKE,
                         this.getRandomX(0.5F),
@@ -87,6 +101,29 @@ public class BriskEntity extends Monster {
                         0.0F);
             }
         }
+    }
+
+    @Override
+    protected void customServerAiStep() {
+        --this.nextHeightOffsetChangeTick;
+        if (this.nextHeightOffsetChangeTick <= 0) {
+            this.nextHeightOffsetChangeTick = 100;
+            this.allowedHeightOffset = (float)this.random.triangle(0.5F, 6.891);
+        }
+
+        LivingEntity target = this.getTarget();
+        if (target != null && target.getEyeY() > this.getEyeY() + (double)this.allowedHeightOffset && this.canAttack(target)) {
+            Vec3 deltaMovement = this.getDeltaMovement();
+            this.setDeltaMovement(this.getDeltaMovement().add(0.0F, ((double)0.3F - deltaMovement.y) * (double)0.3F, 0.0F));
+            this.hasImpulse = true;
+        }
+
+        super.customServerAiStep();
+    }
+
+    @Override
+    public boolean causeFallDamage(float pFallDistance, float pMultiplier, DamageSource pSource) {
+        return false;
     }
 
     @Override
@@ -109,6 +146,10 @@ public class BriskEntity extends Monster {
         return 0.0F;
     }
 
+    private boolean isSuperCharged(){
+        return this.level().isRaining() && this.level().getBiome(this.getOnPos()).value().coldEnoughToSnow(this.getOnPos());
+    }
+
     void setCharged(boolean pCharged) {
         byte chargedBoolean = this.entityData.get(DATA_FLAGS_ID);
         if (pCharged) {
@@ -122,6 +163,16 @@ public class BriskEntity extends Monster {
 
     static {
         DATA_FLAGS_ID = SynchedEntityData.defineId(BriskEntity.class, EntityDataSerializers.BYTE);
+    }
+
+    @Override
+    protected SoundEvent getHurtSound(DamageSource pDamageSource) {
+        return SoundEvents.AMETHYST_CLUSTER_BREAK;
+    }
+
+    @Override
+    protected SoundEvent getDeathSound() {
+        return SoundEvents.EVOKER_CAST_SPELL;
     }
 
     static class BriskAttackGoal extends Goal {
@@ -178,15 +229,24 @@ public class BriskEntity extends Monster {
                     this.briskEntity.getMoveControl().setWantedPosition(target.getX(), target.getY(), target.getZ(), 1.0F);
                 } else if (distanceToSqr < this.getFollowDistance() * this.getFollowDistance() && hasLineOfSight) {
                     double toTargetX = target.getX() - this.briskEntity.getX();
-                    double toTargetY = target.getBoundingBox().getCenter().y - briskEntity.getBoundingBox().getCenter().y;
+                    double toTargetY = target.getEyeY() - briskEntity.getBoundingBox().getCenter().y;
                     double toTargetZ = target.getZ() - this.briskEntity.getZ();
                     if (this.attackTime <= 0) {
                         ++this.attackStep;
+
+                        int attackMax = 5;
+                        int attackInterval = 20;
+
+                        if (briskEntity.isSuperCharged()){
+                            attackMax = 9;
+                            attackInterval = 10;
+                        }
+
                         if (this.attackStep == 1) {
                             this.attackTime = 60;
                             this.briskEntity.setCharged(true);
-                        } else if (this.attackStep <= 4) {
-                            this.attackTime = 6;
+                        } else if (this.attackStep <= attackMax) {
+                            this.attackTime = attackInterval;
                         } else {
                             this.attackTime = 100;
                             this.attackStep = 0;
@@ -205,7 +265,7 @@ public class BriskEntity extends Monster {
                                 Vec3 targetDirection = new Vec3(toTargetX, toTargetY, toTargetZ).normalize();
 
                                 double chanceForIceSpike = 0.1 + (0.2 * chilledAmplifier);
-                                boolean shootIceSpike = briskEntity.getRandom().nextDouble() < chanceForIceSpike;
+                                boolean shootIceSpike = briskEntity.getRandom().nextDouble() < chanceForIceSpike || chilledAmplifier > 3;
 
                                 if (shootIceSpike) {
                                     IceSpikeProjectileEntity iceSpike = new IceSpikeProjectileEntity(briskEntity.level(), briskEntity);

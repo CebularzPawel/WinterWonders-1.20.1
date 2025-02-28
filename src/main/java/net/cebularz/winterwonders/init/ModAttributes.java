@@ -16,8 +16,8 @@ public class ModAttributes {
     public static final DeferredRegister<Attribute> REGISTRY =
             DeferredRegister.create(ForgeRegistries.ATTRIBUTES, WinterWonders.MOD_ID);
 
-    public static final RegistryObject<Attribute> COLD_RESISTANCE =
-            create("cold_resistance", 0D, 0D);
+    public static final RegistryObject<Attribute> FROST_RESISTANCE =
+            create("frost_resistance", 0D, 0D);
 
     private static RegistryObject<Attribute> create(
             String name, double defaultValue, double minValue) {

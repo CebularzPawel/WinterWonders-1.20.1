@@ -1,5 +1,6 @@
 package net.cebularz.winterwonders.init;
 
+import net.cebularz.winterwonders.item.custom.BlizzardStaffItem;
 import net.minecraft.ChatFormatting;
 import net.minecraft.core.Direction;
 import net.minecraft.world.food.FoodProperties;
@@ -65,6 +66,9 @@ public class ModItems {
 
     public static final RegistryObject<Item> FROSTBITE_WAND = ITEMS.register("frostbite_wand",
             () -> new FrostbiteWandItem(new Item.Properties().rarity(Rarity.RARE)));
+
+    public static final RegistryObject<Item> BLIZZARD_STAFF = ITEMS.register("blizzard_staff",
+            () -> new BlizzardStaffItem(new Item.Properties().rarity(Rarity.EPIC)));
 
     public static final RegistryObject<Item> SNOW_WISP_SPAWN_EGG = ITEMS.register("snow_wisp_spawn_egg",
             ()-> new ForgeSpawnEggItem(ModEntities.SNOW_WISP,0xffffff,0xc5ebeb,new Item.Properties()));

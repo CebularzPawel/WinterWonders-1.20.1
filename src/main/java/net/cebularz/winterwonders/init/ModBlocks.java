@@ -2,7 +2,6 @@ package net.cebularz.winterwonders.init;
 
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
-import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.item.BlockItem;
@@ -127,7 +126,7 @@ public class ModBlocks {
                     BlockBehaviour.Properties.copy(Blocks.POTTED_ALLIUM).noOcclusion()));
 
     public static final RegistryObject<Block> ICE_FLOWER = registerBlock("ice_flower",
-            () -> new FlowerBlock(ModEffects.COLD_RESIST,5,
+            () -> new FlowerBlock(ModEffects.FROST_RESISTANCE,5,
                     BlockBehaviour.Properties.copy(Blocks.ALLIUM).noOcclusion().noCollission()));
 
     public static final RegistryObject<Block> POTTED_ICE_FLOWER = BLOCKS.register("potted_ice_flower",
