@@ -30,6 +30,7 @@ public class ModEntities
     public static final RegistryObject<EntityType<PinginEntity>> PINGIN =
             TYPES.register("pingin",()-> EntityType.Builder.of(PinginEntity::new, MobCategory.CREATURE)
                     .sized(0.4F, .9F).build("pingin"));
+
     public static final RegistryObject<EntityType<LichEntity>> LICH =
             TYPES.register("lich",()-> EntityType.Builder.of(LichEntity::new, MobCategory.MONSTER)
                     .sized(0.6F, 1.99F).build("lich"));

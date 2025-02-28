@@ -53,7 +53,7 @@ public class ModBusEvents
         event.registerLayerDefinition(SnowWispModel.SNOW_WISP_LAYER, SnowWispModel::createBodyLayer);
         event.registerLayerDefinition(PinginModel.PINGIN_LAYER, PinginModel::createBodyLayer);
         event.registerLayerDefinition(BriskModel.BRISK_LAYER, BriskModel::createBodyLayer);
-        event.registerLayerDefinition(LichModel.LAYER_LOCATION, LichModel::createBodyLayer);
+        event.registerLayerDefinition(LichModel.LICH_LAYER, LichModel::createBodyLayer);
         event.registerLayerDefinition(IceSpikeModel.ICE_SPIKE_LAYER, IceSpikeModel::createBodyLayer);
         event.registerLayerDefinition(IcyVinesModel.ICY_VINES_LAYER, IcyVinesModel::createBodyLayer);
         event.registerLayerDefinition(IcyVinesPlantModel.ICY_VINES_PLANT_LAYER, IcyVinesModel::createBodyLayer);

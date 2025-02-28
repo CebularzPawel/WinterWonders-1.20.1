@@ -3,10 +3,12 @@ package net.cebularz.winterwonders.block.custom;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.util.RandomSource;
+import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.LevelReader;
 import net.minecraft.world.level.block.*;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.VoxelShape;
 import net.cebularz.winterwonders.block.entity.IcyVinesBlockEntity;
 import net.cebularz.winterwonders.init.ModBlocks;
@@ -14,10 +16,21 @@ import org.jetbrains.annotations.Nullable;
 
 public class IcyVinesBlock extends GrowingPlantHeadBlock implements EntityBlock{
 
-    public IcyVinesBlock(Properties p_154975_) {
-        super(p_154975_, Direction.DOWN, SHAPE, false,0.1);
+    public IcyVinesBlock(Properties properties) {
+        super(properties, Direction.DOWN, SHAPE, false,0.1);
     }
+
     public static final VoxelShape SHAPE = Block.box(1.0, 0.0, 1.0, 15.0, 16.0, 15.0);
+
+    @Override
+    public VoxelShape getShape(BlockState pState, BlockGetter pLevel, BlockPos pPos, CollisionContext pContext) {
+        return SHAPE;
+    }
+
+    @Override
+    public RenderShape getRenderShape(BlockState pState) {
+        return RenderShape.MODEL;
+    }
 
     protected int getBlocksToGrowWhenBonemealed(RandomSource p_222680_) {
         return NetherVines.getBlocksToGrowWhenBonemealed(p_222680_);

@@ -101,6 +101,7 @@ public class ModCreativeModeTabs {
                         pOutput.accept(ModItems.REVENANT_SPAWN_EGG.get());
                         pOutput.accept(ModItems.BRISK_SPAWN_EGG.get());
                         pOutput.accept(ModItems.PINGIN_SPAWN_EGG.get());
+                        pOutput.accept(ModItems.LICH_SPAWN_EGG.get());
                     })
                     .build());
 

@@ -2,17 +2,19 @@ package net.cebularz.winterwonders.client.models.entity;
 
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
+import net.cebularz.winterwonders.WinterWonders;
 import net.cebularz.winterwonders.entity.custom.LichEntity;
+import net.minecraft.client.model.ArmedModel;
 import net.minecraft.client.model.HierarchicalModel;
 import net.minecraft.client.model.geom.ModelLayerLocation;
 import net.minecraft.client.model.geom.ModelPart;
 import net.minecraft.client.model.geom.PartPose;
 import net.minecraft.client.model.geom.builders.*;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.entity.HumanoidArm;
 
-public class LichModel<T extends LichEntity> extends HierarchicalModel<T> {
-    // This layer location should be baked with EntityRendererProvider.Context in the entity renderer and passed into this model's constructor
-    public static final ModelLayerLocation LAYER_LOCATION = new ModelLayerLocation(new ResourceLocation("winterwonders", "lich"), "main");
+public class LichModel<T extends LichEntity> extends HierarchicalModel<T> implements ArmedModel {
+    public static final ModelLayerLocation LICH_LAYER = new ModelLayerLocation(new ResourceLocation(WinterWonders.MOD_ID, "lich"), "main");
     private final ModelPart lich;
     private final ModelPart head;
     private final ModelPart head1;
@@ -127,5 +129,14 @@ public class LichModel<T extends LichEntity> extends HierarchicalModel<T> {
     @Override
     public ModelPart root() {
         return this.lich;
+    }
+
+    @Override
+    public void translateToHand(HumanoidArm humanoidArm, PoseStack poseStack) {
+        ModelPart armPart = humanoidArm == HumanoidArm.LEFT ? this.left_arm1 : this.right_arm1;
+        armPart.translateAndRotate(poseStack);
+
+        float xOffset = humanoidArm == HumanoidArm.LEFT ? 0.2F : -0.2F;
+        poseStack.translate(xOffset, 0, 0);
     }
 }

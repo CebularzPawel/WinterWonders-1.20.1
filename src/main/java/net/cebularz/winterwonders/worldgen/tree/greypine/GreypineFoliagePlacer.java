@@ -61,7 +61,8 @@ public class GreypineFoliagePlacer extends FoliagePlacer {
             for (Direction dir : new Direction[]{Direction.NORTH, Direction.SOUTH, Direction.EAST, Direction.WEST}) {
                 if (pRandom.nextFloat() > 0.85f) {
                     BlockPos mushroomPos = originPos.above(y).relative(dir, 1);
-                    if (TreeFeature.validTreePos(pLevel, mushroomPos)) {
+                    BlockPos logPos = originPos.above(y);
+                    if (pLevel.isStateAtPosition(logPos, (state) -> state.is(ModBlocks.GREYPINE_LOG.get()))) {
                         pBlockSetter.set(mushroomPos,
                                 ModBlocks.WONDER_TREE_SHROOM_WALL.get().defaultBlockState()
                                         .setValue(TreeMushroomWallBlock.FACING, dir));

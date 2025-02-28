@@ -5,6 +5,7 @@ import net.minecraft.data.worldgen.BiomeDefaultFeatures;
 import net.minecraft.data.worldgen.BootstapContext;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.MobCategory;
 import net.minecraft.world.level.biome.*;
 import net.minecraft.world.level.levelgen.GenerationStep;
@@ -30,8 +31,19 @@ public final class WinterFrostBiome {
 
     private static Biome createBiome(BootstapContext<Biome> context) {
         MobSpawnSettings.Builder spawnSettings = new MobSpawnSettings.Builder()
-                .addSpawn(MobCategory.MONSTER, new MobSpawnSettings.SpawnerData(ModEntities.REVENANT.get(), 12, 6, 10))
-                .addSpawn(MobCategory.CREATURE, new MobSpawnSettings.SpawnerData(ModEntities.SNOW_WISP.get(), 8, 6, 8));
+                .addSpawn(MobCategory.MONSTER, new MobSpawnSettings.SpawnerData(ModEntities.BRISK.get(), 4, 1, 2))
+                .addSpawn(MobCategory.MONSTER, new MobSpawnSettings.SpawnerData(ModEntities.REVENANT.get(), 8, 3, 6))
+                .addSpawn(MobCategory.MONSTER, new MobSpawnSettings.SpawnerData(EntityType.STRAY, 8, 3, 6))
+                .addSpawn(MobCategory.MONSTER, new MobSpawnSettings.SpawnerData(EntityType.SPIDER, 6, 2, 4))
+                .addSpawn(MobCategory.MONSTER, new MobSpawnSettings.SpawnerData(EntityType.CREEPER, 6, 2, 4))
+                .addSpawn(MobCategory.MONSTER, new MobSpawnSettings.SpawnerData(EntityType.ENDERMAN, 4, 1, 2))
+                .addSpawn(MobCategory.MONSTER, new MobSpawnSettings.SpawnerData(ModEntities.SNOW_WISP.get(), 12, 1, 3))
+
+                .addSpawn(MobCategory.CREATURE, new MobSpawnSettings.SpawnerData(EntityType.PIG, 7, 2, 4))
+                .addSpawn(MobCategory.CREATURE, new MobSpawnSettings.SpawnerData(EntityType.COW, 7, 2, 4))
+                .addSpawn(MobCategory.CREATURE, new MobSpawnSettings.SpawnerData(EntityType.SHEEP, 7, 2, 4))
+                .addSpawn(MobCategory.CREATURE, new MobSpawnSettings.SpawnerData(EntityType.FROG, 4, 1, 2))
+                .addSpawn(MobCategory.CREATURE, new MobSpawnSettings.SpawnerData(EntityType.FOX, 3, 1, 3));
 
         BiomeSpecialEffects effects = new BiomeSpecialEffects.Builder()
                 .fogColor(0x6A98D4)
@@ -59,8 +71,8 @@ public final class WinterFrostBiome {
 
         return new Biome.BiomeBuilder()
                 .hasPrecipitation(true)
-                .downfall(0.9F) // Adjusted to fit a wintery environment
-                .temperature(-0.5F) // Freezing cold environment
+                .downfall(0.9F)
+                .temperature(0F)
                 .mobSpawnSettings(spawnSettings.build())
                 .specialEffects(effects)
                 .generationSettings(settings.build())

@@ -85,18 +85,78 @@
     "axolotls": [],
     "creature": [
       {
-        "type": "winterwonders:snow_wisp",
-        "maxCount": 8,
-        "minCount": 6,
-        "weight": 8
+        "type": "minecraft:pig",
+        "maxCount": 4,
+        "minCount": 2,
+        "weight": 7
+      },
+      {
+        "type": "minecraft:cow",
+        "maxCount": 4,
+        "minCount": 2,
+        "weight": 7
+      },
+      {
+        "type": "minecraft:sheep",
+        "maxCount": 4,
+        "minCount": 2,
+        "weight": 7
+      },
+      {
+        "type": "minecraft:frog",
+        "maxCount": 2,
+        "minCount": 1,
+        "weight": 4
+      },
+      {
+        "type": "minecraft:fox",
+        "maxCount": 3,
+        "minCount": 1,
+        "weight": 3
       }
     ],
     "misc": [],
     "monster": [
       {
+        "type": "winterwonders:brisk",
+        "maxCount": 2,
+        "minCount": 1,
+        "weight": 4
+      },
+      {
         "type": "winterwonders:revenant",
-        "maxCount": 10,
-        "minCount": 6,
+        "maxCount": 6,
+        "minCount": 3,
+        "weight": 8
+      },
+      {
+        "type": "minecraft:stray",
+        "maxCount": 6,
+        "minCount": 3,
+        "weight": 8
+      },
+      {
+        "type": "minecraft:spider",
+        "maxCount": 4,
+        "minCount": 2,
+        "weight": 6
+      },
+      {
+        "type": "minecraft:creeper",
+        "maxCount": 4,
+        "minCount": 2,
+        "weight": 6
+      },
+      {
+        "type": "minecraft:enderman",
+        "maxCount": 2,
+        "minCount": 1,
+        "weight": 4
+      },
+      {
+        "type": "winterwonders:snow_wisp",
+        "maxCount": 3,
+        "minCount": 1,
         "weight": 12
       }
     ],
@@ -104,6 +164,6 @@
     "water_ambient": [],
     "water_creature": []
   },
-  "temperature": -0.5,
+  "temperature": 0.0,
   "temperature_modifier": "frozen"
 }

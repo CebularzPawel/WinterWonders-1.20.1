@@ -9,16 +9,27 @@ import net.minecraft.world.level.block.*;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.VoxelShape;
 import net.cebularz.winterwonders.block.entity.IcyVinesPlantBlockEntity;
 import net.cebularz.winterwonders.init.ModBlocks;
 import org.jetbrains.annotations.Nullable;
 
 public class IcyVinesPlantBlock extends GrowingPlantBodyBlock implements EntityBlock{
+    public IcyVinesPlantBlock(BlockBehaviour.Properties properties) {
+        super(properties, Direction.DOWN, SHAPE, false);
+    }
+
     public static final VoxelShape SHAPE = Block.box(1.0, 0.0, 1.0, 15.0, 16.0, 15.0);
 
-    public IcyVinesPlantBlock(BlockBehaviour.Properties p_154975_) {
-        super(p_154975_, Direction.DOWN, SHAPE, false);
+    @Override
+    public VoxelShape getShape(BlockState pState, BlockGetter pLevel, BlockPos pPos, CollisionContext pContext) {
+        return SHAPE;
+    }
+
+    @Override
+    public RenderShape getRenderShape(BlockState pState) {
+        return RenderShape.MODEL;
     }
 
     protected boolean mayPlaceOn(BlockState pState, BlockGetter pLevel, BlockPos pPos) {
@@ -37,11 +48,6 @@ public class IcyVinesPlantBlock extends GrowingPlantBodyBlock implements EntityB
         } else {
             return $$4.is(this.getHeadBlock()) || $$4.is(this.getBodyBlock()) || $$4.isCollisionShapeFullBlock(pLevel, $$3);
         }
-    }
-
-    @Override
-    public RenderShape getRenderShape(BlockState pState) {
-        return RenderShape.MODEL;
     }
 
     @Override

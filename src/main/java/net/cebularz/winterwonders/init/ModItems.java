@@ -84,6 +84,9 @@ public class ModItems {
     public static final RegistryObject<Item> PINGIN_SPAWN_EGG = ITEMS.register("pingin_spawn_egg",
             ()-> new ForgeSpawnEggItem(ModEntities.PINGIN,0x374859,0xFF914A,new Item.Properties()));
 
+    public static final RegistryObject<Item> LICH_SPAWN_EGG = ITEMS.register("lich_spawn_egg",
+            ()-> new ForgeSpawnEggItem(ModEntities.LICH,0xBFEEF2,0xFFFFFF,new Item.Properties()));
+
     public static final RegistryObject<Item> WONDER_TREE_SHROOM = ITEMS.register("wonder_tree_shroom",
             () -> new StandingAndWallBlockItem(ModBlocks.WONDER_TREE_SHROOM.get(), ModBlocks.WONDER_TREE_SHROOM_WALL.get(), new Item.Properties(), Direction.DOWN));
 
