@@ -1,6 +1,8 @@
 package net.cebularz.winterwonders.effect;
 
 import net.cebularz.winterwonders.init.ModEffects;
+import net.cebularz.winterwonders.network.ModNetworking;
+import net.cebularz.winterwonders.network.packets.FrozenDataS2C;
 import net.cebularz.winterwonders.util.AttributeModifierUtil;
 import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.effect.MobEffectCategory;
@@ -26,6 +28,8 @@ public class FrozenEffect extends MobEffect {
     }
     @Override
     public void applyEffectTick(LivingEntity pLivingEntity, int pAmplifier) {
+        ModNetworking.sendToAllPlayers(new FrozenDataS2C(pLivingEntity.getId(), true));
+
         if (!pLivingEntity.level().isClientSide()) {
             if(pLivingEntity.hasEffect(ModEffects.CHILLED.get())){
                 pLivingEntity.removeEffect(ModEffects.CHILLED.get());
@@ -93,6 +97,7 @@ public class FrozenEffect extends MobEffect {
     @Override
     public void removeAttributeModifiers(LivingEntity pLivingEntity, AttributeMap pAttributeMap, int pAmplifier) {
         super.removeAttributeModifiers(pLivingEntity, pAttributeMap, pAmplifier);
+        ModNetworking.sendToAllPlayers(new FrozenDataS2C(pLivingEntity.getId(), false));
         removeEntityFreeze(pLivingEntity);
         AttributeModifierUtil.removeModifier(
                 pLivingEntity,

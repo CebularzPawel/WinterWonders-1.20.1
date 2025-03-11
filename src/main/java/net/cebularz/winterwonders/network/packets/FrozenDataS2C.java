@@ -1,23 +1,24 @@
 package net.cebularz.winterwonders.network.packets;
 
-import net.cebularz.winterwonders.network.ModNetworking;
+import net.cebularz.winterwonders.client.data.FrozenStatusCache;
+import net.cebularz.winterwonders.init.ModEffects;
+import net.minecraft.client.Minecraft;
 import net.minecraft.network.FriendlyByteBuf;
-import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.world.entity.LivingEntity;
 import net.minecraftforge.network.NetworkEvent;
 
-import java.util.List;
 import java.util.function.Supplier;
 
-public class PortalOverlayPacketC2S {
+public class FrozenDataS2C {
     private final int entityId;
     private final boolean frozen;
 
-    public PortalOverlayPacketC2S(int entityId, boolean frozen) {
+    public FrozenDataS2C(int entityId, boolean frozen) {
         this.entityId = entityId;
         this.frozen = frozen;
     }
 
-    public PortalOverlayPacketC2S(FriendlyByteBuf buf) {
+    public FrozenDataS2C(FriendlyByteBuf buf) {
         this.entityId = buf.readInt();
         this.frozen = buf.readBoolean();
     }
@@ -30,10 +31,11 @@ public class PortalOverlayPacketC2S {
     public boolean handle(Supplier<NetworkEvent.Context> supplier) {
         NetworkEvent.Context context = supplier.get();
         context.enqueueWork(() -> {
-            ServerPlayer player = context.getSender();
-            if (player != null) {
-
-                //ModNetworking.sendToPlayer(new PortalOverlayPacketS2C(newAlpha), player);
+            if (Minecraft.getInstance().level != null) {
+                LivingEntity entity = (LivingEntity) Minecraft.getInstance().level.getEntity(entityId);
+                if (entity != null){
+                FrozenStatusCache.setStatus(entityId, frozen);
+                }
             }
         });
         context.setPacketHandled(true);

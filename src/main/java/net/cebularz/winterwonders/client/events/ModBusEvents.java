@@ -1,10 +1,18 @@
 package net.cebularz.winterwonders.client.events;
 
+import com.google.common.collect.ImmutableList;
 import net.cebularz.winterwonders.client.models.entity.LichModel;
+import net.cebularz.winterwonders.client.renderer.FrozenRenderer;
 import net.cebularz.winterwonders.entity.custom.*;
 import net.cebularz.winterwonders.particle.ModParticles;
 import net.cebularz.winterwonders.particle.particles.ChilledParticles;
+import net.minecraft.client.model.EntityModel;
+import net.minecraft.client.renderer.entity.EntityRenderer;
 import net.minecraft.client.renderer.entity.EntityRenderers;
+import net.minecraft.client.renderer.entity.LivingEntityRenderer;
+import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.ai.attributes.DefaultAttributes;
 import net.minecraftforge.client.event.EntityRenderersEvent;
 import net.minecraftforge.client.event.RegisterParticleProvidersEvent;
 import net.minecraftforge.event.entity.EntityAttributeCreationEvent;
@@ -28,10 +36,37 @@ import net.cebularz.winterwonders.client.renderer.entity.SnowWispRenderer;
 import net.cebularz.winterwonders.client.renderer.entity.projectile.IceSpikeRenderer;
 import net.cebularz.winterwonders.init.ModBlockEntities;
 import net.cebularz.winterwonders.init.ModEntities;
+import net.minecraftforge.registries.ForgeRegistries;
+
+import java.util.List;
+import java.util.stream.Collectors;
 
 @Mod.EventBusSubscriber(modid = WinterWonders.MOD_ID, bus = Mod.EventBusSubscriber.Bus.MOD)
-public class ModBusEvents
-{
+public class ModBusEvents {
+    @SubscribeEvent
+    public static void addFrozenLayer(EntityRenderersEvent.AddLayers event) {
+        List<EntityType<? extends LivingEntity>> entityTypes = ImmutableList.copyOf(
+                ForgeRegistries.ENTITY_TYPES.getValues().stream()
+                        .filter(DefaultAttributes::hasSupplier)
+                        .map(entityType -> (EntityType<? extends LivingEntity>) entityType)
+                        .collect(Collectors.toList()));
+        entityTypes.forEach((entityType -> {
+            LivingEntityRenderer renderer = null;
+            if (entityType != EntityType.ENDER_DRAGON) {
+                try {
+                    renderer = event.getRenderer(entityType);
+                } catch (Exception e) {
+                    throw new RuntimeException(e);
+                }
+                if (renderer != null) {
+                    renderer.addLayer(new FrozenRenderer.FrozenLayer(renderer));
+                }
+            }
+        }));
+        for (String skinType : event.getSkins()){
+            event.getSkin(skinType).addLayer(new FrozenRenderer.FrozenLayer(event.getSkin(skinType)));
+        }
+    }
 
     @SubscribeEvent
     public static void onClientSetupEvent(FMLClientSetupEvent event) {
