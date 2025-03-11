@@ -1,4 +1,4 @@
-package net.cebularz.winterwonders.client.renderers.entity;
+package net.cebularz.winterwonders.client.renderer.entity;
 
 import net.minecraft.client.renderer.entity.EntityRendererProvider;
 import net.minecraft.client.renderer.entity.ZombieRenderer;

@@ -1,4 +1,4 @@
-package net.cebularz.winterwonders.client.renderers.entity;
+package net.cebularz.winterwonders.client.renderer.entity;
 
 import net.cebularz.winterwonders.WinterWonders;
 import net.cebularz.winterwonders.client.models.entity.LichModel;
