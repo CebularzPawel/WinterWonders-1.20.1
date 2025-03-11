@@ -81,10 +81,6 @@ public class FrozenEffect extends MobEffect {
                     mob.getNavigation().stop();
                 }
             }
-            //else if (duration <= 2){
-            //    //System.out.println("Freezing: " + pLivingEntity);
-            //    removeEntityFreeze(pLivingEntity);
-            //}
         }
         super.applyEffectTick(pLivingEntity, pAmplifier);
     }

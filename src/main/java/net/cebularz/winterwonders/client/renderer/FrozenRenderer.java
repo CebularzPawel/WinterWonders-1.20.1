@@ -30,6 +30,12 @@ public class FrozenRenderer {
         @Override
         public void render(@NotNull PoseStack pPostStack, @NotNull MultiBufferSource pBuffer, int pPackedLight, LivingEntity pLivingEntity, float pLimbSwing,
                            float pLimbSwingAmount, float pPartialTicks, float pAgeInTicks, float pNetHeadYaw, float pHeadPitch) {
+            if (!FrozenStatusCache.isFrozen(pLivingEntity.getId())) {
+                return;
+            }
+
+            //System.out.println("Rendering FrozenLayer for entity: " + pLivingEntity.getId());
+
             pPostStack.pushPose();
             EntityModel<T> model = this.frozenRenderer.getModel();
             VertexConsumer originalConsumer = pBuffer.getBuffer(RenderType.entityTranslucent(FROZEN_TEXTURE));

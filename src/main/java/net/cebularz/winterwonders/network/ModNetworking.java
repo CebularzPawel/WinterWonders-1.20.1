@@ -60,7 +60,7 @@ public class ModNetworking {
         double x = livingEntity.getX();
         double y = livingEntity.getY();
         double z = livingEntity.getZ();
-        double r2 = Minecraft.getInstance().options.entityDistanceScaling().get();
+        double r2 = Minecraft.getInstance().options.renderDistance().get() * 16;
         INSTANCE.send(PacketDistributor.NEAR.with(() ->
                 new PacketDistributor.TargetPoint(x, y, z, r2, livingEntity.level().dimension())),
                 message);

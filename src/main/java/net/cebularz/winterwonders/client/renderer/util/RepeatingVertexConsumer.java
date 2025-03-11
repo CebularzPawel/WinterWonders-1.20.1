@@ -51,16 +51,16 @@ public class RepeatingVertexConsumer implements VertexConsumer {
 
     @Override
     public void endVertex() {
-
+        delegate.endVertex();
     }
 
     @Override
     public void defaultColor(int pDefaultR, int pDefaultG, int pDefaultB, int pDefaultA) {
-
+        delegate.defaultColor(pDefaultR, pDefaultG, pDefaultB, pDefaultA);
     }
 
     @Override
     public void unsetDefaultColor() {
-
+        delegate.unsetDefaultColor();
     }
 }
