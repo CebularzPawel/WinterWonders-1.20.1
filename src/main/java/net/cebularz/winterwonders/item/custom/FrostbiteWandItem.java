@@ -1,5 +1,6 @@
 package net.cebularz.winterwonders.item.custom;
 
+import net.cebularz.winterwonders.entity.custom.projectile.ChillingSnowballEntity;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.InteractionHand;
@@ -29,7 +30,7 @@ public class FrostbiteWandItem extends Item {
                 SoundEvents.EVOKER_CAST_SPELL, SoundSource.NEUTRAL, 0.75f, 0.4f / (pLevel.getRandom().nextFloat() * 0.4f + 0.8f));
 
         if(!pLevel.isClientSide){
-            IceSpikeProjectileEntity iceSpike = new IceSpikeProjectileEntity(pLevel, pPlayer);
+            ChillingSnowballEntity iceSpike = new ChillingSnowballEntity(pLevel, pPlayer);
             iceSpike.shootFromRotation(pPlayer, pPlayer.getXRot(), pPlayer.getYRot(), 0.0f, 2f, 1.0f);
             pLevel.addFreshEntity(iceSpike);
         }

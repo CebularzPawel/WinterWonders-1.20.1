@@ -1,4 +1,4 @@
-package net.cebularz.winterwonders.client.renderers.entity;
+package net.cebularz.winterwonders.client.renderer.entity;
 
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;

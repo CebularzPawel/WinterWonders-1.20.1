@@ -1,6 +1,8 @@
 package net.cebularz.winterwonders;
 
 import com.mojang.logging.LogUtils;
+import net.cebularz.winterwonders.network.ModNetworking;
+import net.cebularz.winterwonders.particle.ModParticles;
 import net.minecraft.client.renderer.ItemBlockRenderTypes;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.world.entity.SpawnPlacements;
@@ -35,12 +37,12 @@ public class WinterWonders {
     public WinterWonders() {
         IEventBus modEventBus = FMLJavaModLoadingContext.get().getModEventBus();
         ModFeatures.DEF_REG.register(modEventBus);
+        ModParticles.register(modEventBus);
         ModItems.register(modEventBus);
         ModBlocks.register(modEventBus);
         ModCreativeModeTabs.register(modEventBus);
         ModEffects.register(modEventBus);
         ModEntities.register(modEventBus);
-        ModParticles.register(modEventBus);
         ModBlockEntities.register(modEventBus);
         ModAttributes.REGISTRY.register(modEventBus);
         modEventBus.addListener(this::commonSetup);
@@ -62,6 +64,7 @@ public class WinterWonders {
             ((FlowerPotBlock) Blocks.FLOWER_POT).addPlant(ModBlocks.MAGICAL_ROSE.getId(),ModBlocks.POTTED_MAGICAL_ROSE);
             ((FlowerPotBlock) Blocks.FLOWER_POT).addPlant(ModBlocks.ICE_FLOWER.getId(),ModBlocks.POTTED_ICE_FLOWER);
         });
+        ModNetworking.register();
     }
 
     private void addCreative(BuildCreativeModeTabContentsEvent event) {
