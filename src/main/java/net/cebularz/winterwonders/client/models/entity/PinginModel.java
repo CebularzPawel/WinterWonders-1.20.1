@@ -77,6 +77,18 @@ public class PinginModel<T extends Entity> extends HierarchicalModel<T> {
             this.animateWalk(ModAnimationDefintions.PINGIN_WALK, limbSwing, limbSwingAmount, 2f, 2.4f);
             this.animate(pingin.idleAnimationState, ModAnimationDefintions.PINGIN_IDLE, ageInTicks, 1f);
         }
+
+        if(pingin.isAdmiring()){
+            this.head.xRot = 0.5F;
+            this.head.yRot = 0.0F;
+            if (((PinginEntity) entity).isLeftHanded()) {
+                this.right_arm.yRot = -0.5F;
+                this.right_arm.xRot = -0.9F;
+            } else {
+                this.left_arm.yRot = 0.5F;
+                this.left_arm.xRot = -0.9F;
+            }
+        }
     }
 
     private void applyHeadRotation(float pNetHeadYaw, float pHeadPitch, float pAgeInTicks) {

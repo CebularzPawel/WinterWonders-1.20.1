@@ -1,0 +1,50 @@
+{
+  "targets": [
+    "swap",
+    "minecraft:main"
+  ],
+  "passes": [
+    {
+      "name": "blizzard",
+      "intarget": "minecraft:main",
+      "outtarget": "swap",
+      "uniforms": [
+        {
+          "name": "time",
+          "type": "float",
+          "count": 1,
+          "values": [ 0.0 ]
+        },
+        {
+          "name": "resolution",
+          "type": "float",
+          "count": 2,
+          "values": [ 1.0, 1.0 ]
+        },
+        {
+          "name": "windStrength",
+          "type": "float",
+          "count": 1,
+          "values": [ 0.5 ]
+        },
+        {
+          "name": "snowDensity",
+          "type": "float",
+          "count": 1,
+          "values": [ 0.7 ]
+        },
+        {
+          "name": "windDirection",
+          "type": "float",
+          "count": 3,
+          "values": [ 1.0, -0.5, 0.0 ]
+        }
+      ]
+    },
+    {
+      "name": "blit",
+      "intarget": "swap",
+      "outtarget": "minecraft:main"
+    }
+  ]
+}

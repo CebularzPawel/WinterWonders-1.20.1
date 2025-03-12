@@ -45,7 +45,7 @@ public class ModBusEvents
         event.put(ModEntities.REVENANT.get(), RevenantEntity.createAttributes().build());
         event.put(ModEntities.PINGIN.get(), PinginEntity.createAttributes().build());
         event.put(ModEntities.BRISK.get(), BriskEntity.createAttributes().build());
-        event.put(ModEntities.LICH.get(), LichEntity.createMobAttributes().build());
+        event.put(ModEntities.LICH.get(), LichEntity.createAttribute().build());
     }
 
     @SubscribeEvent
