@@ -1,15 +1,15 @@
 package net.cebularz.winterwonders.item.custom;
 
+import net.cebularz.winterwonders.client.CameraEngine;
 import net.cebularz.winterwonders.client.shaders.blizzard.BlizzardRenderer;
 import net.cebularz.winterwonders.entity.custom.LichEntity;
 import net.cebularz.winterwonders.entity.custom.projectile.ChillingSnowballEntity;
-import net.cebularz.winterwonders.entity.custom.projectile.IceSpikeProjectileEntity;
-import net.cebularz.winterwonders.init.ModEffects;
+import net.cebularz.winterwonders.entity.custom.projectile.IceCubeEntity;
+import net.cebularz.winterwonders.init.ModEntities;
 import net.cebularz.winterwonders.item.custom.impl.IStaffItem;
-import net.cebularz.winterwonders.networking.ClientboundBlizzardPacket;
-import net.cebularz.winterwonders.networking.PacketHandler;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.particles.ParticleTypes;
+import net.minecraft.server.TickTask;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
@@ -26,9 +26,10 @@ import net.minecraft.world.phys.AABB;
 import net.minecraft.world.phys.Vec3;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
-import net.minecraftforge.network.PacketDistributor;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.function.Function;
 
 public class LichBlizzardStaffItem extends Item implements IStaffItem {
 
@@ -38,6 +39,10 @@ public class LichBlizzardStaffItem extends Item implements IStaffItem {
     private boolean interrupted = false;
     private StaffState currentState = StaffState.UNCHARGED;
     private static final int BLIZZARD_EFFECT_DURATION = 100;
+    private static boolean iceProtectionOnCooldown = false;
+    private static int iceProtectionCooldownTime = 0;
+    private static final int ICE_PROTECTION_COOLDOWN = 600;
+    private static final float ICE_PROTECTION_CHANCE = 0.3f;
 
     public LichBlizzardStaffItem(Properties properties) {
         super(properties);
@@ -117,7 +122,7 @@ public class LichBlizzardStaffItem extends Item implements IStaffItem {
 
             for (int i = 0; i < spikeCount; i++) {
                 final int index = i;
-                serverLevel.getServer().tell(new net.minecraft.server.TickTask(serverLevel.getServer().getTickCount() + (i * 3), () -> {
+                serverLevel.getServer().tell(new TickTask(serverLevel.getServer().getTickCount() + (i * 3), () -> {
                     if (target.isAlive()) {
                         double offsetX = random.nextGaussian() * 1.5;
                         double offsetZ = random.nextGaussian() * 1.5;
@@ -163,93 +168,42 @@ public class LichBlizzardStaffItem extends Item implements IStaffItem {
         if (serverLevel == null) return;
 
         if (isCloseRange) {
-
-            BlockPos targetPos = target.blockPosition();
-
-            int radius = 3;
-            for (int x = -radius; x <= radius; x++) {
-                for (int z = -radius; z <= radius; z++) {
-                    if (random.nextFloat() < 0.7f) {
-                        BlockPos spikePos = targetPos.offset(x, 0, z);
-
-                        int delay = (int)(Math.sqrt(x*x + z*z) * 2);
-
-                        serverLevel.getServer().tell(new net.minecraft.server.TickTask(
-                                serverLevel.getServer().getTickCount() + delay,
-                                () -> {
-                                    // Particles for spike
-                                    for (int y = 0; y < 3; y++) {
-                                        serverLevel.sendParticles(
-                                                ParticleTypes.ITEM_SNOWBALL,
-                                                spikePos.getX() + 0.5, spikePos.getY() + y, spikePos.getZ() + 0.5,
-                                                10, 0.2, 0.4, 0.2, 0.1
-                                        );
-                                    }
-
-                                    AABB searchBox = new AABB(
-                                            spikePos.getX(), spikePos.getY(), spikePos.getZ(),
-                                            spikePos.getX() + 1, spikePos.getY() + 2, spikePos.getZ() + 1
-                                    );
-
-                                    List<Entity> entities = serverLevel.getEntities(
-                                            caster, searchBox, entity -> entity instanceof LivingEntity
-                                    );
-
-                                    for (Entity entity : entities) {
-                                        if (entity instanceof LivingEntity victim) {
-                                            victim.hurt(victim.damageSources().indirectMagic(caster, caster), 3.0f);
-                                        }
-                                    }
-                                }
-                        ));
-                    }
-                }
-            }
+            createIcySpikeFloor(target, 16, 5.9F);
         } else {
             BlockPos targetPos = target.blockPosition();
-
             int cubeCount = 3 + random.nextInt(3);
+
             for (int i = 0; i < cubeCount; i++) {
                 int offsetX = random.nextInt(5) - 2;
                 int offsetZ = random.nextInt(5) - 2;
 
                 BlockPos cubePos = targetPos.offset(offsetX, 0, offsetZ);
 
-                serverLevel.getServer().tell(new net.minecraft.server.TickTask(
+                serverLevel.getServer().tell(new TickTask(
                         serverLevel.getServer().getTickCount() + (i * 5),
                         () -> {
                             for (int y = 0; y < 2; y++) {
-                                for (int j = 0; j < 20; j++) {
-                                    serverLevel.sendParticles(
-                                            ParticleTypes.SNOWFLAKE,
-                                            cubePos.getX() + random.nextFloat(),
-                                            cubePos.getY() + y,
-                                            cubePos.getZ() + random.nextFloat(),
-                                            1, 0.1, 0.1, 0.1, 0.01
-                                    );
-                                }
+                                serverLevel.sendParticles(
+                                        ParticleTypes.SNOWFLAKE,
+                                        cubePos.getX() + 0.5,
+                                        cubePos.getY() + y,
+                                        cubePos.getZ() + 0.5,
+                                        10, 0.2, 0.2, 0.2, 0.02
+                                );
                             }
 
-                            AABB searchBox = new AABB(
-                                    cubePos.getX() - 0.5, cubePos.getY(), cubePos.getZ() - 0.5,
-                                    cubePos.getX() + 1.5, cubePos.getY() + 2, cubePos.getZ() + 1.5
-                            );
-
-                            List<Entity> entities = serverLevel.getEntities(
-                                    caster, searchBox, entity -> entity instanceof LivingEntity
-                            );
-
-                            for (Entity entity : entities) {
-                                if (entity instanceof LivingEntity victim) {
-                                    victim.addEffect(new MobEffectInstance(MobEffects.MOVEMENT_SLOWDOWN, 100, 1));
-                                }
+                            IceCubeEntity entity = ModEntities.ICE_CUBE.get().create(level);
+                            if (entity != null) {
+                                entity.setPos(cubePos.getX() + 0.5, cubePos.getY() + 1, cubePos.getZ() + 0.5);
+                                entity.shootFromRotation(caster, caster.getXRot(), caster.getYRot(), 0.0F, 0.8F, 1.0F);
+                                serverLevel.addFreshEntity(entity);
                             }
-
                         }
                 ));
             }
         }
     }
+
 
     public void executeBlizzardAttack(LivingEntity target) {
         if (caster == null || caster.level() == null) return;
@@ -271,7 +225,7 @@ public class LichBlizzardStaffItem extends Item implements IStaffItem {
 
         for (int tick = 0; tick < duration; tick += 5) {
             final int currentTick = tick;
-            serverLevel.getServer().tell(new net.minecraft.server.TickTask(
+            serverLevel.getServer().tell(new TickTask(
                     serverLevel.getServer().getTickCount() + tick,
                     () -> {
                         for (int i = 0; i < 30; i++) {
@@ -311,6 +265,7 @@ public class LichBlizzardStaffItem extends Item implements IStaffItem {
                                     if (entity instanceof LivingEntity victim) {
                                         victim.hurt(victim.damageSources().indirectMagic(caster, caster), 4.0f);
                                         victim.addEffect(new MobEffectInstance(MobEffects.MOVEMENT_SLOWDOWN, 100, 2));
+                                        CameraEngine.getOrAssignEngine((Player) victim).shakeScreen(3,100,0.23F);
                                     }
                                 }
                             }
@@ -338,6 +293,102 @@ public class LichBlizzardStaffItem extends Item implements IStaffItem {
         }
     }
 
+    public void createIcySpikeFloor(LivingEntity target, int radius, float damage) {
+        if (caster == null || caster.level() == null) return;
+
+        Level level = caster.level();
+        ServerLevel serverLevel = level instanceof ServerLevel ? (ServerLevel) level : null;
+        if (serverLevel == null) return;
+
+        BlockPos targetPos = target.blockPosition();
+
+        for (int x = -radius; x <= radius; x++) {
+            for (int z = -radius; z <= radius; z++) {
+                double distance = Math.sqrt(x*x + z*z);
+                if (distance <= radius && random.nextFloat() < 0.7f) {
+                    BlockPos spikePos = targetPos.offset(x, 0, z);
+
+                    int delay = (int)(distance * 3);
+
+                    serverLevel.getServer().tell(new TickTask(
+                            serverLevel.getServer().getTickCount() + delay,
+                            () -> {
+                                createIceSpike(serverLevel, spikePos, damage);
+                            }
+                    ));
+                }
+            }
+        }
+    }
+
+    private void createIceSpike(ServerLevel serverLevel, BlockPos pos, float damage) {
+        for (int i = 0; i < 3; i++) {
+            final int yOffset = i;
+            serverLevel.getServer().tell(new TickTask(
+                    serverLevel.getServer().getTickCount() + i * 2,
+                    () -> {
+                        serverLevel.sendParticles(
+                                ParticleTypes.ITEM_SNOWBALL,
+                                pos.getX() + 0.5, pos.getY() + yOffset * 0.5, pos.getZ() + 0.5,
+                                15, 0.2, 0.1, 0.2, 0.05
+                        );
+
+                        serverLevel.sendParticles(
+                                ParticleTypes.SNOWFLAKE,
+                                pos.getX() + 0.5, pos.getY() + yOffset * 0.5 + 0.25, pos.getZ() + 0.5,
+                                5, 0.3, 0.1, 0.3, 0.01
+                        );
+
+                        if (yOffset == 0) {
+                            serverLevel.playSound(
+                                    null,
+                                    pos,
+                                    SoundEvents.GLASS_PLACE,
+                                    SoundSource.BLOCKS,
+                                    1.0F,
+                                    1.2F + serverLevel.getRandom().nextFloat() * 0.2F
+                            );
+                        }
+
+                        if (yOffset == 2) {
+                            AABB damageArea = new AABB(
+                                    pos.getX(), pos.getY(), pos.getZ(),
+                                    pos.getX() + 1, pos.getY() + 2, pos.getZ() + 1
+                            );
+
+                            List<Entity> entities = serverLevel.getEntities(
+                                    caster, damageArea, entity -> entity instanceof LivingEntity
+                            );
+
+                            for (Entity entity : entities) {
+                                if (entity instanceof LivingEntity victim) {
+                                    victim.hurt(victim.damageSources().indirectMagic(caster, caster), damage);
+
+                                    Vec3 knockback = new Vec3(
+                                            victim.getX() - pos.getX() - 0.5,
+                                            0.2,
+                                            victim.getZ() - pos.getZ() - 0.5
+                                    ).normalize().scale(0.4);
+                                    victim.setDeltaMovement(victim.getDeltaMovement().add(knockback));
+
+                                    victim.addEffect(new MobEffectInstance(MobEffects.MOVEMENT_SLOWDOWN, 60, 1));
+
+                                    serverLevel.playSound(
+                                            null,
+                                            victim.blockPosition(),
+                                            SoundEvents.PLAYER_HURT_FREEZE,
+                                            SoundSource.PLAYERS,
+                                            0.8F,
+                                            1.0F
+                                    );
+                                }
+                            }
+                        }
+                    }
+            ));
+        }
+    }
+
     public void executeWhirlwindAttack(LivingEntity target) {
         if (caster == null || caster.level() == null) return;
 
@@ -355,7 +406,7 @@ public class LichBlizzardStaffItem extends Item implements IStaffItem {
 
         for (int tick = 0; tick < duration; tick += 2) {
             final int currentTick = tick;
-            serverLevel.getServer().tell(new net.minecraft.server.TickTask(
+            serverLevel.getServer().tell(new TickTask(
                     serverLevel.getServer().getTickCount() + tick,
                     () -> {
                         float angle = (float) (currentTick * 0.2);
@@ -405,6 +456,8 @@ public class LichBlizzardStaffItem extends Item implements IStaffItem {
                                             victim.getDeltaMovement().z + pushZ
                                     );
 
+                                    CameraEngine.getOrAssignEngine(((Player) victim)).shakeScreen(2,100,0.21F);
+
                                     if (victim instanceof Player) {
                                         ((Player) victim).fallDistance = 0;
                                     }
@@ -443,6 +496,129 @@ public class LichBlizzardStaffItem extends Item implements IStaffItem {
         }
     }
 
+    public void createRotatingIceBlocks(LivingEntity lich, int blockCount, float duration) {
+        if (lich == null || lich.level() == null) return;
+
+        Level level = lich.level();
+        ServerLevel serverLevel = level instanceof ServerLevel ? (ServerLevel) level : null;
+        if (serverLevel == null) return;
+
+        List<IceBlockTracker> iceBlocks = new ArrayList<>();
+
+        for (int i = 0; i < blockCount; i++) {
+            final int blockIndex = i;
+            int spawnDelay = i * 4;
+
+            serverLevel.getServer().tell(new net.minecraft.server.TickTask(
+                    serverLevel.getServer().getTickCount() + spawnDelay,
+                    () -> {
+                        double angle = (Math.PI * 2 * blockIndex) / blockCount;
+                        double radius = 2.5;
+                        double x = lich.getX() + Math.cos(angle) * radius;
+                        double z = lich.getZ() + Math.sin(angle) * radius;
+                        BlockPos blockPos = new BlockPos((int)x, (int)lich.getY(), (int)z);
+
+                        IceBlockTracker tracker = new IceBlockTracker(
+                                blockPos,
+                                angle,
+                                radius,
+                                serverLevel.getGameTime()
+                        );
+                        iceBlocks.add(tracker);
+
+                        playIceFormationEffect(serverLevel, blockPos);
+                    }
+            ));
+        }
+
+        int totalTicks = (int)(duration * 20);
+
+        ScheduledTask rotationTask = new ScheduledTask(serverLevel, totalTicks, (currentTick) -> {
+            for (IceBlockTracker block : iceBlocks) {
+
+                float elapsedTime = (serverLevel.getGameTime() - block.spawnTime) / 20f;
+                double rotationSpeed = 0.5;
+                double newAngle = block.initialAngle + (rotationSpeed * elapsedTime);
+
+                double x = lich.getX() + Math.cos(newAngle) * block.radius;
+                double z = lich.getZ() + Math.sin(newAngle) * block.radius;
+
+                double maxHeight = 1.5;
+                double height = Math.min(maxHeight, elapsedTime * 0.5);
+                double y = lich.getY() + height;
+
+                BlockPos newPos = new BlockPos((int)x, (int)y, (int)z);
+                displayIceBlock(serverLevel, newPos);
+
+                AABB blockBox = new AABB(
+                        x - 0.5, y - 0.5, z - 0.5,
+                        x + 0.5, y + 0.5, z + 0.5
+                );
+
+                List<Entity> collidingEntities = serverLevel.getEntities(
+                        lich, blockBox, entity -> entity instanceof LivingEntity && entity != lich
+                );
+
+                for (Entity entity : collidingEntities) {
+                    if (entity instanceof LivingEntity victim) {
+                        victim.hurt(victim.damageSources().freeze(), 2.0f);
+
+                        victim.addEffect(new MobEffectInstance(MobEffects.MOVEMENT_SLOWDOWN, 60, 1));
+
+                        serverLevel.playSound(
+                                null,
+                                victim.blockPosition(),
+                                SoundEvents.PLAYER_HURT_FREEZE,
+                                SoundSource.NEUTRAL,
+                                0.6F,
+                                1.0F + serverLevel.getRandom().nextFloat() * 0.2F
+                        );
+
+                        Vec3 knockback = new Vec3(
+                                victim.getX() - x,
+                                0.1,
+                                victim.getZ() - z
+                        ).normalize().scale(0.3);
+                        victim.setDeltaMovement(victim.getDeltaMovement().add(knockback));
+                    }
+                }
+            }
+
+            return currentTick < totalTicks;
+        });
+
+        rotationTask.start();
+    }
+
+    public void tick(Level level, LichEntity entity, int hurtAmount) {
+        if (iceProtectionOnCooldown) {
+            iceProtectionCooldownTime--;
+            if (iceProtectionCooldownTime <= 0) {
+                iceProtectionOnCooldown = false;
+            }
+        }
+
+        if (!iceProtectionOnCooldown &&
+                entity.getHealth() < entity.getMaxHealth() * 0.5f &&
+                hurtAmount > 3.0f &&
+                level.getRandom().nextFloat() < ICE_PROTECTION_CHANCE) {
+
+            createRotatingIceBlocks(entity,5, Float.MAX_VALUE);
+
+            iceProtectionOnCooldown = true;
+            iceProtectionCooldownTime = ICE_PROTECTION_COOLDOWN;
+
+            entity.level().playSound(
+                    null,
+                    entity.blockPosition(),
+                    SoundEvents.WITHER_HURT,
+                    SoundSource.HOSTILE,
+                    1.0F,
+                    0.5F
+            );
+        }
+    }
+
     @OnlyIn(Dist.CLIENT)
     private void startBlizzardEffectClient(Vec3 center) {
         BlizzardRenderer.getInstance().startBlizzard(center, BLIZZARD_EFFECT_DURATION, 1.0f);
@@ -472,4 +648,101 @@ public class LichBlizzardStaffItem extends Item implements IStaffItem {
     public int getPriority() {
         return 10;
     }
+
+    // Helper class to track each ice block
+    private static class IceBlockTracker {
+        public BlockPos initialPos;
+        public double initialAngle;
+        public double radius;
+        public long spawnTime;
+
+        public IceBlockTracker(BlockPos pos, double angle, double radius, long time) {
+            this.initialPos = pos;
+            this.initialAngle = angle;
+            this.radius = radius;
+            this.spawnTime = time;
+        }
+    }
+
+    // Helper class for scheduled tasks that run over multiple ticks
+    private static class ScheduledTask {
+        private final ServerLevel level;
+        private final int maxTicks;
+        private final Function<Integer, Boolean> updateFunction;
+        private int currentTick = 0;
+
+        public ScheduledTask(ServerLevel level, int maxTicks, Function<Integer, Boolean> updateFunction) {
+            this.level = level;
+            this.maxTicks = maxTicks;
+            this.updateFunction = updateFunction;
+        }
+
+        public void start() {
+            scheduleNextTick();
+        }
+
+        private void scheduleNextTick() {
+            level.getServer().tell(new net.minecraft.server.TickTask(
+                    level.getServer().getTickCount() + 1,
+                    () -> {
+                        boolean continueTask = updateFunction.apply(currentTick);
+                        currentTick++;
+
+                        if (continueTask && currentTick < maxTicks) {
+                            scheduleNextTick();
+                        } else {
+
+                        }
+                    }
+            ));
+        }
+    }
+
+    private void playIceFormationEffect(ServerLevel level, BlockPos pos) {
+        level.playSound(
+                null,
+                pos,
+                SoundEvents.GLASS_PLACE,
+                SoundSource.BLOCKS,
+                1.0F,
+                0.8F + level.getRandom().nextFloat() * 0.4F
+        );
+
+        level.sendParticles(
+                ParticleTypes.SNOWFLAKE,
+                pos.getX() + 0.5, pos.getY() + 0.1, pos.getZ() + 0.5,
+                20, 0.7, 0.1, 0.7, 0.02
+        );
+
+        for (int y = 0; y < 3; y++) {
+            final int yOffset = y;
+            level.getServer().tell(new net.minecraft.server.TickTask(
+                    level.getServer().getTickCount() + y * 3,
+                    () -> {
+
+                    }
+            ));
+        }
+    }
+
+    private void displayIceBlock(ServerLevel level, BlockPos pos) {
+        double size = 0.5;
+
+        for (int i = 0; i < 8; i++) {
+            double xOffset = ((i & 1) == 0) ? -size : size;
+            double yOffset = ((i & 2) == 0) ? -size : size;
+            double zOffset = ((i & 4) == 0) ? -size : size;
+
+            IceCubeEntity entity = ModEntities.ICE_CUBE.get().create(level);
+            entity.setPos(xOffset,yOffset,zOffset);
+            level.addFreshEntity(entity);
+        }
+
+        level.sendParticles(
+                ParticleTypes.SNOWFLAKE,
+                pos.getX() + 0.5, pos.getY() + 0.5, pos.getZ() + 0.5,
+                3, 0.4, 0.4, 0.4, 0.01
+        );
+    }
+
 }

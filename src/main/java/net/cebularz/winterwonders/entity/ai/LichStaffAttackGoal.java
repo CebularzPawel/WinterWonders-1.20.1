@@ -219,10 +219,10 @@ public class LichStaffAttackGoal extends Goal {
 
             this.attackTime = this.attackIntervalMin + this.lich.getRandom().nextInt(this.attackIntervalMax - this.attackIntervalMin);
 
-            this.lich.setAttackCooldown(20);
+            this.lich.setAttackCooldown(120);
         } else if (this.attackTime < 0) {
             float f = (float)Math.sqrt(distanceToTargetSq) / this.attackRadius;
-            this.attackTime = Math.max(20, (int)(f * (float)(this.attackIntervalMax - this.attackIntervalMin) + (float)this.attackIntervalMin));
+            this.attackTime = Math.max(120, (int)(f * (float)(this.attackIntervalMax - this.attackIntervalMin) + (float)this.attackIntervalMin));
         }
     }
 

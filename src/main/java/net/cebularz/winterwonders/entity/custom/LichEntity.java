@@ -6,6 +6,8 @@ import net.cebularz.winterwonders.init.ModItems;
 import net.cebularz.winterwonders.item.custom.LichBlizzardStaffItem;
 import net.cebularz.winterwonders.item.custom.impl.IStaffItem;
 import net.minecraft.nbt.CompoundTag;
+import net.minecraft.server.level.ServerLevel;
+import net.minecraft.sounds.SoundSource;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.DifficultyInstance;
 import net.minecraft.world.entity.*;
@@ -50,7 +52,7 @@ public class LichEntity extends Monster implements IStaffHoldingMob, RangedAttac
     @Override
     protected void registerGoals() {
         this.goalSelector.addGoal(0, new FloatGoal(this));
-        this.goalSelector.addGoal(1, new RangedAttackGoal(this, 1.0D, 20, 40, 16.0F));
+        this.goalSelector.addGoal(1, new RangedAttackGoal(this, 1.0D, 120, 140, 16.0F));
         this.goalSelector.addGoal(3, new WaterAvoidingRandomStrollGoal(this, 1.0D));
         this.goalSelector.addGoal(4, new LookAtPlayerGoal(this, Player.class, 8.0F));
         this.goalSelector.addGoal(5, new RandomLookAroundGoal(this));
@@ -129,29 +131,30 @@ public class LichEntity extends Monster implements IStaffHoldingMob, RangedAttac
     private LichStaffAttackGoal.AttackType selectAttackType(double distance, float healthPercentage) {
         RandomSource random = level().getRandom();
 
-        if (healthPercentage <= 50) {
+        if (healthPercentage <= 50.0f) {
             if (distance < 36.0) {
                 return random.nextBoolean() ?
                         LichStaffAttackGoal.AttackType.WHIRLWIND :
                         LichStaffAttackGoal.AttackType.BLIZZARD;
             } else {
+
                 if (distance < 100.0) {
                     return LichStaffAttackGoal.AttackType.TERRAIN_ATTACK_CLOSE;
                 } else {
                     return LichStaffAttackGoal.AttackType.TERRAIN_ATTACK_FAR;
                 }
             }
-        } else {
+        }
+        else {
             if (distance < 36.0) {
                 return LichStaffAttackGoal.AttackType.WHIRLWIND;
-            } else if (distance < 100.0) {
-                return random.nextBoolean() ?
-                        LichStaffAttackGoal.AttackType.BASIC_PROJECTILE :
-                        LichStaffAttackGoal.AttackType.SPECIAL_ATTACK;
             } else {
-                return random.nextBoolean() ?
-                        LichStaffAttackGoal.AttackType.BASIC_PROJECTILE :
-                        LichStaffAttackGoal.AttackType.TERRAIN_ATTACK_FAR;
+                float attackChance = random.nextFloat();
+                if (attackChance < 0.5f) {
+                    return LichStaffAttackGoal.AttackType.BASIC_PROJECTILE;
+                } else {
+                    return LichStaffAttackGoal.AttackType.SPECIAL_ATTACK;
+                }
             }
         }
     }

@@ -3,6 +3,7 @@ package net.cebularz.winterwonders.client.events;
 import com.google.common.collect.ImmutableList;
 import net.cebularz.winterwonders.client.models.entity.LichModel;
 import net.cebularz.winterwonders.client.renderer.FrozenRenderer;
+import net.cebularz.winterwonders.client.renderer.block.IceCubeRenderer;
 import net.cebularz.winterwonders.client.renderer.entity.*;
 import net.cebularz.winterwonders.entity.custom.*;
 import net.cebularz.winterwonders.particle.ModParticles;
@@ -77,6 +78,7 @@ public class ModBusEvents {
         EntityRenderers.register(ModEntities.BRISK.get(), BriskRenderer::new);
         EntityRenderers.register(ModEntities.LICH.get(), LichRenderer::new);
         EntityRenderers.register(ModEntities.ICE_SPIKE.get(), IceSpikeRenderer::new);
+        EntityRenderers.register(ModEntities.ICE_CUBE.get(), IceCubeRenderer::new);
     }
 
     @SubscribeEvent
