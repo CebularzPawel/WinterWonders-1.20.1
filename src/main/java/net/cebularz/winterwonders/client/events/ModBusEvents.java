@@ -3,6 +3,7 @@ package net.cebularz.winterwonders.client.events;
 import com.google.common.collect.ImmutableList;
 import net.cebularz.winterwonders.client.models.entity.LichModel;
 import net.cebularz.winterwonders.client.renderer.FrozenRenderer;
+import net.cebularz.winterwonders.client.renderer.entity.*;
 import net.cebularz.winterwonders.entity.custom.*;
 import net.cebularz.winterwonders.particle.ModParticles;
 import net.cebularz.winterwonders.particle.particles.ChilledParticles;
@@ -30,10 +31,6 @@ import net.cebularz.winterwonders.client.models.entity.projectile.IceSpikeModel;
 import net.cebularz.winterwonders.client.particles.AuroraParticle;
 import net.cebularz.winterwonders.client.renderer.block.IcyVinesBlockEntityRenderer;
 import net.cebularz.winterwonders.client.renderer.block.IcyVinesPlantBlockEntityRenderer;
-import net.cebularz.winterwonders.client.renderer.entity.BriskRenderer;
-import net.cebularz.winterwonders.client.renderer.entity.PinginRenderer;
-import net.cebularz.winterwonders.client.renderer.entity.RevenantRenderer;
-import net.cebularz.winterwonders.client.renderer.entity.SnowWispRenderer;
 import net.cebularz.winterwonders.client.renderer.entity.projectile.IceSpikeRenderer;
 import net.cebularz.winterwonders.init.ModBlockEntities;
 import net.cebularz.winterwonders.init.ModEntities;
@@ -78,6 +75,7 @@ public class ModBusEvents {
         EntityRenderers.register(ModEntities.REVENANT.get(), RevenantRenderer::new);
         EntityRenderers.register(ModEntities.PINGIN.get(), PinginRenderer::new);
         EntityRenderers.register(ModEntities.BRISK.get(), BriskRenderer::new);
+        EntityRenderers.register(ModEntities.LICH.get(), LichRenderer::new);
         EntityRenderers.register(ModEntities.ICE_SPIKE.get(), IceSpikeRenderer::new);
     }
 
