@@ -52,7 +52,6 @@ public class WinterWonders {
         ModSongs.REGISTRAR.register(modEventBus);
         TerraInit.register();
         MinecraftForge.EVENT_BUS.register(this);
-        new BiomeMusicManager();
         modEventBus.addListener(this::addCreative);
     }
 

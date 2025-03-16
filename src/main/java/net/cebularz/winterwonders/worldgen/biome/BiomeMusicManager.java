@@ -1,5 +1,6 @@
 package net.cebularz.winterwonders.worldgen.biome;
 
+import net.cebularz.winterwonders.WinterWonders;
 import net.cebularz.winterwonders.init.ModSongs;
 import net.minecraft.network.protocol.game.ClientboundStopSoundPacket;
 import net.minecraft.resources.ResourceKey;
@@ -9,14 +10,17 @@ import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.level.biome.Biome;
+import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.TickEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
+import net.minecraftforge.fml.common.Mod;
 
 import java.util.HashMap;
 import java.util.Map;
 import java.util.UUID;
 
+@Mod.EventBusSubscriber(modid = WinterWonders.MOD_ID, bus = Mod.EventBusSubscriber.Bus.FORGE)
 public class BiomeMusicManager {
     private final Map<UUID, ResourceKey<Biome>> playerBiomes = new HashMap<>();
     private final Map<ResourceKey<Biome>, SoundEvent> biomeSounds = new HashMap<>();
@@ -24,7 +28,6 @@ public class BiomeMusicManager {
 
     public BiomeMusicManager() {
         biomeSounds.put(WinterFrostBiome.WINTER_FROST, ModSongs.BIOME_MUSIC.get());
-        MinecraftForge.EVENT_BUS.register(this);
     }
 
     @SubscribeEvent
@@ -50,8 +53,7 @@ public class BiomeMusicManager {
             if (biomeSounds.containsKey(currentBiome)) {
                 player.connection.send(new ClientboundStopSoundPacket(null, SoundSource.MUSIC));
 
-                player.level().playSound(null, player.getX(), player.getY(), player.getZ(),
-                        biomeSounds.get(currentBiome), SoundSource.MUSIC,
+                player.playNotifySound(biomeSounds.get(currentBiome),SoundSource.MUSIC,
                         1.0F, 1.0F);
             }
         }
