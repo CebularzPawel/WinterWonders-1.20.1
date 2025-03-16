@@ -1,16 +1,9 @@
 {
-  "deprecophobia": {
+  "biome_music": {
     "sounds": [
       {
-        "name": "ancientcurses:deprecophobia",
+        "name": "winterwonders:biome_music",
         "stream": true
-      }
-    ]
-  },
-  "gem_place": {
-    "sounds": [
-      {
-        "name": "ancientcurses:gem_place"
       }
     ]
   }

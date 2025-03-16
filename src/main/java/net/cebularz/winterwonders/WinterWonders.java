@@ -3,6 +3,7 @@ package net.cebularz.winterwonders;
 import com.mojang.logging.LogUtils;
 import net.cebularz.winterwonders.network.ModNetworking;
 import net.cebularz.winterwonders.particle.ModParticles;
+import net.cebularz.winterwonders.worldgen.biome.BiomeMusicManager;
 import net.minecraft.client.renderer.ItemBlockRenderTypes;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.world.entity.SpawnPlacements;
@@ -48,8 +49,10 @@ public class WinterWonders {
         modEventBus.addListener(this::commonSetup);
         ModTrunkPlacers.register(modEventBus);
         ModFoliagePlacers.register(modEventBus);
+        ModSongs.REGISTRAR.register(modEventBus);
         TerraInit.register();
         MinecraftForge.EVENT_BUS.register(this);
+        new BiomeMusicManager();
         modEventBus.addListener(this::addCreative);
     }
 
