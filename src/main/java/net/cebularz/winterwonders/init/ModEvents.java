@@ -1,19 +1,13 @@
 package net.cebularz.winterwonders.init;
 
-import com.mojang.authlib.minecraft.client.MinecraftClient;
+import net.cebularz.winterwonders.client.renderer.util.ParticleSpawnQueue;
 import net.cebularz.winterwonders.network.ModNetworking;
 import net.cebularz.winterwonders.network.packets.SendParticlesS2C;
-import net.cebularz.winterwonders.worldgen.biome.WinterFrostBiome;
-import net.minecraft.client.Minecraft;
 import net.minecraft.core.BlockPos;
-import net.minecraft.core.Holder;
 import net.minecraft.core.particles.BlockParticleOption;
 import net.minecraft.core.particles.ParticleOptions;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.nbt.CompoundTag;
-import net.minecraft.resources.ResourceLocation;
-import net.minecraft.server.level.ServerPlayer;
-import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.util.RandomSource;
@@ -23,10 +17,8 @@ import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.monster.Zombie;
 import net.minecraft.world.entity.monster.ZombieVillager;
-import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.biome.Biome;
-import net.minecraft.world.level.biome.Biomes;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraftforge.event.TickEvent;
 import net.minecraftforge.event.entity.living.LivingDamageEvent;
@@ -37,8 +29,6 @@ import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.cebularz.winterwonders.WinterWonders;
 import net.cebularz.winterwonders.entity.custom.RevenantEntity;
-
-import java.util.UUID;
 
 @Mod.EventBusSubscriber(modid = WinterWonders.MOD_ID)
 public class ModEvents {
@@ -158,5 +148,10 @@ public class ModEvents {
                         xSpeed, ySpeed, zSpeed), hurtEntity);
             }
         }
+    }
+
+    @SubscribeEvent
+    public static void onClientTick(TickEvent.ClientTickEvent event) {
+        ParticleSpawnQueue.tick();
     }
 }

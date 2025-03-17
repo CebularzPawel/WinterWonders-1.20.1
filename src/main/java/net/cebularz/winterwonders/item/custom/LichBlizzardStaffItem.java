@@ -1,19 +1,22 @@
 package net.cebularz.winterwonders.item.custom;
 
 import net.cebularz.winterwonders.client.CameraEngine;
+import net.cebularz.winterwonders.client.renderer.util.ParticleSpawnQueue;
 import net.cebularz.winterwonders.client.shaders.blizzard.BlizzardRenderer;
 import net.cebularz.winterwonders.entity.custom.LichEntity;
 import net.cebularz.winterwonders.entity.custom.projectile.ChillingSnowballEntity;
 import net.cebularz.winterwonders.entity.custom.projectile.IceCubeEntity;
 import net.cebularz.winterwonders.init.ModEntities;
 import net.cebularz.winterwonders.item.custom.impl.IStaffItem;
+import net.cebularz.winterwonders.network.ModNetworking;
+import net.cebularz.winterwonders.network.packets.SendParticlesS2C;
+import net.cebularz.winterwonders.particle.ModParticles;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.server.TickTask;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
-import net.minecraft.util.Mth;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffects;
@@ -390,109 +393,69 @@ public class LichBlizzardStaffItem extends Item implements IStaffItem {
     }
 
     public void executeWhirlwindAttack(LivingEntity target) {
-        if (caster == null || caster.level() == null) return;
-
+        if (caster == null) {
+            return;
+        }
         Level level = caster.level();
         if (!(level instanceof ServerLevel serverLevel)) return;
 
-        int duration = 60;
-        double pushStrength = 0.3;
+        for (int i = 0; i < 4; i++) {
+            serverLevel.sendParticles(
+                    ParticleTypes.SNOWFLAKE,
+                    caster.getX(), (caster.getY() + caster.getBbHeight() / 2), caster.getZ(),
+                    20, 1.0, 0.5, 1.0, 0.2
+            );
+        }
 
-        serverLevel.sendParticles(
-                ParticleTypes.CLOUD,
-                caster.getX(), caster.getY() + 1, caster.getZ(),
-                20, 1.0, 0.5, 1.0, 0.2
-        );
+        double maxRadius = 5.0;
+        long startTime = System.currentTimeMillis();
+        int totalDegrees = 360;
+        double rotationSpeed = Math.toRadians(totalDegrees);
+        int stepAdvanceInterval = 3;
+        int minParticles = 1;
+        int maxParticles = 24;
 
-        for (int tick = 0; tick < duration; tick += 2) {
-            final int currentTick = tick;
-            serverLevel.getServer().tell(new TickTask(
-                    serverLevel.getServer().getTickCount() + tick,
-                    () -> {
-                        float angle = (float) (currentTick * 0.2);
-                        float xForce = Mth.sin(angle) * (float)pushStrength;
-                        float zForce = Mth.cos(angle) * (float)pushStrength;
+        for (int step = 0; step < totalDegrees; step += stepAdvanceInterval) {
+            int delay = step * stepAdvanceInterval;
+            int finalStep = step;
+            ParticleSpawnQueue.schedule(delay, () -> {
+                double timeElapsed = (System.currentTimeMillis() - startTime) / 1000.0;
+                double particleAngle = Math.toRadians(finalStep) + rotationSpeed * timeElapsed;
+                double progress = Math.min(1.0, timeElapsed / ((double) (totalDegrees * stepAdvanceInterval) / 1000.0));
+                double newRadius = maxRadius * progress;
+                double x = caster.getX() + Math.sin(particleAngle) * newRadius;
+                double y = caster.getY() + (timeElapsed * 5);
+                double z = caster.getZ() + Math.cos(particleAngle) * newRadius;
 
-                        double radius = 5.0;
+                int particleCount = (int) (minParticles + (maxParticles - minParticles) * progress);
+                double spread = 0.25 + (1.0 - 0.25) * progress;
+                for (int i = 0; i < particleCount; i++) {
+                    double particleX = x + (random.nextDouble() - 0.5) * spread;
+                    double particleY = caster.getY() + (random.nextDouble() - 0.5) * spread + (timeElapsed * 5);
+                    double particleZ = z + (random.nextDouble() - 0.5) * spread;
 
-                        for (int i = 0; i < 10; i++) {
-                            double particleAngle = Math.PI * 2 * (i / 10.0) + (currentTick * 0.1);
-                            double x = caster.getX() + Math.sin(particleAngle) * radius;
-                            double z = caster.getZ() + Math.cos(particleAngle) * radius;
+                    ModNetworking.sendToNear(new SendParticlesS2C(
+                            ModParticles.CHILLED_PARTICLES.get(),
+                            particleX, particleY, particleZ,
+                            0, 0, 0), caster);
+                }
 
-                            serverLevel.sendParticles(
-                                    ParticleTypes.CLOUD,
-                                    x, caster.getY() + 1, z,
-                                    1, 0.1, 0.1, 0.1, 0.2
-                            );
-                        }
+                AABB whirlwindArea = caster.getBoundingBox().inflate(maxRadius);
 
-                        AABB effectArea = new AABB(
-                                caster.getX() - radius, caster.getY(), caster.getZ() - radius,
-                                caster.getX() + radius, caster.getY() + 3, caster.getZ() + radius
-                        );
+                List<LivingEntity> targets = caster.level().getEntitiesOfClass(LivingEntity.class, whirlwindArea);
+                double attractionStrength = 0.02;
+                for (LivingEntity livingTargets : targets) {
+                    if (livingTargets != caster) {
+                        double dx = x - livingTargets.getX();
+                        double dy = y - livingTargets.getY();
+                        double dz = z - livingTargets.getZ();
 
-                        List<Entity> entities = serverLevel.getEntities(
-                                caster, effectArea, entity -> entity instanceof LivingEntity && entity != caster
-                        );
-
-                        for (Entity entity : entities) {
-                            if (entity instanceof LivingEntity victim) {
-                                double dx = entity.getX() - caster.getX();
-                                double dz = entity.getZ() - caster.getZ();
-                                double distSq = dx * dx + dz * dz;
-
-                                if (distSq > 0) {
-                                    double dist = Math.sqrt(distSq);
-                                    double nx = dx / dist;
-                                    double nz = dz / dist;
-
-                                    double pushX = (nx * 0.5 + xForce) * pushStrength;
-                                    double pushZ = (nz * 0.5 + zForce) * pushStrength;
-
-                                    victim.setDeltaMovement(
-                                            victim.getDeltaMovement().x + pushX,
-                                            victim.getDeltaMovement().y + 0.1,
-                                            victim.getDeltaMovement().z + pushZ
-                                    );
-
-                                    CameraEngine.getOrAssignEngine(((Player) victim)).shakeScreen(2,100,0.21F);
-
-                                    if (victim instanceof Player) {
-                                        ((Player) victim).fallDistance = 0;
-                                    }
-                                }
-                            }
-                        }
-
-                        if (currentTick % 10 == 0 && target.isAlive()) {
-                            for (int i = 0; i < 2; i++) {
-                                ChillingSnowballEntity snowball = new ChillingSnowballEntity(level, caster);
-
-                                double spawnAngle = random.nextDouble() * Math.PI * 2;
-                                double spawnX = caster.getX() + Math.sin(spawnAngle) * radius;
-                                double spawnY = caster.getY() + 1.5;
-                                double spawnZ = caster.getZ() + Math.cos(spawnAngle) * radius;
-
-                                snowball.setPos(spawnX, spawnY, spawnZ);
-
-                                Vec3 directionVec = target.position().subtract(snowball.position()).normalize();
-
-                                directionVec = directionVec.add(
-                                        random.nextGaussian() * 0.1,
-                                        random.nextGaussian() * 0.05 + 0.1,
-                                        random.nextGaussian() * 0.1
-                                ).normalize();
-
-                                snowball.setDeltaMovement(directionVec.scale(1.2));
-
-                                snowball.addTag("freezeSnowball");
-
-                                level.addFreshEntity(snowball);
-                            }
-                        }
+                        livingTargets.setDeltaMovement(livingTargets.getDeltaMovement().add(
+                                dx * attractionStrength, dy * attractionStrength, dz * attractionStrength));
+                        livingTargets.hurtMarked = true;
                     }
-            ));
+                }
+            });
         }
     }
 

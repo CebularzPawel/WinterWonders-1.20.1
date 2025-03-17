@@ -17,8 +17,7 @@ import org.slf4j.Logger;
 import java.util.UUID;
 
 @Mod.EventBusSubscriber(modid = WinterWonders.MOD_ID, bus = Mod.EventBusSubscriber.Bus.FORGE, value = Dist.CLIENT)
-public class CameraEngine
-{
+public class CameraEngine {
     private static final Object2ObjectOpenHashMap<UUID, CameraEngine> ENGINE = new Object2ObjectOpenHashMap<>();
     private static final float MAX_OFFSET = 0.5F;
     private static final float MAX_INTENSITY = 10.0F;
