@@ -4,6 +4,7 @@ import com.mojang.blaze3d.vertex.PoseStack;
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.entity.EntityRendererProvider;
 import net.minecraft.client.renderer.entity.MobRenderer;
+import net.minecraft.client.renderer.entity.layers.ItemInHandLayer;
 import net.minecraft.resources.ResourceLocation;
 import net.cebularz.winterwonders.WinterWonders;
 import net.cebularz.winterwonders.client.models.entity.PinginModel;
@@ -13,6 +14,7 @@ public class PinginRenderer extends MobRenderer<PinginEntity, PinginModel<Pingin
     private static ResourceLocation TEXTURE = new ResourceLocation(WinterWonders.MOD_ID, "textures/entity/pingin.png");
     public PinginRenderer(EntityRendererProvider.Context pContext) {
         super(pContext, new PinginModel<>(pContext.bakeLayer(PinginModel.PINGIN_LAYER)),0.5f);
+        this.addLayer(new ItemInHandLayer<>(this, pContext.getItemInHandRenderer()));
     }
 
     @Override

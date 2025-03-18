@@ -3,7 +3,7 @@
   "category": "misc",
   "pattern": [
     " FT",
-    " SF",
+    " RF",
     "L  "
   ],
   "key": {
@@ -13,8 +13,8 @@
     "F": {
       "item": "winterwonders:frost_essence"
     },
-    "S": {
-      "item": "minecraft:stick"
+    "R": {
+      "item": "winterwonders:brisk_rod"
     },
     "L": {
       "item": "minecraft:lapis_lazuli"

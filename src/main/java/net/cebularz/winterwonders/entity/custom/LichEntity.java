@@ -6,6 +6,9 @@ import net.cebularz.winterwonders.init.ModItems;
 import net.cebularz.winterwonders.item.custom.LichBlizzardStaffItem;
 import net.cebularz.winterwonders.item.custom.impl.IStaffItem;
 import net.minecraft.nbt.CompoundTag;
+import net.minecraft.network.syncher.EntityDataAccessor;
+import net.minecraft.network.syncher.EntityDataSerializers;
+import net.minecraft.network.syncher.SynchedEntityData;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.util.RandomSource;
@@ -30,11 +33,19 @@ import org.jetbrains.annotations.Nullable;
 public class LichEntity extends Monster implements IStaffHoldingMob, RangedAttackMob {
     private static final double MIN_RANGED_ATTACK_DISTANCE = 5.0D;
     private static final double MAX_RANGED_ATTACK_DISTANCE = 32.0D;
+    private static final EntityDataAccessor<Integer> CASTING_TICKS =
+            SynchedEntityData.defineId(LichEntity.class, EntityDataSerializers.INT);
 
     private int attackCooldown = 0;
 
     public LichEntity(EntityType<? extends Monster> pEntityType, Level pLevel) {
         super(pEntityType, pLevel);
+    }
+
+    @Override
+    protected void defineSynchedData() {
+        super.defineSynchedData();
+        this.entityData.define(CASTING_TICKS, 0);
     }
 
     public static AttributeSupplier.Builder createAttribute() {
@@ -43,7 +54,7 @@ public class LichEntity extends Monster implements IStaffHoldingMob, RangedAttac
                 .add(Attributes.ATTACK_KNOCKBACK, 1.2D)
                 .add(Attributes.ATTACK_SPEED, 0.89D)
                 .add(Attributes.ATTACK_DAMAGE, 5.0D)
-                .add(Attributes.MAX_HEALTH, 80.0D)
+                .add(Attributes.MAX_HEALTH, 120.0D)
                 .add(Attributes.ARMOR_TOUGHNESS, 1.5D)
                 .add(Attributes.ARMOR, 1.2D)
                 .add(Attributes.FOLLOW_RANGE, 32.0D);
@@ -67,6 +78,11 @@ public class LichEntity extends Monster implements IStaffHoldingMob, RangedAttac
     }
 
     @Override
+    public ItemStack getMainHandItem() {
+        return this.getItemBySlot(EquipmentSlot.MAINHAND);
+    }
+
+    @Override
     protected @NotNull PathNavigation createNavigation(Level pLevel) {
         GroundPathNavigation navigation = new GroundPathNavigation(this, pLevel);
         navigation.canOpenDoors();
@@ -80,6 +96,10 @@ public class LichEntity extends Monster implements IStaffHoldingMob, RangedAttac
         if (attackCooldown > 0) {
             attackCooldown--;
         }
+
+        if (getCastingSpellTicks() > 0) {
+            setCastingSpellTicks(getCastingSpellTicks() - 1);
+        }
     }
 
     public boolean isOnAttackCooldown() {
@@ -88,6 +108,18 @@ public class LichEntity extends Monster implements IStaffHoldingMob, RangedAttac
 
     public void setAttackCooldown(int cooldown) {
         this.attackCooldown = cooldown;
+    }
+
+    public boolean isCastingSpell(){
+        return getCastingSpellTicks() > 0;
+    }
+
+    public int getCastingSpellTicks() {
+        return this.entityData.get(CASTING_TICKS);
+    }
+
+    public void setCastingSpellTicks(int ticks) {
+        this.entityData.set(CASTING_TICKS, ticks);
     }
 
     public boolean isTargetInRangedAttackRange(LivingEntity target) {
@@ -104,7 +136,7 @@ public class LichEntity extends Monster implements IStaffHoldingMob, RangedAttac
         pSpawnData = super.finalizeSpawn(pLevel, pDifficulty, pReason, pSpawnData, pDataTag);
         ItemStack staffStack = new ItemStack(ModItems.LICH_BLIZZARD_STAFF.get());
         this.setItemSlot(EquipmentSlot.MAINHAND, staffStack);
-        System.out.println("Lich spawned with staff: " + !this.getMainHandItem().isEmpty());
+        //System.out.println("Lich spawned with staff: " + !this.getMainHandItem().isEmpty());
         return pSpawnData;
     }
 
@@ -117,6 +149,7 @@ public class LichEntity extends Monster implements IStaffHoldingMob, RangedAttac
     public void performRangedAttack(LivingEntity target, float distanceFactor) {
         IStaffItem staffItem = this.getStaffItem();
         if (staffItem instanceof LichBlizzardStaffItem lichStaff) {
+            setCastingSpellTicks(20);
             lichStaff.setCaster(this);
 
             double distance = this.distanceToSqr(target);

@@ -26,7 +26,10 @@ public class ModItems {
             DeferredRegister.create(ForgeRegistries.ITEMS, WinterWonders.MOD_ID);
 
     public static final RegistryObject<Item> FROST_ESSENCE = ITEMS.register("frost_essence",
-            () -> new Item(new Item.Properties().rarity(Rarity.UNCOMMON)));
+            () -> new Item(new Item.Properties().rarity(Rarity.COMMON)));
+
+    public static final RegistryObject<Item> BRISK_ROD = ITEMS.register("brisk_rod",
+            () -> new Item(new Item.Properties().rarity(Rarity.COMMON)));
 
     public static final RegistryObject<Item> TRUEICE_SHARD = ITEMS.register("trueice_shard",
             () -> new Item(new Item.Properties().rarity(Rarity.RARE)));
@@ -35,10 +38,10 @@ public class ModItems {
             () -> new Item(new Item.Properties().rarity(Rarity.EPIC)));
 
     public static final RegistryObject<Item> COLDSTEEL_SCRAP = ITEMS.register("coldsteel_scrap",
-            () -> new Item(new Item.Properties().rarity(Rarity.RARE)));
+            () -> new Item(new Item.Properties().rarity(Rarity.UNCOMMON)));
 
     public static final RegistryObject<Item> COLDSTEEL_INGOT = ITEMS.register("coldsteel_ingot",
-            () -> new Item(new Item.Properties().rarity(Rarity.RARE)));
+            () -> new Item(new Item.Properties().rarity(Rarity.UNCOMMON)));
 
     public static final RegistryObject<Item> COLDSTEEL_SWORD = ITEMS.register("coldsteel_sword",
             () -> new SwordItem(ModToolTiers.COLDSTEEL, 3, -2.4f, new Item.Properties().rarity(Rarity.RARE)));
@@ -89,7 +92,7 @@ public class ModItems {
             ()-> new ForgeSpawnEggItem(ModEntities.PINGIN,0x374859,0xFF914A,new Item.Properties()));
 
     public static final RegistryObject<Item> LICH_SPAWN_EGG = ITEMS.register("lich_spawn_egg",
-            ()-> new ForgeSpawnEggItem(ModEntities.LICH,0xBFEEF2,0xFFFFFF,new Item.Properties()));
+            ()-> new ForgeSpawnEggItem(ModEntities.LICH,0x393D44,0xF3B8FF,new Item.Properties()));
 
     public static final RegistryObject<Item> WONDER_TREE_SHROOM = ITEMS.register("wonder_tree_shroom",
             () -> new StandingAndWallBlockItem(ModBlocks.WONDER_TREE_SHROOM.get(), ModBlocks.WONDER_TREE_SHROOM_WALL.get(), new Item.Properties(), Direction.DOWN));

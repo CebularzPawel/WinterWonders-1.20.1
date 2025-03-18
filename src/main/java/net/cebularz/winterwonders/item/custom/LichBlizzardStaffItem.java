@@ -6,6 +6,7 @@ import net.cebularz.winterwonders.client.shaders.blizzard.BlizzardRenderer;
 import net.cebularz.winterwonders.entity.custom.LichEntity;
 import net.cebularz.winterwonders.entity.custom.projectile.ChillingSnowballEntity;
 import net.cebularz.winterwonders.entity.custom.projectile.IceCubeEntity;
+import net.cebularz.winterwonders.init.ModEffects;
 import net.cebularz.winterwonders.init.ModEntities;
 import net.cebularz.winterwonders.item.custom.impl.IStaffItem;
 import net.cebularz.winterwonders.network.ModNetworking;
@@ -164,7 +165,11 @@ public class LichBlizzardStaffItem extends Item implements IStaffItem {
     }
 
     public void executeTerrainAttack(LivingEntity target, boolean isCloseRange) {
-        if (caster == null || caster.level() == null) return;
+        if (caster == null) {
+            return;
+        } else {
+            caster.level();
+        }
 
         Level level = caster.level();
         ServerLevel serverLevel = level instanceof ServerLevel ? (ServerLevel) level : null;
@@ -209,7 +214,11 @@ public class LichBlizzardStaffItem extends Item implements IStaffItem {
 
 
     public void executeBlizzardAttack(LivingEntity target) {
-        if (caster == null || caster.level() == null) return;
+        if (caster == null) {
+            return;
+        } else {
+            caster.level();
+        }
 
         Level level = caster.level();
         if (!(level instanceof ServerLevel serverLevel)) return;
@@ -297,7 +306,11 @@ public class LichBlizzardStaffItem extends Item implements IStaffItem {
     }
 
     public void createIcySpikeFloor(LivingEntity target, int radius, float damage) {
-        if (caster == null || caster.level() == null) return;
+        if (caster == null) {
+            return;
+        } else {
+            caster.level();
+        }
 
         Level level = caster.level();
         ServerLevel serverLevel = level instanceof ServerLevel ? (ServerLevel) level : null;
@@ -315,9 +328,7 @@ public class LichBlizzardStaffItem extends Item implements IStaffItem {
 
                     serverLevel.getServer().tell(new TickTask(
                             serverLevel.getServer().getTickCount() + delay,
-                            () -> {
-                                createIceSpike(serverLevel, spikePos, damage);
-                            }
+                            () -> createIceSpike(serverLevel, spikePos, damage)
                     ));
                 }
             }
@@ -407,7 +418,7 @@ public class LichBlizzardStaffItem extends Item implements IStaffItem {
             );
         }
 
-        double maxRadius = 5.0;
+        double maxRadius = 6.0;
         long startTime = System.currentTimeMillis();
         int totalDegrees = 360;
         double rotationSpeed = Math.toRadians(totalDegrees);
@@ -443,7 +454,7 @@ public class LichBlizzardStaffItem extends Item implements IStaffItem {
                 AABB whirlwindArea = caster.getBoundingBox().inflate(maxRadius);
 
                 List<LivingEntity> targets = caster.level().getEntitiesOfClass(LivingEntity.class, whirlwindArea);
-                double attractionStrength = 0.02;
+                double attractionStrength = Math.max(0.02, 0.05 * progress);
                 for (LivingEntity livingTargets : targets) {
                     if (livingTargets != caster) {
                         double dx = x - livingTargets.getX();
@@ -453,6 +464,23 @@ public class LichBlizzardStaffItem extends Item implements IStaffItem {
                         livingTargets.setDeltaMovement(livingTargets.getDeltaMovement().add(
                                 dx * attractionStrength, dy * attractionStrength, dz * attractionStrength));
                         livingTargets.hurtMarked = true;
+
+                        if (!livingTargets.hasEffect(ModEffects.CHILLED.get())){
+                            livingTargets.addEffect(new MobEffectInstance(
+                                    ModEffects.CHILLED.get(),
+                                    300,
+                                    2
+                            ));
+                        } else if (livingTargets.hasEffect(ModEffects.CHILLED.get()) && livingTargets.getEffect(ModEffects.CHILLED.get()).getAmplifier() <= 2) {
+                            livingTargets.addEffect(new MobEffectInstance(
+                                    ModEffects.CHILLED.get(),
+                                    300,
+                                    2,
+                                    livingTargets.getEffect(ModEffects.CHILLED.get()).isAmbient(),
+                                    livingTargets.getEffect(ModEffects.CHILLED.get()).isVisible(),
+                                    livingTargets.getEffect(ModEffects.CHILLED.get()).showIcon()
+                            ));
+                        }
                     }
                 }
             });

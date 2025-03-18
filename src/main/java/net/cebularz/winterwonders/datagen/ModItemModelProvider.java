@@ -43,6 +43,7 @@ public class ModItemModelProvider extends ItemModelProvider {
     @Override
     protected void registerModels() {
         simpleItem(ModItems.FROST_ESSENCE);
+        simpleItem(ModItems.BRISK_ROD);
         simpleItem(ModItems.TRUEICE_SHARD);
         simpleItem(ModItems.FROZEN_HEART);
         simpleItem(ModItems.COLDSTEEL_SCRAP);

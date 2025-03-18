@@ -1,7 +1,5 @@
 {
   "creativetab.winterwonders_tab": "Winter Wonders",
-  "creativetab.winterwonders_item_tab": "Winter Wonders Item Tab",
-  "creativetab.winterwonders_block_tab": "Winter Wonders Block Tab",
 
   "effect.winterwonders.chilled": "Chilled",
   "effect.winterwonders.frozen": "Frozen",
@@ -67,6 +65,7 @@
   "block.winterwonders.myst_willow_sapling": "Myst Willow Sapling",
 
   "item.winterwonders.frost_essence": "Frost Essence",
+  "item.winterwonders.brisk_rod": "Brisk Rod",
   "item.winterwonders.trueice_shard": "True Ice Shard",
   "item.winterwonders.frozen_heart": "Frozen Heart",
   "item.winterwonders.coldsteel_scrap": "Coldsteel Scraps",
@@ -76,6 +75,7 @@
   "item.winterwonders.revenant_spawn_egg": "Revenant Spawn Egg",
   "item.winterwonders.brisk_spawn_egg": "Brisk Spawn Egg",
   "item.winterwonders.pingin_spawn_egg": "Pingin Spawn Egg",
+  "item.winterwonders.lich_spawn_egg": "Lich Spawn Egg",
 
   "item.winterwonders.coldsteel_sword": "Coldsteel Sword",
   "item.winterwonders.coldsteel_pickaxe": "Coldsteel Pickaxe",
@@ -87,6 +87,8 @@
   "item.winterwonders.coldsteel_chestplate": "Coldsteel Chestplate",
   "item.winterwonders.coldsteel_leggings": "Coldsteel Leggings",
   "item.winterwonders.coldsteel_boots": "Coldsteel Boots",
+
+  "item.winterwonders.puckerberry": "Puckerberry",
 
   "item.winterwonders.frostbite_wand": "Frostbite Wand",
   "item.winterwonders.blizzard_staff": "Blizzard Staff",

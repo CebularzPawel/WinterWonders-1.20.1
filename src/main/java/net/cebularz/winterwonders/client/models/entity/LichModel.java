@@ -4,6 +4,7 @@ import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
 import net.cebularz.winterwonders.WinterWonders;
 import net.cebularz.winterwonders.entity.custom.LichEntity;
+import net.minecraft.client.model.AnimationUtils;
 import net.minecraft.client.model.ArmedModel;
 import net.minecraft.client.model.HierarchicalModel;
 import net.minecraft.client.model.geom.ModelLayerLocation;
@@ -11,7 +12,10 @@ import net.minecraft.client.model.geom.ModelPart;
 import net.minecraft.client.model.geom.PartPose;
 import net.minecraft.client.model.geom.builders.*;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.util.Mth;
 import net.minecraft.world.entity.HumanoidArm;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.Items;
 
 public class LichModel<T extends LichEntity> extends HierarchicalModel<T> implements ArmedModel {
     public static final ModelLayerLocation LICH_LAYER = new ModelLayerLocation(new ResourceLocation(WinterWonders.MOD_ID, "lich"), "main");
@@ -118,7 +122,71 @@ public class LichModel<T extends LichEntity> extends HierarchicalModel<T> implem
 
     @Override
     public void setupAnim(T entity, float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch) {
+        this.head.yRot = netHeadYaw * ((float)Math.PI / 180F);
+        this.head.xRot = headPitch * ((float)Math.PI / 180F);
 
+        float swing = Mth.cos(limbSwing * 0.6662F) * 1.4F * limbSwingAmount;
+        float oppositeSwing = Mth.cos(limbSwing * 0.6662F + (float)Math.PI) * 1.4F * limbSwingAmount;
+
+        this.left_leg.xRot = swing;
+        this.right_leg.xRot = oppositeSwing;
+
+        this.left_arm.xRot = oppositeSwing * 0.5F;
+        this.right_arm.xRot = swing * 0.5F;
+
+        this.left_arm1.xRot = oppositeSwing * 0.5F;
+        this.right_arm1.xRot = swing * 0.5F;
+
+        this.right_arm2.xRot = 0.0f;
+        this.left_arm2.xRot = 0.0f;
+
+        this.right_arm3.xRot = 0.0f;
+        this.left_arm3.xRot = 0.0f;
+
+        this.left_arm.zRot = 0.0f;
+        this.right_arm.zRot = 0.0f;
+
+        this.left_arm1.zRot = 0.0f;
+        this.right_arm1.zRot = 0.0f;
+
+        this.right_arm2.zRot = 0.0f;
+        this.left_arm2.zRot = 0.0f;
+
+        this.right_arm3.zRot = 0.0f;
+        this.left_arm3.zRot = 0.0f;
+
+        this.body.yRot = 0.0F;
+        this.body.xRot = Mth.cos(limbSwing * 0.6662F) * 0.05F * limbSwingAmount;
+
+        if (entity.isCastingSpell()) {
+            float baseXRot = -1.5f;
+            float baseZRot = 0.4f;
+            float amplitude = 0.35f;
+            float castSpeed = 0.2f;
+            float angle = ageInTicks * castSpeed;
+            float offsetX = Mth.cos(angle) * amplitude;
+            float offsetZ = Mth.sin(angle) * amplitude;
+
+            this.right_arm.xRot = baseXRot + offsetX;
+            this.right_arm.zRot = -baseZRot + offsetZ;
+            this.left_arm.xRot = baseXRot - offsetX;
+            this.left_arm.zRot = baseZRot - offsetZ;
+
+            this.right_arm1.xRot = baseXRot + offsetX;
+            this.right_arm1.zRot = -baseZRot + offsetZ;
+            this.left_arm1.xRot = baseXRot - offsetX;
+            this.left_arm1.zRot = baseZRot - offsetZ;
+
+            this.right_arm2.xRot = baseXRot + offsetX;
+            this.right_arm2.zRot = -baseZRot + offsetZ;
+            this.left_arm2.xRot = baseXRot - offsetX;
+            this.left_arm2.zRot = baseZRot -offsetZ;
+
+            this.right_arm3.xRot = baseXRot + offsetX;
+            this.right_arm3.zRot = -baseZRot + offsetZ;
+            this.left_arm3.xRot = baseXRot - offsetX;
+            this.left_arm3.zRot = baseZRot - offsetZ;
+        }
     }
 
     @Override
