@@ -336,10 +336,10 @@ public class LichBlizzardStaffItem extends Item implements IStaffItem {
                                 );
 
                                 for (Entity entity : entities) {
-                                    if (entity instanceof LivingEntity victim) {
+                                    if (entity instanceof Player victim) {
                                         victim.hurt(victim.damageSources().indirectMagic(caster, caster), 4.0f);
                                         victim.addEffect(new MobEffectInstance(MobEffects.MOVEMENT_SLOWDOWN, 100, 2));
-                                        CameraEngine.getOrAssignEngine((Player) victim).shakeScreen(3,100,0.23F);
+                                        CameraEngine.getOrAssignEngine(victim).shakeScreen(3,100,0.23F);
                                     }
                                 }
                             }

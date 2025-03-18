@@ -3,11 +3,13 @@ package net.cebularz.winterwonders.client.events;
 import com.google.common.collect.ImmutableList;
 import net.cebularz.winterwonders.client.models.entity.LichModel;
 import net.cebularz.winterwonders.client.renderer.FrozenRenderer;
+import net.cebularz.winterwonders.client.renderer.LichBossBar;
 import net.cebularz.winterwonders.client.renderer.block.IceCubeRenderer;
 import net.cebularz.winterwonders.client.renderer.entity.*;
 import net.cebularz.winterwonders.entity.custom.*;
 import net.cebularz.winterwonders.particle.ModParticles;
 import net.cebularz.winterwonders.particle.particles.ChilledParticles;
+import net.minecraft.client.Minecraft;
 import net.minecraft.client.model.EntityModel;
 import net.minecraft.client.renderer.entity.EntityRenderer;
 import net.minecraft.client.renderer.entity.EntityRenderers;
@@ -18,6 +20,7 @@ import net.minecraft.world.entity.ai.attributes.DefaultAttributes;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.client.event.EntityRenderersEvent;
 import net.minecraftforge.client.event.RegisterParticleProvidersEvent;
+import net.minecraftforge.client.event.RenderGuiOverlayEvent;
 import net.minecraftforge.event.entity.EntityAttributeCreationEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
@@ -114,4 +117,6 @@ public class ModBusEvents {
         event.registerSpriteSet(ModParticles.CHILLED_PARTICLES.get(),
                 ChilledParticles.Provider::new);
     }
+
+
 }

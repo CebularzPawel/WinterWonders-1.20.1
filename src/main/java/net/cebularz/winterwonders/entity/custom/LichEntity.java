@@ -8,6 +8,7 @@ import net.cebularz.winterwonders.item.custom.LichBlizzardStaffItem;
 import net.cebularz.winterwonders.item.custom.impl.IStaffItem;
 import net.cebularz.winterwonders.network.ModNetworking;
 import net.cebularz.winterwonders.network.packets.FrozenDataS2C;
+import net.cebularz.winterwonders.network.packets.LichBossDataS2C;
 import net.cebularz.winterwonders.network.packets.SendParticlesS2C;
 import net.cebularz.winterwonders.spells.SpellScheduler;
 import net.minecraft.core.particles.BlockParticleOption;
@@ -205,6 +206,11 @@ public class LichEntity extends Monster implements IStaffHoldingMob, RangedAttac
                     spawnMinions();
                 }
             }
+        }
+
+        if (!this.level().isClientSide) {
+            float healthPercentage = this.getHealth() / this.getMaxHealth();
+            ModNetworking.sendToNear(new LichBossDataS2C(this.getId(), healthPercentage),this);
         }
     }
 

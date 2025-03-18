@@ -99,5 +99,7 @@
 
   "death.attack.frost": "%s froze to death",
   "death.attack.frost.item": "%s was frozen by %s using %s",
-  "death.attack.frost.player": "%s's frozen body shattered whilst trying to escape %s"
+  "death.attack.frost.player": "%s's frozen body shattered whilst trying to escape %s",
+
+  "boss.winterwonders.lich": "The Lich"
 }

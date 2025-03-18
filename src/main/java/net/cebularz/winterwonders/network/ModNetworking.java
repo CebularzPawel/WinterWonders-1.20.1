@@ -1,8 +1,10 @@
 package net.cebularz.winterwonders.network;
 
 import net.cebularz.winterwonders.WinterWonders;
+import net.cebularz.winterwonders.client.data.LichBossData;
 import net.cebularz.winterwonders.network.packets.FrozenDataC2S;
 import net.cebularz.winterwonders.network.packets.FrozenDataS2C;
+import net.cebularz.winterwonders.network.packets.LichBossDataS2C;
 import net.cebularz.winterwonders.network.packets.SendParticlesS2C;
 import net.minecraft.client.Minecraft;
 import net.minecraft.resources.ResourceLocation;
@@ -45,6 +47,12 @@ public class ModNetworking {
                 .decoder(FrozenDataC2S::new)
                 .encoder(FrozenDataC2S::toBytes)
                 .consumerMainThread(FrozenDataC2S::handle)
+                .add();
+
+        net.messageBuilder(LichBossDataS2C.class, id(), NetworkDirection.PLAY_TO_CLIENT)
+                .decoder(LichBossDataS2C::new)
+                .encoder(LichBossDataS2C::toBytes)
+                .consumerMainThread(LichBossDataS2C::handle)
                 .add();
     }
 
