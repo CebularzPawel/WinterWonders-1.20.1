@@ -15,10 +15,12 @@ public class ParticleSpawnQueue {
     public static void tick() {
         long now = System.currentTimeMillis();
         List<ScheduledParticleSpawn> snapshot = new ArrayList<>(queue);
-        for (ScheduledParticleSpawn spawn : snapshot) {
-            if (spawn.scheduledTime <= now) {
-                spawn.spawnTask.run();
-                queue.remove(spawn);
+        if (!snapshot.isEmpty()) {
+            for (ScheduledParticleSpawn spawn : snapshot) {
+                if (spawn.scheduledTime <= now) {
+                    spawn.spawnTask.run();
+                    queue.remove(spawn);
+                }
             }
         }
     }

@@ -11,16 +11,15 @@ import net.minecraft.world.entity.Mob;
 import net.minecraft.world.entity.ai.attributes.AttributeMap;
 import net.minecraft.world.entity.ai.attributes.AttributeModifier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
-import net.cebularz.winterwonders.init.ModDamageSources;
 import net.cebularz.winterwonders.init.ModEffects;
 import net.cebularz.winterwonders.util.AttributeModifierUtil;
 import net.minecraft.world.entity.player.Player;
 
-import java.util.function.Supplier;
-
 
 public class ChilledEffect extends MobEffect {
-    private final String attributeModifierName = "chilled_movement_speed";
+    private final String moveSpeedAttributeName = "chilled_movement_speed";
+    private final String attackSpeedAttributeName = "chilled_attack_speed";
+    private final String attackAttributeName = "chilled_attack";
     public ChilledEffect(MobEffectCategory mobEffectCategory, int color) {
         super(mobEffectCategory, color);
     }
@@ -59,7 +58,19 @@ public class ChilledEffect extends MobEffect {
                 AttributeModifierUtil.applyPermanentModifier(
                         mob,
                         Attributes.MOVEMENT_SPEED,
-                        attributeModifierName,
+                        moveSpeedAttributeName,
+                        -0.125 * (1 + pAmplifier),
+                        AttributeModifier.Operation.MULTIPLY_TOTAL);
+                AttributeModifierUtil.applyPermanentModifier(
+                        mob,
+                        Attributes.MOVEMENT_SPEED,
+                        attackSpeedAttributeName,
+                        -0.125 * (1 + pAmplifier),
+                        AttributeModifier.Operation.MULTIPLY_TOTAL);
+                AttributeModifierUtil.applyPermanentModifier(
+                        mob,
+                        Attributes.MOVEMENT_SPEED,
+                        attackAttributeName,
                         -0.125 * (1 + pAmplifier),
                         AttributeModifier.Operation.MULTIPLY_TOTAL);
             }
@@ -68,12 +79,22 @@ public class ChilledEffect extends MobEffect {
                 AttributeModifierUtil.applyPermanentModifier(
                         player,
                         Attributes.MOVEMENT_SPEED,
-                        attributeModifierName,
+                        moveSpeedAttributeName,
+                        -0.2 * (1 + pAmplifier),
+                        AttributeModifier.Operation.MULTIPLY_TOTAL);
+                AttributeModifierUtil.applyPermanentModifier(
+                        player,
+                        Attributes.ATTACK_SPEED,
+                        attackSpeedAttributeName,
+                        -0.2 * (1 + pAmplifier),
+                        AttributeModifier.Operation.MULTIPLY_TOTAL);
+                AttributeModifierUtil.applyPermanentModifier(
+                        player,
+                        Attributes.ATTACK_DAMAGE,
+                        attackAttributeName,
                         -0.2 * (1 + pAmplifier),
                         AttributeModifier.Operation.MULTIPLY_TOTAL);
             }
-
-           //ModDamageSources.hurtWithColdDamage(pLivingEntity, null, 0.05f * (1 + pAmplifier));
 
             if (pAmplifier > 3){
                 pLivingEntity.removeEffect(ModEffects.CHILLED.get());
@@ -94,7 +115,15 @@ public class ChilledEffect extends MobEffect {
         AttributeModifierUtil.removeModifier(
                 pLivingEntity,
                 Attributes.MOVEMENT_SPEED,
-                attributeModifierName);
+                moveSpeedAttributeName);
+        AttributeModifierUtil.removeModifier(
+                pLivingEntity,
+                Attributes.ATTACK_SPEED,
+                attackSpeedAttributeName);
+        AttributeModifierUtil.removeModifier(
+                pLivingEntity,
+                Attributes.ATTACK_DAMAGE,
+                attackAttributeName);
     }
 }
 

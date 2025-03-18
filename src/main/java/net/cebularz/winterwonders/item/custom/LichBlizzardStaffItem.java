@@ -6,6 +6,7 @@ import net.cebularz.winterwonders.client.shaders.blizzard.BlizzardRenderer;
 import net.cebularz.winterwonders.entity.custom.LichEntity;
 import net.cebularz.winterwonders.entity.custom.projectile.ChillingSnowballEntity;
 import net.cebularz.winterwonders.entity.custom.projectile.IceCubeEntity;
+import net.cebularz.winterwonders.entity.custom.projectile.IceSpikeProjectileEntity;
 import net.cebularz.winterwonders.init.ModEffects;
 import net.cebularz.winterwonders.init.ModEntities;
 import net.cebularz.winterwonders.item.custom.impl.IStaffItem;
@@ -80,44 +81,105 @@ public class LichBlizzardStaffItem extends Item implements IStaffItem {
         return false;
     }
 
-    public void executeProjectileAttack(LivingEntity target, int variant) {
-        if (caster == null || caster.level() == null) return;
+    public void executeSnowballVolley(LivingEntity target) {
+        if (caster == null) {
+            return;
+        } else {
+            caster.level();
+        }
 
         Level level = caster.level();
+        if (!(level instanceof ServerLevel serverLevel)) return;
 
         for (int i = 0; i < 3; i++) {
-            ChillingSnowballEntity snowball = new ChillingSnowballEntity(level, caster);
+            int delayMillis = i * (50 * 10);
+            caster.getSpellScheduler().schedule(delayMillis, () -> {
+                int chillAmplifier = 0;
+                int damagePercent = 5;
+                double accuracyModifier = 0.15;
+                if (caster.getHealth() < (caster.getMaxHealth() / 2)) {
+                    chillAmplifier = 2;
+                    damagePercent = 10;
+                    accuracyModifier = 0;
+                }
 
-            double offsetX = random.nextGaussian() * 0.2;
-            double offsetY = random.nextGaussian() * 0.1;
-            double offsetZ = random.nextGaussian() * 0.2;
+                ChillingSnowballEntity snowball = new ChillingSnowballEntity(level, caster, chillAmplifier, true, damagePercent);
 
-            Vec3 directionVec = target.position().subtract(caster.position()).normalize();
+                double offsetX = random.nextGaussian() * accuracyModifier;
+                double offsetY = target.getBbHeight() / 2;
+                double offsetZ = random.nextGaussian() * accuracyModifier;
 
-            snowball.setDeltaMovement(
-                    directionVec.x + offsetX,
-                    directionVec.y + 0.1 + offsetY,
-                    directionVec.z + offsetZ
-            );
+                Vec3 adjustedTargetPos = new Vec3(
+                        target.getX() + offsetX,
+                        target.getY() + offsetY,
+                        target.getZ() + offsetZ
+                );
 
-            snowball.setDeltaMovement(snowball.getDeltaMovement().scale(1.5));
+                Vec3 directionVec = adjustedTargetPos.subtract(caster.position()).normalize();
+                snowball.setDeltaMovement(directionVec.scale(1.5));
 
-            snowball.addTag("freezeSnowball");
+                level.addFreshEntity(snowball);
 
-            level.addFreshEntity(snowball);
-
-            if (level instanceof ServerLevel serverLevel) {
                 serverLevel.sendParticles(
                         ParticleTypes.SNOWFLAKE,
                         caster.getX(), caster.getY() + 1.5, caster.getZ(),
                         10, 0.2, 0.2, 0.2, 0.1
                 );
-            }
+            });
+        }
+    }
+
+    public void executeIceSpikeVolley(LivingEntity target) {
+        if (caster == null) {
+            return;
+        } else {
+            caster.level();
+        }
+
+        Level level = caster.level();
+        if (!(level instanceof ServerLevel serverLevel)) return;
+
+        for (int i = 0; i < 3; i++) {
+            int delayMillis = i * (50 * 10);
+            caster.getSpellScheduler().schedule(delayMillis, () -> {
+                int damagePercent = 10;
+                boolean homing = false;
+                if (caster.getHealth() < (caster.getMaxHealth() / 2)) {
+                    damagePercent = 20;
+                    homing = true;
+                }
+
+                IceSpikeProjectileEntity iceSpike = new IceSpikeProjectileEntity(level, caster, (float) damagePercent / 100, homing);
+                iceSpike.setHomingTarget(target);
+
+                double offsetY = target.getBbHeight() / 2;
+
+                Vec3 adjustedTargetPos = new Vec3(
+                        target.getX(),
+                        target.getY() + offsetY,
+                        target.getZ()
+                );
+
+                Vec3 directionVec = adjustedTargetPos.subtract(caster.position()).normalize();
+                iceSpike.setDeltaMovement(directionVec.scale(1.5));
+
+                level.addFreshEntity(iceSpike);
+
+                serverLevel.sendParticles(
+                        ModParticles.CHILLED_PARTICLES.get(),
+                        caster.getX(), caster.getY() + 1.5, caster.getZ(),
+                        20, 0.2, 0.2, 0.2, 0.1
+                );
+            });
         }
     }
 
     public void executeSpecialAttack(LivingEntity target) {
-        if (caster == null || caster.level() == null) return;
+        if (caster == null) {
+            return;
+        } else {
+            caster.level();
+        }
 
         Level level = caster.level();
 
@@ -403,10 +465,11 @@ public class LichBlizzardStaffItem extends Item implements IStaffItem {
         }
     }
 
-    public void executeWhirlwindAttack(LivingEntity target) {
+    public void executeWhirlwindAttack() {
         if (caster == null) {
             return;
         }
+
         Level level = caster.level();
         if (!(level instanceof ServerLevel serverLevel)) return;
 
@@ -456,7 +519,7 @@ public class LichBlizzardStaffItem extends Item implements IStaffItem {
                 List<LivingEntity> targets = caster.level().getEntitiesOfClass(LivingEntity.class, whirlwindArea);
                 double attractionStrength = Math.max(0.02, 0.05 * progress);
                 for (LivingEntity livingTargets : targets) {
-                    if (livingTargets != caster) {
+                    if (livingTargets != caster && !caster.isMinion(caster, livingTargets)) {
                         double dx = x - livingTargets.getX();
                         double dy = y - livingTargets.getY();
                         double dz = z - livingTargets.getZ();
@@ -488,7 +551,11 @@ public class LichBlizzardStaffItem extends Item implements IStaffItem {
     }
 
     public void createRotatingIceBlocks(LivingEntity lich, int blockCount, float duration) {
-        if (lich == null || lich.level() == null) return;
+        if (lich == null) {
+            return;
+        } else {
+            lich.level();
+        }
 
         Level level = lich.level();
         ServerLevel serverLevel = level instanceof ServerLevel ? (ServerLevel) level : null;

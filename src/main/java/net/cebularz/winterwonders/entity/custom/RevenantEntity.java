@@ -133,7 +133,7 @@ public class RevenantEntity extends Zombie {
         );
     }
 
-    private static void equipRandomColdsteelWeapon(RevenantEntity revenantEntity, float dropChance) {
+    public static void equipRandomColdsteelWeapon(RevenantEntity revenantEntity, float dropChance) {
             if (revenantEntity.getRandom().nextBoolean()) {
                 revenantEntity.setItemSlot(
                         EquipmentSlot.MAINHAND,
@@ -148,7 +148,7 @@ public class RevenantEntity extends Zombie {
             revenantEntity.setDropChance(EquipmentSlot.MAINHAND, dropChance);
     }
 
-    private static void equipRandomColdsteelArmor(RevenantEntity revenantEntity) {
+    public static void equipRandomColdsteelArmor(RevenantEntity revenantEntity) {
         double armorChance = revenantEntity.getRandom().nextDouble();
         if (armorChance < 0.05) {
             equipIfEmpty(revenantEntity, EquipmentSlot.HEAD, ModItems.COLDSTEEL_HELMET.get(), 0.01F);

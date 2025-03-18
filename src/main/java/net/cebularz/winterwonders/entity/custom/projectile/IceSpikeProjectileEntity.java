@@ -17,21 +17,37 @@ import net.cebularz.winterwonders.init.ModEffects;
 import net.cebularz.winterwonders.init.ModEntities;
 
 public class IceSpikeProjectileEntity extends AbstractArrow {
+    private final float damageAmount;
+    private final boolean homing;
+    private LivingEntity homingTarget;
     public IceSpikeProjectileEntity(EntityType<? extends AbstractArrow> pEntityType, Level pLevel) {
         super(pEntityType, pLevel);
+        this.damageAmount = 0.05f;
+        this.homing = false;
     }
 
     public IceSpikeProjectileEntity(Level pLevel){
         super(ModEntities.ICE_SPIKE.get(), pLevel);
+        this.damageAmount = 0.05f;
+        this.homing = false;
     }
 
     public IceSpikeProjectileEntity(Level pLevel, LivingEntity pLivingEntity){
         super(ModEntities.ICE_SPIKE.get(), pLivingEntity, pLevel);
+        this.damageAmount = 0.05f;
+        this.homing = false;
+    }
+
+    public IceSpikeProjectileEntity(Level pLevel, LivingEntity pLivingEntity, float damageAmount, boolean homing) {
+        super(ModEntities.ICE_SPIKE.get(), pLivingEntity, pLevel);
+        this.damageAmount = damageAmount;
+        this.homing = homing;
     }
 
     @Override
     public void tick() {
         super.tick();
+
         if (this.level().isClientSide){
             for(int particles = 0; particles < 1; ++particles) {
                 this.level().addParticle(
@@ -44,6 +60,16 @@ public class IceSpikeProjectileEntity extends AbstractArrow {
                         0.0F);
             }
         }
+
+        if (homing && homingTarget != null && !homingTarget.isRemoved()) {
+            Vec3 currentPos = this.position();
+            Vec3 targetPos = homingTarget.position().add(0, homingTarget.getBbHeight() / 2.0, 0);
+            Vec3 desiredDir = targetPos.subtract(currentPos).normalize();
+            Vec3 currentMotion = this.getDeltaMovement();
+            Vec3 homingMotion = currentMotion.scale(0.65).add(desiredDir.scale(0.35));
+            this.setDeltaMovement(homingMotion.normalize().scale(currentMotion.length()));
+            this.hurtMarked = true;
+        }
     }
 
     @Override
@@ -52,13 +78,15 @@ public class IceSpikeProjectileEntity extends AbstractArrow {
         Entity ownerEntity = getOwner();
         if (hitEntity != ownerEntity) {
             if (hitEntity instanceof LivingEntity livingEntity) {
+                float finalDamage;
                 if (livingEntity.hasEffect(ModEffects.CHILLED.get())) {
                     int chilledAmplifier = livingEntity.getEffect(ModEffects.CHILLED.get()).getAmplifier() + 1;
                     //System.out.println("Hit target with " + chilledAmplifier + "Chilled");
-                    ModDamageSources.hurtWithFrostDamage(livingEntity, getOwner(), 0.05f * chilledAmplifier);
+                    finalDamage = damageAmount * chilledAmplifier;
                 } else {
-                    ModDamageSources.hurtWithFrostDamage(livingEntity, getOwner(), 0.05f);
+                    finalDamage = damageAmount;
                 }
+                ModDamageSources.hurtWithFrostDamage(livingEntity, getOwner(), finalDamage);
             }
 
             this.level().playSound(
@@ -86,7 +114,7 @@ public class IceSpikeProjectileEntity extends AbstractArrow {
 
         Vec3 vec3 = pResult.getLocation().subtract(this.getX(), this.getY(), this.getZ());
         this.setDeltaMovement(vec3);
-        Vec3 vec31 = vec3.normalize().scale((double)0.05F);
+        Vec3 vec31 = vec3.normalize().scale(0.05F);
         this.setPosRaw(this.getX() - vec31.x, this.getY() - vec31.y, this.getZ() - vec31.z);
         this.inGround = true;
         this.shakeTime = 7;
@@ -104,5 +132,9 @@ public class IceSpikeProjectileEntity extends AbstractArrow {
     @Override
     protected ItemStack getPickupItem() {
         return null;
+    }
+
+    public void setHomingTarget(LivingEntity target) {
+        this.homingTarget = target;
     }
 }

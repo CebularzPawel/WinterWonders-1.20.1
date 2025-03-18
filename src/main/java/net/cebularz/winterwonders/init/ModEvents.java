@@ -3,6 +3,7 @@ package net.cebularz.winterwonders.init;
 import net.cebularz.winterwonders.client.renderer.util.ParticleSpawnQueue;
 import net.cebularz.winterwonders.network.ModNetworking;
 import net.cebularz.winterwonders.network.packets.SendParticlesS2C;
+import net.cebularz.winterwonders.spells.SpellScheduler;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.particles.BlockParticleOption;
 import net.minecraft.core.particles.ParticleOptions;
@@ -107,7 +108,7 @@ public class ModEvents {
             hurtEntity.removeEffect(frozenEffect);
             float entityMaxHealth = hurtEntity.getMaxHealth();
             int maxDamage = 10;
-            System.out.println("Dealing " + maxDamage + " damage to " + hurtEntity);
+            //System.out.println("Dealing " + maxDamage + " damage to " + hurtEntity);
             hurtEntity.hurt(
                     ModDamageSources.frostDamage(
                             hurtEntity.level(),
@@ -125,7 +126,7 @@ public class ModEvents {
                     0.4f / (hurtEntity.level().getRandom().nextFloat() * 0.4f + 0.8f)
             );
             double entitySize = hurtEntity.getBbHeight() * hurtEntity.getBbWidth();
-            System.out.println("Spawning " + (entitySize * 60) + " particles for " + hurtEntity.getName());
+            //System.out.println("Spawning " + (entitySize * 60) + " particles for " + hurtEntity.getName());
             RandomSource random = hurtEntity.level().getRandom();
             int count = (int) (entitySize * 60);
             for (int i = 0; i < count; i++) {

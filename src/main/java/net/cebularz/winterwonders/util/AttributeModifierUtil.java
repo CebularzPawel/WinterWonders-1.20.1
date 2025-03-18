@@ -17,8 +17,9 @@ public class AttributeModifierUtil {
         UUID uuid = generateUUIDFromName(name);
         AttributeInstance attributeInstance = livingEntity.getAttribute(attribute);
         if (attributeInstance != null) {
-            if (attributeInstance.getModifier(uuid) != null) {
-                attributeInstance.removeModifier(uuid);
+            AttributeModifier existingModifier = attributeInstance.getModifier(uuid);
+            if (existingModifier != null) {
+                attributeInstance.removeModifier(existingModifier);
             }
             attributeInstance.addPermanentModifier(new AttributeModifier(uuid, name, value, operation));
         }
@@ -28,8 +29,9 @@ public class AttributeModifierUtil {
         UUID uuid = generateUUIDFromName(name);
         AttributeInstance attributeInstance = livingEntity.getAttribute(attribute);
         if (attributeInstance != null) {
-            if (attributeInstance.getModifier(uuid) != null) {
-                attributeInstance.removeModifier(uuid);
+            AttributeModifier existingModifier = attributeInstance.getModifier(uuid);
+            if (existingModifier != null) {
+                attributeInstance.removeModifier(existingModifier);
             }
             attributeInstance.addTransientModifier(new AttributeModifier(uuid, name, value, operation));
         }
