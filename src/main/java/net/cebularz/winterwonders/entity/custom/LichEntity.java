@@ -2,6 +2,7 @@ package net.cebularz.winterwonders.entity.custom;
 
 import net.cebularz.winterwonders.entity.ai.LichStaffAttackGoal;
 import net.cebularz.winterwonders.entity.custom.base.IStaffHoldingMob;
+import net.cebularz.winterwonders.init.ModEffects;
 import net.cebularz.winterwonders.init.ModEntities;
 import net.cebularz.winterwonders.init.ModItems;
 import net.cebularz.winterwonders.item.custom.LichBlizzardStaffItem;
@@ -134,6 +135,12 @@ public class LichEntity extends Monster implements IStaffHoldingMob, RangedAttac
             triggerIceBlock();
         }
 
+        if (this.tickCount % 20 == 0){
+            if (this.getHealth() < this.getMaxHealth()) {
+                heal(1);
+            }
+        }
+
         if (iceBlockActive) {
             this.setDeltaMovement(Vec3.ZERO);
             this.getNavigation().stop();
@@ -263,16 +270,21 @@ public class LichEntity extends Monster implements IStaffHoldingMob, RangedAttac
 
     @Override
     public void performRangedAttack(LivingEntity target, float distanceFactor) {
+        castSpell(target);
+        if (this.getHealth() / this.getMaxHealth() <= 0.5) {
+            castSpell(target);
+        }
+    }
+
+    private void castSpell(LivingEntity target){
         IStaffItem staffItem = this.getStaffItem();
         if (staffItem instanceof LichBlizzardStaffItem lichStaff) {
-            setCastingSpellTicks(20);
             lichStaff.setCaster(this);
 
             double distance = this.distanceToSqr(target);
             float healthPercentage = this.getHealth() / this.getMaxHealth() * 100f;
 
             LichStaffAttackGoal.AttackType attackType = selectAttackType(distance, healthPercentage);
-
             executeAttack(lichStaff, target, attackType);
         }
     }
@@ -301,23 +313,29 @@ public class LichEntity extends Monster implements IStaffHoldingMob, RangedAttac
         switch (attackType) {
             case BASIC_PROJECTILE:
                 float projectileTypeChance = random.nextFloat();
-                if (projectileTypeChance < 0.5f) {
-                    staffItem.executeSnowballVolley(target);
-                } else {
+                if (projectileTypeChance < 0.5f || target.hasEffect(ModEffects.FROZEN.get())) {
                     staffItem.executeIceSpikeVolley(target);
+                    setCastingSpellTicks(60);
+                } else {
+                    staffItem.executeSnowballVolley(target);
+                    setCastingSpellTicks(60);
                 }
                 break;
             case FLOOR_SPIKES:
                 staffItem.executeTerrainAttack(target, true);
+                setCastingSpellTicks(20);
                 break;
             case FREEZING_CUBE:
                 staffItem.executeTerrainAttack(target, false);
+                setCastingSpellTicks(20);
                 break;
             case BLIZZARD:
                 staffItem.executeBlizzardAttack(target);
+                setCastingSpellTicks(20);
                 break;
             case WHIRLWIND:
                 staffItem.executeWhirlwindAttack();
+                setCastingSpellTicks(20);
                 break;
         }
     }
@@ -327,6 +345,14 @@ public class LichEntity extends Monster implements IStaffHoldingMob, RangedAttac
         if (iceBlockActive) {
             return false;
         }
+
+        if (source.getEntity() instanceof LivingEntity attacker) {
+            spellScheduler.schedule(1000, ()-> {
+                castSpell(attacker);
+                setAttackCooldown(0);
+            });
+        }
+
         return super.hurt(source, amount);
     }
 

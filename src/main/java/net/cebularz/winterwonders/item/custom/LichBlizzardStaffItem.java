@@ -91,8 +91,8 @@ public class LichBlizzardStaffItem extends Item implements IStaffItem {
         Level level = caster.level();
         if (!(level instanceof ServerLevel serverLevel)) return;
 
-        for (int i = 0; i < 3; i++) {
-            int delayMillis = i * (50 * 10);
+        for (int i = 0; i < 4; i++) {
+            int delayMillis = i * (50 * 15);
             caster.getSpellScheduler().schedule(delayMillis, () -> {
                 int chillAmplifier = 0;
                 int damagePercent = 5;
@@ -139,8 +139,8 @@ public class LichBlizzardStaffItem extends Item implements IStaffItem {
         Level level = caster.level();
         if (!(level instanceof ServerLevel serverLevel)) return;
 
-        for (int i = 0; i < 3; i++) {
-            int delayMillis = i * (50 * 10);
+        for (int i = 0; i < 4; i++) {
+            int delayMillis = i * (50 * 15);
             caster.getSpellScheduler().schedule(delayMillis, () -> {
                 int damagePercent = 10;
                 boolean homing = false;
