@@ -4,12 +4,15 @@ import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
 import net.cebularz.winterwonders.WinterWonders;
 import net.cebularz.winterwonders.entity.animations.ModAnimationDefintions;
+import net.cebularz.winterwonders.entity.custom.PinginEntity;
+import net.cebularz.winterwonders.entity.custom.SnowWeaselEntity;
 import net.minecraft.client.model.HierarchicalModel;
 import net.minecraft.client.model.geom.ModelLayerLocation;
 import net.minecraft.client.model.geom.ModelPart;
 import net.minecraft.client.model.geom.PartPose;
 import net.minecraft.client.model.geom.builders.*;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.util.Mth;
 import net.minecraft.world.entity.Entity;
 
 public class SnowWeaselModel<T extends Entity> extends HierarchicalModel<T> {
@@ -43,26 +46,49 @@ public class SnowWeaselModel<T extends Entity> extends HierarchicalModel<T> {
         PartDefinition hands = chest.addOrReplaceChild("hands", CubeListBuilder.create().texOffs(12, 23).addBox(1.0F, 0.0F, -0.5F, 1.0F, 1.0F, 1.0F, new CubeDeformation(0.0F))
                 .texOffs(12, 23).addBox(-2.0F, 0.0F, -0.5F, 1.0F, 1.0F, 1.0F, new CubeDeformation(0.0F)), PartPose.offset(0.0F, 2.0F, -1.0F));
 
-        PartDefinition head = chest.addOrReplaceChild("head", CubeListBuilder.create().texOffs(0, 14).addBox(-3.0F, -2.25F, -5.0F, 6.0F, 4.0F, 5.0F, new CubeDeformation(0.0F))
+        PartDefinition head = chest.addOrReplaceChild("head", CubeListBuilder.create().texOffs(1, 14).addBox(-2.0F, -2.25F, -5.0F, 4.0F, 4.0F, 5.0F, new CubeDeformation(0.0F))
                 .texOffs(22, 20).addBox(-1.5F, -0.25F, -6.0F, 3.0F, 2.0F, 1.0F, new CubeDeformation(0.0F))
-                .texOffs(1, 24).addBox(2.0F, -3.25F, -2.0F, 2.0F, 2.0F, 0.0F, new CubeDeformation(0.0F))
-                .texOffs(7, 24).addBox(-4.0F, -3.25F, -2.0F, 2.0F, 2.0F, 0.0F, new CubeDeformation(0.0F)), PartPose.offset(0.0F, 0.25F, -2.0F));
+                .texOffs(1, 24).addBox(1.0F, -3.25F, -2.0F, 2.0F, 2.0F, 0.0F, new CubeDeformation(0.0F))
+                .texOffs(7, 24).addBox(-3.0F, -3.25F, -2.0F, 2.0F, 2.0F, 0.0F, new CubeDeformation(0.0F)), PartPose.offset(0.0F, 0.25F, -2.0F));
 
-        PartDefinition posterior = weasel.addOrReplaceChild("posterior", CubeListBuilder.create().texOffs(16, 3).addBox(-2.5F, -2.5F, -3.0F, 5.0F, 5.0F, 6.0F, new CubeDeformation(0.0F)), PartPose.offset(0.0F, -3.5F, 3.0F));
+        PartDefinition posterior = weasel.addOrReplaceChild("posterior", CubeListBuilder.create().texOffs(16, 3).addBox(-2.5F, -2.5F, 0.0F, 5.0F, 5.0F, 6.0F, new CubeDeformation(0.0F)), PartPose.offset(0.0F, -3.5F, 0.0F));
 
         PartDefinition feet = posterior.addOrReplaceChild("feet", CubeListBuilder.create().texOffs(14, 23).addBox(0.5F, 0.0F, -2.0F, 2.0F, 1.0F, 2.0F, new CubeDeformation(0.0F))
-                .texOffs(14, 23).mirror().addBox(-2.5F, 0.0F, -2.0F, 2.0F, 1.0F, 2.0F, new CubeDeformation(0.0F)).mirror(false), PartPose.offset(0.0F, 2.5F, 3.0F));
+                .texOffs(14, 23).mirror().addBox(-2.5F, 0.0F, -2.0F, 2.0F, 1.0F, 2.0F, new CubeDeformation(0.0F)).mirror(false), PartPose.offset(0.0F, 2.5F, 6.0F));
 
-        PartDefinition tail = posterior.addOrReplaceChild("tail", CubeListBuilder.create(), PartPose.offset(0.0F, -2.5179F, 2.2189F));
+        PartDefinition tail = posterior.addOrReplaceChild("tail", CubeListBuilder.create(), PartPose.offset(0.0F, -2.5179F, 5.2189F));
 
-        PartDefinition tail_r1 = tail.addOrReplaceChild("tail_r1", CubeListBuilder.create().texOffs(38, 6).addBox(-1.0F, -1.0F, 0.0F, 2.0F, 2.0F, 6.0F, new CubeDeformation(0.0F)), PartPose.offsetAndRotation(0.0F, 1.0179F, 0.2811F, 0.4363F, 0.0F, 0.0F));
+        PartDefinition tailtuft_r1 = tail.addOrReplaceChild("tailtuft_r1", CubeListBuilder.create().texOffs(42, 2).addBox(-1.0F, 0.0413F, 5.8246F, 2.0F, 2.0F, 2.0F, new CubeDeformation(0.0F))
+                .texOffs(38, 6).addBox(-1.0F, 0.0413F, -0.1754F, 2.0F, 2.0F, 6.0F, new CubeDeformation(0.0F)), PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, 0.4363F, 0.0F, 0.0F));
 
         return LayerDefinition.create(meshdefinition, 64, 64);
     }
 
     @Override
     public void setupAnim(Entity entity, float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch) {
-        this.animateWalk(ModAnimationDefintions.SNOW_WEASEL_WALKING, limbSwing, limbSwingAmount, 0.25f, 0.25f);
+        this.root().getAllParts().forEach(ModelPart::resetPose);
+        SnowWeaselEntity snowWeasel = (SnowWeaselEntity) entity;
+
+        this.applyHeadRotation(netHeadYaw, headPitch);
+
+        float finalLimbSwing = limbSwing;
+        float finalLimbSwingAmount = limbSwingAmount;
+
+        if (snowWeasel.isBaby()) {
+            finalLimbSwing = limbSwing * 0.66f;
+            finalLimbSwingAmount = limbSwingAmount * 0.66f;
+        }
+
+        this.animateWalk(ModAnimationDefintions.SNOW_WEASEL_WALKING, finalLimbSwing, finalLimbSwingAmount, 1.25f, 2.4f);
+        this.animate(snowWeasel.idleAnimationState, ModAnimationDefintions.SNOW_WEASEL_IDLE, ageInTicks, 1f);
+    }
+
+    private void applyHeadRotation(float pNetHeadYaw, float pHeadPitch) {
+        pNetHeadYaw = Mth.clamp(pNetHeadYaw, -30.0F, 30.0F);
+        pHeadPitch = Mth.clamp(pHeadPitch, -25.0F, 45.0F);
+
+        this.head.yRot = pNetHeadYaw * ((float)Math.PI / 180F);
+        this.head.xRot = pHeadPitch * ((float)Math.PI / 180F);
     }
 
     @Override
