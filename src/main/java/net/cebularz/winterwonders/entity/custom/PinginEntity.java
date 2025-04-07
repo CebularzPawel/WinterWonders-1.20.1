@@ -58,7 +58,6 @@ public class PinginEntity extends Animal {
         this.goalSelector.addGoal(8, new SlideOnIceGoal(this, 1.2D));
     }
 
-
     public AnimationState idleAnimationState = new AnimationState();
     private int idleAnimationTimeout = 0;
 
