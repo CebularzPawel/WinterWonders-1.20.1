@@ -9,6 +9,7 @@
   "entity.winterwonders.revenant": "Revenant",
   "entity.winterwonders.brisk": "Brisk",
   "entity.winterwonders.pingin": "Pingin",
+  "entity.winterwonders.snow_weasel": "Snow Weasel",
 
   "block.winterwonders.coldsteel_block": "Coldsteel Block",
 
@@ -34,11 +35,12 @@
 
   "block.winterwonders.ice_stone_pillar": "Ice Stone Pillar",
 
-  "block.winterwonders.wonder_shroom": "Wonder Shroom",
-  "block.winterwonders.wonder_tree_shroom": "Wonder Tree Shroom",
+  "block.winterwonders.wundershroom": "Wundershroom",
+  "block.winterwonders.wundershroom_tree": "Tree Wundershroom",
 
-  "block.winterwonders.magical_rose": "Magical Rose",
-  "block.winterwonders.ice_flower": "Ice Flower",
+  "block.winterwonders.arcanillum": "Arcanillum",
+  "block.winterwonders.rimebloom": "Rimebloom",
+  "block.winterwonders.frostpetal": "Frostpetal",
 
   "block.winterwonders.greypine_log": "Grey Pine Log",
   "block.winterwonders.greypine_wood": "Grey Pine Wood",
@@ -75,6 +77,7 @@
   "item.winterwonders.revenant_spawn_egg": "Revenant Spawn Egg",
   "item.winterwonders.brisk_spawn_egg": "Brisk Spawn Egg",
   "item.winterwonders.pingin_spawn_egg": "Pingin Spawn Egg",
+  "item.winterwonders.snow_weasel_spawn_egg": "Snow Weasel Spawn Egg",
   "item.winterwonders.lich_spawn_egg": "Lich Spawn Egg",
 
   "item.winterwonders.coldsteel_sword": "Coldsteel Sword",

@@ -1,0 +1,19 @@
+{
+  "variants": {
+    "facing=east": {
+      "model": "winterwonders:block/wundershroom_tree_wall",
+      "y": 90
+    },
+    "facing=north": {
+      "model": "winterwonders:block/wundershroom_tree_wall"
+    },
+    "facing=south": {
+      "model": "winterwonders:block/wundershroom_tree_wall",
+      "y": 180
+    },
+    "facing=west": {
+      "model": "winterwonders:block/wundershroom_tree_wall",
+      "y": 270
+    }
+  }
+}

@@ -1,0 +1,8 @@
+{
+  "render_type": "minecraft:cutout",
+  "parent": "minecraft:block/flowerbed_4",
+  "textures": {
+    "flowerbed": "winterwonders:block/frostpetal",
+    "stem": "winterwonders:block/frostpetal_stem"
+  }
+}

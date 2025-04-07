@@ -13,7 +13,7 @@
                   "to_place": {
                     "type": "minecraft:simple_state_provider",
                     "state": {
-                      "Name": "winterwonders:magical_rose"
+                      "Name": "winterwonders:arcanillum"
                     }
                   }
                 }
@@ -46,7 +46,7 @@
                   "to_place": {
                     "type": "minecraft:simple_state_provider",
                     "state": {
-                      "Name": "winterwonders:ice_flower"
+                      "Name": "winterwonders:rimebloom"
                     }
                   }
                 }
