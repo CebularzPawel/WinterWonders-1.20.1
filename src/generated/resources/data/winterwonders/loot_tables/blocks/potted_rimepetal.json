@@ -26,11 +26,11 @@
       "entries": [
         {
           "type": "minecraft:item",
-          "name": "winterwonders:ice_flower"
+          "name": "winterwonders:rimepetal"
         }
       ],
       "rolls": 1.0
     }
   ],
-  "random_sequence": "winterwonders:blocks/potted_ice_flower"
+  "random_sequence": "winterwonders:blocks/potted_rimepetal"
 }

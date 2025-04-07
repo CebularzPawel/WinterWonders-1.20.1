@@ -97,8 +97,8 @@ public class ModItemModelProvider extends ItemModelProvider {
 
         simpleItem(ModItems.PUCKERBERRY);
 
-        simpleBlockItemBlockTexture(ModBlocks.MAGICAL_ROSE);
-        simpleBlockItemBlockTexture(ModBlocks.ICE_FLOWER);
+        simpleBlockItemBlockTexture(ModBlocks.ARCANILLUM);
+        simpleBlockItemBlockTexture(ModBlocks.RIMEBLOOM);
 
         simpleItem(ModItems.PINGIN_FEATHER);
         simpleItem(ModItems.PINGIN_MEAT);

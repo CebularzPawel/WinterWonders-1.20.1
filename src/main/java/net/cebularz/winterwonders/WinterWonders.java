@@ -3,7 +3,6 @@ package net.cebularz.winterwonders;
 import com.mojang.logging.LogUtils;
 import net.cebularz.winterwonders.network.ModNetworking;
 import net.cebularz.winterwonders.particle.ModParticles;
-import net.cebularz.winterwonders.worldgen.biome.BiomeMusicManager;
 import net.minecraft.client.renderer.ItemBlockRenderTypes;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.world.entity.SpawnPlacements;
@@ -63,8 +62,8 @@ public class WinterWonders {
             SpawnPlacements.register(ModEntities.PINGIN.get(), SpawnPlacements.Type.ON_GROUND, Heightmap.Types.WORLD_SURFACE, PinginEntity::canSpawn);
             SurfaceRuleManager.addSurfaceRules(SurfaceRuleManager.RuleCategory.OVERWORLD,MOD_ID, WWSurfaceRules.makeRules());
 
-            ((FlowerPotBlock) Blocks.FLOWER_POT).addPlant(ModBlocks.MAGICAL_ROSE.getId(),ModBlocks.POTTED_MAGICAL_ROSE);
-            ((FlowerPotBlock) Blocks.FLOWER_POT).addPlant(ModBlocks.ICE_FLOWER.getId(),ModBlocks.POTTED_ICE_FLOWER);
+            ((FlowerPotBlock) Blocks.FLOWER_POT).addPlant(ModBlocks.ARCANILLUM.getId(),ModBlocks.POTTED_ARCANILLUM);
+            ((FlowerPotBlock) Blocks.FLOWER_POT).addPlant(ModBlocks.RIMEBLOOM.getId(),ModBlocks.POTTED_RIMEBLOOM);
         });
         ModNetworking.register();
     }

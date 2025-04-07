@@ -11,11 +11,11 @@
       "entries": [
         {
           "type": "minecraft:item",
-          "name": "winterwonders:magical_rose"
+          "name": "winterwonders:rimebloom"
         }
       ],
       "rolls": 1.0
     }
   ],
-  "random_sequence": "winterwonders:blocks/magical_rose"
+  "random_sequence": "winterwonders:blocks/rimebloom"
 }

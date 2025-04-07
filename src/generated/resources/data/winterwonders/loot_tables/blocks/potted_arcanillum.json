@@ -26,11 +26,11 @@
       "entries": [
         {
           "type": "minecraft:item",
-          "name": "winterwonders:magical_rose"
+          "name": "winterwonders:arcanillum"
         }
       ],
       "rolls": 1.0
     }
   ],
-  "random_sequence": "winterwonders:blocks/potted_magical_rose"
+  "random_sequence": "winterwonders:blocks/potted_arcanillum"
 }

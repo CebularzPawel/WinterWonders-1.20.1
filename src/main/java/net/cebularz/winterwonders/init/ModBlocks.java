@@ -3,7 +3,6 @@ package net.cebularz.winterwonders.init;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.sounds.SoundEvents;
-import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.BlockGetter;
@@ -96,41 +95,39 @@ public class ModBlocks {
     public static final RegistryObject<Block> STRIPPED_MYST_WILLOW_WOOD = registerBlock("stripped_myst_willow_wood",
             () -> new ModFlammableRotatedPillarBlock(BlockBehaviour.Properties.copy(Blocks.SPRUCE_LOG).strength(3f)));
 
-    public static final RegistryObject<Block> WONDER_SHROOM = registerBlock("wonder_shroom",
+    public static final RegistryObject<Block> WUNDERSHROOM = registerBlock("wundershroom",
             () -> new MushroomNoGrowableBlock(BlockBehaviour.Properties.copy(Blocks.BROWN_MUSHROOM)));
 
-    public static final RegistryObject<Block> WONDER_TREE_SHROOM = BLOCKS.register("wonder_tree_shroom",
+    public static final RegistryObject<Block> WUNDERSHROOM_TREE = BLOCKS.register("wundershroom_tree",
             () -> new TreeMushroomBlock(BlockBehaviour.Properties.of().mapColor(MapColor.COLOR_PURPLE).noCollission().instabreak().sound(SoundType.GRASS).pushReaction(PushReaction.DESTROY)));
 
-    public static final RegistryObject<Block> WONDER_TREE_SHROOM_WALL = BLOCKS.register("wonder_tree_shroom_wall",
-            () -> new TreeMushroomWallBlock(BlockBehaviour.Properties.of().mapColor(MapColor.COLOR_GRAY).forceSolidOn().sound(SoundType.GRASS).instrument(NoteBlockInstrument.BASEDRUM).requiresCorrectToolForDrops().noCollission().instabreak().dropsLike(WONDER_SHROOM.get())));
+    public static final RegistryObject<Block> WUNDERSHROOM_TREE_WALL = BLOCKS.register("wundershroom_tree_wall",
+            () -> new TreeMushroomWallBlock(BlockBehaviour.Properties.of().mapColor(MapColor.COLOR_GRAY).forceSolidOn().sound(SoundType.GRASS).instrument(NoteBlockInstrument.BASEDRUM).requiresCorrectToolForDrops().noCollission().instabreak().dropsLike(WUNDERSHROOM.get())));
 
     public static final RegistryObject<Block> ICY_VINES_PLANT = BLOCKS.register("icy_vines_plant",
             () -> new IcyVinesPlantBlock(BlockBehaviour.Properties.of().mapColor(MapColor.COLOR_BLUE).noCollission().instabreak().sound(SoundType.VINE).pushReaction(PushReaction.DESTROY).lightLevel((p_50870_) -> {
                 return 6;
             })));
     public static final RegistryObject<Block> ICY_VINES = registerBlock("icy_vines",
-            () -> new IcyVinesBlock(BlockBehaviour.Properties.of().mapColor(MapColor.COLOR_BLUE).noCollission().instabreak().randomTicks().sound(SoundType.VINE).pushReaction(PushReaction.DESTROY).lightLevel((p_50870_) -> {
-                return 8;
-            })));
+            () -> new IcyVinesBlock(BlockBehaviour.Properties.of().mapColor(MapColor.COLOR_BLUE).noCollission().instabreak().randomTicks().sound(SoundType.VINE).pushReaction(PushReaction.DESTROY).lightLevel((p_50870_) -> 8)));
 
-    public static final RegistryObject<Block> MAGICAL_FLOWERS = registerBlock("magical_flowers",
+    public static final RegistryObject<Block> FROSTPETAL = registerBlock("frostpetal",
             () -> new PinkPetalsBlock(BlockBehaviour.Properties.copy(Blocks.PINK_PETALS)));
 
-    public static final RegistryObject<Block> MAGICAL_ROSE = registerBlock("magical_rose",
-            () -> new FlowerBlock(() -> MobEffects.NIGHT_VISION,5,
+    public static final RegistryObject<Block> ARCANILLUM = registerBlock("arcanillum",
+            () -> new FlowerBlock(ModEffects.FROST_RESISTANCE,40,
                     BlockBehaviour.Properties.copy(Blocks.ALLIUM).noOcclusion().noCollission()));
 
-    public static final RegistryObject<Block> POTTED_MAGICAL_ROSE = BLOCKS.register("potted_magical_rose",
-            () -> new FlowerPotBlock(() -> ((FlowerPotBlock) Blocks.FLOWER_POT),ModBlocks.MAGICAL_ROSE,
+    public static final RegistryObject<Block> POTTED_ARCANILLUM = BLOCKS.register("potted_arcanillum",
+            () -> new FlowerPotBlock(() -> ((FlowerPotBlock) Blocks.FLOWER_POT),ModBlocks.ARCANILLUM,
                     BlockBehaviour.Properties.copy(Blocks.POTTED_ALLIUM).noOcclusion()));
 
-    public static final RegistryObject<Block> ICE_FLOWER = registerBlock("ice_flower",
-            () -> new FlowerBlock(ModEffects.FROST_RESISTANCE,5,
+    public static final RegistryObject<Block> RIMEBLOOM = registerBlock("rimebloom",
+            () -> new FlowerBlock(ModEffects.FROZEN,5,
                     BlockBehaviour.Properties.copy(Blocks.ALLIUM).noOcclusion().noCollission()));
 
-    public static final RegistryObject<Block> POTTED_ICE_FLOWER = BLOCKS.register("potted_ice_flower",
-            () -> new FlowerPotBlock(() -> ((FlowerPotBlock) Blocks.FLOWER_POT),ModBlocks.ICE_FLOWER,
+    public static final RegistryObject<Block> POTTED_RIMEBLOOM = BLOCKS.register("potted_rimebloom",
+            () -> new FlowerPotBlock(() -> ((FlowerPotBlock) Blocks.FLOWER_POT),ModBlocks.RIMEBLOOM,
                     BlockBehaviour.Properties.copy(Blocks.POTTED_ALLIUM).noOcclusion()));
 
     public static final RegistryObject<Block> GREYPINE_PLANKS = registerBlock("greypine_planks",

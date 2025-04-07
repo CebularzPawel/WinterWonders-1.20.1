@@ -94,8 +94,8 @@ public class ModItems {
     public static final RegistryObject<Item> LICH_SPAWN_EGG = ITEMS.register("lich_spawn_egg",
             ()-> new ForgeSpawnEggItem(ModEntities.LICH,0x393D44,0xF3B8FF,new Item.Properties()));
 
-    public static final RegistryObject<Item> WONDER_TREE_SHROOM = ITEMS.register("wonder_tree_shroom",
-            () -> new StandingAndWallBlockItem(ModBlocks.WONDER_TREE_SHROOM.get(), ModBlocks.WONDER_TREE_SHROOM_WALL.get(), new Item.Properties(), Direction.DOWN));
+    public static final RegistryObject<Item> WUNDERSHROOM_TREE = ITEMS.register("wundershroom_tree",
+            () -> new StandingAndWallBlockItem(ModBlocks.WUNDERSHROOM_TREE.get(), ModBlocks.WUNDERSHROOM_TREE_WALL.get(), new Item.Properties(), Direction.DOWN));
 
     public static final RegistryObject<Item> PUCKERBERRY = ITEMS.register("puckerberry",
             () -> new ItemNameBlockItem(ModBlocks.PUCKERBERRY_BUSH.get(), new Item.Properties().rarity(Rarity.COMMON)

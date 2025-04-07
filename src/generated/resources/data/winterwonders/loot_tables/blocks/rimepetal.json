@@ -11,11 +11,11 @@
       "entries": [
         {
           "type": "minecraft:item",
-          "name": "winterwonders:wonder_tree_shroom"
+          "name": "winterwonders:rimepetal"
         }
       ],
       "rolls": 1.0
     }
   ],
-  "random_sequence": "winterwonders:blocks/wonder_tree_shroom"
+  "random_sequence": "winterwonders:blocks/rimepetal"
 }

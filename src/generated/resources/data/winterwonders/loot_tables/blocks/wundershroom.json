@@ -11,11 +11,11 @@
       "entries": [
         {
           "type": "minecraft:item",
-          "name": "winterwonders:ice_flower"
+          "name": "winterwonders:wundershroom_tree"
         }
       ],
       "rolls": 1.0
     }
   ],
-  "random_sequence": "winterwonders:blocks/ice_flower"
+  "random_sequence": "winterwonders:blocks/wundershroom"
 }

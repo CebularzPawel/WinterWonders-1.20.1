@@ -1,8 +1,0 @@
-{
-  "parent": "minecraft:block/coral_fan",
-  "render_type": "minecraft:cutout",
-
-  "textures": {
-    "fan": "winterwonders:block/wonder_tree_shroom"
-  }
-}
