@@ -1,4 +1,4 @@
-// 1.20.1	2025-02-28T16:39:12.4396921	Item Models: winterwonders
+// 1.20.1	2025-04-06T18:16:38.147926	Item Models: winterwonders
 c438a44b63bedbeee407e8332cded4816d611359 assets/winterwonders/models/item/brisk_rod.json
 63ec6c618a3a23eab4cab9c52d7d3250de9b516e assets/winterwonders/models/item/brisk_spawn_egg.json
 36283cf1fd87e09ccafb94da1e65ddd0046bd737 assets/winterwonders/models/item/cobbled_ice_stone_slab.json
@@ -86,5 +86,6 @@ eedc60e8b014f5bc386a170a8ed823d2d7427ea4 assets/winterwonders/models/item/polish
 fdcdb552b8c9d6d311f33e969f2059126d64c8e8 assets/winterwonders/models/item/polished_ice_stone_wall.json
 701eba09498f3f919242a96667dcb62595d543b6 assets/winterwonders/models/item/puckerberry.json
 63ec6c618a3a23eab4cab9c52d7d3250de9b516e assets/winterwonders/models/item/revenant_spawn_egg.json
+63ec6c618a3a23eab4cab9c52d7d3250de9b516e assets/winterwonders/models/item/snow_weasel_spawn_egg.json
 63ec6c618a3a23eab4cab9c52d7d3250de9b516e assets/winterwonders/models/item/snow_wisp_spawn_egg.json
 218b4747b17f1ee380065ea930ccead60abc05d3 assets/winterwonders/models/item/trueice_shard.json

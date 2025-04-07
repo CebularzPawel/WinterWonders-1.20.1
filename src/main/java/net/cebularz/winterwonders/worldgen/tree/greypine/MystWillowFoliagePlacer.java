@@ -63,7 +63,7 @@ public class MystWillowFoliagePlacer extends FoliagePlacer {
                     BlockPos mushroomPos = originPos.above(y).relative(dir, 1);
                     if (TreeFeature.validTreePos(pLevel, mushroomPos)) {
                         pBlockSetter.set(mushroomPos,
-                                ModBlocks.WONDER_TREE_SHROOM_WALL.get().defaultBlockState()
+                                ModBlocks.WUNDERSHROOM_TREE_WALL.get().defaultBlockState()
                                         .setValue(TreeMushroomWallBlock.FACING, dir));
                     }
                 }

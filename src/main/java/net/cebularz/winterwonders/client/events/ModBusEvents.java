@@ -1,7 +1,7 @@
 package net.cebularz.winterwonders.client.events;
 
 import com.google.common.collect.ImmutableList;
-import net.cebularz.winterwonders.client.models.entity.LichModel;
+import net.cebularz.winterwonders.client.models.entity.*;
 import net.cebularz.winterwonders.client.renderer.FrozenRenderer;
 import net.cebularz.winterwonders.client.renderer.LichBossBar;
 import net.cebularz.winterwonders.client.renderer.block.IceCubeRenderer;
@@ -28,9 +28,6 @@ import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
 import net.cebularz.winterwonders.WinterWonders;
 import net.cebularz.winterwonders.client.models.blocks.IcyVinesModel;
 import net.cebularz.winterwonders.client.models.blocks.IcyVinesPlantModel;
-import net.cebularz.winterwonders.client.models.entity.BriskModel;
-import net.cebularz.winterwonders.client.models.entity.PinginModel;
-import net.cebularz.winterwonders.client.models.entity.SnowWispModel;
 import net.cebularz.winterwonders.client.models.entity.projectile.IceSpikeModel;
 import net.cebularz.winterwonders.client.particles.AuroraParticle;
 import net.cebularz.winterwonders.client.renderer.block.IcyVinesBlockEntityRenderer;
@@ -78,6 +75,7 @@ public class ModBusEvents {
         EntityRenderers.register(ModEntities.SNOW_WISP.get(), SnowWispRenderer::new);
         EntityRenderers.register(ModEntities.REVENANT.get(), RevenantRenderer::new);
         EntityRenderers.register(ModEntities.PINGIN.get(), PinginRenderer::new);
+        EntityRenderers.register(ModEntities.SNOW_WEASEL.get(), SnowWeaselRenderer::new);
         EntityRenderers.register(ModEntities.BRISK.get(), BriskRenderer::new);
         EntityRenderers.register(ModEntities.LICH.get(), LichRenderer::new);
         EntityRenderers.register(ModEntities.ICE_SPIKE.get(), IceSpikeRenderer::new);
@@ -89,6 +87,7 @@ public class ModBusEvents {
         event.put(ModEntities.SNOW_WISP.get(), SnowWispEntity.createAttributes().build());
         event.put(ModEntities.REVENANT.get(), RevenantEntity.createAttributes().build());
         event.put(ModEntities.PINGIN.get(), PinginEntity.createAttributes().build());
+        event.put(ModEntities.SNOW_WEASEL.get(), SnowWeaselEntity.createAttributes().build());
         event.put(ModEntities.BRISK.get(), BriskEntity.createAttributes().build());
         event.put(ModEntities.LICH.get(), LichEntity.createAttribute().build());
     }
@@ -97,6 +96,7 @@ public class ModBusEvents {
     public static void registerEntityLayer(EntityRenderersEvent.RegisterLayerDefinitions event) {
         event.registerLayerDefinition(SnowWispModel.SNOW_WISP_LAYER, SnowWispModel::createBodyLayer);
         event.registerLayerDefinition(PinginModel.PINGIN_LAYER, PinginModel::createBodyLayer);
+        event.registerLayerDefinition(SnowWeaselModel.SNOW_WEASEL_LAYER, SnowWeaselModel::createBodyLayer);
         event.registerLayerDefinition(BriskModel.BRISK_LAYER, BriskModel::createBodyLayer);
         event.registerLayerDefinition(LichModel.LICH_LAYER, LichModel::createBodyLayer);
         event.registerLayerDefinition(IceSpikeModel.ICE_SPIKE_LAYER, IceSpikeModel::createBodyLayer);

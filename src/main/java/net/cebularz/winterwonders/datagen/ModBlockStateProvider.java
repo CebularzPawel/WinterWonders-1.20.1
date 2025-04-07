@@ -45,15 +45,15 @@ public class ModBlockStateProvider extends BlockStateProvider {
         slabBlock(((SlabBlock) ModBlocks.POLISHED_ICE_STONE_SLAB.get()),blockTexture(ModBlocks.POLISHED_ICE_STONE.get()),blockTexture(ModBlocks.POLISHED_ICE_STONE.get()));
         wallBlock(((WallBlock) ModBlocks.POLISHED_ICE_STONE_WALL.get()),blockTexture(ModBlocks.POLISHED_ICE_STONE.get()));
 
-        simpleBlockWithItem(ModBlocks.MAGICAL_ROSE.get(), models().cross(blockTexture(ModBlocks.MAGICAL_ROSE.get()).getPath(),
-                blockTexture(ModBlocks.MAGICAL_ROSE.get())).renderType("cutout"));
-        simpleBlockWithItem(ModBlocks.POTTED_MAGICAL_ROSE.get(), models().singleTexture("potted_magical_rose", new ResourceLocation("flower_pot_cross"), "plant",
-                blockTexture(ModBlocks.MAGICAL_ROSE.get())).renderType("cutout"));
+        simpleBlockWithItem(ModBlocks.ARCANILLUM.get(), models().cross(blockTexture(ModBlocks.ARCANILLUM.get()).getPath(),
+                blockTexture(ModBlocks.ARCANILLUM.get())).renderType("cutout"));
+        simpleBlockWithItem(ModBlocks.POTTED_ARCANILLUM.get(), models().singleTexture("potted_magical_rose", new ResourceLocation("flower_pot_cross"), "plant",
+                blockTexture(ModBlocks.ARCANILLUM.get())).renderType("cutout"));
 
-        simpleBlockWithItem(ModBlocks.ICE_FLOWER.get(), models().cross(blockTexture(ModBlocks.ICE_FLOWER.get()).getPath(),
-                blockTexture(ModBlocks.ICE_FLOWER.get())).renderType("cutout"));
-        simpleBlockWithItem(ModBlocks.POTTED_ICE_FLOWER.get(), models().singleTexture("potted_ice_flower", new ResourceLocation("flower_pot_cross"), "plant",
-                blockTexture(ModBlocks.ICE_FLOWER.get())).renderType("cutout"));
+        simpleBlockWithItem(ModBlocks.RIMEBLOOM.get(), models().cross(blockTexture(ModBlocks.RIMEBLOOM.get()).getPath(),
+                blockTexture(ModBlocks.RIMEBLOOM.get())).renderType("cutout"));
+        simpleBlockWithItem(ModBlocks.POTTED_RIMEBLOOM.get(), models().singleTexture("potted_ice_flower", new ResourceLocation("flower_pot_cross"), "plant",
+                blockTexture(ModBlocks.RIMEBLOOM.get())).renderType("cutout"));
 
         axisBlock(((RotatedPillarBlock) ModBlocks.ICE_STONE_PILLAR.get()), blockTexture(ModBlocks.ICE_STONE_PILLAR.get()),
                 new ResourceLocation(WinterWonders.MOD_ID, "block/ice_stone_pillar_end"));

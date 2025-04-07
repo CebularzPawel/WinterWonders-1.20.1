@@ -46,24 +46,22 @@ public final class ModConfiguredFeatures {
 
         register(context,WONDER_SHROOM_KEY,Feature.RANDOM_PATCH, new RandomPatchConfiguration(32, 7, 3, PlacementUtils.onlyWhenEmpty(
                         Feature.SIMPLE_BLOCK,
-                        new SimpleBlockConfiguration(BlockStateProvider.simple(ModBlocks.WONDER_SHROOM.get())))
+                        new SimpleBlockConfiguration(BlockStateProvider.simple(ModBlocks.WUNDERSHROOM.get())))
                 )
         );
         SimpleWeightedRandomList.Builder<BlockState> $$33 = SimpleWeightedRandomList.builder();
 
         for(int $$34 = 1; $$34 <= 4; ++$$34) {
-            Iterator var35 = Direction.Plane.HORIZONTAL.iterator();
 
-            while(var35.hasNext()) {
-                Direction $$35 = (Direction)var35.next();
-                $$33.add((BlockState)((BlockState)ModBlocks.MAGICAL_FLOWERS.get().defaultBlockState().setValue(PinkPetalsBlock.AMOUNT, $$34)).setValue(PinkPetalsBlock.FACING, $$35), 1);
+            for (Direction $$35 : Direction.Plane.HORIZONTAL) {
+                $$33.add(ModBlocks.FROSTPETAL.get().defaultBlockState().setValue(PinkPetalsBlock.AMOUNT, $$34).setValue(PinkPetalsBlock.FACING, $$35), 1);
             }
         }
         register(context,MAGICAL_FLOWERS_KEY,Feature.FLOWER, new RandomPatchConfiguration(96, 6, 2, PlacementUtils.onlyWhenEmpty(Feature.SIMPLE_BLOCK, new SimpleBlockConfiguration(new WeightedStateProvider($$33)))));
 
 
 
-        register(context,WINTER_FROST_FLOWERS_KEY,Feature.SIMPLE_RANDOM_SELECTOR,new SimpleRandomFeatureConfiguration(HolderSet.direct(new Holder[]{PlacementUtils.inlinePlaced(Feature.RANDOM_PATCH, FeatureUtils.simplePatchConfiguration(Feature.SIMPLE_BLOCK, new SimpleBlockConfiguration(BlockStateProvider.simple(ModBlocks.MAGICAL_ROSE.get()))), new PlacementModifier[0]), PlacementUtils.inlinePlaced(Feature.RANDOM_PATCH, FeatureUtils.simplePatchConfiguration(Feature.SIMPLE_BLOCK, new SimpleBlockConfiguration(BlockStateProvider.simple(ModBlocks.ICE_FLOWER.get()))), new PlacementModifier[0])})));
+        register(context,WINTER_FROST_FLOWERS_KEY,Feature.SIMPLE_RANDOM_SELECTOR,new SimpleRandomFeatureConfiguration(HolderSet.direct(PlacementUtils.inlinePlaced(Feature.RANDOM_PATCH, FeatureUtils.simplePatchConfiguration(Feature.SIMPLE_BLOCK, new SimpleBlockConfiguration(BlockStateProvider.simple(ModBlocks.ARCANILLUM.get()))), new PlacementModifier[0]), PlacementUtils.inlinePlaced(Feature.RANDOM_PATCH, FeatureUtils.simplePatchConfiguration(Feature.SIMPLE_BLOCK, new SimpleBlockConfiguration(BlockStateProvider.simple(ModBlocks.RIMEBLOOM.get()))), new PlacementModifier[0]))));
 
         register(context, GREYPINE_KEY, Feature.TREE, new TreeConfiguration.TreeConfigurationBuilder(
                 BlockStateProvider.simple(ModBlocks.GREYPINE_LOG.get()),

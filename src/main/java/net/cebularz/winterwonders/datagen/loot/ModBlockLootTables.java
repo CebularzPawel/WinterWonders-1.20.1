@@ -13,7 +13,6 @@ import net.minecraft.world.level.storage.loot.functions.SetItemCountFunction;
 import net.minecraft.world.level.storage.loot.predicates.LootItemBlockStatePropertyCondition;
 import net.minecraft.world.level.storage.loot.predicates.LootItemCondition;
 import net.minecraft.world.level.storage.loot.providers.number.UniformGenerator;
-import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.registries.RegistryObject;
 import net.cebularz.winterwonders.block.custom.PuckerberryBushBlock;
 import net.cebularz.winterwonders.init.ModBlocks;
@@ -85,17 +84,17 @@ public class ModBlockLootTables extends BlockLootSubProvider {
 
         this.dropWhenSilkTouch(ModBlocks.ICE_SLUSH.get());
 
-        this.dropSelf(ModBlocks.WONDER_SHROOM.get());
-        this.dropSelf(ModBlocks.WONDER_TREE_SHROOM.get());
-        this.dropSelf(ModBlocks.WONDER_TREE_SHROOM_WALL.get());
+        this.dropSelf(ModBlocks.WUNDERSHROOM.get());
+        this.dropSelf(ModBlocks.WUNDERSHROOM_TREE.get());
+        this.dropSelf(ModBlocks.WUNDERSHROOM_TREE_WALL.get());
         this.dropWhenSilkTouch(ModBlocks.ICY_VINES.get());
         this.dropWhenSilkTouch(ModBlocks.ICY_VINES_PLANT.get());
         this.dropSelf(ModBlocks.ICE_STONE_PILLAR.get());
 
-        this.dropSelf(ModBlocks.MAGICAL_ROSE.get());
-        this.add(ModBlocks.POTTED_MAGICAL_ROSE.get(),createPotFlowerItemTable(ModBlocks.MAGICAL_ROSE.get()));
-        this.dropSelf(ModBlocks.ICE_FLOWER.get());
-        this.add(ModBlocks.POTTED_ICE_FLOWER.get(),createPotFlowerItemTable(ModBlocks.ICE_FLOWER.get()));
+        this.dropSelf(ModBlocks.ARCANILLUM.get());
+        this.add(ModBlocks.POTTED_ARCANILLUM.get(),createPotFlowerItemTable(ModBlocks.ARCANILLUM.get()));
+        this.dropSelf(ModBlocks.RIMEBLOOM.get());
+        this.add(ModBlocks.POTTED_RIMEBLOOM.get(),createPotFlowerItemTable(ModBlocks.RIMEBLOOM.get()));
 
         LootItemCondition.Builder lootitemcondition$builder2 = LootItemBlockStatePropertyCondition
                 .hasBlockStateProperties(ModBlocks.PUCKERBERRY_BUSH.get())
@@ -111,8 +110,8 @@ public class ModBlockLootTables extends BlockLootSubProvider {
                         ModItems.PUCKERBERRY.get(),
                         lootitemcondition$builder2));
 
-        this.add(ModBlocks.MAGICAL_FLOWERS.get(),
-                createPetalsDrops(ModBlocks.MAGICAL_FLOWERS.get()));
+        this.add(ModBlocks.FROSTPETAL.get(),
+                createPetalsDrops(ModBlocks.FROSTPETAL.get()));
     }
 
     protected LootTable.Builder createCopperLikeOreDrops(Block pBlock, Item item) {

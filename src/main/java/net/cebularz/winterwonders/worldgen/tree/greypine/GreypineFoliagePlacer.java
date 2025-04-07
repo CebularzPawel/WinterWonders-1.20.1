@@ -9,7 +9,6 @@ import net.minecraft.util.RandomSource;
 import net.minecraft.util.valueproviders.IntProvider;
 import net.minecraft.world.level.LevelSimulatedReader;
 import net.minecraft.world.level.block.state.BlockBehaviour;
-import net.minecraft.world.level.levelgen.feature.TreeFeature;
 import net.minecraft.world.level.levelgen.feature.configurations.TreeConfiguration;
 import net.minecraft.world.level.levelgen.feature.foliageplacers.FoliagePlacer;
 import net.minecraft.world.level.levelgen.feature.foliageplacers.FoliagePlacerType;
@@ -64,7 +63,7 @@ public class GreypineFoliagePlacer extends FoliagePlacer {
                     BlockPos logPos = originPos.above(y);
                     if (pLevel.isStateAtPosition(logPos, (state) -> state.is(ModBlocks.GREYPINE_LOG.get()))) {
                         pBlockSetter.set(mushroomPos,
-                                ModBlocks.WONDER_TREE_SHROOM_WALL.get().defaultBlockState()
+                                ModBlocks.WUNDERSHROOM_TREE_WALL.get().defaultBlockState()
                                         .setValue(TreeMushroomWallBlock.FACING, dir));
                     }
                 }
