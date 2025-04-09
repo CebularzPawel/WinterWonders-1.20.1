@@ -55,6 +55,11 @@ public class ModBlockStateProvider extends BlockStateProvider {
         simpleBlockWithItem(ModBlocks.POTTED_RIMEBLOOM.get(), models().singleTexture("potted_ice_flower", new ResourceLocation("flower_pot_cross"), "plant",
                 blockTexture(ModBlocks.RIMEBLOOM.get())).renderType("cutout"));
 
+        simpleBlockWithItem(ModBlocks.MUSCARI.get(), models().cross(blockTexture(ModBlocks.MUSCARI.get()).getPath(),
+                blockTexture(ModBlocks.MUSCARI.get())).renderType("cutout"));
+        simpleBlockWithItem(ModBlocks.POTTED_MUSCARI.get(), models().singleTexture("potted_muscari", new ResourceLocation("flower_pot_cross"), "plant",
+                blockTexture(ModBlocks.MUSCARI.get())).renderType("cutout"));
+
         axisBlock(((RotatedPillarBlock) ModBlocks.ICE_STONE_PILLAR.get()), blockTexture(ModBlocks.ICE_STONE_PILLAR.get()),
                 new ResourceLocation(WinterWonders.MOD_ID, "block/ice_stone_pillar_end"));
         blockItem(ModBlocks.ICE_STONE_PILLAR);
