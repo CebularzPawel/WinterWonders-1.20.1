@@ -3,6 +3,7 @@ package net.cebularz.winterwonders.init;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.sounds.SoundEvents;
+import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.BlockGetter;
@@ -125,6 +126,14 @@ public class ModBlocks {
     public static final RegistryObject<Block> RIMEBLOOM = registerBlock("rimebloom",
             () -> new FlowerBlock(ModEffects.FROZEN,5,
                     BlockBehaviour.Properties.copy(Blocks.ALLIUM).noOcclusion().noCollission()));
+    public static final RegistryObject<Block> MUSCARI = registerBlock("muscari",
+            () -> new FlowerBlock(() -> MobEffects.GLOWING,5,
+                    BlockBehaviour.Properties.copy(Blocks.ALLIUM).noOcclusion().noCollission()));
+    public static final RegistryObject<Block> POTTED_MUSCARI = BLOCKS.register("potted_muscari",
+            () -> new FlowerPotBlock(() -> ((FlowerPotBlock) Blocks.FLOWER_POT),ModBlocks.MUSCARI,
+                    BlockBehaviour.Properties.copy(Blocks.POTTED_ALLIUM).noOcclusion()));
+
+
 
     public static final RegistryObject<Block> POTTED_RIMEBLOOM = BLOCKS.register("potted_rimebloom",
             () -> new FlowerPotBlock(() -> ((FlowerPotBlock) Blocks.FLOWER_POT),ModBlocks.RIMEBLOOM,

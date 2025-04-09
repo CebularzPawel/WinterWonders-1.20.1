@@ -96,6 +96,8 @@ public class ModBlockLootTables extends BlockLootSubProvider {
         this.dropSelf(ModBlocks.RIMEBLOOM.get());
         this.add(ModBlocks.POTTED_RIMEBLOOM.get(),createPotFlowerItemTable(ModBlocks.RIMEBLOOM.get()));
 
+        this.dropSelf(ModBlocks.MUSCARI.get());
+        this.add(ModBlocks.POTTED_MUSCARI.get(),createPotFlowerItemTable(ModBlocks.MUSCARI.get()));
         LootItemCondition.Builder lootitemcondition$builder2 = LootItemBlockStatePropertyCondition
                 .hasBlockStateProperties(ModBlocks.PUCKERBERRY_BUSH.get())
                 .setProperties(StatePropertiesPredicate.Builder.properties().hasProperty(PuckerberryBushBlock.AGE, 2))

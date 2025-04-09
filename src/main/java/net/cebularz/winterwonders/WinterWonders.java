@@ -64,6 +64,8 @@ public class WinterWonders {
 
             ((FlowerPotBlock) Blocks.FLOWER_POT).addPlant(ModBlocks.ARCANILLUM.getId(),ModBlocks.POTTED_ARCANILLUM);
             ((FlowerPotBlock) Blocks.FLOWER_POT).addPlant(ModBlocks.RIMEBLOOM.getId(),ModBlocks.POTTED_RIMEBLOOM);
+            ((FlowerPotBlock) Blocks.FLOWER_POT).addPlant(ModBlocks.MUSCARI.getId(),ModBlocks.POTTED_MUSCARI);
+
         });
         ModNetworking.register();
     }

@@ -1,4 +1,4 @@
-// 1.20.1	2025-04-07T11:48:44.4360234	Item Models: winterwonders
+// 1.20.1	2025-04-08T18:43:34.2343713	Item Models: winterwonders
 3b3b138819367044cef18d3d8bb1914e67ce2d44 assets/winterwonders/models/item/arcanillum.json
 c438a44b63bedbeee407e8332cded4816d611359 assets/winterwonders/models/item/brisk_rod.json
 63ec6c618a3a23eab4cab9c52d7d3250de9b516e assets/winterwonders/models/item/brisk_spawn_egg.json
@@ -76,6 +76,7 @@ c593b4781475a0f22f9bb82ed8d88ee7b34fb7d3 assets/winterwonders/models/item/ice_st
 a9a66a6f695fb43f98ab00c4284511f75d408767 assets/winterwonders/models/item/ice_stone_tiles_stairs.json
 1a6abeabc749e03f0730a281cbfce967b47b3344 assets/winterwonders/models/item/ice_stone_tiles_wall.json
 63ec6c618a3a23eab4cab9c52d7d3250de9b516e assets/winterwonders/models/item/lich_spawn_egg.json
+8d5e083e2fe78f8b460dadff0bbeeaacf72f6e89 assets/winterwonders/models/item/muscari.json
 7592a7d9a8326f68c6be9447512ae987f379cb42 assets/winterwonders/models/item/myst_willow_sapling.json
 2e10d686a0612ab7a64f9e73b05cdc93dc37e3b3 assets/winterwonders/models/item/pingin_feather.json
 69937872e0753e623de5a25c59e6aa3640cb0ae3 assets/winterwonders/models/item/pingin_meat.json
