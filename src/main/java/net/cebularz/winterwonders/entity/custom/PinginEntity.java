@@ -127,7 +127,7 @@ public class PinginEntity extends Animal {
     public static AttributeSupplier.Builder createAttributes(){
         return Animal.createMobAttributes()
                 .add(Attributes.MAX_HEALTH, 12D)
-                .add(Attributes.MOVEMENT_SPEED, 0.25D)
+                .add(Attributes.MOVEMENT_SPEED, 0.15D)
                 .add(Attributes.FOLLOW_RANGE, 24D);
     }
 

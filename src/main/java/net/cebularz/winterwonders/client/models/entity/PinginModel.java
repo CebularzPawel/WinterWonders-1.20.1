@@ -74,6 +74,14 @@ public class PinginModel<T extends Entity> extends HierarchicalModel<T> implemen
 
         PinginEntity pingin = (PinginEntity) entity;
 
+        float finalLimbSwing = limbSwing;
+        float finalLimbSwingAmount = limbSwingAmount;
+
+        if (pingin.isBaby()) {
+            finalLimbSwing = limbSwing * 0.66f;
+            finalLimbSwingAmount = limbSwingAmount * 0.66f;
+        }
+
         if (pingin.isSliding()) {
             this.animate(pingin.slideAnimationState, ModAnimationDefintions.PINGIN_SLIDE, ageInTicks, 1f);
         } else if (pingin.isAdmiring()) {
@@ -92,7 +100,7 @@ public class PinginModel<T extends Entity> extends HierarchicalModel<T> implemen
         } else {
             this.applyHeadRotation(netHeadYaw, headPitch);
             if(!pingin.isAdmiring()) {
-                this.animateWalk(ModAnimationDefintions.PINGIN_WALK, limbSwing, limbSwingAmount, 2f, 2.4f);
+                this.animateWalk(ModAnimationDefintions.PINGIN_WALK, finalLimbSwing, finalLimbSwingAmount, 2f, 2.4f);
             }
             this.animate(pingin.idleAnimationState, ModAnimationDefintions.PINGIN_IDLE, ageInTicks, 1f);
         }
