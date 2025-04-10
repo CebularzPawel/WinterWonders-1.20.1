@@ -1,6 +1,6 @@
 package net.cebularz.winterwonders.worldgen;
 
-import net.cebularz.winterwonders.worldgen.customfeatures.IceStoneSpikeFeature;
+import net.cebularz.winterwonders.worldgen.customfeatures.ColdstoneSpikeFeature;
 import net.minecraft.core.Direction;
 import net.minecraft.core.HolderSet;
 import net.minecraft.core.registries.Registries;
@@ -39,7 +39,8 @@ public final class ModConfiguredFeatures {
     public static final ResourceKey<ConfiguredFeature<?,?>> FROSTPETAL_KEY = registerKey("frostpetal");
 
     public static void bootstrap(BootstapContext<ConfiguredFeature<?, ?>> context) {
-        register(context, COLDSTONE_SPIKE_KEY, new IceStoneSpikeFeature(NoneFeatureConfiguration.CODEC), new NoneFeatureConfiguration());
+        FeatureUtils.register(context, COLDSTONE_SPIKE_KEY, ModFeatures.COLDSTONE_SPIKE.get());
+        //register(context, COLDSTONE_SPIKE_KEY, ModFeatures.COLDSTONE_SPIKE.get(), NoneFeatureConfiguration.INSTANCE);
 
         register(context, WUNDERSHROOM_KEY,Feature.RANDOM_PATCH, new RandomPatchConfiguration(32, 7, 3, PlacementUtils.onlyWhenEmpty(
                         Feature.SIMPLE_BLOCK,

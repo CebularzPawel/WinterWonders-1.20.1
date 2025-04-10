@@ -15,6 +15,7 @@ import net.minecraft.world.phys.Vec3;
 import net.cebularz.winterwonders.init.ModDamageSources;
 import net.cebularz.winterwonders.effect.ModEffects;
 import net.cebularz.winterwonders.entity.ModEntities;
+import net.turtleboi.turtlecore.effect.CoreEffects;
 
 public class IceSpikeProjectileEntity extends AbstractArrow {
     private final float damageAmount;
@@ -79,8 +80,8 @@ public class IceSpikeProjectileEntity extends AbstractArrow {
         if (hitEntity != ownerEntity) {
             if (hitEntity instanceof LivingEntity livingEntity) {
                 float finalDamage;
-                if (livingEntity.hasEffect(ModEffects.CHILLED.get())) {
-                    int chilledAmplifier = livingEntity.getEffect(ModEffects.CHILLED.get()).getAmplifier() + 1;
+                if (livingEntity.hasEffect(CoreEffects.CHILLED.get())) {
+                    int chilledAmplifier = livingEntity.getEffect(CoreEffects.CHILLED.get()).getAmplifier() + 1;
                     //System.out.println("Hit target with " + chilledAmplifier + "Chilled");
                     finalDamage = damageAmount * chilledAmplifier;
                 } else {

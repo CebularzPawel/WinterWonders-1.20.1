@@ -1,9 +1,7 @@
 package net.cebularz.winterwonders.item.custom;
 
-import net.cebularz.winterwonders.client.renderer.util.ParticleSpawnQueue;
 import net.cebularz.winterwonders.effect.ModEffects;
 import net.cebularz.winterwonders.network.ModNetworking;
-import net.cebularz.winterwonders.network.packets.SendParticlesS2C;
 import net.cebularz.winterwonders.particle.ModParticles;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.sounds.SoundEvents;
@@ -18,6 +16,11 @@ import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.AABB;
+import net.turtleboi.turtlecore.client.util.ParticleSpawnQueue;
+import net.turtleboi.turtlecore.effect.CoreEffects;
+import net.turtleboi.turtlecore.network.CoreNetworking;
+import net.turtleboi.turtlecore.network.packet.util.SendParticlesS2C;
+import net.turtleboi.turtlecore.particle.CoreParticles;
 
 import java.util.List;
 
@@ -41,7 +44,7 @@ public class BlizzardStaffItem extends Item {
 
         if(!pLevel.isClientSide){
             for (int i = 0; i < 20; i++) {
-                ModNetworking.sendToNear(new SendParticlesS2C(
+                CoreNetworking.sendToNear(new SendParticlesS2C(
                         ParticleTypes.SNOWFLAKE,
                         pPlayer.getX(),
                         (pPlayer.getY() + pPlayer.getBbHeight() / 2),
@@ -78,8 +81,8 @@ public class BlizzardStaffItem extends Item {
                         double particleY = pPlayer.getY() + (random.nextDouble() - 0.5) * spread + (timeElapsed * 5);
                         double particleZ = z + (random.nextDouble() - 0.5) * spread;
 
-                        ModNetworking.sendToNear(new SendParticlesS2C(
-                                ModParticles.CHILLED_PARTICLES.get(),
+                        CoreNetworking.sendToNear(new SendParticlesS2C(
+                                CoreParticles.CHILLED_PARTICLES.get(),
                                 particleX, particleY, particleZ,
                                 0, 0, 0), pPlayer);
                     }
@@ -98,20 +101,20 @@ public class BlizzardStaffItem extends Item {
                                     dx * attractionStrength, dy * attractionStrength, dz * attractionStrength));
                             livingTargets.hurtMarked = true;
 
-                            if (!livingTargets.hasEffect(ModEffects.CHILLED.get())){
+                            if (!livingTargets.hasEffect(CoreEffects.CHILLED.get())){
                                 livingTargets.addEffect(new MobEffectInstance(
-                                        ModEffects.CHILLED.get(),
+                                        CoreEffects.CHILLED.get(),
                                         300,
                                         2
                                 ));
-                            } else if (livingTargets.hasEffect(ModEffects.CHILLED.get()) && livingTargets.getEffect(ModEffects.CHILLED.get()).getAmplifier() <= 2) {
+                            } else if (livingTargets.hasEffect(CoreEffects.CHILLED.get()) && livingTargets.getEffect(CoreEffects.CHILLED.get()).getAmplifier() <= 2) {
                                 livingTargets.addEffect(new MobEffectInstance(
-                                        ModEffects.CHILLED.get(),
+                                        CoreEffects.CHILLED.get(),
                                         300,
                                         2,
-                                        livingTargets.getEffect(ModEffects.CHILLED.get()).isAmbient(),
-                                        livingTargets.getEffect(ModEffects.CHILLED.get()).isVisible(),
-                                        livingTargets.getEffect(ModEffects.CHILLED.get()).showIcon()
+                                        livingTargets.getEffect(CoreEffects.CHILLED.get()).isAmbient(),
+                                        livingTargets.getEffect(CoreEffects.CHILLED.get()).isVisible(),
+                                        livingTargets.getEffect(CoreEffects.CHILLED.get()).showIcon()
                                 ));
                             }
                         }

@@ -1,10 +1,7 @@
 package net.cebularz.winterwonders.events;
 
-import net.cebularz.winterwonders.client.renderer.util.ParticleSpawnQueue;
-import net.cebularz.winterwonders.init.ModDamageSources;
 import net.cebularz.winterwonders.effect.ModEffects;
 import net.cebularz.winterwonders.network.ModNetworking;
-import net.cebularz.winterwonders.network.packets.SendParticlesS2C;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.particles.BlockParticleOption;
 import net.minecraft.core.particles.ParticleOptions;
@@ -31,6 +28,11 @@ import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.cebularz.winterwonders.WinterWonders;
 import net.cebularz.winterwonders.entity.custom.RevenantEntity;
+import net.turtleboi.turtlecore.client.util.ParticleSpawnQueue;
+import net.turtleboi.turtlecore.effect.CoreEffects;
+import net.turtleboi.turtlecore.init.CoreDamageSources;
+import net.turtleboi.turtlecore.network.CoreNetworking;
+import net.turtleboi.turtlecore.network.packet.util.SendParticlesS2C;
 
 @Mod.EventBusSubscriber(modid = WinterWonders.MOD_ID)
 public class ModEvents {
@@ -93,7 +95,7 @@ public class ModEvents {
         LivingEntity livingEntity = event.getEntity();
         MobEffectInstance mobEffectInstance = event.getEffectInstance();
         if (mobEffectInstance != null) {
-            if (mobEffectInstance.getEffect() == ModEffects.CHILLED.get() && livingEntity.hasEffect(ModEffects.FROZEN.get())) {
+            if (mobEffectInstance.getEffect() == CoreEffects.CHILLED.get() && livingEntity.hasEffect(CoreEffects.FROZEN.get())) {
                 event.setResult(Event.Result.DENY);
             }
         }
@@ -103,15 +105,15 @@ public class ModEvents {
     public static void  onEntityHurtPost(LivingDamageEvent event){
         LivingEntity hurtEntity = event.getEntity();
         Entity attackerEntity = event.getSource().getEntity();
-        MobEffect frozenEffect = ModEffects.FROZEN.get();
+        MobEffect frozenEffect = CoreEffects.FROZEN.get();
         if (hurtEntity.hasEffect(frozenEffect) &&
-                !event.getSource().typeHolder().equals(ModDamageSources.frostDamage(hurtEntity.level(), attackerEntity, null))){
+                !event.getSource().typeHolder().equals(CoreDamageSources.frozenDamage(hurtEntity.level(), attackerEntity, null))){
             hurtEntity.removeEffect(frozenEffect);
             float entityMaxHealth = hurtEntity.getMaxHealth();
             int maxDamage = 10;
             //System.out.println("Dealing " + maxDamage + " damage to " + hurtEntity);
             hurtEntity.hurt(
-                    ModDamageSources.frostDamage(
+                    CoreDamageSources.frozenDamage(
                             hurtEntity.level(),
                             attackerEntity,
                             null),
@@ -142,7 +144,7 @@ public class ModEvents {
                 double zSpeed = speed * Math.sin(theta) * Math.sin(phi);
                 ParticleOptions particle = new BlockParticleOption(ParticleTypes.BLOCK, Blocks.ICE.defaultBlockState());
 
-                ModNetworking.sendToNear(new SendParticlesS2C(
+                CoreNetworking.sendToNear(new SendParticlesS2C(
                         particle,
                         hurtEntity.getX() + offX,
                         hurtEntity.getY() + offY,

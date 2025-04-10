@@ -22,8 +22,6 @@ import net.cebularz.winterwonders.WinterWonders;
 import net.cebularz.winterwonders.item.custom.FrostbiteWandItem;
 
 public class ModItems {
-    public static final Rarity LEGENDARY = Rarity.create("LEGENDARY", ChatFormatting.GOLD);
-
     public static final DeferredRegister<Item> ITEMS =
             DeferredRegister.create(ForgeRegistries.ITEMS, WinterWonders.MOD_ID);
 

@@ -58,7 +58,7 @@ public final class WinterFrostBiome {
                 context.lookup(Registries.CONFIGURED_CARVER));
 
         globalOverworldGeneration(settings);
-        settings.addFeature(GenerationStep.Decoration.LOCAL_MODIFICATIONS, ModPlacedFeatures.ICE_STONE_SPIKE_KEY);
+        settings.addFeature(GenerationStep.Decoration.LOCAL_MODIFICATIONS, ModPlacedFeatures.COLDSTONE_SPIKE_KEY);
         BiomeDefaultFeatures.addDefaultOres(settings);
         BiomeDefaultFeatures.addFerns(settings);
         BiomeDefaultFeatures.addDefaultFlowers(settings);

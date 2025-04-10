@@ -25,6 +25,7 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.pathfinder.BlockPathTypes;
 import net.minecraft.world.phys.Vec3;
+import net.turtleboi.turtlecore.effect.CoreEffects;
 
 import java.util.EnumSet;
 
@@ -259,7 +260,7 @@ public class BriskEntity extends Monster {
                                         SoundEvents.EVOKER_CAST_SPELL, SoundSource.HOSTILE, 1.25f, 0.4f / (this.briskEntity.level().getRandom().nextFloat() * 0.4f + 0.8f));
                             }
 
-                            int chilledAmplifier = target.hasEffect(ModEffects.CHILLED.get()) ? target.getEffect(ModEffects.CHILLED.get()).getAmplifier() : 0;
+                            int chilledAmplifier = target.hasEffect(CoreEffects.CHILLED.get()) ? target.getEffect(CoreEffects.CHILLED.get()).getAmplifier() : 0;
 
                             for (int projectileCount = 0; projectileCount < 1; ++projectileCount) {
                                 Vec3 targetDirection = new Vec3(toTargetX, toTargetY, toTargetZ).normalize();

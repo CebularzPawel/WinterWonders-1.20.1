@@ -1,4 +1,4 @@
-package net.cebularz.winterwonders.client.renderer;
+package net.cebularz.winterwonders.client.gui;
 
 import net.cebularz.winterwonders.WinterWonders;
 import net.cebularz.winterwonders.client.data.LichBossData;

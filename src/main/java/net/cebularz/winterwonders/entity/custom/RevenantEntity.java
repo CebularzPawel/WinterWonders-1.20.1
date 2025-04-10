@@ -21,6 +21,7 @@ import net.minecraft.world.level.ServerLevelAccessor;
 import net.cebularz.winterwonders.effect.ModEffects;
 import net.cebularz.winterwonders.entity.ModEntities;
 import net.cebularz.winterwonders.item.ModItems;
+import net.turtleboi.turtlecore.effect.CoreEffects;
 
 import javax.annotation.Nullable;
 
@@ -40,11 +41,11 @@ public class RevenantEntity extends Zombie {
         boolean didAttack = super.doHurtTarget(target);
 
         if (didAttack && target instanceof LivingEntity livingEntity) {
-            if (livingEntity.hasEffect(ModEffects.CHILLED.get())) {
-                livingEntity.addEffect(new MobEffectInstance(ModEffects.CHILLED.get(), 100,
-                        livingEntity.getEffect(ModEffects.CHILLED.get()).getAmplifier() + 1));
+            if (livingEntity.hasEffect(CoreEffects.CHILLED.get())) {
+                livingEntity.addEffect(new MobEffectInstance(CoreEffects.CHILLED.get(), 100,
+                        livingEntity.getEffect(CoreEffects.CHILLED.get()).getAmplifier() + 1));
             } else {
-                livingEntity.addEffect(new MobEffectInstance(ModEffects.CHILLED.get(), 100, 0));
+                livingEntity.addEffect(new MobEffectInstance(CoreEffects.CHILLED.get(), 100, 0));
             }
         }
 

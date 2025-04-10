@@ -21,7 +21,7 @@ public final class ModPlacedFeatures {
     public static final ResourceKey<PlacedFeature> GREYPINE_PLACED_KEY = registerKey("greypine_placed");
     public static final ResourceKey<PlacedFeature> MYST_WILLOW_PLACED_KEY = registerKey("myst_willow_placed");
 
-    public static final ResourceKey<PlacedFeature> ICE_STONE_SPIKE_KEY = registerKey("ice_stone_spike");
+    public static final ResourceKey<PlacedFeature> COLDSTONE_SPIKE_KEY = registerKey("coldstone_spike");
 
     public static final ResourceKey<PlacedFeature> WONDER_SHROOM_PATCH_KEY = registerKey("wonder_shroom_patch");
 
@@ -61,7 +61,7 @@ public final class ModPlacedFeatures {
                 CountPlacement.of(ClampedInt.of(UniformInt.of(-3, 1), 0, 1)),
                 BiomeFilter.biome());
 
-        PlacementUtils.register(context, ICE_STONE_SPIKE_KEY, configuredFeatures.getOrThrow(
+        PlacementUtils.register(context, COLDSTONE_SPIKE_KEY, configuredFeatures.getOrThrow(
                 ModConfiguredFeatures.COLDSTONE_SPIKE_KEY),
                 CountPlacement.of(1),
                 RarityFilter.onAverageOnceEvery(2),

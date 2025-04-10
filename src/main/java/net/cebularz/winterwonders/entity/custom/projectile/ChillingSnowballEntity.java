@@ -12,6 +12,7 @@ import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.projectile.Snowball;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.EntityHitResult;
+import net.turtleboi.turtlecore.effect.CoreEffects;
 
 public class ChillingSnowballEntity extends Snowball {
     private final int chillAmplifier;
@@ -51,11 +52,11 @@ public class ChillingSnowballEntity extends Snowball {
         Entity ownerEntity = getOwner();
         if (hitEntity != ownerEntity) {
             if (hitEntity instanceof LivingEntity livingEntity) {
-                if (livingEntity.hasEffect(ModEffects.CHILLED.get())) {
-                    int currentAmplifier = livingEntity.getEffect(ModEffects.CHILLED.get()).getAmplifier();
-                    livingEntity.addEffect(new MobEffectInstance(ModEffects.CHILLED.get(), 400, currentAmplifier + this.chillAmplifier));
+                if (livingEntity.hasEffect(CoreEffects.CHILLED.get())) {
+                    int currentAmplifier = livingEntity.getEffect(CoreEffects.CHILLED.get()).getAmplifier();
+                    livingEntity.addEffect(new MobEffectInstance(CoreEffects.CHILLED.get(), 400, currentAmplifier + this.chillAmplifier));
                 } else {
-                    livingEntity.addEffect(new MobEffectInstance(ModEffects.CHILLED.get(), 400, this.chillAmplifier));
+                    livingEntity.addEffect(new MobEffectInstance(CoreEffects.CHILLED.get(), 400, this.chillAmplifier));
                 }
 
                 if (this.dealsDamage) {

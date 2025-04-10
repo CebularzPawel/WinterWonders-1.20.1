@@ -11,8 +11,8 @@ import net.minecraft.world.level.levelgen.feature.FeaturePlaceContext;
 import net.minecraft.world.level.levelgen.feature.configurations.NoneFeatureConfiguration;
 import net.cebularz.winterwonders.block.ModBlocks;
 
-public class IceStoneSpikeFeature extends Feature<NoneFeatureConfiguration> {
-    public IceStoneSpikeFeature(Codec<NoneFeatureConfiguration> pCodec) {
+public class ColdstoneSpikeFeature extends Feature<NoneFeatureConfiguration> {
+    public ColdstoneSpikeFeature(Codec<NoneFeatureConfiguration> pCodec) {
         super(pCodec);
     }
 

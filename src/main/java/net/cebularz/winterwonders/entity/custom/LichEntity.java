@@ -5,12 +5,8 @@ import net.cebularz.winterwonders.effect.ModEffects;
 import net.cebularz.winterwonders.entity.ModEntities;
 import net.cebularz.winterwonders.item.ModItems;
 import net.cebularz.winterwonders.item.custom.LichBlizzardStaffItem;
-import net.cebularz.winterwonders.item.custom.impl.IStaffItem;
 import net.cebularz.winterwonders.network.ModNetworking;
-import net.cebularz.winterwonders.network.packets.FrozenDataS2C;
 import net.cebularz.winterwonders.network.packets.LichBossDataS2C;
-import net.cebularz.winterwonders.network.packets.SendParticlesS2C;
-import net.cebularz.winterwonders.spells.SpellScheduler;
 import net.minecraft.core.particles.BlockParticleOption;
 import net.minecraft.core.particles.ParticleOptions;
 import net.minecraft.core.particles.ParticleTypes;
@@ -44,6 +40,11 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.level.ServerLevelAccessor;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.phys.Vec3;
+import net.turtleboi.turtlecore.effect.CoreEffects;
+import net.turtleboi.turtlecore.network.CoreNetworking;
+import net.turtleboi.turtlecore.network.packet.effects.FrozenDataS2C;
+import net.turtleboi.turtlecore.network.packet.util.SendParticlesS2C;
+import net.turtleboi.turtlecore.spells.SpellScheduler;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -191,7 +192,7 @@ public class LichEntity extends Monster implements RangedAttackMob {
                         double zSpeed = speed * Math.sin(theta) * Math.sin(phi);
                         ParticleOptions particle = new BlockParticleOption(ParticleTypes.BLOCK, Blocks.ICE.defaultBlockState());
 
-                        ModNetworking.sendToNear(new SendParticlesS2C(
+                        CoreNetworking.sendToNear(new SendParticlesS2C(
                                 particle,
                                 this.getX() + offX,
                                 this.getY() + offY,
@@ -308,7 +309,7 @@ public class LichEntity extends Monster implements RangedAttackMob {
         switch (attackType) {
             case BASIC_PROJECTILE:
                 float projectileTypeChance = random.nextFloat();
-                if (projectileTypeChance < 0.5f || target.hasEffect(ModEffects.FROZEN.get())) {
+                if (projectileTypeChance < 0.5f || target.hasEffect(CoreEffects.FROZEN.get())) {
                     staffItem.executeIceSpikeVolley(target);
                     setCastingSpellTicks(60);
                 } else {

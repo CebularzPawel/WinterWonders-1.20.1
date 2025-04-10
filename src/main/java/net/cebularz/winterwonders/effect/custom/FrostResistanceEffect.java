@@ -1,12 +1,12 @@
 package net.cebularz.winterwonders.effect.custom;
 
 import net.cebularz.winterwonders.init.ModAttributes;
-import net.cebularz.winterwonders.util.AttributeModifierUtil;
 import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.effect.MobEffectCategory;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.ai.attributes.AttributeMap;
 import net.minecraft.world.entity.ai.attributes.AttributeModifier;
+import net.turtleboi.turtlecore.init.CoreAttributeModifiers;
 
 
 public class FrostResistanceEffect extends MobEffect {
@@ -16,7 +16,7 @@ public class FrostResistanceEffect extends MobEffect {
     @Override
     public void applyEffectTick(LivingEntity pLivingEntity, int pAmplifier) {
         if (!pLivingEntity.level().isClientSide()) {
-            AttributeModifierUtil.applyPermanentModifier(
+            CoreAttributeModifiers.applyPermanentModifier(
                     pLivingEntity,
                     ModAttributes.FROST_RESISTANCE.get(),
                     "frost_resistance",
@@ -36,7 +36,7 @@ public class FrostResistanceEffect extends MobEffect {
     public void removeAttributeModifiers(LivingEntity pLivingEntity, AttributeMap pAttributeMap, int pAmplifier) {
         super.removeAttributeModifiers(pLivingEntity, pAttributeMap, pAmplifier);
         if (!pLivingEntity.level().isClientSide()) {
-            AttributeModifierUtil.removeModifier(
+            CoreAttributeModifiers.removeModifier(
                     pLivingEntity,
                     ModAttributes.FROST_RESISTANCE.get(),
                     "frost_resistance"

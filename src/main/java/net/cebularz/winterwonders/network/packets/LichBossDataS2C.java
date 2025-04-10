@@ -1,6 +1,5 @@
 package net.cebularz.winterwonders.network.packets;
 
-import net.cebularz.winterwonders.client.data.FrozenStatusCache;
 import net.cebularz.winterwonders.client.data.LichBossData;
 import net.minecraft.client.Minecraft;
 import net.minecraft.network.FriendlyByteBuf;

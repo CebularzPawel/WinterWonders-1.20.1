@@ -24,6 +24,7 @@ import net.cebularz.winterwonders.WinterWonders;
 import net.cebularz.winterwonders.block.custom.*;
 import net.cebularz.winterwonders.worldgen.tree.greypine.GreypineTreeGrower;
 import net.cebularz.winterwonders.worldgen.tree.greypine.MystWillowTreeGrower;
+import net.turtleboi.turtlecore.effect.CoreEffects;
 
 
 import java.util.function.Supplier;
@@ -126,7 +127,7 @@ public class ModBlocks {
                     BlockBehaviour.Properties.copy(Blocks.POTTED_ALLIUM).noOcclusion()));
 
     public static final RegistryObject<Block> RIMEBLOOM = registerBlock("rimebloom",
-            () -> new FlowerBlock(ModEffects.FROZEN,5,
+            () -> new FlowerBlock(CoreEffects.FROZEN,5,
                     BlockBehaviour.Properties.copy(Blocks.ALLIUM).noOcclusion().noCollission()));
     public static final RegistryObject<Block> MUSCARI = registerBlock("muscari",
             () -> new FlowerBlock(() -> MobEffects.GLOWING,5,

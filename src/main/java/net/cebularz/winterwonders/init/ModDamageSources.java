@@ -13,22 +13,10 @@ import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.ai.attributes.AttributeInstance;
 import net.minecraft.world.level.Level;
 import net.cebularz.winterwonders.WinterWonders;
+import net.turtleboi.turtlecore.init.CoreDamageSources;
 import org.jetbrains.annotations.Nullable;
 
 public class ModDamageSources {
-    public static final ResourceLocation FROST_DAMAGE_ID = new ResourceLocation(WinterWonders.MOD_ID, "frost");
-
-    public static DamageSource frostDamage(Level level, @Nullable Entity attacker, @Nullable Entity directCause) {
-        Holder<DamageType> holder = frostDamageType(level);
-        return new DamageSource(holder, attacker, directCause, attacker != null ? attacker.position() : null);
-    }
-
-    public static Holder<DamageType> frostDamageType(Level level) {
-        return level.registryAccess()
-                .registryOrThrow(Registries.DAMAGE_TYPE)
-                .getHolderOrThrow(ResourceKey.create(Registries.DAMAGE_TYPE, FROST_DAMAGE_ID));
-    }
-
     public static void hurtWithFrostDamage(LivingEntity target, @Nullable Entity attacker, float percent) {
         float damageAmount = target.getMaxHealth() * percent;
         double resistanceModifier = 1.0;
@@ -48,7 +36,7 @@ public class ModDamageSources {
             spawnSnowParticles(target.getServer().getLevel(target.level().dimension()), target.getX(), target.getY(), target.getZ());
         }
 
-        DamageSource damageSource = frostDamage(target.level(), attacker, null);
+        DamageSource damageSource = CoreDamageSources.frozenDamage(target.level(), attacker, null);
         target.hurt(damageSource, reducedDamage);
     }
 

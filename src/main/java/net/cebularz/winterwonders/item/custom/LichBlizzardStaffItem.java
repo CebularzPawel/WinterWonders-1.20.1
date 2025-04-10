@@ -1,7 +1,6 @@
 package net.cebularz.winterwonders.item.custom;
 
 import net.cebularz.winterwonders.client.CameraEngine;
-import net.cebularz.winterwonders.client.renderer.util.ParticleSpawnQueue;
 import net.cebularz.winterwonders.client.shaders.blizzard.BlizzardRenderer;
 import net.cebularz.winterwonders.entity.custom.LichEntity;
 import net.cebularz.winterwonders.entity.custom.projectile.ChillingSnowballEntity;
@@ -11,7 +10,6 @@ import net.cebularz.winterwonders.effect.ModEffects;
 import net.cebularz.winterwonders.entity.ModEntities;
 import net.cebularz.winterwonders.item.custom.impl.IStaffItem;
 import net.cebularz.winterwonders.network.ModNetworking;
-import net.cebularz.winterwonders.network.packets.SendParticlesS2C;
 import net.cebularz.winterwonders.particle.ModParticles;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.particles.ParticleTypes;
@@ -31,6 +29,11 @@ import net.minecraft.world.phys.AABB;
 import net.minecraft.world.phys.Vec3;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
+import net.turtleboi.turtlecore.client.util.ParticleSpawnQueue;
+import net.turtleboi.turtlecore.effect.CoreEffects;
+import net.turtleboi.turtlecore.network.CoreNetworking;
+import net.turtleboi.turtlecore.network.packet.util.SendParticlesS2C;
+import net.turtleboi.turtlecore.particle.CoreParticles;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -166,7 +169,7 @@ public class LichBlizzardStaffItem extends Item implements IStaffItem {
                 level.addFreshEntity(iceSpike);
 
                 serverLevel.sendParticles(
-                        ModParticles.CHILLED_PARTICLES.get(),
+                        CoreParticles.CHILLED_PARTICLES.get(),
                         caster.getX(), caster.getY() + 1.5, caster.getZ(),
                         20, 0.2, 0.2, 0.2, 0.1
                 );
@@ -508,8 +511,8 @@ public class LichBlizzardStaffItem extends Item implements IStaffItem {
                     double particleY = caster.getY() + (random.nextDouble() - 0.5) * spread + (timeElapsed * 5);
                     double particleZ = z + (random.nextDouble() - 0.5) * spread;
 
-                    ModNetworking.sendToNear(new SendParticlesS2C(
-                            ModParticles.CHILLED_PARTICLES.get(),
+                    CoreNetworking.sendToNear(new SendParticlesS2C(
+                            CoreParticles.CHILLED_PARTICLES.get(),
                             particleX, particleY, particleZ,
                             0, 0, 0), caster);
                 }
@@ -528,20 +531,20 @@ public class LichBlizzardStaffItem extends Item implements IStaffItem {
                                 dx * attractionStrength, dy * attractionStrength, dz * attractionStrength));
                         livingTargets.hurtMarked = true;
 
-                        if (!livingTargets.hasEffect(ModEffects.CHILLED.get())){
+                        if (!livingTargets.hasEffect(CoreEffects.CHILLED.get())){
                             livingTargets.addEffect(new MobEffectInstance(
-                                    ModEffects.CHILLED.get(),
+                                    CoreEffects.CHILLED.get(),
                                     300,
                                     2
                             ));
-                        } else if (livingTargets.hasEffect(ModEffects.CHILLED.get()) && livingTargets.getEffect(ModEffects.CHILLED.get()).getAmplifier() <= 2) {
+                        } else if (livingTargets.hasEffect(CoreEffects.CHILLED.get()) && livingTargets.getEffect(CoreEffects.CHILLED.get()).getAmplifier() <= 2) {
                             livingTargets.addEffect(new MobEffectInstance(
-                                    ModEffects.CHILLED.get(),
+                                    CoreEffects.CHILLED.get(),
                                     300,
                                     2,
-                                    livingTargets.getEffect(ModEffects.CHILLED.get()).isAmbient(),
-                                    livingTargets.getEffect(ModEffects.CHILLED.get()).isVisible(),
-                                    livingTargets.getEffect(ModEffects.CHILLED.get()).showIcon()
+                                    livingTargets.getEffect(CoreEffects.CHILLED.get()).isAmbient(),
+                                    livingTargets.getEffect(CoreEffects.CHILLED.get()).isVisible(),
+                                    livingTargets.getEffect(CoreEffects.CHILLED.get()).showIcon()
                             ));
                         }
                     }

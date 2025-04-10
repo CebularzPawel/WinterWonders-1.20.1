@@ -11,6 +11,7 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.EntityHitResult;
+import net.turtleboi.turtlecore.effect.CoreEffects;
 
 public class IceCubeEntity extends ThrowableProjectile
 {
@@ -28,7 +29,7 @@ public class IceCubeEntity extends ThrowableProjectile
         Entity target = pResult.getEntity();
         if(target instanceof LivingEntity lv)
         {
-            lv.addEffect(new MobEffectInstance(ModEffects.CHILLED.get(),100));
+            lv.addEffect(new MobEffectInstance(CoreEffects.CHILLED.get(),100));
             lv.hurt(level().damageSources().explosion(this,target), 1.2F);
         }
         this.discard();

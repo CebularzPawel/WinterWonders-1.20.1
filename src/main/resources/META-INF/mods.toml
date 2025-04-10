@@ -25,8 +25,8 @@ description='''${mod_description}'''
     side="BOTH"
 
 [[dependencies.${mod_id}]]
-    modId="curios"
-    mandatory=false
-    versionRange="[1.20,)"
-    ordering="NONE"
-    side="BOTH"
+modId="turtlecore"
+mandatory=true
+versionRange="2.0.0"
+ordering="NONE"
+side="BOTH"
