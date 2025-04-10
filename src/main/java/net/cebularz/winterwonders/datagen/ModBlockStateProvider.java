@@ -12,7 +12,7 @@ import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.RegistryObject;
 import net.cebularz.winterwonders.WinterWonders;
 import net.cebularz.winterwonders.block.custom.PuckerberryBushBlock;
-import net.cebularz.winterwonders.init.ModBlocks;
+import net.cebularz.winterwonders.block.ModBlocks;
 
 import java.util.function.Function;
 

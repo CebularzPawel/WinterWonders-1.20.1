@@ -1,6 +1,6 @@
 package net.cebularz.winterwonders.entity.custom;
 
-import net.cebularz.winterwonders.entity.ai.PinginTradeWithPlayerGoal;
+import net.cebularz.winterwonders.entity.ai.pingin.PinginTradeWithPlayerGoal;
 import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.syncher.EntityDataAccessor;
@@ -21,8 +21,8 @@ import net.minecraft.world.item.Items;
 import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.ServerLevelAccessor;
-import net.cebularz.winterwonders.entity.ai.SlideOnIceGoal;
-import net.cebularz.winterwonders.init.ModEntities;
+import net.cebularz.winterwonders.entity.ai.pingin.SlideOnIceGoal;
+import net.cebularz.winterwonders.entity.ModEntities;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.ArrayList;
@@ -127,7 +127,7 @@ public class PinginEntity extends Animal {
     public static AttributeSupplier.Builder createAttributes(){
         return Animal.createMobAttributes()
                 .add(Attributes.MAX_HEALTH, 12D)
-                .add(Attributes.MOVEMENT_SPEED, 0.15D)
+                .add(Attributes.MOVEMENT_SPEED, 0.25D)
                 .add(Attributes.FOLLOW_RANGE, 24D);
     }
 

@@ -1,7 +1,6 @@
 package net.cebularz.winterwonders.network.packets;
 
 import net.cebularz.winterwonders.client.data.FrozenStatusCache;
-import net.cebularz.winterwonders.init.ModEffects;
 import net.minecraft.client.Minecraft;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.world.entity.LivingEntity;

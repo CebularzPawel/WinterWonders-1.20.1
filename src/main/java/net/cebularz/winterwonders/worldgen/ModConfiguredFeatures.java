@@ -1,7 +1,7 @@
 package net.cebularz.winterwonders.worldgen;
 
+import net.cebularz.winterwonders.worldgen.customfeatures.IceStoneSpikeFeature;
 import net.minecraft.core.Direction;
-import net.minecraft.core.Holder;
 import net.minecraft.core.HolderSet;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.data.worldgen.BootstapContext;
@@ -23,28 +23,25 @@ import net.minecraft.world.level.levelgen.feature.stateproviders.WeightedStatePr
 import net.minecraft.world.level.levelgen.feature.trunkplacers.DarkOakTrunkPlacer;
 import net.minecraft.world.level.levelgen.placement.PlacementModifier;
 import net.cebularz.winterwonders.WinterWonders;
-import net.cebularz.winterwonders.init.ModBlocks;
-import net.cebularz.winterwonders.init.ModFeatures;
+import net.cebularz.winterwonders.block.ModBlocks;
 import net.cebularz.winterwonders.worldgen.tree.greypine.GreypineFoliagePlacer;
 import net.cebularz.winterwonders.worldgen.tree.greypine.GreypineTrunkPlacer;
-
-import java.util.Iterator;
 
 public final class ModConfiguredFeatures {
     public static final ResourceKey<ConfiguredFeature<?, ?>> GREYPINE_KEY = registerKey("grey_pine");
     public static final ResourceKey<ConfiguredFeature<?, ?>> MYST_WILLOW_KEY = registerKey("myst_willow");
 
-    public static final ResourceKey<ConfiguredFeature<?,?>> ICE_STONE_SPIKE_KEY = registerKey("ice_stone_spike");
+    public static final ResourceKey<ConfiguredFeature<?,?>> COLDSTONE_SPIKE_KEY = registerKey("coldstone_spike");
 
-    public static final ResourceKey<ConfiguredFeature<?,?>> WONDER_SHROOM_KEY = registerKey("wonder_shroom");
+    public static final ResourceKey<ConfiguredFeature<?,?>> WUNDERSHROOM_KEY = registerKey("wundershroom");
 
-    public static final ResourceKey<ConfiguredFeature<?,?>> WINTER_FROST_FLOWERS_KEY = registerKey("winter_frost_flowers");
-    public static final ResourceKey<ConfiguredFeature<?,?>> MAGICAL_FLOWERS_KEY = registerKey("magical_flowers");
+    public static final ResourceKey<ConfiguredFeature<?,?>> RIMEBLOOM_KEY = registerKey("rimebloom");
+    public static final ResourceKey<ConfiguredFeature<?,?>> FROSTPETAL_KEY = registerKey("frostpetal");
 
     public static void bootstrap(BootstapContext<ConfiguredFeature<?, ?>> context) {
-        FeatureUtils.register(context, ICE_STONE_SPIKE_KEY, ModFeatures.ICE_STONE_SPIKE.get());
+        register(context, COLDSTONE_SPIKE_KEY, new IceStoneSpikeFeature(NoneFeatureConfiguration.CODEC), new NoneFeatureConfiguration());
 
-        register(context,WONDER_SHROOM_KEY,Feature.RANDOM_PATCH, new RandomPatchConfiguration(32, 7, 3, PlacementUtils.onlyWhenEmpty(
+        register(context, WUNDERSHROOM_KEY,Feature.RANDOM_PATCH, new RandomPatchConfiguration(32, 7, 3, PlacementUtils.onlyWhenEmpty(
                         Feature.SIMPLE_BLOCK,
                         new SimpleBlockConfiguration(BlockStateProvider.simple(ModBlocks.WUNDERSHROOM.get())))
                 )
@@ -57,11 +54,9 @@ public final class ModConfiguredFeatures {
                 $$33.add(ModBlocks.FROSTPETAL.get().defaultBlockState().setValue(PinkPetalsBlock.AMOUNT, $$34).setValue(PinkPetalsBlock.FACING, $$35), 1);
             }
         }
-        register(context,MAGICAL_FLOWERS_KEY,Feature.FLOWER, new RandomPatchConfiguration(96, 6, 2, PlacementUtils.onlyWhenEmpty(Feature.SIMPLE_BLOCK, new SimpleBlockConfiguration(new WeightedStateProvider($$33)))));
+        register(context, FROSTPETAL_KEY,Feature.FLOWER, new RandomPatchConfiguration(96, 6, 2, PlacementUtils.onlyWhenEmpty(Feature.SIMPLE_BLOCK, new SimpleBlockConfiguration(new WeightedStateProvider($$33)))));
 
-
-
-        register(context,WINTER_FROST_FLOWERS_KEY,Feature.SIMPLE_RANDOM_SELECTOR,new SimpleRandomFeatureConfiguration(HolderSet.direct(PlacementUtils.inlinePlaced(Feature.RANDOM_PATCH, FeatureUtils.simplePatchConfiguration(Feature.SIMPLE_BLOCK, new SimpleBlockConfiguration(BlockStateProvider.simple(ModBlocks.ARCANILLUM.get()))), new PlacementModifier[0]), PlacementUtils.inlinePlaced(Feature.RANDOM_PATCH, FeatureUtils.simplePatchConfiguration(Feature.SIMPLE_BLOCK, new SimpleBlockConfiguration(BlockStateProvider.simple(ModBlocks.RIMEBLOOM.get()))), new PlacementModifier[0]))));
+        register(context, RIMEBLOOM_KEY,Feature.SIMPLE_RANDOM_SELECTOR,new SimpleRandomFeatureConfiguration(HolderSet.direct(PlacementUtils.inlinePlaced(Feature.RANDOM_PATCH, FeatureUtils.simplePatchConfiguration(Feature.SIMPLE_BLOCK, new SimpleBlockConfiguration(BlockStateProvider.simple(ModBlocks.ARCANILLUM.get()))), new PlacementModifier[0]), PlacementUtils.inlinePlaced(Feature.RANDOM_PATCH, FeatureUtils.simplePatchConfiguration(Feature.SIMPLE_BLOCK, new SimpleBlockConfiguration(BlockStateProvider.simple(ModBlocks.RIMEBLOOM.get()))), new PlacementModifier[0]))));
 
         register(context, GREYPINE_KEY, Feature.TREE, new TreeConfiguration.TreeConfigurationBuilder(
                 BlockStateProvider.simple(ModBlocks.GREYPINE_LOG.get()),

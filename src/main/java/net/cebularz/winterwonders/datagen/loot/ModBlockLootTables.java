@@ -15,8 +15,8 @@ import net.minecraft.world.level.storage.loot.predicates.LootItemCondition;
 import net.minecraft.world.level.storage.loot.providers.number.UniformGenerator;
 import net.minecraftforge.registries.RegistryObject;
 import net.cebularz.winterwonders.block.custom.PuckerberryBushBlock;
-import net.cebularz.winterwonders.init.ModBlocks;
-import net.cebularz.winterwonders.init.ModItems;
+import net.cebularz.winterwonders.block.ModBlocks;
+import net.cebularz.winterwonders.item.ModItems;
 
 import java.util.Set;
 

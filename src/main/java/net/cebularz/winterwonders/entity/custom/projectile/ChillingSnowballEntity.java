@@ -1,8 +1,8 @@
 package net.cebularz.winterwonders.entity.custom.projectile;
 
 import net.cebularz.winterwonders.init.ModDamageSources;
-import net.cebularz.winterwonders.init.ModEffects;
-import net.cebularz.winterwonders.init.ModEntities;
+import net.cebularz.winterwonders.effect.ModEffects;
+import net.cebularz.winterwonders.entity.ModEntities;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.effect.MobEffectInstance;

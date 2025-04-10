@@ -3,7 +3,7 @@ package net.cebularz.winterwonders.datagen;
 import net.minecraft.data.PackOutput;
 import net.minecraft.data.recipes.*;
 import net.minecraftforge.common.crafting.conditions.IConditionBuilder;
-import net.cebularz.winterwonders.init.ModBlocks;
+import net.cebularz.winterwonders.block.ModBlocks;
 
 import java.util.function.Consumer;
 

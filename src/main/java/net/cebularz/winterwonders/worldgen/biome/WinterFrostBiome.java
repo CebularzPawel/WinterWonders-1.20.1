@@ -10,7 +10,7 @@ import net.minecraft.world.entity.MobCategory;
 import net.minecraft.world.level.biome.*;
 import net.minecraft.world.level.levelgen.GenerationStep;
 import net.cebularz.winterwonders.WinterWonders;
-import net.cebularz.winterwonders.init.ModEntities;
+import net.cebularz.winterwonders.entity.ModEntities;
 import net.cebularz.winterwonders.worldgen.ModPlacedFeatures;
 
 public final class WinterFrostBiome {

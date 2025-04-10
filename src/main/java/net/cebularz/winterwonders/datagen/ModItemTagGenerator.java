@@ -7,8 +7,8 @@ import net.minecraft.tags.ItemTags;
 import net.minecraft.world.level.block.Block;
 import net.minecraftforge.common.data.ExistingFileHelper;
 import net.cebularz.winterwonders.WinterWonders;
-import net.cebularz.winterwonders.init.ModBlocks;
-import net.cebularz.winterwonders.init.ModItems;
+import net.cebularz.winterwonders.block.ModBlocks;
+import net.cebularz.winterwonders.item.ModItems;
 import net.cebularz.winterwonders.init.ModTags;
 import org.jetbrains.annotations.Nullable;
 

@@ -9,7 +9,7 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.levelgen.feature.Feature;
 import net.minecraft.world.level.levelgen.feature.FeaturePlaceContext;
 import net.minecraft.world.level.levelgen.feature.configurations.NoneFeatureConfiguration;
-import net.cebularz.winterwonders.init.ModBlocks;
+import net.cebularz.winterwonders.block.ModBlocks;
 
 public class IceStoneSpikeFeature extends Feature<NoneFeatureConfiguration> {
     public IceStoneSpikeFeature(Codec<NoneFeatureConfiguration> pCodec) {

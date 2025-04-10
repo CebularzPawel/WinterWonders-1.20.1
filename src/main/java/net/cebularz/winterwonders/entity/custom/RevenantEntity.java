@@ -18,9 +18,9 @@ import net.minecraft.world.item.Items;
 import net.minecraft.world.item.enchantment.EnchantmentHelper;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.ServerLevelAccessor;
-import net.cebularz.winterwonders.init.ModEffects;
-import net.cebularz.winterwonders.init.ModEntities;
-import net.cebularz.winterwonders.init.ModItems;
+import net.cebularz.winterwonders.effect.ModEffects;
+import net.cebularz.winterwonders.entity.ModEntities;
+import net.cebularz.winterwonders.item.ModItems;
 
 import javax.annotation.Nullable;
 

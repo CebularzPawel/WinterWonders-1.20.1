@@ -3,7 +3,7 @@ package net.cebularz.winterwonders.entity.custom;
 import net.cebularz.winterwonders.entity.custom.projectile.ChillingSnowballEntity;
 import net.cebularz.winterwonders.entity.custom.projectile.IceSpikeProjectileEntity;
 import net.cebularz.winterwonders.init.ModAttributes;
-import net.cebularz.winterwonders.init.ModEffects;
+import net.cebularz.winterwonders.effect.ModEffects;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.network.syncher.EntityDataAccessor;
 import net.minecraft.network.syncher.EntityDataSerializers;

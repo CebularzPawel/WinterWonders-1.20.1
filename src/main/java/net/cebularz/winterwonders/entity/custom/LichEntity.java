@@ -1,10 +1,9 @@
 package net.cebularz.winterwonders.entity.custom;
 
-import net.cebularz.winterwonders.entity.ai.LichStaffAttackGoal;
-import net.cebularz.winterwonders.entity.custom.base.IStaffHoldingMob;
-import net.cebularz.winterwonders.init.ModEffects;
-import net.cebularz.winterwonders.init.ModEntities;
-import net.cebularz.winterwonders.init.ModItems;
+import net.cebularz.winterwonders.entity.ai.lich.LichStaffAttackGoal;
+import net.cebularz.winterwonders.effect.ModEffects;
+import net.cebularz.winterwonders.entity.ModEntities;
+import net.cebularz.winterwonders.item.ModItems;
 import net.cebularz.winterwonders.item.custom.LichBlizzardStaffItem;
 import net.cebularz.winterwonders.item.custom.impl.IStaffItem;
 import net.cebularz.winterwonders.network.ModNetworking;
@@ -38,6 +37,7 @@ import net.minecraft.world.entity.monster.Monster;
 import net.minecraft.world.entity.monster.RangedAttackMob;
 import net.minecraft.world.entity.monster.Stray;
 import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.level.Level;
@@ -51,7 +51,7 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
-public class LichEntity extends Monster implements IStaffHoldingMob, RangedAttackMob {
+public class LichEntity extends Monster implements RangedAttackMob {
     private static final double MIN_RANGED_ATTACK_DISTANCE = 5.0D;
     private static final double MAX_RANGED_ATTACK_DISTANCE = 32.0D;
     private static final EntityDataAccessor<Integer> CASTING_TICKS =
@@ -101,12 +101,7 @@ public class LichEntity extends Monster implements IStaffHoldingMob, RangedAttac
     }
 
     @Override
-    public IStaffItem getStaffItem() {
-        return (IStaffItem) ModItems.LICH_BLIZZARD_STAFF.get();
-    }
-
-    @Override
-    public ItemStack getMainHandItem() {
+    public @NotNull ItemStack getMainHandItem() {
         return this.getItemBySlot(EquipmentSlot.MAINHAND);
     }
 
@@ -277,7 +272,7 @@ public class LichEntity extends Monster implements IStaffHoldingMob, RangedAttac
     }
 
     private void castSpell(LivingEntity target){
-        IStaffItem staffItem = this.getStaffItem();
+        Item staffItem = this.getMainHandItem().getItem();
         if (staffItem instanceof LichBlizzardStaffItem lichStaff) {
             lichStaff.setCaster(this);
 

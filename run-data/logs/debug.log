@@ -311,7 +311,7 @@
 [08kwi2025 18:43:28.967] [modloading-worker-0/DEBUG] [io.netty.util.internal.PlatformDependent0/]: sun.misc.Unsafe.copyMemory: available
 [08kwi2025 18:43:28.968] [modloading-worker-0/DEBUG] [io.netty.util.internal.PlatformDependent0/]: sun.misc.Unsafe.storeFence: available
 [08kwi2025 18:43:28.969] [modloading-worker-0/DEBUG] [io.netty.util.internal.PlatformDependent0/]: java.nio.Buffer.address: available
-[08kwi2025 18:43:28.991] [modloading-worker-0/DEBUG] [net.minecraftforge.fml.javafmlmod.AutomaticEventSubscriber/LOADING]: Auto-subscribing net.cebularz.winterwonders.client.events.ModBusEvents to MOD
+[08kwi2025 18:43:28.991] [modloading-worker-0/DEBUG] [net.minecraftforge.fml.javafmlmod.AutomaticEventSubscriber/LOADING]: Auto-subscribing net.cebularz.winterwonders.events.ClientModBusEvents to MOD
 [08kwi2025 18:43:28.969] [modloading-worker-0/DEBUG] [io.netty.util.internal.PlatformDependent0/]: direct buffer constructor: unavailable
 java.lang.UnsupportedOperationException: Reflective setAccessible(true) disabled
 	at io.netty.util.internal.ReflectionUtil.trySetAccessible(ReflectionUtil.java:31) ~[netty-common-4.1.82.Final.jar%23151!/:4.1.82.Final]
@@ -379,12 +379,12 @@ java.lang.IllegalAccessException: class io.netty.util.internal.PlatformDependent
 [08kwi2025 18:43:29.021] [modloading-worker-0/DEBUG] [io.netty.util.internal.PlatformDependent/]: -Dio.netty.uninitializedArrayAllocationThreshold: -1
 [08kwi2025 18:43:29.023] [modloading-worker-0/DEBUG] [io.netty.util.internal.CleanerJava9/]: java.nio.ByteBuffer.cleaner(): available
 [08kwi2025 18:43:29.023] [modloading-worker-0/DEBUG] [io.netty.util.internal.PlatformDependent/]: -Dio.netty.noPreferDirect: false
-[08kwi2025 18:43:29.041] [modloading-worker-0/DEBUG] [net.minecraftforge.fml.javafmlmod.AutomaticEventSubscriber/LOADING]: Auto-subscribing net.cebularz.winterwonders.client.events.ModClientEvents$ClientEvents to FORGE
-[08kwi2025 18:43:29.050] [modloading-worker-0/DEBUG] [net.minecraftforge.fml.javafmlmod.AutomaticEventSubscriber/LOADING]: Auto-subscribing net.cebularz.winterwonders.client.events.ModClientEvents to FORGE
+[08kwi2025 18:43:29.041] [modloading-worker-0/DEBUG] [net.minecraftforge.fml.javafmlmod.AutomaticEventSubscriber/LOADING]: Auto-subscribing net.cebularz.winterwonders.events.ClientEvents$ClientEvents to FORGE
+[08kwi2025 18:43:29.050] [modloading-worker-0/DEBUG] [net.minecraftforge.fml.javafmlmod.AutomaticEventSubscriber/LOADING]: Auto-subscribing net.cebularz.winterwonders.events.ClientEvents to FORGE
 [08kwi2025 18:43:29.066] [modloading-worker-0/DEBUG] [net.minecraftforge.fml.javafmlmod.AutomaticEventSubscriber/LOADING]: Auto-subscribing net.cebularz.winterwonders.datagen.DataGenerators to MOD
 [08kwi2025 18:43:29.083] [modloading-worker-0/DEBUG] [net.minecraftforge.fml.javafmlmod.AutomaticEventSubscriber/LOADING]: Auto-subscribing net.cebularz.winterwonders.init.ModAttributes to MOD
 [08kwi2025 18:43:29.087] [modloading-worker-0/DEBUG] [net.minecraftforge.common.ForgeMod/FORGEMOD]: Loading Network data for FML net version: FML3
-[08kwi2025 18:43:29.100] [modloading-worker-0/DEBUG] [net.minecraftforge.fml.javafmlmod.AutomaticEventSubscriber/LOADING]: Auto-subscribing net.cebularz.winterwonders.init.ModEvents to FORGE
+[08kwi2025 18:43:29.100] [modloading-worker-0/DEBUG] [net.minecraftforge.fml.javafmlmod.AutomaticEventSubscriber/LOADING]: Auto-subscribing net.cebularz.winterwonders.events.ModEvents to FORGE
 [08kwi2025 18:43:29.176] [modloading-worker-0/DEBUG] [net.minecraftforge.fml.javafmlmod.AutomaticEventSubscriber/LOADING]: Auto-subscribing net.cebularz.winterwonders.WinterWonders$ClientModEvents to MOD
 [08kwi2025 18:43:29.179] [modloading-worker-0/DEBUG] [net.minecraftforge.fml.javafmlmod.AutomaticEventSubscriber/LOADING]: Auto-subscribing net.cebularz.winterwonders.worldgen.biome.BiomeMusicManager to FORGE
 [08kwi2025 18:43:29.209] [modloading-worker-0/DEBUG] [net.minecraftforge.fml.config.ConfigTracker/CONFIG]: Config file forge-client.toml for forge tracking

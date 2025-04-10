@@ -16,8 +16,8 @@ import net.minecraftforge.common.data.ExistingFileHelper;
 import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.RegistryObject;
 import net.cebularz.winterwonders.WinterWonders;
-import net.cebularz.winterwonders.init.ModBlocks;
-import net.cebularz.winterwonders.init.ModItems;
+import net.cebularz.winterwonders.block.ModBlocks;
+import net.cebularz.winterwonders.item.ModItems;
 
 import java.util.LinkedHashMap;
 

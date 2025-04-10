@@ -13,8 +13,8 @@ import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.EntityHitResult;
 import net.minecraft.world.phys.Vec3;
 import net.cebularz.winterwonders.init.ModDamageSources;
-import net.cebularz.winterwonders.init.ModEffects;
-import net.cebularz.winterwonders.init.ModEntities;
+import net.cebularz.winterwonders.effect.ModEffects;
+import net.cebularz.winterwonders.entity.ModEntities;
 
 public class IceSpikeProjectileEntity extends AbstractArrow {
     private final float damageAmount;

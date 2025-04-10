@@ -13,7 +13,7 @@ import net.minecraft.world.level.levelgen.feature.configurations.TreeConfigurati
 import net.minecraft.world.level.levelgen.feature.foliageplacers.FoliagePlacer;
 import net.minecraft.world.level.levelgen.feature.foliageplacers.FoliagePlacerType;
 import net.cebularz.winterwonders.block.custom.TreeMushroomWallBlock;
-import net.cebularz.winterwonders.init.ModBlocks;
+import net.cebularz.winterwonders.block.ModBlocks;
 import net.cebularz.winterwonders.worldgen.tree.ModFoliagePlacers;
 
 import java.util.Comparator;

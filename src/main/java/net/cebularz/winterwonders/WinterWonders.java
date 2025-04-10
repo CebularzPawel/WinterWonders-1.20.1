@@ -1,6 +1,12 @@
 package net.cebularz.winterwonders;
 
 import com.mojang.logging.LogUtils;
+import net.cebularz.winterwonders.block.ModBlocks;
+import net.cebularz.winterwonders.block.entity.ModBlockEntities;
+import net.cebularz.winterwonders.effect.ModEffects;
+import net.cebularz.winterwonders.entity.ModEntities;
+import net.cebularz.winterwonders.item.ModCreativeModeTabs;
+import net.cebularz.winterwonders.item.ModItems;
 import net.cebularz.winterwonders.network.ModNetworking;
 import net.cebularz.winterwonders.particle.ModParticles;
 import net.minecraft.client.renderer.ItemBlockRenderTypes;
@@ -36,7 +42,6 @@ public class WinterWonders {
 
     public WinterWonders() {
         IEventBus modEventBus = FMLJavaModLoadingContext.get().getModEventBus();
-        ModFeatures.DEF_REG.register(modEventBus);
         ModParticles.register(modEventBus);
         ModItems.register(modEventBus);
         ModBlocks.register(modEventBus);

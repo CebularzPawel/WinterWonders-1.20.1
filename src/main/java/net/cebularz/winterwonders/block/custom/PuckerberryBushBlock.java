@@ -24,7 +24,7 @@ import net.minecraft.world.level.gameevent.GameEvent;
 import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.VoxelShape;
-import net.cebularz.winterwonders.init.ModItems;
+import net.cebularz.winterwonders.item.ModItems;
 
 public class PuckerberryBushBlock extends BushBlock implements BonemealableBlock {
     public static final int MAX_AGE = 3;

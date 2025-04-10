@@ -13,7 +13,7 @@ import net.minecraft.util.valueproviders.UniformInt;
 import net.minecraft.world.level.levelgen.feature.ConfiguredFeature;
 import net.minecraft.world.level.levelgen.placement.*;
 import net.cebularz.winterwonders.WinterWonders;
-import net.cebularz.winterwonders.init.ModBlocks;
+import net.cebularz.winterwonders.block.ModBlocks;
 
 import java.util.List;
 
@@ -29,17 +29,7 @@ public final class ModPlacedFeatures {
     public static final ResourceKey<PlacedFeature> MAGICAL_FLOWERS_KEY = registerKey("magical_flowers");
 
     public static void bootstrap(BootstapContext<PlacedFeature> context) {
-
-
         HolderGetter<ConfiguredFeature<?, ?>> configuredFeatures = context.lookup(Registries.CONFIGURED_FEATURE);
-
-        PlacementUtils.register(context, MAGICAL_FLOWERS_KEY, configuredFeatures.getOrThrow(ModConfiguredFeatures.MAGICAL_FLOWERS_KEY), new PlacementModifier[]{NoiseThresholdCountPlacement.of(3, 2, 5), InSquarePlacement.spread(), PlacementUtils.HEIGHTMAP, BiomeFilter.biome()});
-
-        PlacementUtils.register(context,WINTER_FROST_FLOWERS_KEY,configuredFeatures.getOrThrow(ModConfiguredFeatures.WINTER_FROST_FLOWERS_KEY), new PlacementModifier[]{CountPlacement.of(1), InSquarePlacement.spread(), PlacementUtils.HEIGHTMAP, BiomeFilter.biome()});
-
-
-        PlacementUtils.register(context,WONDER_SHROOM_PATCH_KEY,configuredFeatures.getOrThrow(ModConfiguredFeatures.WONDER_SHROOM_KEY), new PlacementModifier[]{RarityFilter.onAverageOnceEvery(1), InSquarePlacement.spread(), PlacementUtils.HEIGHTMAP, CountPlacement.of(ClampedInt.of(UniformInt.of(-3, 1), 0, 1)), BiomeFilter.biome()});
-
 
         register(context, GREYPINE_PLACED_KEY, configuredFeatures.getOrThrow(ModConfiguredFeatures.GREYPINE_KEY),
                 VegetationPlacements.treePlacement(PlacementUtils.countExtra(8, 0.5f, 4),
@@ -49,8 +39,35 @@ public final class ModPlacedFeatures {
                 VegetationPlacements.treePlacement(PlacementUtils.countExtra(8, 0.5f, 4),
                         ModBlocks.MYST_WILLOW_SAPLING.get()));
 
-        PlacementUtils.register(context, ICE_STONE_SPIKE_KEY, configuredFeatures.getOrThrow(ModConfiguredFeatures.ICE_STONE_SPIKE_KEY), new PlacementModifier[]{CountPlacement.of(1),RarityFilter.onAverageOnceEvery(2), InSquarePlacement.spread(), PlacementUtils.HEIGHTMAP, BiomeFilter.biome()});
+        PlacementUtils.register(context, MAGICAL_FLOWERS_KEY, configuredFeatures.getOrThrow(
+                ModConfiguredFeatures.FROSTPETAL_KEY),
+                NoiseThresholdCountPlacement.of(3, 2, 5),
+                InSquarePlacement.spread(),
+                PlacementUtils.HEIGHTMAP,
+                BiomeFilter.biome());
 
+        PlacementUtils.register(context,WINTER_FROST_FLOWERS_KEY,configuredFeatures.getOrThrow(
+                ModConfiguredFeatures.RIMEBLOOM_KEY),
+                CountPlacement.of(1),
+                InSquarePlacement.spread(),
+                PlacementUtils.HEIGHTMAP,
+                BiomeFilter.biome());
+
+        PlacementUtils.register(context,WONDER_SHROOM_PATCH_KEY,configuredFeatures.getOrThrow(
+                ModConfiguredFeatures.WUNDERSHROOM_KEY),
+                RarityFilter.onAverageOnceEvery(1),
+                InSquarePlacement.spread(),
+                PlacementUtils.HEIGHTMAP,
+                CountPlacement.of(ClampedInt.of(UniformInt.of(-3, 1), 0, 1)),
+                BiomeFilter.biome());
+
+        PlacementUtils.register(context, ICE_STONE_SPIKE_KEY, configuredFeatures.getOrThrow(
+                ModConfiguredFeatures.COLDSTONE_SPIKE_KEY),
+                CountPlacement.of(1),
+                RarityFilter.onAverageOnceEvery(2),
+                InSquarePlacement.spread(),
+                PlacementUtils.HEIGHTMAP,
+                BiomeFilter.biome());
     }
 
     private static ResourceKey<PlacedFeature> registerKey(String name) {

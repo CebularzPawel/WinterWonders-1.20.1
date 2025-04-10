@@ -1,6 +1,6 @@
 package net.cebularz.winterwonders.entity.custom;
 
-import net.cebularz.winterwonders.init.ModEntities;
+import net.cebularz.winterwonders.entity.ModEntities;
 import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.server.level.ServerLevel;

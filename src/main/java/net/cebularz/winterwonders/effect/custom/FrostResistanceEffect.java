@@ -1,0 +1,47 @@
+package net.cebularz.winterwonders.effect.custom;
+
+import net.cebularz.winterwonders.init.ModAttributes;
+import net.cebularz.winterwonders.util.AttributeModifierUtil;
+import net.minecraft.world.effect.MobEffect;
+import net.minecraft.world.effect.MobEffectCategory;
+import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.ai.attributes.AttributeMap;
+import net.minecraft.world.entity.ai.attributes.AttributeModifier;
+
+
+public class FrostResistanceEffect extends MobEffect {
+    public FrostResistanceEffect(MobEffectCategory mobEffectCategory, int color) {
+        super(mobEffectCategory, color);
+    }
+    @Override
+    public void applyEffectTick(LivingEntity pLivingEntity, int pAmplifier) {
+        if (!pLivingEntity.level().isClientSide()) {
+            AttributeModifierUtil.applyPermanentModifier(
+                    pLivingEntity,
+                    ModAttributes.FROST_RESISTANCE.get(),
+                    "frost_resistance",
+                    20 * (1 + pAmplifier),
+                    AttributeModifier.Operation.ADDITION
+            );
+        }
+        super.applyEffectTick(pLivingEntity, pAmplifier);
+    }
+
+    @Override
+    public boolean isDurationEffectTick(int pDuration, int pAmplifier) {
+        return true;
+    }
+
+    @Override
+    public void removeAttributeModifiers(LivingEntity pLivingEntity, AttributeMap pAttributeMap, int pAmplifier) {
+        super.removeAttributeModifiers(pLivingEntity, pAttributeMap, pAmplifier);
+        if (!pLivingEntity.level().isClientSide()) {
+            AttributeModifierUtil.removeModifier(
+                    pLivingEntity,
+                    ModAttributes.FROST_RESISTANCE.get(),
+                    "frost_resistance"
+            );
+        }
+    }
+}
+

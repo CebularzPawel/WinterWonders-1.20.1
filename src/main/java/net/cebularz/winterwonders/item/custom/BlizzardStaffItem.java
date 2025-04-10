@@ -1,13 +1,11 @@
 package net.cebularz.winterwonders.item.custom;
 
 import net.cebularz.winterwonders.client.renderer.util.ParticleSpawnQueue;
-import net.cebularz.winterwonders.entity.custom.projectile.IceSpikeProjectileEntity;
-import net.cebularz.winterwonders.init.ModEffects;
+import net.cebularz.winterwonders.effect.ModEffects;
 import net.cebularz.winterwonders.network.ModNetworking;
 import net.cebularz.winterwonders.network.packets.SendParticlesS2C;
 import net.cebularz.winterwonders.particle.ModParticles;
 import net.minecraft.core.particles.ParticleTypes;
-import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.util.RandomSource;

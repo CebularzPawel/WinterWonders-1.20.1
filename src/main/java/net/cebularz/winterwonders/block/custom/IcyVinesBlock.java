@@ -10,8 +10,8 @@ import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.VoxelShape;
-import net.cebularz.winterwonders.block.entity.IcyVinesBlockEntity;
-import net.cebularz.winterwonders.init.ModBlocks;
+import net.cebularz.winterwonders.block.entity.custom.IcyVinesBlockEntity;
+import net.cebularz.winterwonders.block.ModBlocks;
 import org.jetbrains.annotations.Nullable;
 
 public class IcyVinesBlock extends GrowingPlantHeadBlock implements EntityBlock{
