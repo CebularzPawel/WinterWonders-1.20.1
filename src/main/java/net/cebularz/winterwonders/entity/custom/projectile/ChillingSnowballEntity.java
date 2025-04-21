@@ -54,7 +54,7 @@ public class ChillingSnowballEntity extends Snowball {
             if (hitEntity instanceof LivingEntity livingEntity) {
                 if (livingEntity.hasEffect(CoreEffects.CHILLED.get())) {
                     int currentAmplifier = livingEntity.getEffect(CoreEffects.CHILLED.get()).getAmplifier();
-                    livingEntity.addEffect(new MobEffectInstance(CoreEffects.CHILLED.get(), 400, currentAmplifier + this.chillAmplifier));
+                    livingEntity.addEffect(new MobEffectInstance(CoreEffects.CHILLED.get(), 400, currentAmplifier + (this.chillAmplifier + 1)));
                 } else {
                     livingEntity.addEffect(new MobEffectInstance(CoreEffects.CHILLED.get(), 400, this.chillAmplifier));
                 }

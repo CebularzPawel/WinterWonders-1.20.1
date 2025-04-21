@@ -3,6 +3,7 @@ package net.cebularz.winterwonders.item;
 import net.cebularz.winterwonders.block.ModBlocks;
 import net.cebularz.winterwonders.entity.ModEntities;
 import net.cebularz.winterwonders.item.custom.BlizzardStaffItem;
+import net.cebularz.winterwonders.item.custom.ColdsteelSwordItem;
 import net.cebularz.winterwonders.item.custom.LichBlizzardStaffItem;
 import net.cebularz.winterwonders.item.util.ModArmorItem;
 import net.cebularz.winterwonders.item.util.ModArmorMaterials;
@@ -44,7 +45,7 @@ public class ModItems {
             () -> new Item(new Item.Properties().rarity(Rarity.UNCOMMON)));
 
     public static final RegistryObject<Item> COLDSTEEL_SWORD = ITEMS.register("coldsteel_sword",
-            () -> new SwordItem(ModToolTiers.COLDSTEEL, 3, -2.4f, new Item.Properties().rarity(Rarity.RARE)));
+            () -> new ColdsteelSwordItem(ModToolTiers.COLDSTEEL, 3, -2.4f, new Item.Properties().rarity(Rarity.RARE)));
 
     public static final RegistryObject<Item> COLDSTEEL_PICKAXE = ITEMS.register("coldsteel_pickaxe",
             () -> new PickaxeItem(ModToolTiers.COLDSTEEL, 1, -2.8f, new Item.Properties().rarity(Rarity.RARE)));

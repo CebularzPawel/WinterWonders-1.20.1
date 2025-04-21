@@ -30,7 +30,7 @@ public class FrostbiteWandItem extends Item {
                 SoundEvents.EVOKER_CAST_SPELL, SoundSource.NEUTRAL, 0.75f, 0.4f / (pLevel.getRandom().nextFloat() * 0.4f + 0.8f));
 
         if(!pLevel.isClientSide){
-            ChillingSnowballEntity iceSpike = new ChillingSnowballEntity(pLevel, pPlayer);
+            ChillingSnowballEntity iceSpike = new ChillingSnowballEntity(pLevel, pPlayer, 0, false, 0);
             iceSpike.shootFromRotation(pPlayer, pPlayer.getXRot(), pPlayer.getYRot(), 0.0f, 2f, 1.0f);
             pLevel.addFreshEntity(iceSpike);
         }
