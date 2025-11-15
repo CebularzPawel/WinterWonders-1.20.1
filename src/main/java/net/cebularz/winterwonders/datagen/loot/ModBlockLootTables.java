@@ -77,10 +77,21 @@ public class ModBlockLootTables extends BlockLootSubProvider {
         this.dropSelf(ModBlocks.MYST_WILLOW_WOOD.get());
         this.dropSelf(ModBlocks.STRIPPED_MYST_WILLOW_LOG.get());
         this.dropSelf(ModBlocks.STRIPPED_MYST_WILLOW_WOOD.get());
-        this.dropSelf(ModBlocks.MYST_WILLOW_PLANKS.get());
         this.dropSelf(ModBlocks.MYST_WILLOW_SAPLING.get());
         this.add(ModBlocks.MYST_WILLOW_LEAVES.get(), block ->
                 createLeavesDrops(block, ModBlocks.MYST_WILLOW_SAPLING.get(), NORMAL_LEAVES_SAPLING_CHANCES));
+
+        this.dropSelf(ModBlocks.MYST_WILLOW_PLANKS.get());
+        this.add(ModBlocks.MYST_WILLOW_SLAB.get(),
+                block -> createSlabItemTable(ModBlocks.MYST_WILLOW_SLAB.get()));
+        this.dropSelf(ModBlocks.MYST_WILLOW_STAIRS.get());
+        this.dropSelf(ModBlocks.MYST_WILLOW_BUTTON.get());
+        this.dropSelf(ModBlocks.MYST_WILLOW_PRESSURE_PLATE.get());
+        //this.add(ModBlocks.MYST_WILLOW_DOOR.get(),
+        //        block -> createDoorTable(ModBlocks.MYST_WILLOW_DOOR.get()));
+        //this.dropSelf(ModBlocks.MYST_WILLOW_TRAPDOOR.get());
+        this.dropSelf(ModBlocks.MYST_WILLOW_FENCE.get());
+        this.dropSelf(ModBlocks.MYST_WILLOW_FENCE_GATE.get());
 
         this.dropWhenSilkTouch(ModBlocks.ICE_SLUSH.get());
 

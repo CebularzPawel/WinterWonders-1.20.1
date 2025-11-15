@@ -62,6 +62,14 @@ public class ModCreativeModeTabs {
                         pOutput.accept(ModBlocks.MYST_WILLOW_LEAVES.get());
                         pOutput.accept(ModBlocks.MYST_WILLOW_SAPLING.get());
                         pOutput.accept(ModBlocks.MYST_WILLOW_PLANKS.get());
+                        pOutput.accept(ModBlocks.MYST_WILLOW_SLAB.get());
+                        pOutput.accept(ModBlocks.MYST_WILLOW_STAIRS.get());
+                        //pOutput.accept(ModBlocks.MYST_WILLOW_DOOR.get());
+                        //pOutput.accept(ModBlocks.MYST_WILLOW_TRAPDOOR.get());
+                        pOutput.accept(ModBlocks.MYST_WILLOW_FENCE.get());
+                        pOutput.accept(ModBlocks.MYST_WILLOW_FENCE_GATE.get());
+                        pOutput.accept(ModBlocks.MYST_WILLOW_BUTTON.get());
+                        pOutput.accept(ModBlocks.MYST_WILLOW_PRESSURE_PLATE.get());
 
                         pOutput.accept(ModBlocks.COBBLED_ICE_STONE.get());
                         pOutput.accept(ModBlocks.COBBLED_ICE_STONE_STAIRS.get());

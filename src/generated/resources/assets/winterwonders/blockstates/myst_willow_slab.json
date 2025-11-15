@@ -1,0 +1,13 @@
+{
+  "variants": {
+    "type=bottom": {
+      "model": "winterwonders:block/myst_willow_slab"
+    },
+    "type=double": {
+      "model": "winterwonders:block/myst_willow_planks"
+    },
+    "type=top": {
+      "model": "winterwonders:block/myst_willow_slab_top"
+    }
+  }
+}

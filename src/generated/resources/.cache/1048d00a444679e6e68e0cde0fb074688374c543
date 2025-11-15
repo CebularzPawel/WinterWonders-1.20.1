@@ -1,4 +1,4 @@
-// 1.20.1	2025-04-08T18:43:34.2343713	Item Models: winterwonders
+// 1.20.1	2025-11-11T22:50:00.8670112	Item Models: winterwonders
 3b3b138819367044cef18d3d8bb1914e67ce2d44 assets/winterwonders/models/item/arcanillum.json
 c438a44b63bedbeee407e8332cded4816d611359 assets/winterwonders/models/item/brisk_rod.json
 63ec6c618a3a23eab4cab9c52d7d3250de9b516e assets/winterwonders/models/item/brisk_spawn_egg.json
@@ -77,7 +77,13 @@ a9a66a6f695fb43f98ab00c4284511f75d408767 assets/winterwonders/models/item/ice_st
 1a6abeabc749e03f0730a281cbfce967b47b3344 assets/winterwonders/models/item/ice_stone_tiles_wall.json
 63ec6c618a3a23eab4cab9c52d7d3250de9b516e assets/winterwonders/models/item/lich_spawn_egg.json
 8d5e083e2fe78f8b460dadff0bbeeaacf72f6e89 assets/winterwonders/models/item/muscari.json
+d1038c5538ceac493c1881d104e91ae3f139028d assets/winterwonders/models/item/myst_willow_button.json
+b283cfb3b27a233d0bf22b317e2017dc31229ac8 assets/winterwonders/models/item/myst_willow_fence.json
+c95f1371cf28b4612c722a9c0da0fca911cc8497 assets/winterwonders/models/item/myst_willow_fence_gate.json
+18055c956ade22f4cec1a6a646d651d8d2832247 assets/winterwonders/models/item/myst_willow_pressure_plate.json
 7592a7d9a8326f68c6be9447512ae987f379cb42 assets/winterwonders/models/item/myst_willow_sapling.json
+44ad058bf2d377f17b8fe34e95b5046f7fbb7840 assets/winterwonders/models/item/myst_willow_slab.json
+f990ccfb31aad899dcfd273529c3a6ea636f5baf assets/winterwonders/models/item/myst_willow_stairs.json
 2e10d686a0612ab7a64f9e73b05cdc93dc37e3b3 assets/winterwonders/models/item/pingin_feather.json
 69937872e0753e623de5a25c59e6aa3640cb0ae3 assets/winterwonders/models/item/pingin_meat.json
 63ec6c618a3a23eab4cab9c52d7d3250de9b516e assets/winterwonders/models/item/pingin_spawn_egg.json

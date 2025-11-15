@@ -23,7 +23,7 @@ import net.minecraftforge.registries.RegistryObject;
 import net.cebularz.winterwonders.WinterWonders;
 import net.cebularz.winterwonders.block.custom.*;
 import net.cebularz.winterwonders.worldgen.tree.greypine.GreypineTreeGrower;
-import net.cebularz.winterwonders.worldgen.tree.greypine.MystWillowTreeGrower;
+import net.cebularz.winterwonders.worldgen.tree.mystwillow.MystWillowTreeGrower;
 import net.turtleboi.turtlecore.effect.CoreEffects;
 
 
@@ -188,7 +188,7 @@ public class ModBlocks {
             () -> new TrapDoorBlock(BlockBehaviour.Properties.copy(Blocks.SPRUCE_TRAPDOOR), BlockSetType.SPRUCE));
 
     public static final RegistryObject<Block> MYST_WILLOW_PLANKS = registerBlock("myst_willow_planks",
-            () -> new Block(BlockBehaviour.Properties.copy(Blocks.SPRUCE_PLANKS)){
+            () -> new Block(BlockBehaviour.Properties.copy(Blocks.MANGROVE_PLANKS)){
                 @Override
                 public boolean isFlammable(BlockState state, BlockGetter level, BlockPos pos, Direction direction) {
                     return true;
@@ -204,6 +204,35 @@ public class ModBlocks {
                     return 5;
                 }
             });
+
+    public static final RegistryObject<Block> MYST_WILLOW_SLAB = registerBlock("myst_willow_slab",
+            () -> new SlabBlock(BlockBehaviour.Properties.copy(Blocks.MANGROVE_PLANKS)));
+
+    public static final RegistryObject<Block> MYST_WILLOW_STAIRS = registerBlock("myst_willow_stairs",
+            () -> new StairBlock(() -> ModBlocks.MYST_WILLOW_PLANKS.get().defaultBlockState(),
+                    BlockBehaviour.Properties.copy(Blocks.MANGROVE_PLANKS)));
+
+    public static final RegistryObject<Block> MYST_WILLOW_BUTTON = registerBlock("myst_willow_button",
+            () -> new ButtonBlock(BlockBehaviour.Properties.copy(Blocks.MANGROVE_BUTTON),
+                    BlockSetType.MANGROVE, 20, true));
+
+    public static final RegistryObject<Block> MYST_WILLOW_PRESSURE_PLATE = registerBlock("myst_willow_pressure_plate",
+            () -> new PressurePlateBlock(PressurePlateBlock.Sensitivity.EVERYTHING,
+                    BlockBehaviour.Properties.copy(Blocks.MANGROVE_PLANKS),
+                    BlockSetType.MANGROVE));
+
+    public static final RegistryObject<Block> MYST_WILLOW_FENCE = registerBlock("myst_willow_fence",
+            () -> new FenceBlock(BlockBehaviour.Properties.copy(Blocks.MANGROVE_PLANKS)));
+
+    public static final RegistryObject<Block> MYST_WILLOW_FENCE_GATE = registerBlock("myst_willow_fence_gate",
+            () -> new FenceGateBlock(BlockBehaviour.Properties.copy(Blocks.MANGROVE_PLANKS),
+                    SoundEvents.WOODEN_DOOR_OPEN, SoundEvents.WOODEN_DOOR_CLOSE));
+
+    //public static final RegistryObject<Block> GREYPINE_DOOR = registerBlock("greypine_door",
+    //        () -> new DoorBlock(BlockBehaviour.Properties.copy(Blocks.SPRUCE_DOOR), BlockSetType.SPRUCE));
+//
+    //public static final RegistryObject<Block> GREYPINE_TRAPDOOR = registerBlock("greypine_trapdoor",
+    //        () -> new TrapDoorBlock(BlockBehaviour.Properties.copy(Blocks.SPRUCE_TRAPDOOR), BlockSetType.SPRUCE));
 
     public static final RegistryObject<Block> ICE_SLUSH = registerBlock("ice_slush",
             ()-> new IceSlushBlock(BlockBehaviour.Properties.copy(Blocks.ICE).mapColor(MapColor.ICE).replaceable().strength(0.2F).friction(0.98F)));

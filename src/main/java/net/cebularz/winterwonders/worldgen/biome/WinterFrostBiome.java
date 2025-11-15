@@ -64,6 +64,7 @@ public final class WinterFrostBiome {
         BiomeDefaultFeatures.addDefaultFlowers(settings);
         BiomeDefaultFeatures.addTaigaGrass(settings);
         settings.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, ModPlacedFeatures.GREYPINE_PLACED_KEY);
+        settings.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, ModPlacedFeatures.MYST_WILLOW_PLACED_KEY);
         settings.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, ModPlacedFeatures.WONDER_SHROOM_PATCH_KEY);
         settings.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, ModPlacedFeatures.WINTER_FROST_FLOWERS_KEY);
         settings.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, ModPlacedFeatures.MAGICAL_FLOWERS_KEY);

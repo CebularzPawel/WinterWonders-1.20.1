@@ -29,8 +29,7 @@ public class ModBiomeSerializers
         return new ListHolderSet<>(holders);
     }
 
-    public static void bootstap(BootstapContext<BiomeModifier> context)
-    {
+    public static void bootstap(BootstapContext<BiomeModifier> context) {
         HolderGetter<PlacedFeature> holderGetter = context.lookup(Registries.PLACED_FEATURE);
         List<ResourceKey<PlacedFeature>> features = List.of(
         );

@@ -69,42 +69,6 @@ public class GreypineFoliagePlacer extends FoliagePlacer {
                 }
             }
         }
-
-        List<int[]> vineRows = rows.stream()
-                .sorted(Comparator.comparingInt(a -> a[1]))
-                .limit(3)
-                .toList();
-
-        for (int[] row : vineRows) {
-            int radius = row[0];
-            int vOffset = row[1];
-            for (int x = -radius; x <= radius; x++) {
-                for (int z = -radius; z <= radius; z++) {
-                    if (Math.max(Math.abs(x), Math.abs(z)) == radius) {
-                        if (pRandom.nextFloat() > 0.8f) {
-                            BlockPos leafPos = originPos.offset(x, vOffset, z);
-                            BlockPos vinePos = leafPos.below();
-                            if (pLevel.isStateAtPosition(leafPos, (p_284924_) -> p_284924_.is(BlockTags.LEAVES)) &&
-                                    pLevel.isStateAtPosition(vinePos, BlockBehaviour.BlockStateBase::isAir)) {
-                                pBlockSetter.set(vinePos, ModBlocks.ICY_VINES.get().defaultBlockState());
-                                if (pRandom.nextFloat() > 0.65f) {
-                                    BlockPos vine2Pos = vinePos.below();
-                                    pBlockSetter.set(vinePos, ModBlocks.ICY_VINES_PLANT.get().defaultBlockState());
-                                    pBlockSetter.set(vine2Pos, ModBlocks.ICY_VINES.get().defaultBlockState());
-                                    if (pRandom.nextFloat() > 0.65f) {
-                                        BlockPos vine3Pos = vine2Pos.below();
-                                        pBlockSetter.set(vinePos, ModBlocks.ICY_VINES_PLANT.get().defaultBlockState());
-                                        pBlockSetter.set(vine2Pos, ModBlocks.ICY_VINES_PLANT.get().defaultBlockState());
-                                        pBlockSetter.set(vine3Pos, ModBlocks.ICY_VINES.get().defaultBlockState());
-                                    }
-                                }
-                            }
-                        }
-                    }
-                }
-            }
-        }
-
     }
 
     private List<int[]> getFoliageRows(int treeVariant) {

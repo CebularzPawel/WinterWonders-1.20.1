@@ -1,9 +1,9 @@
-// 1.20.1	2025-04-10T12:48:08.1301561	Registries
-5b150e1c03927428bdeb22138883ef43c02ea3c5 data/winterwonders/worldgen/biome/winter_frost.json
+// 1.20.1	2025-11-12T23:18:20.4356259	Registries
+98133f11a489190fdcb539445ec477b90cde7be3 data/winterwonders/worldgen/biome/winter_frost.json
 90120e3144ed714326f72f2044f567781ee80d02 data/winterwonders/worldgen/configured_feature/coldstone_spike.json
 0aea5876a2257a8397d8f0afcd78a5355e16802e data/winterwonders/worldgen/configured_feature/frostpetal.json
 42e2366f35691e022e041002c738debc916433bc data/winterwonders/worldgen/configured_feature/grey_pine.json
-cac8b1cceb97064ce9f91a0bc1424451b1532b7a data/winterwonders/worldgen/configured_feature/myst_willow.json
+579d67a3ff9c5819b1469eedc3c526e78ea213fd data/winterwonders/worldgen/configured_feature/myst_willow.json
 b74a8715613af7eb7656e28785828bf8d8b02722 data/winterwonders/worldgen/configured_feature/rimebloom.json
 a20a99cdc12e220472b74f788296fe28b7253cea data/winterwonders/worldgen/configured_feature/wundershroom.json
 5d2b4f58a6194846d22392b1307952d6b530a981 data/winterwonders/worldgen/placed_feature/coldstone_spike.json

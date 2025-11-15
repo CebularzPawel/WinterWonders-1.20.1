@@ -91,7 +91,6 @@ public class ModBlockStateProvider extends BlockStateProvider {
 
         saplingBlock(ModBlocks.GREYPINE_SAPLING);
 
-
         logBlock(((RotatedPillarBlock) ModBlocks.MYST_WILLOW_LOG.get()));
         axisBlock(((RotatedPillarBlock) ModBlocks.MYST_WILLOW_WOOD.get()), blockTexture(ModBlocks.MYST_WILLOW_LOG.get()), blockTexture(ModBlocks.MYST_WILLOW_LOG.get()));
 
@@ -105,6 +104,12 @@ public class ModBlockStateProvider extends BlockStateProvider {
         blockItem(ModBlocks.STRIPPED_MYST_WILLOW_WOOD);
 
         blockWithItem(ModBlocks.MYST_WILLOW_PLANKS);
+        stairsBlock((StairBlock) ModBlocks.MYST_WILLOW_STAIRS.get(), blockTexture(ModBlocks.MYST_WILLOW_PLANKS.get()));
+        slabBlock((SlabBlock) ModBlocks.MYST_WILLOW_SLAB.get(), blockTexture(ModBlocks.MYST_WILLOW_PLANKS.get()), blockTexture(ModBlocks.MYST_WILLOW_PLANKS.get()));
+        buttonBlock((ButtonBlock) ModBlocks.MYST_WILLOW_BUTTON.get(), blockTexture(ModBlocks.MYST_WILLOW_PLANKS.get()));
+        pressurePlateBlock((PressurePlateBlock) ModBlocks.MYST_WILLOW_PRESSURE_PLATE.get(), blockTexture(ModBlocks.MYST_WILLOW_PLANKS.get()));
+        fenceBlock((FenceBlock) ModBlocks.MYST_WILLOW_FENCE.get(), blockTexture(ModBlocks.MYST_WILLOW_PLANKS.get()));
+        fenceGateBlock((FenceGateBlock) ModBlocks.MYST_WILLOW_FENCE_GATE.get(), blockTexture(ModBlocks.MYST_WILLOW_PLANKS.get()));
 
         leavesBlock(ModBlocks.MYST_WILLOW_LEAVES);
 

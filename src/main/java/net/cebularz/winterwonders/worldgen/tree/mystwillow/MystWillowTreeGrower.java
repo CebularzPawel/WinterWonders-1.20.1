@@ -1,4 +1,4 @@
-package net.cebularz.winterwonders.worldgen.tree.greypine;
+package net.cebularz.winterwonders.worldgen.tree.mystwillow;
 
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.util.RandomSource;

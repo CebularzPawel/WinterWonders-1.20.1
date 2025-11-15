@@ -1,6 +1,8 @@
 package net.cebularz.winterwonders.worldgen;
 
 import net.cebularz.winterwonders.worldgen.customfeatures.ColdstoneSpikeFeature;
+import net.cebularz.winterwonders.worldgen.tree.mystwillow.MystWillowFoliagePlacer;
+import net.cebularz.winterwonders.worldgen.tree.mystwillow.MystWillowTrunkPlacer;
 import net.minecraft.core.Direction;
 import net.minecraft.core.HolderSet;
 import net.minecraft.core.registries.Registries;
@@ -50,7 +52,6 @@ public final class ModConfiguredFeatures {
         SimpleWeightedRandomList.Builder<BlockState> $$33 = SimpleWeightedRandomList.builder();
 
         for(int $$34 = 1; $$34 <= 4; ++$$34) {
-
             for (Direction $$35 : Direction.Plane.HORIZONTAL) {
                 $$33.add(ModBlocks.FROSTPETAL.get().defaultBlockState().setValue(PinkPetalsBlock.AMOUNT, $$34).setValue(PinkPetalsBlock.FACING, $$35), 1);
             }
@@ -66,12 +67,17 @@ public final class ModConfiguredFeatures {
                 new GreypineFoliagePlacer(ConstantInt.of(3), ConstantInt.of(2), 3),
                 new TwoLayersFeatureSize(1, 0, 2)).build());
 
-        register(context, MYST_WILLOW_KEY, Feature.TREE, new TreeConfiguration.TreeConfigurationBuilder(
-                BlockStateProvider.simple(ModBlocks.MYST_WILLOW_LOG.get()),
-                new DarkOakTrunkPlacer(4, 2, 1),
-                BlockStateProvider.simple(ModBlocks.MYST_WILLOW_LEAVES.get()),
-                new DarkOakFoliagePlacer(ConstantInt.of(3), ConstantInt.of(2)),
-                new TwoLayersFeatureSize(1, 0, 2)).build());
+        register(context, MYST_WILLOW_KEY, Feature.TREE,
+                new TreeConfiguration.TreeConfigurationBuilder(
+                        BlockStateProvider.simple(ModBlocks.MYST_WILLOW_LOG.get()),
+                        new MystWillowTrunkPlacer(4, 2, 1),
+                        BlockStateProvider.simple(ModBlocks.MYST_WILLOW_LEAVES.get()),
+                        new MystWillowFoliagePlacer(ConstantInt.of(3), ConstantInt.of(2), 3),
+                        new TwoLayersFeatureSize(1, 0, 2)
+                ).build()
+        );
+
+
     }
 
     public static ResourceKey<ConfiguredFeature<?, ?>> registerKey(String name) {

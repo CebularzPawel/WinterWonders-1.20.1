@@ -1,5 +1,6 @@
 package net.cebularz.winterwonders.worldgen.tree;
 
+import net.cebularz.winterwonders.worldgen.tree.mystwillow.MystWillowTrunkPlacer;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.world.level.levelgen.feature.trunkplacers.TrunkPlacerType;
 import net.minecraftforge.eventbus.api.IEventBus;
@@ -14,6 +15,9 @@ public class ModTrunkPlacers {
 
     public static final RegistryObject<TrunkPlacerType<GreypineTrunkPlacer>> GREYPINE_TRUNK_PLACER =
             TRUNK_PLACERS.register("greypine_trunk_placer", () -> new TrunkPlacerType<>(GreypineTrunkPlacer.CODEC));
+
+    public static final RegistryObject<TrunkPlacerType<MystWillowTrunkPlacer>> MYST_WILLOW_TRUNK_PLACER =
+            TRUNK_PLACERS.register("myst_willow_trunk_placer", () -> new TrunkPlacerType<>(MystWillowTrunkPlacer.CODEC));
 
     public static void register(IEventBus eventBus){
         TRUNK_PLACERS.register(eventBus);

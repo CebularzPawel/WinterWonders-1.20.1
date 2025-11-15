@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:block/template_fence_gate",
+  "textures": {
+    "texture": "winterwonders:block/myst_willow_planks"
+  }
+}

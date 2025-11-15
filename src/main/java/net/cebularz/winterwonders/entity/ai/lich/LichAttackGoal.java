@@ -2,7 +2,6 @@ package net.cebularz.winterwonders.entity.ai.lich;
 
 import net.cebularz.winterwonders.entity.custom.LichEntity;
 import net.cebularz.winterwonders.item.custom.LichBlizzardStaffItem;
-import net.cebularz.winterwonders.item.custom.impl.IStaffItem;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.ai.goal.Goal;
 import net.minecraft.world.item.Item;
@@ -10,7 +9,7 @@ import net.minecraft.world.item.Item;
 import java.util.EnumSet;
 import java.util.Random;
 
-public class LichStaffAttackGoal extends Goal {
+public class LichAttackGoal extends Goal {
     private final LichEntity lich;
     private final double speedModifier;
     private int attackInterval;
@@ -31,13 +30,13 @@ public class LichStaffAttackGoal extends Goal {
     public enum AttackType {
         BASIC_PROJECTILE,   // Snowball with freeze effect
         SPECIAL_ATTACK,     // Ice Spike Volley
-        FLOOR_SPIKES,     // Floor Spikes
+        ICE_SPIKES,     // Floor Spikes
         FREEZING_CUBE,       // Ice Cubes
         BLIZZARD,           // Large AoE, Chilled effects
         WHIRLWIND           // Swirls player around and away with snowballs
     }
 
-    public LichStaffAttackGoal(LichEntity pLich, double pSpeedModifier, int pAttackIntervalMin, int pAttackIntervalMax, float pAttackRadius) {
+    public LichAttackGoal(LichEntity pLich, double pSpeedModifier, int pAttackIntervalMin, int pAttackIntervalMax, float pAttackRadius) {
         this.lich = pLich;
         this.speedModifier = pSpeedModifier;
         this.attackIntervalMin = pAttackIntervalMin;
@@ -56,7 +55,7 @@ public class LichStaffAttackGoal extends Goal {
     @Override
     public boolean canContinueToUse() {
         return (this.canUse() || !this.lich.getNavigation().isDone()) &&
-                !this.lich.isOnAttackCooldown();
+                !this.lich.isOnCooldown();
     }
 
     @Override
@@ -91,7 +90,7 @@ public class LichStaffAttackGoal extends Goal {
                         break;
                     case 2:
                         currentAttackType = distance < 100.0 ?
-                                AttackType.FLOOR_SPIKES : AttackType.FREEZING_CUBE;
+                                AttackType.ICE_SPIKES : AttackType.FREEZING_CUBE;
                         break;
                     case 3:
                         currentAttackType = AttackType.BLIZZARD;         // Large AoE with Chilled effect
@@ -111,7 +110,7 @@ public class LichStaffAttackGoal extends Goal {
                         currentAttackType = AttackType.SPECIAL_ATTACK;
                         break;
                     case 3:
-                        currentAttackType = AttackType.FLOOR_SPIKES;
+                        currentAttackType = AttackType.ICE_SPIKES;
                         break;
                 }
             } else {
@@ -227,7 +226,7 @@ public class LichStaffAttackGoal extends Goal {
             case SPECIAL_ATTACK:
                 lichStaff.executeSpecialAttack(target);
                 break;
-            case FLOOR_SPIKES:
+            case ICE_SPIKES:
                 lichStaff.executeTerrainAttack(target, true);
                 break;
             case FREEZING_CUBE:

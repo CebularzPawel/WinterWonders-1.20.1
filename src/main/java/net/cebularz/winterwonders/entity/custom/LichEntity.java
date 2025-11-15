@@ -1,7 +1,6 @@
 package net.cebularz.winterwonders.entity.custom;
 
-import net.cebularz.winterwonders.entity.ai.lich.LichStaffAttackGoal;
-import net.cebularz.winterwonders.effect.ModEffects;
+import net.cebularz.winterwonders.entity.ai.lich.LichAttackGoal;
 import net.cebularz.winterwonders.entity.ModEntities;
 import net.cebularz.winterwonders.item.ModItems;
 import net.cebularz.winterwonders.item.custom.LichBlizzardStaffItem;
@@ -144,7 +143,7 @@ public class LichEntity extends Monster implements RangedAttackMob {
             spawnedMinions.removeIf(entity -> !entity.isAlive());
             iceBlockTickCounter--;
             setCastingSpellTicks(20);
-            ModNetworking.sendToAllPlayers(new FrozenDataS2C(this.getId(), true));
+            CoreNetworking.sendToAllPlayers(new FrozenDataS2C(this.getId(), true));
 
             Iterator<Mob> iterator = spawnedMinions.iterator();
             while (iterator.hasNext()) {
@@ -164,7 +163,7 @@ public class LichEntity extends Monster implements RangedAttackMob {
                 if (spawnedMinions.isEmpty()) {
                     setCastingSpellTicks(0);
                     iceBlockActive = false;
-                    ModNetworking.sendToAllPlayers(new FrozenDataS2C(this.getId(), false));
+                    CoreNetworking.sendToAllPlayers(new FrozenDataS2C(this.getId(), false));
 
                     this.level().playSound(
                             null,
@@ -213,11 +212,11 @@ public class LichEntity extends Monster implements RangedAttackMob {
 
         if (!this.level().isClientSide) {
             float healthPercentage = this.getHealth() / this.getMaxHealth();
-            ModNetworking.sendToNear(new LichBossDataS2C(this.getId(), healthPercentage),this);
+            ModNetworking.sendNear(new LichBossDataS2C(this.getId(), healthPercentage),this);
         }
     }
 
-    public boolean isOnAttackCooldown() {
+    public boolean isOnCooldown() {
         return attackCooldown > 0;
     }
 
@@ -280,32 +279,31 @@ public class LichEntity extends Monster implements RangedAttackMob {
             double distance = this.distanceToSqr(target);
             float healthPercentage = this.getHealth() / this.getMaxHealth() * 100f;
 
-            LichStaffAttackGoal.AttackType attackType = selectAttackType(distance, healthPercentage);
+            LichAttackGoal.AttackType attackType = selectAttackType(distance, healthPercentage);
             executeAttack(lichStaff, target, attackType);
         }
     }
 
-    private LichStaffAttackGoal.AttackType selectAttackType(double distance, float healthPercentage) {
+    private LichAttackGoal.AttackType selectAttackType(double distance, float healthPercentage) {
         RandomSource random = level().getRandom();
 
         if (distance < 36.0) {
             return random.nextBoolean() ?
-                    LichStaffAttackGoal.AttackType.WHIRLWIND :
-                    LichStaffAttackGoal.AttackType.FLOOR_SPIKES;
+                    LichAttackGoal.AttackType.WHIRLWIND : LichAttackGoal.AttackType.ICE_SPIKES;
         } else {
             float attackChance = random.nextFloat();
             if (attackChance < 0.5f) {
-                return LichStaffAttackGoal.AttackType.BASIC_PROJECTILE;
+                return LichAttackGoal.AttackType.BASIC_PROJECTILE;
             } else {
                 return random.nextBoolean() ?
-                        LichStaffAttackGoal.AttackType.FREEZING_CUBE:
-                        LichStaffAttackGoal.AttackType.BLIZZARD;
+                        LichAttackGoal.AttackType.FREEZING_CUBE:
+                        LichAttackGoal.AttackType.BLIZZARD;
             }
         }
     }
 
     private void executeAttack(LichBlizzardStaffItem staffItem, LivingEntity target,
-                               LichStaffAttackGoal.AttackType attackType) {
+                               LichAttackGoal.AttackType attackType) {
         switch (attackType) {
             case BASIC_PROJECTILE:
                 float projectileTypeChance = random.nextFloat();
@@ -317,7 +315,7 @@ public class LichEntity extends Monster implements RangedAttackMob {
                     setCastingSpellTicks(60);
                 }
                 break;
-            case FLOOR_SPIKES:
+            case ICE_SPIKES:
                 staffItem.executeTerrainAttack(target, true);
                 setCastingSpellTicks(20);
                 break;
@@ -418,5 +416,4 @@ public class LichEntity extends Monster implements RangedAttackMob {
     public boolean isMinion(LichEntity lichEntity, LivingEntity minionEntity) {
         return lichEntity.spawnedMinions.stream().anyMatch(minion -> minion.getUUID().equals(minionEntity.getUUID()));
     }
-
 }

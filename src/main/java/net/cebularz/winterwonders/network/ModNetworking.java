@@ -1,6 +1,7 @@
 package net.cebularz.winterwonders.network;
 
 import net.cebularz.winterwonders.WinterWonders;
+import net.cebularz.winterwonders.network.packets.IceSpikeVisualS2C;
 import net.cebularz.winterwonders.network.packets.LichBossDataS2C;
 import net.minecraft.client.Minecraft;
 import net.minecraft.resources.ResourceLocation;
@@ -10,9 +11,6 @@ import net.minecraftforge.network.NetworkDirection;
 import net.minecraftforge.network.NetworkRegistry;
 import net.minecraftforge.network.PacketDistributor;
 import net.minecraftforge.network.simple.SimpleChannel;
-import net.turtleboi.turtlecore.network.packet.effects.FrozenDataC2S;
-import net.turtleboi.turtlecore.network.packet.effects.FrozenDataS2C;
-import net.turtleboi.turtlecore.network.packet.util.SendParticlesS2C;
 
 public class ModNetworking {
     private static SimpleChannel INSTANCE;
@@ -35,17 +33,23 @@ public class ModNetworking {
                 .encoder(LichBossDataS2C::toBytes)
                 .consumerMainThread(LichBossDataS2C::handle)
                 .add();
+
+        net.messageBuilder(IceSpikeVisualS2C.class, id(), NetworkDirection.PLAY_TO_CLIENT)
+                .decoder(IceSpikeVisualS2C::new)
+                .encoder(IceSpikeVisualS2C::toBytes)
+                .consumerMainThread(IceSpikeVisualS2C::handle)
+                .add();
     }
 
     public static <MSG> void sendToPlayer (MSG message, ServerPlayer player) {
         INSTANCE.send(PacketDistributor.PLAYER.with(() -> player), message);
     }
 
-    public static <MSG> void sendToAllPlayers (MSG message) {
+    public static <MSG> void sendToPlayers(MSG message) {
         INSTANCE.send(PacketDistributor.ALL.noArg(), message);
     }
 
-    public static <MSG> void sendToNear (MSG message, LivingEntity livingEntity) {
+    public static <MSG> void sendNear(MSG message, LivingEntity livingEntity) {
         double x = livingEntity.getX();
         double y = livingEntity.getY();
         double z = livingEntity.getZ();

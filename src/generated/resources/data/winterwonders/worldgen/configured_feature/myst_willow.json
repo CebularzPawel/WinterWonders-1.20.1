@@ -9,7 +9,8 @@
       }
     },
     "foliage_placer": {
-      "type": "minecraft:dark_oak_foliage_placer",
+      "type": "winterwonders:myst_willow_foliage_placer",
+      "height": 3,
       "offset": 2,
       "radius": 3
     },
@@ -33,7 +34,7 @@
       "upper_size": 2
     },
     "trunk_placer": {
-      "type": "minecraft:dark_oak_trunk_placer",
+      "type": "winterwonders:myst_willow_trunk_placer",
       "base_height": 4,
       "height_rand_a": 2,
       "height_rand_b": 1

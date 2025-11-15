@@ -6,17 +6,17 @@ import net.cebularz.winterwonders.entity.custom.LichEntity;
 import net.cebularz.winterwonders.entity.custom.projectile.ChillingSnowballEntity;
 import net.cebularz.winterwonders.entity.custom.projectile.IceCubeEntity;
 import net.cebularz.winterwonders.entity.custom.projectile.IceSpikeProjectileEntity;
-import net.cebularz.winterwonders.effect.ModEffects;
 import net.cebularz.winterwonders.entity.ModEntities;
 import net.cebularz.winterwonders.item.custom.impl.IStaffItem;
 import net.cebularz.winterwonders.network.ModNetworking;
-import net.cebularz.winterwonders.particle.ModParticles;
+import net.cebularz.winterwonders.network.packets.IceSpikeVisualS2C;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.server.TickTask;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
+import net.minecraft.util.Mth;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffects;
@@ -25,6 +25,11 @@ import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.block.state.properties.BlockStateProperties;
+import net.minecraft.world.level.material.Fluids;
 import net.minecraft.world.phys.AABB;
 import net.minecraft.world.phys.Vec3;
 import net.minecraftforge.api.distmarker.Dist;
@@ -241,7 +246,7 @@ public class LichBlizzardStaffItem extends Item implements IStaffItem {
         if (serverLevel == null) return;
 
         if (isCloseRange) {
-            createIcySpikeFloor(target, 16, 5.9F);
+            executeIceSpikeAttack(serverLevel, target, 18, 8F);
         } else {
             BlockPos targetPos = target.blockPosition();
             int cubeCount = 3 + random.nextInt(3);
@@ -370,101 +375,148 @@ public class LichBlizzardStaffItem extends Item implements IStaffItem {
         }
     }
 
-    public void createIcySpikeFloor(LivingEntity target, int radius, float damage) {
+    public void executeIceSpikeAttack(ServerLevel serverLevel, LivingEntity target, int spikeCount, float damage) {
         if (caster == null) {
             return;
         } else {
             caster.level();
         }
 
-        Level level = caster.level();
-        ServerLevel serverLevel = level instanceof ServerLevel ? (ServerLevel) level : null;
-        if (serverLevel == null) return;
+        Vec3 casterPos = caster.position();
+        Vec3 targetPos = target.position();
+        double dx = targetPos.x - casterPos.x;
+        double dz = targetPos.z - casterPos.z;
 
-        BlockPos targetPos = target.blockPosition();
+        double centerAngle = Math.atan2(dz, dx);
+        double distance = Math.sqrt(dx * dx + dz * dz);
+        double baseRadius = Mth.clamp(distance, 1.0, 6.0);
+        double arcRadians = Math.toRadians(90);
+        boolean reverseSweep = random.nextBoolean();
 
-        for (int x = -radius; x <= radius; x++) {
-            for (int z = -radius; z <= radius; z++) {
-                double distance = Math.sqrt(x*x + z*z);
-                if (distance <= radius && random.nextFloat() < 0.7f) {
-                    BlockPos spikePos = targetPos.offset(x, 0, z);
+        for (int i = 0; i < spikeCount; i++) {
+            double t = (spikeCount == 1) ? 0.0 : ((double) i / (spikeCount - 1) - 0.5);
+            double angle = centerAngle + t * arcRadians;
 
-                    int delay = (int)(distance * 3);
+            double spikeX = casterPos.x + Math.cos(angle) * baseRadius;
+            double spikeZ = casterPos.z + Math.sin(angle) * baseRadius;
 
-                    serverLevel.getServer().tell(new TickTask(
-                            serverLevel.getServer().getTickCount() + delay,
-                            () -> createIceSpike(serverLevel, spikePos, damage)
-                    ));
-                }
+            BlockPos spikePos = new BlockPos(
+                    Mth.floor(spikeX),
+                    caster.blockPosition().getY(),
+                    Mth.floor(spikeZ)
+            );
+
+            double dxSpike = spikeX - casterPos.x;
+            double dzSpike = spikeZ - casterPos.z;
+            float yawDegrees = (float) Math.toDegrees(Math.atan2(dxSpike, dzSpike));
+            int orderIndex = reverseSweep ? (spikeCount - 1 - i) : i;
+            long baseDelay = orderIndex * 50L;
+
+            for (int stage = 0; stage < 3; stage++) {
+                int spellStage = stage;
+                long delay = baseDelay + stage * (2 * 50L);
+                caster.getSpellScheduler().schedule(delay,
+                        () -> doIceSpikes(serverLevel, spikePos, damage, spellStage, yawDegrees));
             }
         }
     }
 
-    private void createIceSpike(ServerLevel serverLevel, BlockPos pos, float damage) {
-        for (int i = 0; i < 3; i++) {
-            final int yOffset = i;
-            serverLevel.getServer().tell(new TickTask(
-                    serverLevel.getServer().getTickCount() + i * 2,
-                    () -> {
-                        serverLevel.sendParticles(
-                                ParticleTypes.ITEM_SNOWBALL,
-                                pos.getX() + 0.5, pos.getY() + yOffset * 0.5, pos.getZ() + 0.5,
-                                15, 0.2, 0.1, 0.2, 0.05
-                        );
+    private void doIceSpikes(ServerLevel serverLevel, BlockPos blockPos, float damage, int spellStage, float yawDegrees) {
+        serverLevel.sendParticles(
+                ParticleTypes.ITEM_SNOWBALL,
+                blockPos.getX() + 0.5,
+                blockPos.getY() + (spellStage * 0.5),
+                blockPos.getZ() + 0.5,
+                15, 0.2, 0.1, 0.2, 0.05
+        );
 
-                        serverLevel.sendParticles(
-                                ParticleTypes.SNOWFLAKE,
-                                pos.getX() + 0.5, pos.getY() + yOffset * 0.5 + 0.25, pos.getZ() + 0.5,
-                                5, 0.3, 0.1, 0.3, 0.01
-                        );
+        serverLevel.sendParticles(
+                ParticleTypes.SNOWFLAKE,
+                blockPos.getX() + 0.5,
+                blockPos.getY() + ((spellStage * 0.5) + 0.25),
+                blockPos.getZ() + 0.5,
+                5, 0.3, 0.1, 0.3, 0.01
+        );
 
-                        if (yOffset == 0) {
-                            serverLevel.playSound(
-                                    null,
-                                    pos,
-                                    SoundEvents.GLASS_PLACE,
-                                    SoundSource.BLOCKS,
-                                    1.0F,
-                                    1.2F + serverLevel.getRandom().nextFloat() * 0.2F
-                            );
-                        }
+        if (spellStage == 0) {
+            serverLevel.playSound(
+                    null,
+                    blockPos,
+                    SoundEvents.PLAYER_HURT_FREEZE,
+                    SoundSource.BLOCKS,
+                    1.0F,
+                    1.2F + serverLevel.getRandom().nextFloat() * 0.2F
+            );
 
-                        if (yOffset == 2) {
-                            AABB damageArea = new AABB(
-                                    pos.getX(), pos.getY(), pos.getZ(),
-                                    pos.getX() + 1, pos.getY() + 2, pos.getZ() + 1
-                            );
+            BlockState blockState = serverLevel.getBlockState(blockPos.below());
+            if (blockState.getFluidState().getType() == Fluids.WATER) {
+                serverLevel.setBlockAndUpdate(blockPos.below(), Blocks.ICE.defaultBlockState());
+                serverLevel.setBlockAndUpdate(blockPos, Blocks.ICE.defaultBlockState());
+            } else if (blockState.hasProperty(BlockStateProperties.WATERLOGGED)
+                    && blockState.getValue(BlockStateProperties.WATERLOGGED)) {
+                serverLevel.setBlock(blockPos.below(),
+                        blockState.setValue(BlockStateProperties.WATERLOGGED, Boolean.FALSE),
+                        Block.UPDATE_ALL);
+            }
+        }
 
-                            List<Entity> entities = serverLevel.getEntities(
-                                    caster, damageArea, entity -> entity instanceof LivingEntity
-                            );
+        if (spellStage == 2) {
+            if (caster != null) {
+                ModNetworking.sendNear(new IceSpikeVisualS2C(blockPos, yawDegrees), caster);
+            }
 
-                            for (Entity entity : entities) {
-                                if (entity instanceof LivingEntity victim) {
-                                    victim.hurt(victim.damageSources().indirectMagic(caster, caster), damage);
+            AABB damageArea = new AABB(
+                    blockPos.getX() - 1, blockPos.getY(), blockPos.getZ() - 1,
+                    blockPos.getX() + 1, blockPos.getY() + 2.5, blockPos.getZ() + 1
+            );
 
-                                    Vec3 knockback = new Vec3(
-                                            victim.getX() - pos.getX() - 0.5,
-                                            0.2,
-                                            victim.getZ() - pos.getZ() - 0.5
-                                    ).normalize().scale(0.4);
-                                    victim.setDeltaMovement(victim.getDeltaMovement().add(knockback));
+            List<Entity> entities = serverLevel.getEntities(
+                    caster, damageArea, entity -> entity instanceof LivingEntity
+            );
 
-                                    victim.addEffect(new MobEffectInstance(MobEffects.MOVEMENT_SLOWDOWN, 60, 1));
-
-                                    serverLevel.playSound(
-                                            null,
-                                            victim.blockPosition(),
-                                            SoundEvents.PLAYER_HURT_FREEZE,
-                                            SoundSource.PLAYERS,
-                                            0.8F,
-                                            1.0F
-                                    );
-                                }
-                            }
-                        }
+            for (Entity entity : entities) {
+                if (entity instanceof LivingEntity victim) {
+                    if (caster != null && caster.isMinion(caster, victim)) {
+                        continue;
                     }
-            ));
+
+                    victim.hurt(victim.damageSources().indirectMagic(caster, caster), damage);
+                    Vec3 knockbackDir;
+                    if (caster != null) {
+                        knockbackDir = victim.position().subtract(caster.position());
+                    } else {
+                        knockbackDir = new Vec3(
+                                victim.getX() - (blockPos.getX() + 0.5),
+                                0.0,
+                                victim.getZ() - (blockPos.getZ() + 0.5)
+                        );
+                    }
+
+                    if (knockbackDir.lengthSqr() < 1.0e-4) {
+                        knockbackDir = new Vec3(0.0, 0.0, 1.0);
+                    }
+
+                    knockbackDir = knockbackDir.normalize();
+                    Vec3 knockback = new Vec3(knockbackDir.x * 1.1, 0.35, knockbackDir.z * 1.1);
+
+                    victim.setDeltaMovement(victim.getDeltaMovement().add(knockback));
+                    victim.hurtMarked = true;
+                    victim.addEffect(new MobEffectInstance(
+                            CoreEffects.CHILLED.get(),
+                            120,
+                            1
+                    ));
+
+                    serverLevel.playSound(
+                            null,
+                            victim.blockPosition(),
+                            SoundEvents.PLAYER_HURT_FREEZE,
+                            SoundSource.PLAYERS,
+                            0.8F,
+                            1.0F
+                    );
+                }
+            }
         }
     }
 

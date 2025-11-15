@@ -1,5 +1,6 @@
 package net.cebularz.winterwonders.worldgen.tree;
 
+import net.cebularz.winterwonders.worldgen.tree.mystwillow.MystWillowFoliagePlacer;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.world.level.levelgen.feature.foliageplacers.FoliagePlacerType;
 import net.minecraftforge.eventbus.api.IEventBus;
@@ -14,6 +15,9 @@ public class ModFoliagePlacers {
 
     public static final RegistryObject<FoliagePlacerType<GreypineFoliagePlacer>> GREYPINE_FOLIAGE_PLACER =
             FOLIAGE_PLACERS.register("greypine_foliage_placer", () -> new FoliagePlacerType<>(GreypineFoliagePlacer.CODEC));
+
+    public static final RegistryObject<FoliagePlacerType<MystWillowFoliagePlacer>> MYST_WILLOW_FOLIAGE_PLACER =
+            FOLIAGE_PLACERS.register("myst_willow_foliage_placer", () -> new FoliagePlacerType<>(MystWillowFoliagePlacer.CODEC));
 
     public static void register(IEventBus eventBus){
         FOLIAGE_PLACERS.register(eventBus);

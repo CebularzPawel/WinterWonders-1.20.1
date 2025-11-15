@@ -83,6 +83,14 @@ public class ModItemModelProvider extends ItemModelProvider {
         evenSimplerBlockItem(ModBlocks.GREYPINE_PRESSURE_PLATE);
 
         saplingItem(ModBlocks.MYST_WILLOW_SAPLING);
+        evenSimplerBlockItem(ModBlocks.MYST_WILLOW_SLAB);
+        evenSimplerBlockItem(ModBlocks.MYST_WILLOW_STAIRS);
+        //simpleBlockItem(ModBlocks.MYST_WILLOW_DOOR);
+        //trapdoorItem(ModBlocks.MYST_WILLOW_TRAPDOOR);
+        fenceItem(ModBlocks.MYST_WILLOW_FENCE, ModBlocks.MYST_WILLOW_PLANKS);
+        evenSimplerBlockItem(ModBlocks.MYST_WILLOW_FENCE_GATE);
+        buttonItem(ModBlocks.MYST_WILLOW_BUTTON, ModBlocks.MYST_WILLOW_PLANKS);
+        evenSimplerBlockItem(ModBlocks.MYST_WILLOW_PRESSURE_PLATE);
 
         trimmedArmorItem(ModItems.COLDSTEEL_HELMET);
         trimmedArmorItem(ModItems.COLDSTEEL_CHESTPLATE);
