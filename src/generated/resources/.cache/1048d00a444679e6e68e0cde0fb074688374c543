@@ -1,4 +1,4 @@
-// 1.20.1	2025-11-15T12:39:23.8621717	Item Models: winterwonders
+// 1.20.1	2025-11-17T11:45:51.8915241	Item Models: winterwonders
 3b3b138819367044cef18d3d8bb1914e67ce2d44 assets/winterwonders/models/item/arcanillum.json
 c438a44b63bedbeee407e8332cded4816d611359 assets/winterwonders/models/item/brisk_rod.json
 63ec6c618a3a23eab4cab9c52d7d3250de9b516e assets/winterwonders/models/item/brisk_spawn_egg.json
@@ -76,6 +76,9 @@ c593b4781475a0f22f9bb82ed8d88ee7b34fb7d3 assets/winterwonders/models/item/ice_st
 a9a66a6f695fb43f98ab00c4284511f75d408767 assets/winterwonders/models/item/ice_stone_tiles_stairs.json
 1a6abeabc749e03f0730a281cbfce967b47b3344 assets/winterwonders/models/item/ice_stone_tiles_wall.json
 63ec6c618a3a23eab4cab9c52d7d3250de9b516e assets/winterwonders/models/item/lich_spawn_egg.json
+7c39a49f4a7f92cb079016bb558ead44c7eda9f3 assets/winterwonders/models/item/mossy_cobbled_ice_stone_slab.json
+bdab52a015cf5b0f36ceac0b9b1bfd17fcb01017 assets/winterwonders/models/item/mossy_cobbled_ice_stone_stairs.json
+845247cb3db50797aee20b704e35e7cc806e0bd7 assets/winterwonders/models/item/mossy_cobbled_ice_stone_wall.json
 8d5e083e2fe78f8b460dadff0bbeeaacf72f6e89 assets/winterwonders/models/item/muscari.json
 d1038c5538ceac493c1881d104e91ae3f139028d assets/winterwonders/models/item/myst_willow_button.json
 b283cfb3b27a233d0bf22b317e2017dc31229ac8 assets/winterwonders/models/item/myst_willow_fence.json

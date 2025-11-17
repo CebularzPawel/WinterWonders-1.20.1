@@ -149,6 +149,15 @@ public class ModBlocks {
             () -> new FlowerPotBlock(() -> ((FlowerPotBlock) Blocks.FLOWER_POT),ModBlocks.RIMEBLOOM,
                     BlockBehaviour.Properties.copy(Blocks.POTTED_ALLIUM).noOcclusion()));
 
+    public static final RegistryObject<Block> MOSSY_COBBLED_ICE_STONE = registerBlock("mossy_cobbled_ice_stone",
+            () -> new Block(BlockBehaviour.Properties.copy(Blocks.COBBLESTONE)));
+    public static final RegistryObject<Block> MOSSY_COBBLED_ICE_STONE_SLAB = registerBlock("mossy_cobbled_ice_stone_slab",
+            () -> new SlabBlock(BlockBehaviour.Properties.copy(Blocks.COBBLESTONE)));
+    public static final RegistryObject<Block> MOSSY_COBBLED_ICE_STONE_STAIRS = registerBlock("mossy_cobbled_ice_stone_stairs",
+            () -> new StairBlock(()-> ModBlocks.MOSSY_COBBLED_ICE_STONE.get().defaultBlockState(),BlockBehaviour.Properties.copy(Blocks.COBBLESTONE)));
+    public static final RegistryObject<Block> MOSSY_COBBLED_ICE_STONE_WALL = registerBlock("mossy_cobbled_ice_stone_wall",
+            () -> new WallBlock(BlockBehaviour.Properties.copy(Blocks.COBBLESTONE)));
+
     public static final RegistryObject<Block> GREYPINE_PLANKS = registerBlock("greypine_planks",
             () -> new Block(BlockBehaviour.Properties.copy(Blocks.SPRUCE_PLANKS)){
                 @Override

@@ -2,6 +2,7 @@ package net.cebularz.winterwonders.datagen;
 
 import net.minecraft.data.PackOutput;
 import net.minecraft.data.recipes.*;
+import net.minecraft.world.level.block.Blocks;
 import net.minecraftforge.common.crafting.conditions.IConditionBuilder;
 import net.cebularz.winterwonders.block.ModBlocks;
 
@@ -104,5 +105,37 @@ public class ModRecipeProvider extends RecipeProvider implements IConditionBuild
                 .define('M', ModBlocks.COBBLED_ICE_STONE.get())
                 .unlockedBy(getHasName(ModBlocks.COBBLED_ICE_STONE.get()), has(ModBlocks.COBBLED_ICE_STONE.get()))
                 .save(pWriter);
+
+        //MOSSY COBBLED ICE STONE
+        stonecutterResultFromBase(pWriter,RecipeCategory.MISC, ModBlocks.MOSSY_COBBLED_ICE_STONE_STAIRS.get().asItem(), ModBlocks.MOSSY_COBBLED_ICE_STONE.get());
+        stonecutterResultFromBase(pWriter,RecipeCategory.MISC, ModBlocks.MOSSY_COBBLED_ICE_STONE_WALL.get().asItem(), ModBlocks.MOSSY_COBBLED_ICE_STONE.get());
+        stonecutterResultFromBase(pWriter,RecipeCategory.MISC, ModBlocks.MOSSY_COBBLED_ICE_STONE_SLAB.get().asItem(), ModBlocks.MOSSY_COBBLED_ICE_STONE.get(),2);
+        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, ModBlocks.MOSSY_COBBLED_ICE_STONE_SLAB.get(),6)
+                .pattern("MMM")
+                .define('M', ModBlocks.MOSSY_COBBLED_ICE_STONE.get())
+                .unlockedBy(getHasName(ModBlocks.MOSSY_COBBLED_ICE_STONE.get()), has(ModBlocks.MOSSY_COBBLED_ICE_STONE.get()))
+                .save(pWriter);
+
+        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, ModBlocks.MOSSY_COBBLED_ICE_STONE_STAIRS.get(),4)
+                .pattern("M  ")
+                .pattern("MM ")
+                .pattern("MMM")
+                .define('M', ModBlocks.MOSSY_COBBLED_ICE_STONE.get())
+                .unlockedBy(getHasName(ModBlocks.MOSSY_COBBLED_ICE_STONE.get()), has(ModBlocks.MOSSY_COBBLED_ICE_STONE.get()))
+                .save(pWriter);
+
+        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, ModBlocks.MOSSY_COBBLED_ICE_STONE_WALL.get(),6)
+                .pattern("MMM")
+                .pattern("MMM")
+                .define('M', ModBlocks.MOSSY_COBBLED_ICE_STONE.get())
+                .unlockedBy(getHasName(ModBlocks.MOSSY_COBBLED_ICE_STONE.get()), has(ModBlocks.MOSSY_COBBLED_ICE_STONE.get()))
+                .save(pWriter);
+
+        ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC, ModBlocks.MOSSY_COBBLED_ICE_STONE.get())
+                .requires(ModBlocks.COBBLED_ICE_STONE.get())
+                .requires(ModBlocks.ICY_VINES.get())
+                .unlockedBy(getHasName(ModBlocks.COBBLED_ICE_STONE.get()), has(ModBlocks.ICY_VINES.get()))
+                .save(pWriter);
+
     }
 }

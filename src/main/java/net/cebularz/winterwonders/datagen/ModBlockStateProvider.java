@@ -30,6 +30,11 @@ public class ModBlockStateProvider extends BlockStateProvider {
         slabBlock(((SlabBlock) ModBlocks.COBBLED_ICE_STONE_SLAB.get()),blockTexture(ModBlocks.COBBLED_ICE_STONE.get()),blockTexture(ModBlocks.COBBLED_ICE_STONE.get()));
         wallBlock(((WallBlock) ModBlocks.COBBLED_ICE_STONE_WALL.get()),blockTexture(ModBlocks.COBBLED_ICE_STONE.get()));
 
+        blockWithItem(ModBlocks.MOSSY_COBBLED_ICE_STONE);
+        stairsBlock(((StairBlock) ModBlocks.MOSSY_COBBLED_ICE_STONE_STAIRS.get()),blockTexture(ModBlocks.MOSSY_COBBLED_ICE_STONE.get()));
+        slabBlock(((SlabBlock) ModBlocks.MOSSY_COBBLED_ICE_STONE_SLAB.get()),blockTexture(ModBlocks.MOSSY_COBBLED_ICE_STONE.get()),blockTexture(ModBlocks.MOSSY_COBBLED_ICE_STONE.get()));
+        wallBlock(((WallBlock) ModBlocks.MOSSY_COBBLED_ICE_STONE_WALL.get()),blockTexture(ModBlocks.MOSSY_COBBLED_ICE_STONE.get()));
+
         blockWithItem(ModBlocks.ICE_STONE_BRICKS);
         stairsBlock(((StairBlock) ModBlocks.ICE_STONE_BRICKS_STAIRS.get()),blockTexture(ModBlocks.ICE_STONE_BRICKS.get()));
         slabBlock(((SlabBlock) ModBlocks.ICE_STONE_BRICKS_SLAB.get()),blockTexture(ModBlocks.ICE_STONE_BRICKS.get()),blockTexture(ModBlocks.ICE_STONE_BRICKS.get()));

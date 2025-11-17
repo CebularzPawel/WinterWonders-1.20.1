@@ -5,6 +5,7 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.util.Mth;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.level.WorldGenLevel;
+import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.levelgen.feature.Feature;
 import net.minecraft.world.level.levelgen.feature.FeaturePlaceContext;
@@ -48,12 +49,13 @@ public class ColdstoneSpikeFeature extends Feature<NoneFeatureConfiguration> {
                         BlockPos blockPos = pos.offset(dx, y, dz);
                         BlockState blockBelow = world.getBlockState(blockPos.below());
 
+                        Block desiredBlock = (world.getRandom().nextDouble()<0.2) ? ModBlocks.MOSSY_COBBLED_ICE_STONE.get() : ModBlocks.COBBLED_ICE_STONE.get();
                         // Place block and ensure it extends down to solid ground
-                        this.setBlock(world, blockPos, ModBlocks.COBBLED_ICE_STONE.get().defaultBlockState());
+                        this.setBlock(world, blockPos, desiredBlock.defaultBlockState());
 
                         while (world.isEmptyBlock(blockPos.below()) && blockPos.getY() > world.getMinBuildHeight() + 2) {
                             blockPos = blockPos.below();
-                            this.setBlock(world, blockPos, ModBlocks.COBBLED_ICE_STONE.get().defaultBlockState());
+                            this.setBlock(world, blockPos, desiredBlock.defaultBlockState());
                         }
                     }
                 }

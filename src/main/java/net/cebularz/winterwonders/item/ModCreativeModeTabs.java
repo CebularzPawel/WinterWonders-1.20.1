@@ -76,6 +76,10 @@ public class ModCreativeModeTabs {
                         pOutput.accept(ModBlocks.COBBLED_ICE_STONE_SLAB.get());
                         pOutput.accept(ModBlocks.COBBLED_ICE_STONE_WALL.get());
 
+                        pOutput.accept(ModBlocks.MOSSY_COBBLED_ICE_STONE.get());
+                        pOutput.accept(ModBlocks.MOSSY_COBBLED_ICE_STONE_STAIRS.get());
+                        pOutput.accept(ModBlocks.MOSSY_COBBLED_ICE_STONE_SLAB.get());
+                        pOutput.accept(ModBlocks.MOSSY_COBBLED_ICE_STONE_WALL.get());
 
                         pOutput.accept(ModBlocks.ICE_STONE_BRICKS.get());
                         pOutput.accept(ModBlocks.ICE_STONE_BRICKS_STAIRS.get());
