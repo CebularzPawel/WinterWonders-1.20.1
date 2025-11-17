@@ -68,6 +68,7 @@ public final class WinterFrostBiome {
         settings.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, ModPlacedFeatures.WONDER_SHROOM_PATCH_KEY);
         settings.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, ModPlacedFeatures.WINTER_FROST_FLOWERS_KEY);
         settings.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, ModPlacedFeatures.MAGICAL_FLOWERS_KEY);
+        settings.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, ModPlacedFeatures.MUSCARIS_KEY);
 
 
         return new Biome.BiomeBuilder()

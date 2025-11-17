@@ -1,4 +1,4 @@
-// 1.20.1	2025-11-11T22:44:04.9649381	Loot Tables
+// 1.20.1	2025-11-15T12:39:23.8581704	Loot Tables
 396c22769f1c8ce8b1b8668e95c1dd2510fa1dfe data/winterwonders/loot_tables/blocks/arcanillum.json
 a0c137ed9e5d1bcf0e2309ad3995a104570ab04e data/winterwonders/loot_tables/blocks/cobbled_ice_stone.json
 0fa0a0a461277ea1c1c1ac779131e4db92765524 data/winterwonders/loot_tables/blocks/cobbled_ice_stone_slab.json
@@ -50,11 +50,13 @@ c4daf628648a173310104ab5f60b6df3f378bd93 data/winterwonders/loot_tables/blocks/p
 253def9e6133a890b6fdec1757e5f3cfae335007 data/winterwonders/loot_tables/blocks/potted_arcanillum.json
 ad8ddfa18a47f8c665db7e4837959c7baa6a2653 data/winterwonders/loot_tables/blocks/potted_muscari.json
 db229d0ffd4c11044fffc7c2e24c299e201e2694 data/winterwonders/loot_tables/blocks/potted_rimebloom.json
+4282a808ba8efdff1dafcee1caaba131beaeb616 data/winterwonders/loot_tables/blocks/potted_white_muscari.json
 e78e01a5bc093d254f69d11bd59571904f8df4bc data/winterwonders/loot_tables/blocks/puckerberry_bush.json
 de337e6eac21f677946a61d43f5582559064f860 data/winterwonders/loot_tables/blocks/rimebloom.json
 234aec24a404382ff27812909d61a6f79fc01b16 data/winterwonders/loot_tables/blocks/stripped_greypine_log.json
 ecbc65a086d3566fef5068c04f7199026090f4c7 data/winterwonders/loot_tables/blocks/stripped_greypine_wood.json
 e2fdc867fc7945a5394dcf800ce208b13ddb0d25 data/winterwonders/loot_tables/blocks/stripped_myst_willow_log.json
 ed7871a9672a868c63eef3d7afcac3fe96e445c0 data/winterwonders/loot_tables/blocks/stripped_myst_willow_wood.json
+750b9efdecf484ea8c3c1981a2fdca4426aa3c16 data/winterwonders/loot_tables/blocks/white_muscari.json
 8495ec4f25d2fe4c19a974a06fcb81ab62b79f69 data/winterwonders/loot_tables/blocks/wundershroom.json
 36698c5f3439005ff2ad3c42f9cc2d6d4abe2953 data/winterwonders/loot_tables/blocks/wundershroom_tree.json

@@ -99,6 +99,8 @@ public class ModCreativeModeTabs {
 
                         pOutput.accept(ModBlocks.ARCANILLUM.get());
                         pOutput.accept(ModBlocks.RIMEBLOOM.get());
+                        pOutput.accept(ModBlocks.MUSCARI.get());
+                        pOutput.accept(ModBlocks.WHITE_MUSCARI.get());
 
                         pOutput.accept(ModItems.PUCKERBERRY.get());
 

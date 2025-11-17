@@ -38,6 +38,7 @@ public final class ModConfiguredFeatures {
     public static final ResourceKey<ConfiguredFeature<?,?>> WUNDERSHROOM_KEY = registerKey("wundershroom");
 
     public static final ResourceKey<ConfiguredFeature<?,?>> RIMEBLOOM_KEY = registerKey("rimebloom");
+    public static final ResourceKey<ConfiguredFeature<?,?>> MUSCARI_KEY = registerKey("muscari");
     public static final ResourceKey<ConfiguredFeature<?,?>> FROSTPETAL_KEY = registerKey("frostpetal");
 
     public static void bootstrap(BootstapContext<ConfiguredFeature<?, ?>> context) {
@@ -59,6 +60,7 @@ public final class ModConfiguredFeatures {
         register(context, FROSTPETAL_KEY,Feature.FLOWER, new RandomPatchConfiguration(96, 6, 2, PlacementUtils.onlyWhenEmpty(Feature.SIMPLE_BLOCK, new SimpleBlockConfiguration(new WeightedStateProvider($$33)))));
 
         register(context, RIMEBLOOM_KEY,Feature.SIMPLE_RANDOM_SELECTOR,new SimpleRandomFeatureConfiguration(HolderSet.direct(PlacementUtils.inlinePlaced(Feature.RANDOM_PATCH, FeatureUtils.simplePatchConfiguration(Feature.SIMPLE_BLOCK, new SimpleBlockConfiguration(BlockStateProvider.simple(ModBlocks.ARCANILLUM.get()))), new PlacementModifier[0]), PlacementUtils.inlinePlaced(Feature.RANDOM_PATCH, FeatureUtils.simplePatchConfiguration(Feature.SIMPLE_BLOCK, new SimpleBlockConfiguration(BlockStateProvider.simple(ModBlocks.RIMEBLOOM.get()))), new PlacementModifier[0]))));
+        register(context, MUSCARI_KEY, Feature.SIMPLE_RANDOM_SELECTOR, new SimpleRandomFeatureConfiguration(HolderSet.direct(PlacementUtils.inlinePlaced(Feature.RANDOM_PATCH, FeatureUtils.simplePatchConfiguration(Feature.SIMPLE_BLOCK, new SimpleBlockConfiguration(BlockStateProvider.simple(ModBlocks.MUSCARI.get())))), PlacementUtils.inlinePlaced(Feature.RANDOM_PATCH, FeatureUtils.simplePatchConfiguration(Feature.SIMPLE_BLOCK, new SimpleBlockConfiguration(BlockStateProvider.simple(ModBlocks.WHITE_MUSCARI.get())))))));
 
         register(context, GREYPINE_KEY, Feature.TREE, new TreeConfiguration.TreeConfigurationBuilder(
                 BlockStateProvider.simple(ModBlocks.GREYPINE_LOG.get()),

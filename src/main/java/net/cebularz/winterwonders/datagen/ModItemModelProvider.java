@@ -109,6 +109,7 @@ public class ModItemModelProvider extends ItemModelProvider {
         simpleBlockItemBlockTexture(ModBlocks.ARCANILLUM);
         simpleBlockItemBlockTexture(ModBlocks.RIMEBLOOM);
         simpleBlockItemBlockTexture(ModBlocks.MUSCARI);
+        simpleBlockItemBlockTexture(ModBlocks.WHITE_MUSCARI);
 
         simpleItem(ModItems.PINGIN_FEATHER);
         simpleItem(ModItems.PINGIN_MEAT);

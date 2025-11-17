@@ -44,6 +44,8 @@ public class ModBlocks {
     public static final RegistryObject<Block> COBBLED_ICE_STONE_WALL = registerBlock("cobbled_ice_stone_wall",
             () -> new WallBlock(BlockBehaviour.Properties.copy(Blocks.COBBLESTONE)));
 
+
+
     public static final RegistryObject<Block> ICE_STONE_BRICKS = registerBlock("ice_stone_bricks",
             () -> new Block(BlockBehaviour.Properties.copy(Blocks.STONE_BRICKS)));
     public static final RegistryObject<Block> ICE_STONE_BRICKS_SLAB = registerBlock("ice_stone_bricks_slab",
@@ -135,7 +137,12 @@ public class ModBlocks {
     public static final RegistryObject<Block> POTTED_MUSCARI = BLOCKS.register("potted_muscari",
             () -> new FlowerPotBlock(() -> ((FlowerPotBlock) Blocks.FLOWER_POT),ModBlocks.MUSCARI,
                     BlockBehaviour.Properties.copy(Blocks.POTTED_ALLIUM).noOcclusion()));
-
+    public static final RegistryObject<Block> WHITE_MUSCARI = registerBlock("white_muscari",
+            () -> new FlowerBlock(() -> MobEffects.GLOWING,5,
+                    BlockBehaviour.Properties.copy(Blocks.ALLIUM).noOcclusion().noCollission()));
+    public static final RegistryObject<Block> POTTED_WHITE_MUSCARI = BLOCKS.register("potted_white_muscari",
+            () -> new FlowerPotBlock(() -> ((FlowerPotBlock) Blocks.FLOWER_POT),ModBlocks.MUSCARI,
+                    BlockBehaviour.Properties.copy(Blocks.POTTED_ALLIUM).noOcclusion()));
 
 
     public static final RegistryObject<Block> POTTED_RIMEBLOOM = BLOCKS.register("potted_rimebloom",
