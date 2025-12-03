@@ -1,0 +1,18 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "M": {
+      "item": "winterwonders:mossy_cobbled_ice_stone"
+    }
+  },
+  "pattern": [
+    "MMM",
+    "MMM"
+  ],
+  "result": {
+    "count": 6,
+    "item": "winterwonders:mossy_cobbled_ice_stone_wall"
+  },
+  "show_notification": true
+}

@@ -1,38 +1,38 @@
-[17lis2025 11:55:33.882] [main/INFO] [cpw.mods.modlauncher.Launcher/MODLAUNCHER]: ModLauncher running: args [--launchTarget, forgedatauserdev, --assetIndex, 5, --assetsDir, C:\Users\PC-\.gradle\caches\forge_gradle\assets, --gameDir, ., --fml.forgeVersion, 47.3.7, --fml.mcVersion, 1.20.1, --fml.forgeGroup, net.minecraftforge, --fml.mcpVersion, 20230612.114412, --mod, winterwonders, --all, --output, C:\Users\PC-\WinterWonders-1.20.1\src\generated\resources, --existing, C:\Users\PC-\WinterWonders-1.20.1\src\main\resources]
-[17lis2025 11:55:33.888] [main/INFO] [cpw.mods.modlauncher.Launcher/MODLAUNCHER]: ModLauncher 10.0.9+10.0.9+main.dcd20f30 starting: java version 17.0.2 by Oracle Corporation; OS Windows 11 arch amd64 version 10.0
-[17lis2025 11:55:33.989] [main/INFO] [net.minecraftforge.fml.loading.ImmediateWindowHandler/]: ImmediateWindowProvider not loading because launch target is forgedatauserdev
-[17lis2025 11:55:34.037] [main/INFO] [mixin/]: SpongePowered MIXIN Subsystem Version=0.8.5 Source=union:/C:/Users/PC-/.gradle/caches/modules-2/files-2.1/org.spongepowered/mixin/0.8.5/9d1c0c3a304ae6697ecd477218fa61b850bf57fc/mixin-0.8.5.jar%23128!/ Service=ModLauncher Env=CLIENT
-[17lis2025 11:55:34.307] [main/WARN] [net.minecraftforge.fml.loading.moddiscovery.ModFileParser/LOADING]: Mod file C:\Users\PC-\.gradle\caches\modules-2\files-2.1\net.minecraftforge\javafmllanguage\1.20.1-47.3.7\5d72a04334eea2494912f0d91216648462bb32c3\javafmllanguage-1.20.1-47.3.7.jar is missing mods.toml file
-[17lis2025 11:55:34.311] [main/WARN] [net.minecraftforge.fml.loading.moddiscovery.ModFileParser/LOADING]: Mod file C:\Users\PC-\.gradle\caches\modules-2\files-2.1\net.minecraftforge\lowcodelanguage\1.20.1-47.3.7\74fd0ee16e74766d45d2efe7c74b6d0e121677df\lowcodelanguage-1.20.1-47.3.7.jar is missing mods.toml file
-[17lis2025 11:55:34.314] [main/WARN] [net.minecraftforge.fml.loading.moddiscovery.ModFileParser/LOADING]: Mod file C:\Users\PC-\.gradle\caches\modules-2\files-2.1\net.minecraftforge\mclanguage\1.20.1-47.3.7\cf753f5bc19311c127ea07e1ee43d5f9477df22b\mclanguage-1.20.1-47.3.7.jar is missing mods.toml file
-[17lis2025 11:55:34.317] [main/WARN] [net.minecraftforge.fml.loading.moddiscovery.ModFileParser/LOADING]: Mod file C:\Users\PC-\.gradle\caches\modules-2\files-2.1\net.minecraftforge\fmlcore\1.20.1-47.3.7\b6a4840dfdc56e2ae2eccdd1bf233959493d11ea\fmlcore-1.20.1-47.3.7.jar is missing mods.toml file
-[17lis2025 11:55:34.401] [main/INFO] [net.minecraftforge.fml.loading.moddiscovery.JarInJarDependencyLocator/]: No dependencies to load found. Skipping!
-[17lis2025 11:55:35.550] [main/INFO] [mixin/]: Compatibility level set to JAVA_17
-[17lis2025 11:55:35.556] [main/INFO] [cpw.mods.modlauncher.LaunchServiceHandler/MODLAUNCHER]: Launching target 'forgedatauserdev' with arguments [--gameDir, ., --assetsDir, C:\Users\PC-\.gradle\caches\forge_gradle\assets, --assetIndex, 5, --mod, winterwonders, --all, --output, C:\Users\PC-\WinterWonders-1.20.1\src\generated\resources, --existing, C:\Users\PC-\WinterWonders-1.20.1\src\main\resources]
-[17lis2025 11:55:35.919] [main/INFO] [mixin/]: Remapping refMap terrablender.refmap.json using C:\Users\PC-\WinterWonders-1.20.1\build\createSrgToMcp\output.srg
-[17lis2025 11:55:35.921] [main/INFO] [mixin/]: Remapping refMap terrablender.refmap.json using C:\Users\PC-\WinterWonders-1.20.1\build\createSrgToMcp\output.srg
-[17lis2025 11:55:35.922] [main/INFO] [mixin/]: Remapping refMap turtlecore.refmap.json using C:\Users\PC-\WinterWonders-1.20.1\build\createSrgToMcp\output.srg
-[17lis2025 11:55:36.271] [main/INFO] [net.minecraftforge.data.loading.DatagenModLoader/]: Initializing Data Gatherer for mods [winterwonders]
-[17lis2025 11:55:39.924] [modloading-worker-0/INFO] [net.minecraftforge.common.ForgeMod/FORGEMOD]: Forge mod loading, version 47.3.7, for MC 1.20.1 with MCP 20230612.114412
-[17lis2025 11:55:39.926] [modloading-worker-0/INFO] [net.minecraftforge.common.MinecraftForge/FORGE]: MinecraftForge v47.3.7 Initialized
-[17lis2025 11:55:39.966] [modloading-worker-0/INFO] [terrablender/]: Registered region minecraft:overworld to index 0 for type OVERWORLD
-[17lis2025 11:55:39.966] [modloading-worker-0/INFO] [terrablender/]: Registered region minecraft:nether to index 0 for type NETHER
-[17lis2025 11:55:39.966] [modloading-worker-0/INFO] [terrablender/]: Registered region winterwonders:overworld to index 1 for type OVERWORLD
-[17lis2025 11:55:40.400] [main/WARN] [net.minecraft.server.packs.VanillaPackResourcesBuilder/]: Assets URL 'union:/C:/Users/PC-/WinterWonders-1.20.1/build/fg_cache/net/minecraftforge/forge/1.20.1-47.3.7_mapped_parchment_2023.09.03-1.20.1/forge-1.20.1-47.3.7_mapped_parchment_2023.09.03-1.20.1-recomp.jar%23191!/assets/.mcassetsroot' uses unexpected schema
-[17lis2025 11:55:40.400] [main/WARN] [net.minecraft.server.packs.VanillaPackResourcesBuilder/]: Assets URL 'union:/C:/Users/PC-/WinterWonders-1.20.1/build/fg_cache/net/minecraftforge/forge/1.20.1-47.3.7_mapped_parchment_2023.09.03-1.20.1/forge-1.20.1-47.3.7_mapped_parchment_2023.09.03-1.20.1-recomp.jar%23191!/data/.mcassetsroot' uses unexpected schema
-[17lis2025 11:55:40.570] [main/INFO] [net.minecraft.data.DataGenerator/]: Starting provider: Recipes
-[17lis2025 11:55:40.606] [main/INFO] [net.minecraft.data.DataGenerator/]: Recipes finished after 35 ms
-[17lis2025 11:55:40.606] [main/INFO] [net.minecraft.data.DataGenerator/]: Starting provider: Loot Tables
-[17lis2025 11:55:40.665] [main/INFO] [net.minecraft.data.DataGenerator/]: Loot Tables finished after 58 ms
-[17lis2025 11:55:40.665] [main/INFO] [net.minecraft.data.DataGenerator/]: Starting provider: Block States: winterwonders
-[17lis2025 11:55:40.834] [main/INFO] [net.minecraft.data.DataGenerator/]: Block States: winterwonders finished after 169 ms
-[17lis2025 11:55:40.834] [main/INFO] [net.minecraft.data.DataGenerator/]: Starting provider: Item Models: winterwonders
-[17lis2025 11:55:40.852] [main/INFO] [net.minecraft.data.DataGenerator/]: Item Models: winterwonders finished after 17 ms
-[17lis2025 11:55:40.852] [main/INFO] [net.minecraft.data.DataGenerator/]: Starting provider: Tags for minecraft:block mod id winterwonders
-[17lis2025 11:55:40.862] [main/INFO] [net.minecraft.data.DataGenerator/]: Tags for minecraft:block mod id winterwonders finished after 9 ms
-[17lis2025 11:55:40.862] [main/INFO] [net.minecraft.data.DataGenerator/]: Starting provider: Tags for minecraft:item mod id winterwonders
-[17lis2025 11:55:40.875] [main/INFO] [net.minecraft.data.DataGenerator/]: Tags for minecraft:item mod id winterwonders finished after 13 ms
-[17lis2025 11:55:40.875] [main/INFO] [net.minecraft.data.DataGenerator/]: Starting provider: Registries
-[17lis2025 11:55:40.902] [main/INFO] [net.minecraft.data.DataGenerator/]: Registries finished after 27 ms
-[17lis2025 11:55:40.902] [main/INFO] [net.minecraft.data.DataGenerator/]: All providers took: 333 ms
-[17lis2025 11:55:40.922] [main/INFO] [net.minecraft.data.HashCache/]: Caching: total files: 459, old count: 459, new count: 460, removed stale: 0, written: 0
+[03Dec2025 09:15:31.061] [main/INFO] [cpw.mods.modlauncher.Launcher/MODLAUNCHER]: ModLauncher running: args [--launchTarget, forgedatauserdev, --assetIndex, 5, --assetsDir, C:\Users\cmartinez\.gradle\caches\forge_gradle\assets, --gameDir, ., --fml.forgeVersion, 47.3.7, --fml.mcVersion, 1.20.1, --fml.forgeGroup, net.minecraftforge, --fml.mcpVersion, 20230612.114412, --mod, winterwonders, --all, --output, C:\Users\cmartinez\Downloads\WinterWonders-1.20.1\src\generated\resources, --existing, C:\Users\cmartinez\Downloads\WinterWonders-1.20.1\src\main\resources]
+[03Dec2025 09:15:31.065] [main/INFO] [cpw.mods.modlauncher.Launcher/MODLAUNCHER]: ModLauncher 10.0.9+10.0.9+main.dcd20f30 starting: java version 17.0.12 by Eclipse Adoptium; OS Windows 11 arch amd64 version 10.0
+[03Dec2025 09:15:31.195] [main/INFO] [net.minecraftforge.fml.loading.ImmediateWindowHandler/]: ImmediateWindowProvider not loading because launch target is forgedatauserdev
+[03Dec2025 09:15:31.231] [main/INFO] [mixin/]: SpongePowered MIXIN Subsystem Version=0.8.5 Source=union:/C:/Users/cmartinez/.gradle/caches/modules-2/files-2.1/org.spongepowered/mixin/0.8.5/9d1c0c3a304ae6697ecd477218fa61b850bf57fc/mixin-0.8.5.jar%23128!/ Service=ModLauncher Env=CLIENT
+[03Dec2025 09:15:31.453] [main/WARN] [net.minecraftforge.fml.loading.moddiscovery.ModFileParser/LOADING]: Mod file C:\Users\cmartinez\.gradle\caches\modules-2\files-2.1\net.minecraftforge\javafmllanguage\1.20.1-47.3.7\5d72a04334eea2494912f0d91216648462bb32c3\javafmllanguage-1.20.1-47.3.7.jar is missing mods.toml file
+[03Dec2025 09:15:31.455] [main/WARN] [net.minecraftforge.fml.loading.moddiscovery.ModFileParser/LOADING]: Mod file C:\Users\cmartinez\.gradle\caches\modules-2\files-2.1\net.minecraftforge\lowcodelanguage\1.20.1-47.3.7\74fd0ee16e74766d45d2efe7c74b6d0e121677df\lowcodelanguage-1.20.1-47.3.7.jar is missing mods.toml file
+[03Dec2025 09:15:31.456] [main/WARN] [net.minecraftforge.fml.loading.moddiscovery.ModFileParser/LOADING]: Mod file C:\Users\cmartinez\.gradle\caches\modules-2\files-2.1\net.minecraftforge\mclanguage\1.20.1-47.3.7\cf753f5bc19311c127ea07e1ee43d5f9477df22b\mclanguage-1.20.1-47.3.7.jar is missing mods.toml file
+[03Dec2025 09:15:31.458] [main/WARN] [net.minecraftforge.fml.loading.moddiscovery.ModFileParser/LOADING]: Mod file C:\Users\cmartinez\.gradle\caches\modules-2\files-2.1\net.minecraftforge\fmlcore\1.20.1-47.3.7\b6a4840dfdc56e2ae2eccdd1bf233959493d11ea\fmlcore-1.20.1-47.3.7.jar is missing mods.toml file
+[03Dec2025 09:15:31.519] [main/INFO] [net.minecraftforge.fml.loading.moddiscovery.JarInJarDependencyLocator/]: No dependencies to load found. Skipping!
+[03Dec2025 09:15:32.690] [main/INFO] [mixin/]: Compatibility level set to JAVA_17
+[03Dec2025 09:15:32.693] [main/INFO] [cpw.mods.modlauncher.LaunchServiceHandler/MODLAUNCHER]: Launching target 'forgedatauserdev' with arguments [--gameDir, ., --assetsDir, C:\Users\cmartinez\.gradle\caches\forge_gradle\assets, --assetIndex, 5, --mod, winterwonders, --all, --output, C:\Users\cmartinez\Downloads\WinterWonders-1.20.1\src\generated\resources, --existing, C:\Users\cmartinez\Downloads\WinterWonders-1.20.1\src\main\resources]
+[03Dec2025 09:15:32.981] [main/INFO] [mixin/]: Remapping refMap terrablender.refmap.json using C:\Users\cmartinez\Downloads\WinterWonders-1.20.1\build\createSrgToMcp\output.srg
+[03Dec2025 09:15:32.983] [main/INFO] [mixin/]: Remapping refMap terrablender.refmap.json using C:\Users\cmartinez\Downloads\WinterWonders-1.20.1\build\createSrgToMcp\output.srg
+[03Dec2025 09:15:32.984] [main/INFO] [mixin/]: Remapping refMap turtlecore.refmap.json using C:\Users\cmartinez\Downloads\WinterWonders-1.20.1\build\createSrgToMcp\output.srg
+[03Dec2025 09:15:33.354] [main/INFO] [net.minecraftforge.data.loading.DatagenModLoader/]: Initializing Data Gatherer for mods [winterwonders]
+[03Dec2025 09:15:36.936] [modloading-worker-0/INFO] [net.minecraftforge.common.ForgeMod/FORGEMOD]: Forge mod loading, version 47.3.7, for MC 1.20.1 with MCP 20230612.114412
+[03Dec2025 09:15:36.940] [modloading-worker-0/INFO] [net.minecraftforge.common.MinecraftForge/FORGE]: MinecraftForge v47.3.7 Initialized
+[03Dec2025 09:15:36.994] [modloading-worker-0/INFO] [terrablender/]: Registered region minecraft:overworld to index 0 for type OVERWORLD
+[03Dec2025 09:15:36.995] [modloading-worker-0/INFO] [terrablender/]: Registered region minecraft:nether to index 0 for type NETHER
+[03Dec2025 09:15:36.995] [modloading-worker-0/INFO] [terrablender/]: Registered region winterwonders:overworld to index 1 for type OVERWORLD
+[03Dec2025 09:15:37.497] [main/WARN] [net.minecraft.server.packs.VanillaPackResourcesBuilder/]: Assets URL 'union:/C:/Users/cmartinez/Downloads/WinterWonders-1.20.1/build/fg_cache/net/minecraftforge/forge/1.20.1-47.3.7_mapped_parchment_2023.09.03-1.20.1/forge-1.20.1-47.3.7_mapped_parchment_2023.09.03-1.20.1.jar%23191!/assets/.mcassetsroot' uses unexpected schema
+[03Dec2025 09:15:37.497] [main/WARN] [net.minecraft.server.packs.VanillaPackResourcesBuilder/]: Assets URL 'union:/C:/Users/cmartinez/Downloads/WinterWonders-1.20.1/build/fg_cache/net/minecraftforge/forge/1.20.1-47.3.7_mapped_parchment_2023.09.03-1.20.1/forge-1.20.1-47.3.7_mapped_parchment_2023.09.03-1.20.1.jar%23191!/data/.mcassetsroot' uses unexpected schema
+[03Dec2025 09:15:37.772] [main/INFO] [net.minecraft.data.DataGenerator/]: Starting provider: Recipes
+[03Dec2025 09:15:37.807] [main/INFO] [net.minecraft.data.DataGenerator/]: Recipes finished after 34 ms
+[03Dec2025 09:15:37.807] [main/INFO] [net.minecraft.data.DataGenerator/]: Starting provider: Loot Tables
+[03Dec2025 09:15:37.850] [main/INFO] [net.minecraft.data.DataGenerator/]: Loot Tables finished after 41 ms
+[03Dec2025 09:15:37.850] [main/INFO] [net.minecraft.data.DataGenerator/]: Starting provider: Block States: winterwonders
+[03Dec2025 09:15:38.006] [main/INFO] [net.minecraft.data.DataGenerator/]: Block States: winterwonders finished after 156 ms
+[03Dec2025 09:15:38.006] [main/INFO] [net.minecraft.data.DataGenerator/]: Starting provider: Item Models: winterwonders
+[03Dec2025 09:15:38.023] [main/INFO] [net.minecraft.data.DataGenerator/]: Item Models: winterwonders finished after 17 ms
+[03Dec2025 09:15:38.023] [main/INFO] [net.minecraft.data.DataGenerator/]: Starting provider: Tags for minecraft:block mod id winterwonders
+[03Dec2025 09:15:38.063] [main/INFO] [net.minecraft.data.DataGenerator/]: Tags for minecraft:block mod id winterwonders finished after 39 ms
+[03Dec2025 09:15:38.063] [main/INFO] [net.minecraft.data.DataGenerator/]: Starting provider: Tags for minecraft:item mod id winterwonders
+[03Dec2025 09:15:38.065] [main/INFO] [net.minecraft.data.DataGenerator/]: Tags for minecraft:item mod id winterwonders finished after 1 ms
+[03Dec2025 09:15:38.065] [main/INFO] [net.minecraft.data.DataGenerator/]: Starting provider: Registries
+[03Dec2025 09:15:38.090] [main/INFO] [net.minecraft.data.DataGenerator/]: Registries finished after 24 ms
+[03Dec2025 09:15:38.090] [main/INFO] [net.minecraft.data.DataGenerator/]: All providers took: 317 ms
+[03Dec2025 09:15:38.104] [main/INFO] [net.minecraft.data.HashCache/]: Caching: total files: 459, old count: 459, new count: 460, removed stale: 0, written: 44

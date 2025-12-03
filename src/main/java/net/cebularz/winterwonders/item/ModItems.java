@@ -2,13 +2,10 @@ package net.cebularz.winterwonders.item;
 
 import net.cebularz.winterwonders.block.ModBlocks;
 import net.cebularz.winterwonders.entity.ModEntities;
-import net.cebularz.winterwonders.item.custom.BlizzardStaffItem;
-import net.cebularz.winterwonders.item.custom.ColdsteelSwordItem;
-import net.cebularz.winterwonders.item.custom.LichBlizzardStaffItem;
+import net.cebularz.winterwonders.item.custom.*;
 import net.cebularz.winterwonders.item.util.ModArmorItem;
 import net.cebularz.winterwonders.item.util.ModArmorMaterials;
 import net.cebularz.winterwonders.item.util.ModToolTiers;
-import net.minecraft.ChatFormatting;
 import net.minecraft.core.Direction;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffects;
@@ -20,7 +17,6 @@ import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.RegistryObject;
 import net.cebularz.winterwonders.WinterWonders;
-import net.cebularz.winterwonders.item.custom.FrostbiteWandItem;
 
 public class ModItems {
     public static final DeferredRegister<Item> ITEMS =
@@ -79,6 +75,9 @@ public class ModItems {
 
     public static final RegistryObject<Item> LICH_BLIZZARD_STAFF = ITEMS.register("lich_blizzard_staff",
             () -> new LichBlizzardStaffItem(new Item.Properties().rarity(Rarity.EPIC).setNoRepair().fireResistant().stacksTo(1)));
+
+    public static final RegistryObject<Item> TITANFELLER = ITEMS.register("titanfeller",
+            () -> new TitanfellerItem(ModToolTiers.MAMMOTH, 3, -2.4f, new Item.Properties().rarity(Rarity.EPIC)));
 
     public static final RegistryObject<Item> SNOW_WISP_SPAWN_EGG = ITEMS.register("snow_wisp_spawn_egg",
             ()-> new ForgeSpawnEggItem(ModEntities.SNOW_WISP,0xffffff,0xc5ebeb,new Item.Properties()));
