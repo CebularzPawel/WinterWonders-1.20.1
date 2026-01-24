@@ -6,7 +6,7 @@ import net.cebularz.winterwonders.effect.ModEffects;
 import net.cebularz.winterwonders.entity.ModEntities;
 import net.cebularz.winterwonders.item.ModItems;
 import net.minecraft.data.PackOutput;
-import net.turtleboi.turtlecore.util.CoreLanguageProvider;
+import net.turtleboi.turtlecore.datagen.CoreLanguageProvider;
 
 public class ModLanguageProvider extends CoreLanguageProvider {
     public ModLanguageProvider(PackOutput output) {
