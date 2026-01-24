@@ -39,6 +39,7 @@ import net.turtleboi.turtlecore.effect.CoreEffects;
 import net.turtleboi.turtlecore.network.CoreNetworking;
 import net.turtleboi.turtlecore.network.packet.util.SendParticlesS2C;
 import net.turtleboi.turtlecore.particle.CoreParticles;
+import net.turtleboi.turtlecore.spells.SpellScheduler;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -100,8 +101,8 @@ public class LichBlizzardStaffItem extends Item implements IStaffItem {
         if (!(level instanceof ServerLevel serverLevel)) return;
 
         for (int i = 0; i < 4; i++) {
-            int delayMillis = i * (50 * 15);
-            caster.getSpellScheduler().schedule(delayMillis, () -> {
+            int delayMillis = i * 15;
+            SpellScheduler.schedule(serverLevel, delayMillis, () -> {
                 int chillAmplifier = 0;
                 int damagePercent = 5;
                 double accuracyModifier = 0.15;
@@ -148,8 +149,8 @@ public class LichBlizzardStaffItem extends Item implements IStaffItem {
         if (!(level instanceof ServerLevel serverLevel)) return;
 
         for (int i = 0; i < 4; i++) {
-            int delayMillis = i * (50 * 15);
-            caster.getSpellScheduler().schedule(delayMillis, () -> {
+            int delayMillis = i * 15;
+            SpellScheduler.schedule(serverLevel, delayMillis, () -> {
                 int damagePercent = 10;
                 boolean homing = false;
                 if (caster.getHealth() < (caster.getMaxHealth() / 2)) {
@@ -409,13 +410,12 @@ public class LichBlizzardStaffItem extends Item implements IStaffItem {
             double dxSpike = spikeX - casterPos.x;
             double dzSpike = spikeZ - casterPos.z;
             float yawDegrees = (float) Math.toDegrees(Math.atan2(dxSpike, dzSpike));
-            int orderIndex = reverseSweep ? (spikeCount - 1 - i) : i;
-            long baseDelay = orderIndex * 50L;
+            long baseDelay = reverseSweep ? (spikeCount - 1 - i) : i;
 
             for (int stage = 0; stage < 3; stage++) {
                 int spellStage = stage;
-                long delay = baseDelay + stage * (2 * 50L);
-                caster.getSpellScheduler().schedule(delay,
+                long delay = baseDelay + stage * 2;
+                SpellScheduler.schedule(serverLevel, delay,
                         () -> doIceSpikes(serverLevel, spikePos, damage, spellStage, yawDegrees));
             }
         }

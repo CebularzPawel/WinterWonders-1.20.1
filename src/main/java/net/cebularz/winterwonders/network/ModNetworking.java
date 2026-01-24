@@ -11,6 +11,9 @@ import net.minecraftforge.network.NetworkDirection;
 import net.minecraftforge.network.NetworkRegistry;
 import net.minecraftforge.network.PacketDistributor;
 import net.minecraftforge.network.simple.SimpleChannel;
+import net.turtleboi.turtlecore.network.packet.effects.FrozenDataC2S;
+import net.turtleboi.turtlecore.network.packet.effects.FrozenDataS2C;
+import net.turtleboi.turtlecore.network.packet.util.SendParticlesS2C;
 
 public class ModNetworking {
     private static SimpleChannel INSTANCE;

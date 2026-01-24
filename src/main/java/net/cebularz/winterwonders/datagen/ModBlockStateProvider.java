@@ -115,6 +115,18 @@ public class ModBlockStateProvider extends BlockStateProvider {
 
         saplingBlock(ModBlocks.MYST_WILLOW_SAPLING);
 
+        logBlock(((RotatedPillarBlock) ModBlocks.WYRMSCALE_FIR_LOG.get()));
+        axisBlock(((RotatedPillarBlock) ModBlocks.WYRMSCALE_FIR_WOOD.get()), blockTexture(ModBlocks.WYRMSCALE_FIR_LOG.get()), blockTexture(ModBlocks.WYRMSCALE_FIR_LOG.get()));
+
+        axisBlock(((RotatedPillarBlock) ModBlocks.STRIPPED_WYRMSCALE_FIR_LOG.get()), blockTexture(ModBlocks.STRIPPED_WYRMSCALE_FIR_LOG.get()),
+                new ResourceLocation(WinterWonders.MOD_ID, "block/stripped_wyrmscale_fir_log_top"));
+        axisBlock(((RotatedPillarBlock) ModBlocks.STRIPPED_WYRMSCALE_FIR_WOOD.get()), blockTexture(ModBlocks.STRIPPED_WYRMSCALE_FIR_LOG.get()), blockTexture(ModBlocks.STRIPPED_WYRMSCALE_FIR_LOG.get()));
+
+        blockItem(ModBlocks.WYRMSCALE_FIR_LOG);
+        blockItem(ModBlocks.WYRMSCALE_FIR_WOOD);
+        blockItem(ModBlocks.STRIPPED_WYRMSCALE_FIR_LOG);
+        blockItem(ModBlocks.STRIPPED_WYRMSCALE_FIR_WOOD);
+
         makeBerryBush((BushBlock) ModBlocks.PUCKERBERRY_BUSH.get(), "puckerberry_stage", "puckerberry_stage");
     }
 

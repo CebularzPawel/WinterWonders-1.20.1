@@ -34,7 +34,11 @@ public class ModEntities
 
     public static final RegistryObject<EntityType<SnowWeaselEntity>> SNOW_WEASEL =
             TYPES.register("snow_weasel",()-> EntityType.Builder.of(SnowWeaselEntity::new, MobCategory.CREATURE)
-                    .sized(0.4F, .4F).build("pingin"));
+                    .sized(0.4F, .4F).build("snow_weasel"));
+
+    public static final RegistryObject<EntityType<MittenMouseEntity>> MITTEN_MOUSE =
+            TYPES.register("mitten_mouse",()-> EntityType.Builder.of(MittenMouseEntity::new, MobCategory.CREATURE)
+                    .sized(0.375f, 0.375f).build("mitten_mouse"));
 
     public static final RegistryObject<EntityType<LichEntity>> LICH =
             TYPES.register("lich",()-> EntityType.Builder.of(LichEntity::new, MobCategory.MONSTER)

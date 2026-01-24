@@ -12,6 +12,7 @@ import net.minecraftforge.client.event.RegisterParticleProvidersEvent;
 import net.minecraftforge.event.entity.EntityAttributeCreationEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
+import net.minecraftforge.fml.event.lifecycle.*;
 import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
 import net.cebularz.winterwonders.WinterWonders;
 import net.cebularz.winterwonders.block.entity.custom.models.IcyVinesModel;
@@ -33,6 +34,7 @@ public class ClientModBusEvents {
         EntityRenderers.register(ModEntities.SNOW_WISP.get(), SnowWispRenderer::new);
         EntityRenderers.register(ModEntities.REVENANT.get(), RevenantRenderer::new);
         EntityRenderers.register(ModEntities.PINGIN.get(), PinginRenderer::new);
+        EntityRenderers.register(ModEntities.MITTEN_MOUSE.get(), MittenMouseRenderer::new);
         EntityRenderers.register(ModEntities.SNOW_WEASEL.get(), SnowWeaselRenderer::new);
         EntityRenderers.register(ModEntities.BRISK.get(), BriskRenderer::new);
         EntityRenderers.register(ModEntities.LICH.get(), LichRenderer::new);
@@ -45,6 +47,7 @@ public class ClientModBusEvents {
         event.put(ModEntities.SNOW_WISP.get(), SnowWispEntity.createAttributes().build());
         event.put(ModEntities.REVENANT.get(), RevenantEntity.createAttributes().build());
         event.put(ModEntities.PINGIN.get(), PinginEntity.createAttributes().build());
+        event.put(ModEntities.MITTEN_MOUSE.get(), MittenMouseEntity.createAttributes().build());
         event.put(ModEntities.SNOW_WEASEL.get(), SnowWeaselEntity.createAttributes().build());
         event.put(ModEntities.BRISK.get(), BriskEntity.createAttributes().build());
         event.put(ModEntities.LICH.get(), LichEntity.createAttribute().build());
@@ -54,6 +57,7 @@ public class ClientModBusEvents {
     public static void registerEntityLayer(EntityRenderersEvent.RegisterLayerDefinitions event) {
         event.registerLayerDefinition(SnowWispModel.SNOW_WISP_LAYER, SnowWispModel::createBodyLayer);
         event.registerLayerDefinition(PinginModel.PINGIN_LAYER, PinginModel::createBodyLayer);
+        event.registerLayerDefinition(MittenMouseModel.MOUSE_LAYER, MittenMouseModel::createBodyLayer);
         event.registerLayerDefinition(SnowWeaselModel.SNOW_WEASEL_LAYER, SnowWeaselModel::createBodyLayer);
         event.registerLayerDefinition(BriskModel.BRISK_LAYER, BriskModel::createBodyLayer);
         event.registerLayerDefinition(LichModel.LICH_LAYER, LichModel::createBodyLayer);

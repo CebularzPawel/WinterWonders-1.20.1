@@ -4,6 +4,7 @@ import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
 import com.mojang.math.Axis;
 import net.cebularz.winterwonders.entity.animations.PinginAnimations;
+import net.minecraft.client.Minecraft;
 import net.minecraft.client.model.ArmedModel;
 import net.minecraft.client.model.HierarchicalModel;
 import net.minecraft.client.model.geom.ModelLayerLocation;
@@ -64,7 +65,6 @@ public class PinginModel<T extends Entity> extends HierarchicalModel<T> implemen
         PartDefinition right_foot = pingin.addOrReplaceChild("right_foot", CubeListBuilder.create().texOffs(18, 14).addBox(-1.5F, 0.5F, -2.5F, 3.0F, 0.0F, 4.0F, new CubeDeformation(0.0F))
                 .texOffs(0, 3).addBox(-0.5F, -1.5F, -0.5F, 1.0F, 2.0F, 1.0F, new CubeDeformation(0.0F)), PartPose.offset(-2.5F, -0.5F, 0.5F));
 
-
         return LayerDefinition.create(meshdefinition, 64, 64);
     }
 
@@ -84,25 +84,11 @@ public class PinginModel<T extends Entity> extends HierarchicalModel<T> implemen
 
         if (pingin.isSliding()) {
             this.animate(pingin.slideAnimationState, PinginAnimations.SLIDE, ageInTicks, 1f);
-        } else if (pingin.isAdmiring()) {
-            this.head.xRot = 0.25F;
-            if (pingin.isLeftHanded()) {
-                this.head.yRot = 0.5F;
-                this.right_arm.yRot = 0.5F;
-                this.right_arm.xRot = -0.9F;
-                this.left_arm.zRot = -0.15F;
-            } else {
-                this.head.yRot = -0.5F;
-                this.left_arm.yRot = -0.5F;
-                this.left_arm.xRot = -0.9F;
-                this.right_arm.zRot = 0.15F;
-            }
         } else {
             this.applyHeadRotation(netHeadYaw, headPitch);
-            if(!pingin.isAdmiring()) {
-                this.animateWalk(PinginAnimations.WALKING, finalLimbSwing, finalLimbSwingAmount, 2f, 2.4f);
-            }
+            this.animateWalk(PinginAnimations.WALKING, finalLimbSwing, finalLimbSwingAmount, 2f, 2.4f);
             this.animate(pingin.idleAnimationState, PinginAnimations.IDLE, ageInTicks, 1f);
+            admireItem(pingin);
         }
     }
 
@@ -126,10 +112,72 @@ public class PinginModel<T extends Entity> extends HierarchicalModel<T> implemen
 
     @Override
     public void translateToHand(HumanoidArm humanoidArm, PoseStack poseStack) {
-        ModelPart armPart = humanoidArm == HumanoidArm.LEFT ? this.right_arm : this.left_arm;
+        this.pingin.translateAndRotate(poseStack);
+        this.body.translateAndRotate(poseStack);
+
+        ModelPart armPart = humanoidArm == HumanoidArm.LEFT ? this.left_arm : this.right_arm;
         armPart.translateAndRotate(poseStack);
-        poseStack.scale(0.65f, 0.65f, 0.65f);
-        poseStack.translate(0.55, 2, 1.5);
-        poseStack.mulPose(Axis.ZP.rotationDegrees(90));
+
+        float scale = 1.00f;
+        float scaleDivider = 16.0f;
+        poseStack.translate((1f * scale) / scaleDivider, (-2f * scale) / scaleDivider, 0.0f);
+        poseStack.scale(scale, scale, scale);
     }
+
+    private static float smoothStep(float ticks) {
+        ticks = Mth.clamp(ticks, 0f, 1f);
+        return ticks * ticks * ticks * (ticks * (6f * ticks - 15f) + 10f);
+    }
+
+    private void admireItem(PinginEntity pingin) {
+        float partial = Minecraft.getInstance().getFrameTime();
+        float raw = Mth.lerp(partial, pingin.lastAdmireProgress, pingin.admireProgress);
+        float ease = smoothStep(raw);
+
+        float nHeadX = this.head.xRot;
+        float nHeadY = this.head.yRot;
+
+        float nRArmX = this.right_arm.xRot;
+        float nRArmY = this.right_arm.yRot;
+        float nRArmZ = this.right_arm.zRot;
+        float nRArmYPos = this.right_arm.y;
+
+        float nLArmX = this.left_arm.xRot;
+        float nLArmY = this.left_arm.yRot;
+        float nLArmZ = this.left_arm.zRot;
+        float nLArmYPos = this.left_arm.y;
+
+        boolean leftHanded = pingin.isLeftHanded();
+
+        float tHeadX = 0.25F;
+        float tHeadY = leftHanded ? -0.5F : 0.5F;
+        float tRArmX = nRArmX, tRArmY = nRArmY, tRArmZ = nRArmZ, tRArmYPos = nRArmYPos;
+        float tLArmX = nLArmX, tLArmY = nLArmY, tLArmZ = nLArmZ, tLArmYPos = nLArmYPos;
+
+        if (!leftHanded) {
+            tRArmY = 0.5F;
+            tRArmX = -1.9F;
+            tRArmYPos = -0.5F;
+            tLArmZ = -0.5F;
+        } else {
+            tLArmY = -0.5F;
+            tLArmX = -1.9F;
+            tLArmYPos = -0.5F;
+            tRArmZ = 0.5F;
+        }
+
+        this.head.xRot = Mth.lerp(ease, nHeadX, tHeadX);
+        this.head.yRot = Mth.lerp(ease, nHeadY, tHeadY);
+
+        this.right_arm.xRot = Mth.lerp(ease, nRArmX, tRArmX);
+        this.right_arm.yRot = Mth.lerp(ease, nRArmY, tRArmY);
+        this.right_arm.zRot = Mth.lerp(ease, nRArmZ, tRArmZ);
+        this.right_arm.y = Mth.lerp(ease, nRArmYPos, tRArmYPos);
+
+        this.left_arm.xRot = Mth.lerp(ease, nLArmX, tLArmX);
+        this.left_arm.yRot = Mth.lerp(ease, nLArmY, tLArmY);
+        this.left_arm.zRot = Mth.lerp(ease, nLArmZ, tLArmZ);
+        this.left_arm.y = Mth.lerp(ease, nLArmYPos, tLArmYPos);
+    }
+
 }

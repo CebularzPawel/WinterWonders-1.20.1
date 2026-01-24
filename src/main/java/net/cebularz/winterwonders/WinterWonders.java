@@ -67,12 +67,11 @@ public class WinterWonders {
             SpawnPlacements.register(ModEntities.REVENANT.get(), SpawnPlacements.Type.ON_GROUND, Heightmap.Types.WORLD_SURFACE, Monster::checkMonsterSpawnRules);
             SpawnPlacements.register(ModEntities.BRISK.get(), SpawnPlacements.Type.ON_GROUND, Heightmap.Types.WORLD_SURFACE, Monster::checkMonsterSpawnRules);
             SpawnPlacements.register(ModEntities.PINGIN.get(), SpawnPlacements.Type.ON_GROUND, Heightmap.Types.WORLD_SURFACE, PinginEntity::canSpawn);
-            SurfaceRuleManager.addSurfaceRules(SurfaceRuleManager.RuleCategory.OVERWORLD,MOD_ID, WWSurfaceRules.makeRules());
+            SurfaceRuleManager.addSurfaceRules(SurfaceRuleManager.RuleCategory.OVERWORLD, MOD_ID, WWSurfaceRules.makeRules());
 
-            ((FlowerPotBlock) Blocks.FLOWER_POT).addPlant(ModBlocks.ARCANILLUM.getId(),ModBlocks.POTTED_ARCANILLUM);
-            ((FlowerPotBlock) Blocks.FLOWER_POT).addPlant(ModBlocks.RIMEBLOOM.getId(),ModBlocks.POTTED_RIMEBLOOM);
-            ((FlowerPotBlock) Blocks.FLOWER_POT).addPlant(ModBlocks.MUSCARI.getId(),ModBlocks.POTTED_MUSCARI);
-
+            ((FlowerPotBlock) Blocks.FLOWER_POT).addPlant(ModBlocks.ARCANILLUM.getId(), ModBlocks.POTTED_ARCANILLUM);
+            ((FlowerPotBlock) Blocks.FLOWER_POT).addPlant(ModBlocks.RIMEBLOOM.getId(), ModBlocks.POTTED_RIMEBLOOM);
+            ((FlowerPotBlock) Blocks.FLOWER_POT).addPlant(ModBlocks.MUSCARI.getId(), ModBlocks.POTTED_MUSCARI);
         });
         ModNetworking.register();
     }

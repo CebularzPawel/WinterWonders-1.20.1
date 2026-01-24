@@ -17,22 +17,21 @@ public class ColdstoneSpikeFeature extends Feature<NoneFeatureConfiguration> {
     }
 
     public boolean place(FeaturePlaceContext<NoneFeatureConfiguration> context) {
-        BlockPos pos = context.origin();
-        RandomSource random = context.random();
+        BlockPos originPos = context.origin();
+        RandomSource randomSource = context.random();
         WorldGenLevel world = context.level();
 
-        // Move down to find ground level
-        while (world.isEmptyBlock(pos) && pos.getY() > world.getMinBuildHeight() + 2) {
-            pos = pos.below();
+        while (world.isEmptyBlock(originPos) && originPos.getY() > world.getMinBuildHeight() + 2) {
+            originPos = originPos.below();
         }
 
-        if (!isDirt(world.getBlockState(pos))) {
+        if (!isDirt(world.getBlockState(originPos))) {
             return false;
         }
 
-        pos = pos.above(random.nextInt(2)); // Start slightly above ground
-        int height = random.nextInt(3) + 4; // Height range: 4-6
-        int width = height / 3 + random.nextInt(1); // Adjusted width
+        originPos = originPos.above(randomSource.nextInt(2));
+        int height = randomSource.nextInt(3) + 4;
+        int width = height / 3 + randomSource.nextInt(1);
 
         for (int y = 0; y < height; ++y) {
             float radius = (1.0F - (float) y / (float) height) * (float) width;
@@ -44,13 +43,9 @@ public class ColdstoneSpikeFeature extends Feature<NoneFeatureConfiguration> {
                 for (int dz = -radiusCeil; dz <= radiusCeil; ++dz) {
                     float zDist = (float) Mth.abs(dz) - 0.25F;
                     if ((dx == 0 && dz == 0 || !(xDist * xDist + zDist * zDist > radius * radius)) &&
-                            (dx != -radiusCeil && dx != radiusCeil && dz != -radiusCeil && dz != radiusCeil || !(random.nextFloat() > 0.75F))) {
-                        BlockPos blockPos = pos.offset(dx, y, dz);
-                        BlockState blockBelow = world.getBlockState(blockPos.below());
-
-                        // Place block and ensure it extends down to solid ground
+                            (dx != -radiusCeil && dx != radiusCeil && dz != -radiusCeil && dz != radiusCeil || !(randomSource.nextFloat() > 0.75F))) {
+                        BlockPos blockPos = originPos.offset(dx, y, dz);
                         this.setBlock(world, blockPos, ModBlocks.COBBLED_ICE_STONE.get().defaultBlockState());
-
                         while (world.isEmptyBlock(blockPos.below()) && blockPos.getY() > world.getMinBuildHeight() + 2) {
                             blockPos = blockPos.below();
                             this.setBlock(world, blockPos, ModBlocks.COBBLED_ICE_STONE.get().defaultBlockState());

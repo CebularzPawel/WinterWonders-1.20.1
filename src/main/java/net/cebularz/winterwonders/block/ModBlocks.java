@@ -99,6 +99,18 @@ public class ModBlocks {
     public static final RegistryObject<Block> STRIPPED_MYST_WILLOW_WOOD = registerBlock("stripped_myst_willow_wood",
             () -> new ModFlammableRotatedPillarBlock(BlockBehaviour.Properties.copy(Blocks.SPRUCE_LOG).strength(3f)));
 
+    public static final RegistryObject<Block> WYRMSCALE_FIR_LOG = registerBlock("wyrmscale_fir_log",
+            () -> new ModFlammableRotatedPillarBlock(BlockBehaviour.Properties.copy(Blocks.SPRUCE_LOG).strength(3f)));
+
+    public static final RegistryObject<Block> WYRMSCALE_FIR_WOOD = registerBlock("wyrmscale_fir_wood",
+            () -> new ModFlammableRotatedPillarBlock(BlockBehaviour.Properties.copy(Blocks.SPRUCE_LOG).strength(3f)));
+
+    public static final RegistryObject<Block> STRIPPED_WYRMSCALE_FIR_LOG = registerBlock("stripped_wyrmscale_fir_log",
+            () -> new ModFlammableRotatedPillarBlock(BlockBehaviour.Properties.copy(Blocks.SPRUCE_LOG).strength(3f)));
+
+    public static final RegistryObject<Block> STRIPPED_WYRMSCALE_FIR_WOOD = registerBlock("stripped_wyrmscale_fir_wood",
+            () -> new ModFlammableRotatedPillarBlock(BlockBehaviour.Properties.copy(Blocks.SPRUCE_LOG).strength(3f)));
+
     public static final RegistryObject<Block> WUNDERSHROOM = registerBlock("wundershroom",
             () -> new MushroomNoGrowableBlock(BlockBehaviour.Properties.copy(Blocks.BROWN_MUSHROOM)));
 
@@ -135,7 +147,6 @@ public class ModBlocks {
     public static final RegistryObject<Block> POTTED_MUSCARI = BLOCKS.register("potted_muscari",
             () -> new FlowerPotBlock(() -> ((FlowerPotBlock) Blocks.FLOWER_POT),ModBlocks.MUSCARI,
                     BlockBehaviour.Properties.copy(Blocks.POTTED_ALLIUM).noOcclusion()));
-
 
 
     public static final RegistryObject<Block> POTTED_RIMEBLOOM = BLOCKS.register("potted_rimebloom",

@@ -76,13 +76,13 @@ public class PinginTradeWithPlayerGoal extends Goal {
         if (isChecking) {
             checkingTimer--;
 
-            if (checkingTimer % 5 == 0) {
-                this.mob.getLookControl().setLookAt(
-                        this.mob.getX() + this.mob.getRandom().nextGaussian() * 2.0D,
-                        this.mob.getEyeY(),
-                        this.mob.getZ() + this.mob.getRandom().nextGaussian() * 2.0D
-                );
-            }
+            //if (checkingTimer % 5 == 0) {
+            //    this.mob.getLookControl().setLookAt(
+            //            this.mob.getX() + this.mob.getRandom().nextGaussian() * 2.0D,
+            //            this.mob.getEyeY(),
+            //            this.mob.getZ() + this.mob.getRandom().nextGaussian() * 2.0D
+            //    );
+            //}
 
             if (checkingTimer % 20 == 0 && mob.getRandom().nextFloat() < 0.3F) {
                 mob.playSound(SoundEvents.PIGLIN_ADMIRING_ITEM, 0.5F,

@@ -4,6 +4,7 @@ import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
 import net.cebularz.winterwonders.WinterWonders;
 import net.cebularz.winterwonders.entity.custom.LichEntity;
+import net.minecraft.client.Minecraft;
 import net.minecraft.client.model.ArmedModel;
 import net.minecraft.client.model.HierarchicalModel;
 import net.minecraft.client.model.geom.ModelLayerLocation;
@@ -155,35 +156,7 @@ public class LichModel<T extends LichEntity> extends HierarchicalModel<T> implem
         this.body.yRot = 0.0F;
         this.body.xRot = Mth.cos(limbSwing * 0.6662F) * 0.05F * limbSwingAmount;
 
-        if (entity.isCastingSpell()) {
-            float baseXRot = -1.5f;
-            float baseZRot = 0.4f;
-            float amplitude = 0.35f;
-            float castSpeed = 0.2f;
-            float angle = ageInTicks * castSpeed;
-            float offsetX = Mth.cos(angle) * amplitude;
-            float offsetZ = Mth.sin(angle) * amplitude;
-
-            this.right_arm.xRot = baseXRot + offsetX;
-            this.right_arm.zRot = -baseZRot + offsetZ;
-            this.left_arm.xRot = baseXRot - offsetX;
-            this.left_arm.zRot = baseZRot - offsetZ;
-
-            this.right_arm1.xRot = baseXRot + offsetX;
-            this.right_arm1.zRot = -baseZRot + offsetZ;
-            this.left_arm1.xRot = baseXRot - offsetX;
-            this.left_arm1.zRot = baseZRot - offsetZ;
-
-            this.right_arm2.xRot = baseXRot + offsetX;
-            this.right_arm2.zRot = -baseZRot + offsetZ;
-            this.left_arm2.xRot = baseXRot - offsetX;
-            this.left_arm2.zRot = baseZRot -offsetZ;
-
-            this.right_arm3.xRot = baseXRot + offsetX;
-            this.right_arm3.zRot = -baseZRot + offsetZ;
-            this.left_arm3.xRot = baseXRot - offsetX;
-            this.left_arm3.zRot = baseZRot - offsetZ;
-        }
+        castingTransforms(entity, ageInTicks);
     }
 
     @Override
@@ -198,10 +171,69 @@ public class LichModel<T extends LichEntity> extends HierarchicalModel<T> implem
 
     @Override
     public void translateToHand(HumanoidArm humanoidArm, PoseStack poseStack) {
-        ModelPart armPart = humanoidArm == HumanoidArm.LEFT ? this.left_arm1 : this.right_arm1;
-        armPart.translateAndRotate(poseStack);
-
-        float xOffset = humanoidArm == HumanoidArm.LEFT ? 0.2F : -0.2F;
-        poseStack.translate(xOffset, 0, 0);
+        this.lich.translateAndRotate(poseStack);
+        ModelPart parent = (humanoidArm == HumanoidArm.LEFT ? this.left_arm : this.right_arm);
+        parent.translateAndRotate(poseStack);
+        ModelPart pivot = (humanoidArm == HumanoidArm.LEFT ? this.left_arm1 : this.right_arm1);
+        pivot.translateAndRotate(poseStack);
+        float scaleDivider = 16.0f;
+        poseStack.translate((humanoidArm == HumanoidArm.RIGHT ? 1.0f : -1.0f) / scaleDivider, 0.5f / scaleDivider, 0.0f);
     }
+
+    private static float smoothStep(float ticks) {
+        ticks = Mth.clamp(ticks, 0f, 1f);
+        return ticks * ticks * ticks * (ticks * (6f * ticks - 15f) + 10f);
+    }
+
+    private void castingTransforms(LichEntity lichEntity, float ageInTicks) {
+        float partial = Minecraft.getInstance().getFrameTime();
+        float raw = Mth.lerp(partial, lichEntity.lastCastProgress, lichEntity.castProgress);
+        float ease = smoothStep(raw);
+
+        float baseXRot = -1.5f;
+        float baseZRot = 0.4f;
+        float amplitude = 0.35f;
+        float castSpeed = 0.20f;
+        float angle = ageInTicks * castSpeed;
+        float offsetX = Mth.cos(angle) * amplitude;
+        float offsetZ = Mth.sin(angle) * amplitude;
+
+        float rAx = this.right_arm.xRot, rAz = this.right_arm.zRot;
+        float lAx = this.left_arm.xRot, lAz = this.left_arm.zRot;
+
+        float rA1x = this.right_arm1.xRot, rA1z = this.right_arm1.zRot;
+        float lA1x = this.left_arm1.xRot, lA1z = this.left_arm1.zRot;
+
+        float rA2x = this.right_arm2.xRot, rA2z = this.right_arm2.zRot;
+        float lA2x = this.left_arm2.xRot, lA2z = this.left_arm2.zRot;
+
+        float rA3x = this.right_arm3.xRot, rA3z = this.right_arm3.zRot;
+        float lA3x = this.left_arm3.xRot, lA3z = this.left_arm3.zRot;
+
+        float rCastX = baseXRot + offsetX;
+        float rCastZ = -baseZRot + offsetZ;
+        float lCastX = baseXRot - offsetX;
+        float lCastZ =  baseZRot - offsetZ;
+
+        this.right_arm.xRot = Mth.lerp(ease, rAx, rCastX);
+        this.right_arm.zRot = Mth.lerp(ease, rAz, rCastZ);
+        this.left_arm.xRot = Mth.lerp(ease, lAx, lCastX);
+        this.left_arm.zRot = Mth.lerp(ease, lAz, lCastZ);
+
+        this.right_arm1.xRot = Mth.lerp(ease, rA1x, rCastX);
+        this.right_arm1.zRot = Mth.lerp(ease, rA1z, rCastZ);
+        this.left_arm1.xRot = Mth.lerp(ease, lA1x, lCastX);
+        this.left_arm1.zRot = Mth.lerp(ease, lA1z, lCastZ);
+
+        this.right_arm2.xRot = Mth.lerp(ease, rA2x, rCastX);
+        this.right_arm2.zRot = Mth.lerp(ease, rA2z, rCastZ);
+        this.left_arm2.xRot = Mth.lerp(ease, lA2x, lCastX);
+        this.left_arm2.zRot = Mth.lerp(ease, lA2z, lCastZ);
+
+        this.right_arm3.xRot = Mth.lerp(ease, rA3x, rCastX);
+        this.right_arm3.zRot = Mth.lerp(ease, rA3z, rCastZ);
+        this.left_arm3.xRot = Mth.lerp(ease, lA3x, lCastX);
+        this.left_arm3.zRot = Mth.lerp(ease, lA3z, lCastZ);
+    }
+
 }

@@ -2,9 +2,7 @@ package net.cebularz.winterwonders.item;
 
 import net.cebularz.winterwonders.block.ModBlocks;
 import net.cebularz.winterwonders.entity.ModEntities;
-import net.cebularz.winterwonders.item.custom.BlizzardStaffItem;
-import net.cebularz.winterwonders.item.custom.ColdsteelSwordItem;
-import net.cebularz.winterwonders.item.custom.LichBlizzardStaffItem;
+import net.cebularz.winterwonders.item.custom.*;
 import net.cebularz.winterwonders.item.util.ModArmorItem;
 import net.cebularz.winterwonders.item.util.ModArmorMaterials;
 import net.cebularz.winterwonders.item.util.ModToolTiers;
@@ -20,7 +18,6 @@ import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.RegistryObject;
 import net.cebularz.winterwonders.WinterWonders;
-import net.cebularz.winterwonders.item.custom.FrostbiteWandItem;
 
 public class ModItems {
     public static final DeferredRegister<Item> ITEMS =
@@ -116,6 +113,11 @@ public class ModItems {
     public static final RegistryObject<Item> COOKED_PINGIN_MEAT = ITEMS.register("cooked_pingin_meat",
             () -> new Item(new Item.Properties().food(
                     new FoodProperties.Builder().nutrition(6).saturationMod(0.6F).meat().build())));
+
+    public static final RegistryObject<Item> SUGAR_COOKIE = ITEMS.register("sugar_cookie",
+            () -> new SugarCookieItem(new Item.Properties().rarity(Rarity.COMMON)
+                    .food(new FoodProperties.Builder().nutrition(3).saturationMod(0.2F).build()),
+                    20 * 30, 0));
 
 
     public static void register(IEventBus eventBus) {

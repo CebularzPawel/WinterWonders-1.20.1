@@ -1,0 +1,7 @@
+{
+  "parent": "minecraft:block/cube_column",
+  "textures": {
+    "end": "winterwonders:block/stripped_wyrmscale_fir_log",
+    "side": "winterwonders:block/stripped_wyrmscale_fir_log"
+  }
+}

@@ -93,6 +93,11 @@ public class ModBlockLootTables extends BlockLootSubProvider {
         this.dropSelf(ModBlocks.MYST_WILLOW_FENCE.get());
         this.dropSelf(ModBlocks.MYST_WILLOW_FENCE_GATE.get());
 
+        this.dropSelf(ModBlocks.WYRMSCALE_FIR_LOG.get());
+        this.dropSelf(ModBlocks.WYRMSCALE_FIR_WOOD.get());
+        this.dropSelf(ModBlocks.STRIPPED_WYRMSCALE_FIR_LOG.get());
+        this.dropSelf(ModBlocks.STRIPPED_WYRMSCALE_FIR_WOOD.get());
+
         this.dropWhenSilkTouch(ModBlocks.ICE_SLUSH.get());
 
         this.dropSelf(ModBlocks.WUNDERSHROOM.get());

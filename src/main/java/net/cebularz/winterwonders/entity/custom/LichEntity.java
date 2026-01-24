@@ -16,6 +16,7 @@ import net.minecraft.network.syncher.SynchedEntityData;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
+import net.minecraft.util.Mth;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.DifficultyInstance;
 import net.minecraft.world.InteractionHand;
@@ -57,14 +58,14 @@ public class LichEntity extends Monster implements RangedAttackMob {
     private static final EntityDataAccessor<Integer> CASTING_TICKS =
             SynchedEntityData.defineId(LichEntity.class, EntityDataSerializers.INT);
 
+    public float castProgress;
+    public float lastCastProgress;
     private int attackCooldown = 0;
     private boolean hasCastIceBlock = false;
     private boolean iceBlockActive = false;
     private final int iceBlockSeconds = 30;
     private int iceBlockTickCounter = iceBlockSeconds * 20;
     public final List<Mob> spawnedMinions = new ArrayList<>();
-
-    private final SpellScheduler spellScheduler = new SpellScheduler();
 
     public LichEntity(EntityType<? extends Monster> pEntityType, Level pLevel) {
         super(pEntityType, pLevel);
@@ -123,8 +124,6 @@ public class LichEntity extends Monster implements RangedAttackMob {
         if (getCastingSpellTicks() > 0) {
             setCastingSpellTicks(getCastingSpellTicks() - 1);
         }
-
-        spellScheduler.tick();
 
         if (!hasCastIceBlock && !iceBlockActive && this.getHealth() < (this.getMaxHealth() / 2)) {
             triggerIceBlock();
@@ -216,6 +215,20 @@ public class LichEntity extends Monster implements RangedAttackMob {
         }
     }
 
+    @Override
+    public void aiStep() {
+        super.aiStep();
+
+        if (this.level().isClientSide) {
+            float target = this.isCastingSpell() ? 1.0F : 0.0F;
+            float speed = 0.125f;
+
+            this.lastCastProgress = this.castProgress;
+            this.castProgress = Mth.lerp(speed, this.castProgress, target);
+            this.castProgress = Mth.clamp(this.castProgress, 0.0F, 1.0F);
+        }
+    }
+
     public boolean isOnCooldown() {
         return attackCooldown > 0;
     }
@@ -234,10 +247,6 @@ public class LichEntity extends Monster implements RangedAttackMob {
 
     public void setCastingSpellTicks(int ticks) {
         this.entityData.set(CASTING_TICKS, ticks);
-    }
-
-    public SpellScheduler getSpellScheduler() {
-        return spellScheduler;
     }
 
     public boolean isTargetInRangedAttackRange(LivingEntity target) {
@@ -341,10 +350,12 @@ public class LichEntity extends Monster implements RangedAttackMob {
         }
 
         if (source.getEntity() instanceof LivingEntity attacker) {
-            spellScheduler.schedule(1000, ()-> {
-                castSpell(attacker);
-                setAttackCooldown(0);
-            });
+            if (attacker.level() instanceof ServerLevel serverLevel) {
+                SpellScheduler.schedule(serverLevel,20, () -> {
+                    castSpell(attacker);
+                    setAttackCooldown(0);
+                });
+            }
         }
 
         return super.hurt(source, amount);
@@ -354,12 +365,14 @@ public class LichEntity extends Monster implements RangedAttackMob {
         iceBlockActive = true;
         iceBlockTickCounter = iceBlockSeconds * 20;
 
-        int spawnIntervalMillis = 10000;
-        int totalDurationMillis = iceBlockSeconds * 1000;
-        int numberOfSpawns = totalDurationMillis / spawnIntervalMillis;
+        int spawnIntervalTicks = 200;
+        int totalDurationTicks = iceBlockSeconds * 20;
+        int numberOfSpawns = totalDurationTicks / spawnIntervalTicks;
         for (int i = 0; i < numberOfSpawns; i++) {
-            int delay = i * spawnIntervalMillis;
-            spellScheduler.schedule(delay, this::spawnMinions);
+            int delay = i * spawnIntervalTicks;
+            if (this.level() instanceof ServerLevel serverLevel) {
+                SpellScheduler.schedule(serverLevel, delay, this::spawnMinions);
+            }
         }
     }
 
