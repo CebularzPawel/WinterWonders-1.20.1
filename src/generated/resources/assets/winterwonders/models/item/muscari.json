@@ -1,3 +1,6 @@
 {
-  "parent": "winterwonders:block/muscari"
+  "parent": "minecraft:item/generated",
+  "textures": {
+    "layer0": "winterwonders:block/muscari"
+  }
 }

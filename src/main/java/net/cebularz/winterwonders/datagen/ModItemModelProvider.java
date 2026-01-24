@@ -53,6 +53,10 @@ public class ModItemModelProvider extends ItemModelProvider {
         evenSimplerBlockItem(ModBlocks.COBBLED_ICE_STONE_STAIRS);
         evenSimplerBlockItem(ModBlocks.COBBLED_ICE_STONE_SLAB);
 
+        wallItem(ModBlocks.MOSSY_COBBLED_ICE_STONE_WALL, ModBlocks.MOSSY_COBBLED_ICE_STONE);
+        evenSimplerBlockItem(ModBlocks.MOSSY_COBBLED_ICE_STONE_STAIRS);
+        evenSimplerBlockItem(ModBlocks.MOSSY_COBBLED_ICE_STONE_SLAB);
+
         wallItem(ModBlocks.ICE_STONE_BRICKS_WALL, ModBlocks.ICE_STONE_BRICKS);
         evenSimplerBlockItem(ModBlocks.ICE_STONE_BRICKS_STAIRS);
         evenSimplerBlockItem(ModBlocks.ICE_STONE_BRICKS_SLAB);
@@ -109,6 +113,7 @@ public class ModItemModelProvider extends ItemModelProvider {
         simpleBlockItemBlockTexture(ModBlocks.ARCANILLUM);
         simpleBlockItemBlockTexture(ModBlocks.RIMEBLOOM);
         simpleBlockItemBlockTexture(ModBlocks.MUSCARI);
+        simpleBlockItemBlockTexture(ModBlocks.WHITE_MUSCARI);
 
         simpleItem(ModItems.PINGIN_FEATHER);
         simpleItem(ModItems.PINGIN_MEAT);

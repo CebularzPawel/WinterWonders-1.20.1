@@ -39,6 +39,8 @@ public class ModCreativeModeTabs {
                         pOutput.accept(ModItems.FROSTBITE_WAND.get());
                         pOutput.accept(ModItems.BLIZZARD_STAFF.get());
 
+                        pOutput.accept(ModItems.TITANFELLER.get());
+
                         pOutput.accept(ModBlocks.GREYPINE_LOG.get());
                         pOutput.accept(ModBlocks.GREYPINE_WOOD.get());
                         pOutput.accept(ModBlocks.STRIPPED_GREYPINE_LOG.get());
@@ -76,6 +78,10 @@ public class ModCreativeModeTabs {
                         pOutput.accept(ModBlocks.COBBLED_ICE_STONE_SLAB.get());
                         pOutput.accept(ModBlocks.COBBLED_ICE_STONE_WALL.get());
 
+                        pOutput.accept(ModBlocks.MOSSY_COBBLED_ICE_STONE.get());
+                        pOutput.accept(ModBlocks.MOSSY_COBBLED_ICE_STONE_STAIRS.get());
+                        pOutput.accept(ModBlocks.MOSSY_COBBLED_ICE_STONE_SLAB.get());
+                        pOutput.accept(ModBlocks.MOSSY_COBBLED_ICE_STONE_WALL.get());
 
                         pOutput.accept(ModBlocks.ICE_STONE_BRICKS.get());
                         pOutput.accept(ModBlocks.ICE_STONE_BRICKS_STAIRS.get());
@@ -99,6 +105,8 @@ public class ModCreativeModeTabs {
 
                         pOutput.accept(ModBlocks.ARCANILLUM.get());
                         pOutput.accept(ModBlocks.RIMEBLOOM.get());
+                        pOutput.accept(ModBlocks.MUSCARI.get());
+                        pOutput.accept(ModBlocks.WHITE_MUSCARI.get());
 
                         pOutput.accept(ModItems.PUCKERBERRY.get());
 

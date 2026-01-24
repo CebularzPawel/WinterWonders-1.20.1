@@ -1,0 +1,8 @@
+{
+  "type": "minecraft:stonecutting",
+  "count": 1,
+  "ingredient": {
+    "item": "winterwonders:mossy_cobbled_ice_stone"
+  },
+  "result": "winterwonders:mossy_cobbled_ice_stone_wall"
+}

@@ -30,6 +30,11 @@ public class ModBlockStateProvider extends BlockStateProvider {
         slabBlock(((SlabBlock) ModBlocks.COBBLED_ICE_STONE_SLAB.get()),blockTexture(ModBlocks.COBBLED_ICE_STONE.get()),blockTexture(ModBlocks.COBBLED_ICE_STONE.get()));
         wallBlock(((WallBlock) ModBlocks.COBBLED_ICE_STONE_WALL.get()),blockTexture(ModBlocks.COBBLED_ICE_STONE.get()));
 
+        blockWithItem(ModBlocks.MOSSY_COBBLED_ICE_STONE);
+        stairsBlock(((StairBlock) ModBlocks.MOSSY_COBBLED_ICE_STONE_STAIRS.get()),blockTexture(ModBlocks.MOSSY_COBBLED_ICE_STONE.get()));
+        slabBlock(((SlabBlock) ModBlocks.MOSSY_COBBLED_ICE_STONE_SLAB.get()),blockTexture(ModBlocks.MOSSY_COBBLED_ICE_STONE.get()),blockTexture(ModBlocks.MOSSY_COBBLED_ICE_STONE.get()));
+        wallBlock(((WallBlock) ModBlocks.MOSSY_COBBLED_ICE_STONE_WALL.get()),blockTexture(ModBlocks.MOSSY_COBBLED_ICE_STONE.get()));
+
         blockWithItem(ModBlocks.ICE_STONE_BRICKS);
         stairsBlock(((StairBlock) ModBlocks.ICE_STONE_BRICKS_STAIRS.get()),blockTexture(ModBlocks.ICE_STONE_BRICKS.get()));
         slabBlock(((SlabBlock) ModBlocks.ICE_STONE_BRICKS_SLAB.get()),blockTexture(ModBlocks.ICE_STONE_BRICKS.get()),blockTexture(ModBlocks.ICE_STONE_BRICKS.get()));
@@ -45,19 +50,24 @@ public class ModBlockStateProvider extends BlockStateProvider {
         slabBlock(((SlabBlock) ModBlocks.POLISHED_ICE_STONE_SLAB.get()),blockTexture(ModBlocks.POLISHED_ICE_STONE.get()),blockTexture(ModBlocks.POLISHED_ICE_STONE.get()));
         wallBlock(((WallBlock) ModBlocks.POLISHED_ICE_STONE_WALL.get()),blockTexture(ModBlocks.POLISHED_ICE_STONE.get()));
 
-        simpleBlockWithItem(ModBlocks.ARCANILLUM.get(), models().cross(blockTexture(ModBlocks.ARCANILLUM.get()).getPath(),
+        simpleBlock(ModBlocks.ARCANILLUM.get(), models().cross(blockTexture(ModBlocks.ARCANILLUM.get()).getPath(),
                 blockTexture(ModBlocks.ARCANILLUM.get())).renderType("cutout"));
-        simpleBlockWithItem(ModBlocks.POTTED_ARCANILLUM.get(), models().singleTexture("potted_magical_rose", new ResourceLocation("flower_pot_cross"), "plant",
+        simpleBlock(ModBlocks.POTTED_ARCANILLUM.get(), models().singleTexture("potted_magical_rose", new ResourceLocation("flower_pot_cross"), "plant",
                 blockTexture(ModBlocks.ARCANILLUM.get())).renderType("cutout"));
 
-        simpleBlockWithItem(ModBlocks.RIMEBLOOM.get(), models().cross(blockTexture(ModBlocks.RIMEBLOOM.get()).getPath(),
+        simpleBlock(ModBlocks.RIMEBLOOM.get(), models().cross(blockTexture(ModBlocks.RIMEBLOOM.get()).getPath(),
                 blockTexture(ModBlocks.RIMEBLOOM.get())).renderType("cutout"));
-        simpleBlockWithItem(ModBlocks.POTTED_RIMEBLOOM.get(), models().singleTexture("potted_ice_flower", new ResourceLocation("flower_pot_cross"), "plant",
+        simpleBlock(ModBlocks.POTTED_RIMEBLOOM.get(), models().singleTexture("potted_ice_flower", new ResourceLocation("flower_pot_cross"), "plant",
                 blockTexture(ModBlocks.RIMEBLOOM.get())).renderType("cutout"));
 
-        simpleBlockWithItem(ModBlocks.MUSCARI.get(), models().cross(blockTexture(ModBlocks.MUSCARI.get()).getPath(),
+        simpleBlock(ModBlocks.MUSCARI.get(), models().cross(blockTexture(ModBlocks.MUSCARI.get()).getPath(),
                 blockTexture(ModBlocks.MUSCARI.get())).renderType("cutout"));
-        simpleBlockWithItem(ModBlocks.POTTED_MUSCARI.get(), models().singleTexture("potted_muscari", new ResourceLocation("flower_pot_cross"), "plant",
+        simpleBlock(ModBlocks.POTTED_MUSCARI.get(), models().singleTexture("potted_muscari", new ResourceLocation("flower_pot_cross"), "plant",
+                blockTexture(ModBlocks.MUSCARI.get())).renderType("cutout"));
+
+        simpleBlock(ModBlocks.WHITE_MUSCARI.get(), models().cross(blockTexture(ModBlocks.WHITE_MUSCARI.get()).getPath(),
+                blockTexture(ModBlocks.WHITE_MUSCARI.get())).renderType("cutout"));
+        simpleBlock(ModBlocks.POTTED_WHITE_MUSCARI.get(), models().singleTexture("potted_white_muscari", new ResourceLocation("flower_pot_cross"), "plant",
                 blockTexture(ModBlocks.MUSCARI.get())).renderType("cutout"));
 
         axisBlock(((RotatedPillarBlock) ModBlocks.ICE_STONE_PILLAR.get()), blockTexture(ModBlocks.ICE_STONE_PILLAR.get()),

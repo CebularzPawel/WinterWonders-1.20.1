@@ -28,6 +28,9 @@ public final class ModPlacedFeatures {
     public static final ResourceKey<PlacedFeature> WINTER_FROST_FLOWERS_KEY = registerKey("winter_frost_flowers");
     public static final ResourceKey<PlacedFeature> MAGICAL_FLOWERS_KEY = registerKey("magical_flowers");
 
+    public static final ResourceKey<PlacedFeature> MUSCARIS_KEY = registerKey("muscaris");
+
+
     public static void bootstrap(BootstapContext<PlacedFeature> context) {
         HolderGetter<ConfiguredFeature<?, ?>> configuredFeatures = context.lookup(Registries.CONFIGURED_FEATURE);
 
@@ -48,6 +51,13 @@ public final class ModPlacedFeatures {
 
         PlacementUtils.register(context,WINTER_FROST_FLOWERS_KEY,configuredFeatures.getOrThrow(
                 ModConfiguredFeatures.RIMEBLOOM_KEY),
+                CountPlacement.of(1),
+                InSquarePlacement.spread(),
+                PlacementUtils.HEIGHTMAP,
+                BiomeFilter.biome());
+
+        PlacementUtils.register(context,MUSCARIS_KEY,configuredFeatures.getOrThrow(
+                        ModConfiguredFeatures.MUSCARI_KEY),
                 CountPlacement.of(1),
                 InSquarePlacement.spread(),
                 PlacementUtils.HEIGHTMAP,

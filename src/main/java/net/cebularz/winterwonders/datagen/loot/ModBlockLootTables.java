@@ -35,6 +35,12 @@ public class ModBlockLootTables extends BlockLootSubProvider {
         this.dropSelf(ModBlocks.COBBLED_ICE_STONE_STAIRS.get());
         this.dropSelf(ModBlocks.COBBLED_ICE_STONE_WALL.get());
 
+        this.dropSelf(ModBlocks.MOSSY_COBBLED_ICE_STONE.get());
+        this.add(ModBlocks.MOSSY_COBBLED_ICE_STONE_SLAB.get(),
+                block -> createSlabItemTable(ModBlocks.MOSSY_COBBLED_ICE_STONE_SLAB.get()));
+        this.dropSelf(ModBlocks.MOSSY_COBBLED_ICE_STONE_STAIRS.get());
+        this.dropSelf(ModBlocks.MOSSY_COBBLED_ICE_STONE_WALL.get());
+
         this.dropSelf(ModBlocks.ICE_STONE_BRICKS.get());
         this.add(ModBlocks.ICE_STONE_BRICKS_SLAB.get(),
                 block -> createSlabItemTable(ModBlocks.ICE_STONE_BRICKS_SLAB.get()));
@@ -111,9 +117,11 @@ public class ModBlockLootTables extends BlockLootSubProvider {
         this.add(ModBlocks.POTTED_ARCANILLUM.get(),createPotFlowerItemTable(ModBlocks.ARCANILLUM.get()));
         this.dropSelf(ModBlocks.RIMEBLOOM.get());
         this.add(ModBlocks.POTTED_RIMEBLOOM.get(),createPotFlowerItemTable(ModBlocks.RIMEBLOOM.get()));
-
         this.dropSelf(ModBlocks.MUSCARI.get());
         this.add(ModBlocks.POTTED_MUSCARI.get(),createPotFlowerItemTable(ModBlocks.MUSCARI.get()));
+        this.dropSelf(ModBlocks.WHITE_MUSCARI.get());
+        this.add(ModBlocks.POTTED_WHITE_MUSCARI.get(),createPotFlowerItemTable(ModBlocks.WHITE_MUSCARI.get()));
+
         LootItemCondition.Builder lootitemcondition$builder2 = LootItemBlockStatePropertyCondition
                 .hasBlockStateProperties(ModBlocks.PUCKERBERRY_BUSH.get())
                 .setProperties(StatePropertiesPredicate.Builder.properties().hasProperty(PuckerberryBushBlock.AGE, 2))

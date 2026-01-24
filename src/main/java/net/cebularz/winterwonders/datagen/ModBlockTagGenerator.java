@@ -38,6 +38,10 @@ public class ModBlockTagGenerator extends BlockTagsProvider {
                 .add(ModBlocks.COBBLED_ICE_STONE_STAIRS.get())
                 .add(ModBlocks.COBBLED_ICE_STONE_SLAB.get())
                 .add(ModBlocks.COBBLED_ICE_STONE_WALL.get())
+                .add(ModBlocks.MOSSY_COBBLED_ICE_STONE.get())
+                .add(ModBlocks.MOSSY_COBBLED_ICE_STONE_STAIRS.get())
+                .add(ModBlocks.MOSSY_COBBLED_ICE_STONE_SLAB.get())
+                .add(ModBlocks.MOSSY_COBBLED_ICE_STONE_WALL.get())
                 .add(ModBlocks.ICE_STONE_BRICKS.get())
                 .add(ModBlocks.ICE_STONE_BRICKS_STAIRS.get())
                 .add(ModBlocks.ICE_STONE_BRICKS_SLAB.get())
@@ -54,6 +58,7 @@ public class ModBlockTagGenerator extends BlockTagsProvider {
 
         this.tag(BlockTags.WALLS)
                 .add(ModBlocks.COBBLED_ICE_STONE_WALL.get())
+                .add(ModBlocks.MOSSY_COBBLED_ICE_STONE_WALL.get())
                 .add(ModBlocks.ICE_STONE_BRICKS_WALL.get())
                 .add(ModBlocks.ICE_STONE_TILES_WALL.get())
                 .add(ModBlocks.POLISHED_ICE_STONE_WALL.get());
