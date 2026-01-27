@@ -307,7 +307,7 @@ public class ModBlocks {
             () -> new SaplingBlock(new MystWillowTreeGrower(), BlockBehaviour.Properties.copy(Blocks.SPRUCE_SAPLING)));
 
     public static final RegistryObject<Block> PUCKERBERRY_BUSH = BLOCKS.register("puckerberry_bush",
-            () -> new PuckerberryBushBlock(BlockBehaviour.Properties.copy(Blocks.SWEET_BERRY_BUSH).noOcclusion().noCollission()));
+            () -> new TallBerryBushBlock(BlockBehaviour.Properties.copy(Blocks.SWEET_BERRY_BUSH).noOcclusion().noCollission()));
 
     private static <T extends Block> RegistryObject<T> registerBlock(String name, Supplier<T> block) {
         RegistryObject<T> toReturn = BLOCKS.register(name, block);

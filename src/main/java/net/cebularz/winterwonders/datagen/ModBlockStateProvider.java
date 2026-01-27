@@ -137,7 +137,6 @@ public class ModBlockStateProvider extends BlockStateProvider {
         blockItem(ModBlocks.STRIPPED_WYRMSCALE_FIR_LOG);
         blockItem(ModBlocks.STRIPPED_WYRMSCALE_FIR_WOOD);
 
-        makeBerryBush((BushBlock) ModBlocks.PUCKERBERRY_BUSH.get(), "puckerberry_stage", "puckerberry_stage");
     }
 
     public void makeBerryBush(BushBlock block, String modelName, String textureName) {
