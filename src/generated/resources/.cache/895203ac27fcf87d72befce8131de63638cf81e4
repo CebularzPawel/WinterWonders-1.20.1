@@ -1,7 +1,7 @@
-// 1.20.1	2025-11-17T11:45:51.8925321	Tags for minecraft:block mod id winterwonders
+// 1.20.1	2026-01-28T03:58:31.222089	Tags for minecraft:block mod id winterwonders
 d1e135b9d9cff54fc67118131586436926519517 data/minecraft/tags/blocks/fences.json
 1e1fcd33440b9a39aa9a61a630c308a7554fbf6d data/minecraft/tags/blocks/fence_gates.json
 f1d5d03c27f1c3565421eeacf30fa250ad619af3 data/minecraft/tags/blocks/logs_that_burn.json
-0bc42ff0956e69bb143d4edbd7e017210e28d40b data/minecraft/tags/blocks/mineable/pickaxe.json
+89d4195d2a6ce4740e519e9560085167ba76a53b data/minecraft/tags/blocks/mineable/pickaxe.json
 19203fc8acd5410ddb85cfc6f3c202498db67dbb data/minecraft/tags/blocks/planks.json
 53b4d076a343adf24a33144bf5e307a504f56f4d data/minecraft/tags/blocks/walls.json

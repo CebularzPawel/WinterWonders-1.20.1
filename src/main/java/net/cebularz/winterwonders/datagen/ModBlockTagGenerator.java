@@ -54,7 +54,8 @@ public class ModBlockTagGenerator extends BlockTagsProvider {
                 .add(ModBlocks.POLISHED_ICE_STONE_STAIRS.get())
                 .add(ModBlocks.POLISHED_ICE_STONE_SLAB.get())
                 .add(ModBlocks.POLISHED_ICE_STONE_WALL.get())
-                .add(ModBlocks.ICE_STONE_PILLAR.get());
+                .add(ModBlocks.ICE_STONE_PILLAR.get())
+                .add(ModBlocks.HEARTH.get());
 
         this.tag(BlockTags.WALLS)
                 .add(ModBlocks.COBBLED_ICE_STONE_WALL.get())

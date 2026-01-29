@@ -4,6 +4,7 @@ import com.mojang.logging.LogUtils;
 import net.cebularz.winterwonders.block.ModBlocks;
 import net.cebularz.winterwonders.block.entity.ModBlockEntities;
 import net.cebularz.winterwonders.effect.ModEffects;
+import net.cebularz.winterwonders.enchantment.ModEnchantments;
 import net.cebularz.winterwonders.entity.ModEntities;
 import net.cebularz.winterwonders.item.ModCreativeModeTabs;
 import net.cebularz.winterwonders.item.ModItems;
@@ -52,6 +53,7 @@ public class WinterWonders {
         ModEntities.register(modEventBus);
         ModBlockEntities.register(modEventBus);
         ModAttributes.REGISTRY.register(modEventBus);
+        ModEnchantments.register(modEventBus);
         modEventBus.addListener(this::commonSetup);
         ModTrunkPlacers.register(modEventBus);
         ModFoliagePlacers.register(modEventBus);

@@ -137,5 +137,13 @@ public class ModRecipeProvider extends RecipeProvider implements IConditionBuild
                 .unlockedBy(getHasName(ModBlocks.COBBLED_ICE_STONE.get()), has(ModBlocks.ICY_VINES.get()))
                 .save(pWriter);
 
+        ShapedRecipeBuilder.shaped(RecipeCategory.BUILDING_BLOCKS, ModBlocks.HEARTH.get(),1)
+                .pattern("BBB")
+                .pattern("B B")
+                .pattern("BCB")
+                .define('B', Blocks.BRICKS)
+                .define('C', Blocks.CAMPFIRE)
+                .unlockedBy(getHasName(Blocks.BRICKS), has(Blocks.BRICKS))
+                .save(pWriter);
     }
 }

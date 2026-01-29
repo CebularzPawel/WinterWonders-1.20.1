@@ -44,8 +44,6 @@ public class ModBlocks {
     public static final RegistryObject<Block> COBBLED_ICE_STONE_WALL = registerBlock("cobbled_ice_stone_wall",
             () -> new WallBlock(BlockBehaviour.Properties.copy(Blocks.COBBLESTONE)));
 
-
-
     public static final RegistryObject<Block> ICE_STONE_BRICKS = registerBlock("ice_stone_bricks",
             () -> new Block(BlockBehaviour.Properties.copy(Blocks.STONE_BRICKS)));
     public static final RegistryObject<Block> ICE_STONE_BRICKS_SLAB = registerBlock("ice_stone_bricks_slab",
@@ -54,7 +52,6 @@ public class ModBlocks {
             () -> new StairBlock(()-> ModBlocks.ICE_STONE_BRICKS.get().defaultBlockState(),BlockBehaviour.Properties.copy(Blocks.STONE_BRICKS)));
     public static final RegistryObject<Block> ICE_STONE_BRICKS_WALL = registerBlock("ice_stone_bricks_wall",
             () -> new WallBlock(BlockBehaviour.Properties.copy(Blocks.STONE_BRICKS)));
-
 
     public static final RegistryObject<Block> ICE_STONE_TILES = registerBlock("ice_stone_tiles",
             () -> new Block(BlockBehaviour.Properties.copy(Blocks.STONE_BRICKS)));
@@ -307,7 +304,13 @@ public class ModBlocks {
             () -> new SaplingBlock(new MystWillowTreeGrower(), BlockBehaviour.Properties.copy(Blocks.SPRUCE_SAPLING)));
 
     public static final RegistryObject<Block> PUCKERBERRY_BUSH = BLOCKS.register("puckerberry_bush",
-            () -> new TallBerryBushBlock(BlockBehaviour.Properties.copy(Blocks.SWEET_BERRY_BUSH).noOcclusion().noCollission()));
+            () -> new PuckerberryBushBlock(BlockBehaviour.Properties.copy(Blocks.SWEET_BERRY_BUSH).noOcclusion().noCollission()));
+
+    public static final RegistryObject<Block> HEARTH = registerBlock("hearth",
+            () -> new HearthBlock(BlockBehaviour.Properties.copy(Blocks.STONE_BRICKS)
+                    .strength(3.5F)
+                    .lightLevel(state -> state.getValue(HearthBlock.LIT) ? 12 : 0)
+                    .randomTicks()));
 
     private static <T extends Block> RegistryObject<T> registerBlock(String name, Supplier<T> block) {
         RegistryObject<T> toReturn = BLOCKS.register(name, block);

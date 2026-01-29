@@ -30,7 +30,7 @@ public class ModDamageSources {
 
         float reducedDamage = Math.max(1, (float) (damageAmount * resistanceModifier));
 
-        //System.out.println("Reduced damage from " + damageAmount + " to " + reducedDamage);
+        System.out.println("Reduced damage from " + damageAmount + " to " + reducedDamage);
 
         if (target.getServer() != null) {
             spawnSnowParticles(target.getServer().getLevel(target.level().dimension()), target.getX(), target.getY(), target.getZ());

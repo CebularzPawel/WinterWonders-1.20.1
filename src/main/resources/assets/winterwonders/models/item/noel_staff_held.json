@@ -1,0 +1,28 @@
+{
+  "parent": "minecraft:item/handheld",
+  "textures": {
+    "layer0": "winterwonders:item/saint_noel_staff_held"
+  },
+  "display": {
+    "firstperson_righthand": {
+      "rotation": [0, -90, 25],
+      "translation": [3.5, 3.5, -1.13],
+      "scale": [1.5, 1.5, 1.0]
+    },
+    "firstperson_lefthand": {
+      "rotation": [0, 90, -25],
+      "translation": [3.5, 3.5, -1.13],
+      "scale": [1.5, 1.5, 1.0]
+    },
+    "thirdperson_righthand": {
+      "rotation": [0, -90, 45],
+      "translation": [0, 4, 1.5],
+      "scale": [2.0, 2.0, 1.0]
+    },
+    "thirdperson_lefthand": {
+      "rotation": [0, 90, -45],
+      "translation": [0, 4, 1.5],
+      "scale": [2.0, 2.0, 1.0]
+    }
+  }
+}

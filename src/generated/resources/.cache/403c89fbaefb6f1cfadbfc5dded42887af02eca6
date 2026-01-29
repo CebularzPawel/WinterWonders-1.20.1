@@ -1,5 +1,6 @@
-// 1.20.1	2025-02-23T22:03:29.6456515	Tags for minecraft:item mod id winterwonders
+// 1.20.1	2026-01-28T03:41:22.0718352	Tags for minecraft:item mod id winterwonders
 f1d5d03c27f1c3565421eeacf30fa250ad619af3 data/minecraft/tags/items/logs_that_burn.json
 d444fd6ef75c66b6d915d55f8a7b25929b5677c4 data/minecraft/tags/items/planks.json
+d61c87c4ec4efb60c0f41792f1d0274b527c886c data/minecraft/tags/items/swords.json
 813f89d0abe33bb05a3544e24756f2797fb78871 data/minecraft/tags/items/trimmable_armor.json
 a1a58dfb96dbe569ec47950a011a2bb4f95736b9 data/winterwonders/tags/items/greypine_logs.json

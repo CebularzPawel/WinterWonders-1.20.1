@@ -1,4 +1,4 @@
-// 1.20.1	2025-11-17T11:45:51.8915241	Item Models: winterwonders
+// 1.20.1	2026-01-28T04:23:26.5874734	Item Models: winterwonders
 3b3b138819367044cef18d3d8bb1914e67ce2d44 assets/winterwonders/models/item/arcanillum.json
 c438a44b63bedbeee407e8332cded4816d611359 assets/winterwonders/models/item/brisk_rod.json
 63ec6c618a3a23eab4cab9c52d7d3250de9b516e assets/winterwonders/models/item/brisk_spawn_egg.json
@@ -69,6 +69,9 @@ c7bb864c14a4ba54b2bd194c8060005c92af996b assets/winterwonders/models/item/frostb
 f78c1699ae405afc1d1bb7a02160248684ca5cf6 assets/winterwonders/models/item/greypine_slab.json
 543aec01311c71184e20542285d69b476ca285a3 assets/winterwonders/models/item/greypine_stairs.json
 894305160675a6efa3ddf30ea2022f04c0f90b3f assets/winterwonders/models/item/greypine_trapdoor.json
+067bdeed3e8d9ce556f6b7f0ab82e3387134c451 assets/winterwonders/models/item/hearth.json
+54ae5ff52ae0454cfd753ea40e103b2358791639 assets/winterwonders/models/item/hearthstone.json
+aa467b0a9c16135386a67a3e45428f5b18f8f3da assets/winterwonders/models/item/hearthstone_active.json
 259329781608547a2fa26b08d1e483c0df775b75 assets/winterwonders/models/item/ice_stone_bricks_slab.json
 1c42957348e664e197986e559d963dccb7c31e22 assets/winterwonders/models/item/ice_stone_bricks_stairs.json
 c593b4781475a0f22f9bb82ed8d88ee7b34fb7d3 assets/winterwonders/models/item/ice_stone_bricks_wall.json

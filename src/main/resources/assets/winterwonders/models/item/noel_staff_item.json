@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:item/handheld",
+  "textures": {
+    "layer0": "winterwonders:item/saint_noel_staff_item"
+  }
+}

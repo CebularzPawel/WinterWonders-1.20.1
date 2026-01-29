@@ -1,9 +1,8 @@
 package net.cebularz.winterwonders.entity.custom;
 
 import net.cebularz.winterwonders.entity.custom.projectile.ChillingSnowballEntity;
-import net.cebularz.winterwonders.entity.custom.projectile.IceSpikeProjectileEntity;
+import net.cebularz.winterwonders.entity.custom.projectile.IcicleProjectileEntity;
 import net.cebularz.winterwonders.init.ModAttributes;
-import net.cebularz.winterwonders.effect.ModEffects;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.network.syncher.EntityDataAccessor;
 import net.minecraft.network.syncher.EntityDataSerializers;
@@ -269,7 +268,7 @@ public class BriskEntity extends Monster {
                                 boolean shootIceSpike = briskEntity.getRandom().nextDouble() < chanceForIceSpike || chilledAmplifier > 3;
 
                                 if (shootIceSpike) {
-                                    IceSpikeProjectileEntity iceSpike = new IceSpikeProjectileEntity(briskEntity.level(), briskEntity);
+                                    IcicleProjectileEntity iceSpike = new IcicleProjectileEntity(briskEntity.level(), briskEntity);
                                     iceSpike.setPos(this.briskEntity.getX(), this.briskEntity.getY() + 1.0, this.briskEntity.getZ());
                                     iceSpike.setDeltaMovement(targetDirection.scale(2.0));
                                     this.briskEntity.level().addFreshEntity(iceSpike);

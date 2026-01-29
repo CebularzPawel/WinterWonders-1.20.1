@@ -6,6 +6,7 @@ import net.minecraft.world.flag.FeatureFlags;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.enchantment.Enchantments;
 import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.state.properties.DoubleBlockHalf;
 import net.minecraft.world.level.storage.loot.LootTable;
 import net.minecraft.world.level.storage.loot.entries.LootItem;
 import net.minecraft.world.level.storage.loot.functions.ApplyBonusCount;
@@ -28,6 +29,7 @@ public class ModBlockLootTables extends BlockLootSubProvider {
     @Override
     protected void generate() {
         this.dropSelf(ModBlocks.COLDSTEEL_BLOCK.get());
+        this.dropSelf(ModBlocks.HEARTH.get());
 
         this.dropSelf(ModBlocks.COBBLED_ICE_STONE.get());
         this.add(ModBlocks.COBBLED_ICE_STONE_SLAB.get(),
@@ -122,19 +124,24 @@ public class ModBlockLootTables extends BlockLootSubProvider {
         this.dropSelf(ModBlocks.WHITE_MUSCARI.get());
         this.add(ModBlocks.POTTED_WHITE_MUSCARI.get(),createPotFlowerItemTable(ModBlocks.WHITE_MUSCARI.get()));
 
-        LootItemCondition.Builder lootitemcondition$builder2 = LootItemBlockStatePropertyCondition
-                .hasBlockStateProperties(ModBlocks.PUCKERBERRY_BUSH.get())
-                .setProperties(StatePropertiesPredicate.Builder.properties().hasProperty(PuckerberryBushBlock.AGE, 2))
-                .or(LootItemBlockStatePropertyCondition
-                        .hasBlockStateProperties(ModBlocks.PUCKERBERRY_BUSH.get())
-                        .setProperties(StatePropertiesPredicate.Builder.properties().hasProperty(PuckerberryBushBlock.AGE,3)));
+        LootItemCondition.Builder hasBerries =
+                LootItemBlockStatePropertyCondition.hasBlockStateProperties(ModBlocks.PUCKERBERRY_BUSH.get())
+                        .setProperties(StatePropertiesPredicate.Builder.properties()
+                                .hasProperty(PuckerberryBushBlock.HALF, DoubleBlockHalf.LOWER)
+                                .hasProperty(PuckerberryBushBlock.BERRIES, 1))
+                        .or(LootItemBlockStatePropertyCondition.hasBlockStateProperties(ModBlocks.PUCKERBERRY_BUSH.get())
+                                .setProperties(StatePropertiesPredicate.Builder.properties()
+                                        .hasProperty(PuckerberryBushBlock.HALF, DoubleBlockHalf.LOWER)
+                                        .hasProperty(PuckerberryBushBlock.BERRIES, 2)));
 
         this.add(ModBlocks.PUCKERBERRY_BUSH.get(),
                 createCropDrops(
                         ModBlocks.PUCKERBERRY_BUSH.get(),
                         ModItems.PUCKERBERRY.get(),
                         ModItems.PUCKERBERRY.get(),
-                        lootitemcondition$builder2));
+                        hasBerries
+                ));
+
 
         this.add(ModBlocks.FROSTPETAL.get(),
                 createPetalsDrops(ModBlocks.FROSTPETAL.get()));

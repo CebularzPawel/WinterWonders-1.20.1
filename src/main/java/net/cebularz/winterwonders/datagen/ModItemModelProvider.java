@@ -118,16 +118,24 @@ public class ModItemModelProvider extends ItemModelProvider {
         simpleItem(ModItems.PINGIN_FEATHER);
         simpleItem(ModItems.PINGIN_MEAT);
         simpleItem(ModItems.COOKED_PINGIN_MEAT);
+
+        blockItemUsesBlockModel(ModBlocks.HEARTH, "hearth_lit");
+        withExistingParent("hearthstone", mcLoc("item/generated"))
+                .texture("layer0", modLoc("item/hearthstone_off"))
+                .override()
+                .predicate(modLoc("bound"), 1.0F)
+                .model(withExistingParent("hearthstone_active", mcLoc("item/generated"))
+                        .texture("layer0", modLoc("item/hearthstone_on")))
+                .end();
     }
 
     private void trimmedArmorItem(RegistryObject<Item> itemRegistryObject) {
         final String MOD_ID = WinterWonders.MOD_ID;
 
         if(itemRegistryObject.get() instanceof ArmorItem armorItem) {
-            trimMaterials.entrySet().forEach(entry -> {
+            trimMaterials.forEach((trimMaterial, value) -> {
 
-                ResourceKey<TrimMaterial> trimMaterial = entry.getKey();
-                float trimValue = entry.getValue();
+                float trimValue = value;
 
                 String armorType = switch (armorItem.getEquipmentSlot()) {
                     case HEAD -> "helmet";
@@ -215,5 +223,10 @@ public class ModItemModelProvider extends ItemModelProvider {
         return withExistingParent(item.getId().getPath(),
                 new ResourceLocation("item/generated")).texture("layer0",
                 new ResourceLocation(WinterWonders.MOD_ID,"item/" + item.getId().getPath()));
+    }
+
+    private void blockItemUsesBlockModel(RegistryObject<Block> block, String blockModelName) {
+        this.withExistingParent(block.getId().getPath(),
+                modLoc("block/" + blockModelName));
     }
 }

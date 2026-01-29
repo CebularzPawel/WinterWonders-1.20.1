@@ -23,7 +23,11 @@ public class ModLanguageProvider extends CoreLanguageProvider {
         add(ModEntities.BRISK.get(), "Brisk");
         add(ModEntities.PINGIN.get(), "Pingin");
         add(ModEntities.SNOW_WEASEL.get(), "Snow Weasel");
+        add(ModEntities.LICH.get(), "The Lich");
 
+        addSimpleNameBlock(ModBlocks.HEARTH);
+        addSimpleItemName(ModItems.HEARTHSTONE);
+        addSimpleItemName(ModItems.NOEL_STAFF);
         addSimpleNameBlock(ModBlocks.COLDSTEEL_BLOCK);
 
         addSimpleNameBlock(ModBlocks.COBBLED_ICE_STONE);
@@ -94,7 +98,6 @@ public class ModLanguageProvider extends CoreLanguageProvider {
         //addSimpleNameBlock(ModBlocks.MYST_WILLOW_DOOR);
         //addSimpleNameBlock(ModBlocks.MYST_WILLOW_TRAPDOOR);
 
-
         addSimpleItemName(ModItems.FROST_ESSENCE);
         addSimpleItemName(ModItems.BRISK_ROD);
         addSimpleItemName(ModItems.TRUEICE_SHARD);
@@ -125,16 +128,14 @@ public class ModLanguageProvider extends CoreLanguageProvider {
 
         addSimpleItemName(ModItems.FROSTBITE_WAND);
         addSimpleItemName(ModItems.BLIZZARD_STAFF);
-        addSimpleItemName(ModItems.TITANFELLER);
+        addItem(ModItems.TITANFELLER, "Titanfeller");
 
         addSimpleItemName(ModItems.PINGIN_FEATHER);
         addSimpleItemName(ModItems.PINGIN_MEAT);
         addSimpleItemName(ModItems.COOKED_PINGIN_MEAT);
 
-        add("death.attack.frost", "%s froze to death");
-        add("death.attack.frost.item", "%s was frozen by %s using %s");
-        add("death.attack.frost.player", "%s's frozen body shattered whilst trying to escape %s");
-
-        add("boss.winterwonders.lich", "The Lich");
+        add("death.attack.frozen", "%s froze to death");
+        add("death.attack.frozen.item", "%s was frozen by %s using %s");
+        add("death.attack.frozen.player", "%s's frozen body shattered whilst trying to escape %s");
     }
 }

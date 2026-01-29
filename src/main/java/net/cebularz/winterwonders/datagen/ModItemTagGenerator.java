@@ -44,5 +44,9 @@ public class ModItemTagGenerator extends ItemTagsProvider {
         this.tag(ModTags.Blocks.GREYPINE_LOGS)
                 .add(ModBlocks.GREYPINE_LOG.get().asItem())
                 .add(ModBlocks.STRIPPED_GREYPINE_LOG.get().asItem());
+
+        this.tag(ItemTags.SWORDS)
+                .add(ModItems.COLDSTEEL_SWORD.get())
+                .add(ModItems.TITANFELLER.get());
     }
 }

@@ -16,6 +16,8 @@ import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.monster.Zombie;
 import net.minecraft.world.entity.monster.ZombieVillager;
+import net.minecraft.world.entity.projectile.Arrow;
+import net.minecraft.world.entity.projectile.Projectile;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.biome.Biome;
 import net.minecraft.world.level.block.Blocks;
@@ -151,6 +153,12 @@ public class ModEvents {
                         hurtEntity.getZ() + offZ,
                         xSpeed, ySpeed, zSpeed), hurtEntity);
             }
+        }
+
+        if (event.getSource().getDirectEntity() instanceof Projectile) {
+            hurtEntity.hurtDuration = 1;
+            hurtEntity.hurtTime = 1;
+            hurtEntity.invulnerableTime = 1;
         }
     }
 

@@ -1,9 +1,11 @@
 package net.cebularz.winterwonders.datagen;
 
+import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.data.PackOutput;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.level.block.*;
 import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.block.state.properties.DoubleBlockHalf;
 import net.minecraftforge.client.model.generators.BlockStateProvider;
 import net.minecraftforge.client.model.generators.ConfiguredModel;
 import net.minecraftforge.client.model.generators.ModelFile;
@@ -14,6 +16,7 @@ import net.cebularz.winterwonders.WinterWonders;
 import net.cebularz.winterwonders.block.custom.PuckerberryBushBlock;
 import net.cebularz.winterwonders.block.ModBlocks;
 
+import java.util.Objects;
 import java.util.function.Function;
 
 public class ModBlockStateProvider extends BlockStateProvider {
@@ -136,20 +139,7 @@ public class ModBlockStateProvider extends BlockStateProvider {
         blockItem(ModBlocks.WYRMSCALE_FIR_WOOD);
         blockItem(ModBlocks.STRIPPED_WYRMSCALE_FIR_LOG);
         blockItem(ModBlocks.STRIPPED_WYRMSCALE_FIR_WOOD);
-
-    }
-
-    public void makeBerryBush(BushBlock block, String modelName, String textureName) {
-        Function<BlockState, ConfiguredModel[]> function = state -> bushStates(state, block, modelName, textureName);
-        getVariantBuilder(block).forAllStates(function);
-    }
-
-    private ConfiguredModel[] bushStates(BlockState state, BushBlock block, String modelName, String textureName) {
-        ConfiguredModel[] models = new ConfiguredModel[1];
-        models[0] = new ConfiguredModel(models().cross(modelName + ((PuckerberryBushBlock) block).getAge(state),
-                new ResourceLocation(WinterWonders.MOD_ID, "block/" + textureName + ((PuckerberryBushBlock) block).getAge(state))).renderType("cutout"));
-
-        return models;
+        puckerberryBush(ModBlocks.PUCKERBERRY_BUSH.get());
     }
 
     private void saplingBlock(RegistryObject<Block> blockRegistryObject) {
@@ -171,4 +161,62 @@ public class ModBlockStateProvider extends BlockStateProvider {
     private void blockWithItem(RegistryObject<Block> blockRegistryObject) {
         simpleBlockWithItem(blockRegistryObject.get(), cubeAll(blockRegistryObject.get()));
     }
+
+    private ModelFile cutoutCross(String name, ResourceLocation texture) {
+        return models()
+                .withExistingParent(name, mcLoc("block/cross"))
+                .texture("cross", texture)
+                .renderType("cutout");
+    }
+
+    private void puckerberryBush(Block block) {
+        String bushName = Objects.requireNonNull(ForgeRegistries.BLOCKS.getKey(block)).getPath();
+
+        ModelFile stage0 = cutoutCross(bushName + "_stage0", modLoc("block/puckerberry_stage0"));
+        ModelFile stage1 = cutoutCross(bushName + "_stage1", modLoc("block/puckerberry_stage1"));
+
+        ModelFile stage2Bottom = cutoutCross(bushName + "_stage2_bottom", modLoc("block/puckerberry_stage2_bottom"));
+        ModelFile stage2Top = cutoutCross(bushName + "_stage2_top", modLoc("block/puckerberry_stage2_top"));
+
+        ModelFile stage3Bottom = cutoutCross(bushName + "_stage3_bottom", modLoc("block/puckerberry_stage3_bottom"));
+        ModelFile stage3Top = cutoutCross(bushName + "_stage3_top", modLoc("block/puckerberry_stage3_top"));
+
+        ModelFile stage4Bottom = cutoutCross(bushName + "_stage4_bottom", modLoc("block/puckerberry_stage3_bottom"));
+        ModelFile stage4Top = cutoutCross(bushName + "_stage4_top", modLoc("block/puckerberry_stage4_top"));
+
+        getVariantBuilder(block).forAllStates(state -> {
+            boolean isTall = state.getValue(PuckerberryBushBlock.TALL);
+            DoubleBlockHalf halfBush = state.getValue(PuckerberryBushBlock.HALF);
+            int growthStage = state.getValue(PuckerberryBushBlock.BERRIES);
+            int bushForm = state.getValue(PuckerberryBushBlock.FORM);
+
+            ModelFile bushModel;
+
+            if (isTall) {
+                if (halfBush == DoubleBlockHalf.LOWER) {
+                    bushModel = switch (growthStage) {
+                        case 0 -> stage2Bottom;
+                        case 1 -> stage3Bottom;
+                        case 2 -> stage4Bottom;
+                        default -> stage2Bottom;
+                    };
+                } else {
+                    bushModel = switch (growthStage) {
+                        case 0 -> stage2Top;
+                        case 1 -> stage3Top;
+                        case 2 -> stage4Top;
+                        default -> stage2Top;
+                    };
+                }
+            } else {
+                if (halfBush == DoubleBlockHalf.LOWER) {
+                    bushModel = (bushForm == 0) ? stage0 : stage1;
+                } else {
+                    bushModel = stage1;
+                }
+            }
+            return ConfiguredModel.builder().modelFile(bushModel).build();
+        });
+    }
+
 }

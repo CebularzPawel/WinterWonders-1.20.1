@@ -16,7 +16,7 @@ public class SpellVisualManager {
     private static final Random random = new Random();
     private record IceSpikes(BlockPos blockPos, long spawnTime, SpikeData spikeData, float yawDegrees) {}
     private static final List<IceSpikes> activeIceSpikes = new ArrayList<>();
-    private static final long spikeLifetime = 3; //seconds
+    private static final long spikeLifetime = 3;
     private static final SpikeData[] premadeSpikes = SpikeData.createPremadeSpikes(random);
 
     public static void addSpike(BlockPos blockPos, float yawDegrees) {

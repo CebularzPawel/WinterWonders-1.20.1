@@ -22,14 +22,16 @@
                       "block": "winterwonders:puckerberry_bush",
                       "condition": "minecraft:block_state_property",
                       "properties": {
-                        "age": "2"
+                        "berries": "1",
+                        "half": "lower"
                       }
                     },
                     {
                       "block": "winterwonders:puckerberry_bush",
                       "condition": "minecraft:block_state_property",
                       "properties": {
-                        "age": "3"
+                        "berries": "2",
+                        "half": "lower"
                       }
                     }
                   ]
@@ -56,14 +58,16 @@
               "block": "winterwonders:puckerberry_bush",
               "condition": "minecraft:block_state_property",
               "properties": {
-                "age": "2"
+                "berries": "1",
+                "half": "lower"
               }
             },
             {
               "block": "winterwonders:puckerberry_bush",
               "condition": "minecraft:block_state_property",
               "properties": {
-                "age": "3"
+                "berries": "2",
+                "half": "lower"
               }
             }
           ]

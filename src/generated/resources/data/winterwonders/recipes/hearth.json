@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "building",
+  "key": {
+    "B": {
+      "item": "minecraft:bricks"
+    },
+    "C": {
+      "item": "minecraft:campfire"
+    }
+  },
+  "pattern": [
+    "BBB",
+    "B B",
+    "BCB"
+  ],
+  "result": {
+    "item": "winterwonders:hearth"
+  },
+  "show_notification": true
+}

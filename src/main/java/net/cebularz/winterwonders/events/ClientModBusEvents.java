@@ -1,30 +1,37 @@
 package net.cebularz.winterwonders.events;
 
-import net.cebularz.winterwonders.block.entity.custom.renderers.IceCubeRenderer;
+import net.cebularz.winterwonders.block.ModBlocks;
+import net.cebularz.winterwonders.entity.models.projectile.OrnamentModel;
+import net.cebularz.winterwonders.entity.renderers.projectile.IceCubeRenderer;
 import net.cebularz.winterwonders.entity.custom.*;
 import net.cebularz.winterwonders.entity.models.*;
 import net.cebularz.winterwonders.entity.renderers.*;
+import net.cebularz.winterwonders.entity.renderers.projectile.OrnamentRenderer;
+import net.cebularz.winterwonders.item.ModItems;
+import net.cebularz.winterwonders.item.custom.HearthstoneItem;
 import net.cebularz.winterwonders.particle.ModParticles;
+import net.minecraft.client.renderer.ItemBlockRenderTypes;
+import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.entity.EntityRenderers;
+import net.minecraft.client.renderer.item.ItemProperties;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.client.event.EntityRenderersEvent;
 import net.minecraftforge.client.event.RegisterParticleProvidersEvent;
 import net.minecraftforge.event.entity.EntityAttributeCreationEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
-import net.minecraftforge.fml.event.lifecycle.*;
 import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
 import net.cebularz.winterwonders.WinterWonders;
 import net.cebularz.winterwonders.block.entity.custom.models.IcyVinesModel;
 import net.cebularz.winterwonders.block.entity.custom.models.IcyVinesPlantModel;
-import net.cebularz.winterwonders.entity.models.projectile.IceSpikeModel;
+import net.cebularz.winterwonders.entity.models.projectile.IcicleProjectileModel;
 import net.cebularz.winterwonders.particle.particles.AuroraParticle;
 import net.cebularz.winterwonders.block.entity.custom.renderers.IcyVinesBlockEntityRenderer;
 import net.cebularz.winterwonders.block.entity.custom.renderers.IcyVinesPlantBlockEntityRenderer;
-import net.cebularz.winterwonders.entity.renderers.projectile.IceSpikeRenderer;
+import net.cebularz.winterwonders.entity.renderers.projectile.IcicleProjectileRenderer;
 import net.cebularz.winterwonders.block.entity.ModBlockEntities;
 import net.cebularz.winterwonders.entity.ModEntities;
-import net.turtleboi.turtlecore.particle.custom.ChilledParticles;
 
 @Mod.EventBusSubscriber(modid = WinterWonders.MOD_ID, bus = Mod.EventBusSubscriber.Bus.MOD, value = Dist.CLIENT)
 public class ClientModBusEvents {
@@ -38,8 +45,17 @@ public class ClientModBusEvents {
         EntityRenderers.register(ModEntities.SNOW_WEASEL.get(), SnowWeaselRenderer::new);
         EntityRenderers.register(ModEntities.BRISK.get(), BriskRenderer::new);
         EntityRenderers.register(ModEntities.LICH.get(), LichRenderer::new);
-        EntityRenderers.register(ModEntities.ICE_SPIKE.get(), IceSpikeRenderer::new);
+        EntityRenderers.register(ModEntities.ICICLE.get(), IcicleProjectileRenderer::new);
         EntityRenderers.register(ModEntities.ICE_CUBE.get(), IceCubeRenderer::new);
+        EntityRenderers.register(ModEntities.ORNAMENT.get(), OrnamentRenderer::new);
+
+        event.enqueueWork(() -> {
+            ItemProperties.register(
+                    ModItems.HEARTHSTONE.get(),
+                    new ResourceLocation(WinterWonders.MOD_ID, "bound"),
+                    (stack, level, entity, seed) -> HearthstoneItem.isBound(stack) ? 1.0F : 0.0F
+            );
+        });
     }
 
     @SubscribeEvent
@@ -61,7 +77,8 @@ public class ClientModBusEvents {
         event.registerLayerDefinition(SnowWeaselModel.SNOW_WEASEL_LAYER, SnowWeaselModel::createBodyLayer);
         event.registerLayerDefinition(BriskModel.BRISK_LAYER, BriskModel::createBodyLayer);
         event.registerLayerDefinition(LichModel.LICH_LAYER, LichModel::createBodyLayer);
-        event.registerLayerDefinition(IceSpikeModel.ICE_SPIKE_LAYER, IceSpikeModel::createBodyLayer);
+        event.registerLayerDefinition(IcicleProjectileModel.ICICLE_LAYER, IcicleProjectileModel::createBodyLayer);
+        event.registerLayerDefinition(OrnamentModel.ORNAMENT_LAYER, OrnamentModel::createBodyLayer);
         event.registerLayerDefinition(IcyVinesModel.ICY_VINES_LAYER, IcyVinesModel::createBodyLayer);
         event.registerLayerDefinition(IcyVinesPlantModel.ICY_VINES_PLANT_LAYER, IcyVinesModel::createBodyLayer);
     }

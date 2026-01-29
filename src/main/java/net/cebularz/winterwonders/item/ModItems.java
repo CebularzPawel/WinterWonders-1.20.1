@@ -73,10 +73,7 @@ public class ModItems {
     public static final RegistryObject<Item> BLIZZARD_STAFF = ITEMS.register("blizzard_staff",
             () -> new BlizzardStaffItem(new Item.Properties().rarity(Rarity.EPIC).stacksTo(1)));
 
-    public static final RegistryObject<Item> LICH_BLIZZARD_STAFF = ITEMS.register("lich_blizzard_staff",
-            () -> new LichBlizzardStaffItem(new Item.Properties().rarity(Rarity.EPIC).setNoRepair().fireResistant().stacksTo(1)));
-
-    public static final RegistryObject<Item> TITANFELLER = ITEMS.register("titanfeller",
+    public static final RegistryObject<Item> TITANFELLER = ITEMS.register("titanfeller_greatsword",
             () -> new TitanfellerItem(ModToolTiers.MAMMOTH, 3, -2.4f, new Item.Properties().rarity(Rarity.EPIC)));
 
     public static final RegistryObject<Item> SNOW_WISP_SPAWN_EGG = ITEMS.register("snow_wisp_spawn_egg",
@@ -121,6 +118,14 @@ public class ModItems {
                     .food(new FoodProperties.Builder().nutrition(3).saturationMod(0.2F).build()),
                     20 * 30, 0));
 
+    public static final RegistryObject<Item> HEARTHSTONE = ITEMS.register("hearthstone",
+            () -> new HearthstoneItem(new Item.Properties().rarity(Rarity.RARE).stacksTo(1), 20 * 90));
+
+    public static final RegistryObject<Item> NOEL_STAFF = ITEMS.register("noel_staff",
+            () -> new NoelStaffItem(new Item.Properties()
+                    .stacksTo(1)
+                    .durability(1561)
+                    .rarity(Rarity.EPIC)));
 
     public static void register(IEventBus eventBus) {
         ITEMS.register(eventBus);

@@ -21,6 +21,7 @@ public class ModCreativeModeTabs {
                         pOutput.accept(ModItems.FROST_ESSENCE.get());
                         pOutput.accept(ModItems.TRUEICE_SHARD.get());
                         pOutput.accept(ModItems.FROZEN_HEART.get());
+                        pOutput.accept(ModItems.HEARTHSTONE.get());
                         pOutput.accept(ModItems.COLDSTEEL_SCRAP.get());
                         pOutput.accept(ModItems.COLDSTEEL_INGOT.get());
                         pOutput.accept(ModBlocks.COLDSTEEL_BLOCK.get());
@@ -38,9 +39,11 @@ public class ModCreativeModeTabs {
 
                         pOutput.accept(ModItems.FROSTBITE_WAND.get());
                         pOutput.accept(ModItems.BLIZZARD_STAFF.get());
+                        pOutput.accept(ModItems.NOEL_STAFF.get());
 
                         pOutput.accept(ModItems.TITANFELLER.get());
 
+                        pOutput.accept(ModBlocks.HEARTH.get());
                         pOutput.accept(ModBlocks.GREYPINE_LOG.get());
                         pOutput.accept(ModBlocks.GREYPINE_WOOD.get());
                         pOutput.accept(ModBlocks.STRIPPED_GREYPINE_LOG.get());
