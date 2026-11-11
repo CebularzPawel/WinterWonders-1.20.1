@@ -52,12 +52,13 @@ public class WinterWonders {
         ModEffects.register(modEventBus);
         ModEntities.register(modEventBus);
         ModBlockEntities.register(modEventBus);
+        // ModPoiTypes.register(modEventBus);
         ModAttributes.REGISTRY.register(modEventBus);
         ModEnchantments.register(modEventBus);
         modEventBus.addListener(this::commonSetup);
         ModTrunkPlacers.register(modEventBus);
         ModFoliagePlacers.register(modEventBus);
-        ModSongs.REGISTRAR.register(modEventBus);
+        ModSounds.register(modEventBus);
         TerraInit.register();
         MinecraftForge.EVENT_BUS.register(this);
         modEventBus.addListener(this::addCreative);

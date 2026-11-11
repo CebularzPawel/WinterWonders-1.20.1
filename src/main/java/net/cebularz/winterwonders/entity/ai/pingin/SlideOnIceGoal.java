@@ -1,59 +1,69 @@
 package net.cebularz.winterwonders.entity.ai.pingin;
 
-import net.minecraft.world.entity.ai.goal.Goal;
+import java.util.EnumSet;
+
 import net.cebularz.winterwonders.entity.custom.PinginEntity;
 
-import java.util.EnumSet;
+import net.minecraft.world.entity.ai.goal.Goal;
 
 public class SlideOnIceGoal extends Goal {
     private final PinginEntity pingin;
-    private final double speed;
-    private int slideTime;
-    private static final int MAX_SLIDE_TIME = 40;
+    private static final int MAX_SLIDE_TIME = 48;
+    private final double speedMultiplier;
 
     public SlideOnIceGoal(PinginEntity pingin, double speed) {
         this.pingin = pingin;
-        this.speed = speed;
+        this.speedMultiplier = speed;
         this.setFlags(EnumSet.of(Flag.MOVE));
     }
 
     @Override
     public boolean canUse() {
-        if (!pingin.isOnIce()) {
-            return false;
-        }
-        if (pingin.getRandom().nextFloat() < 0.02F) {
-            return true;
-        }
-        return false;
+        return canSlide() && pingin.getRandom().nextFloat() < 0.02F;
     }
 
     @Override
     public boolean canContinueToUse() {
-        return slideTime > 0 && pingin.isOnIce();
+        return pingin.getSlideTicks() > 0 && canSlide();
+    }
+
+    private boolean canSlide() {
+        return pingin.isOnIce() && pingin.onGround() && !pingin.isInWater()
+                && !pingin.isAdmiring() && pingin.getTarget() == null && pingin.getHealth() > pingin.getMaxHealth() * 0.5F;
     }
 
     @Override
     public void start() {
-        slideTime = MAX_SLIDE_TIME;
+        pingin.getNavigation().stop();
         pingin.startSliding(MAX_SLIDE_TIME);
     }
 
     @Override
     public void stop() {
-        slideTime = 0;
+        pingin.stopSliding();
+        pingin.setDeltaMovement(pingin.getDeltaMovement().multiply(0.35D, 1D, 0.35D));
+    }
+
+    @Override
+    public boolean requiresUpdateEveryTick() {
+        return true;
     }
 
     @Override
     public void tick() {
-        slideTime--;
-        if (this.slideTime > 0) {
-            double speed = 0.15;
+
+        int ticksLeft = pingin.getSlideTicks() - 1;
+        if (ticksLeft > 0) {
+
+            double elapsed = MAX_SLIDE_TIME - ticksLeft;
+            double push = Math.max(0D, Math.min(1D, (elapsed - 4D) / 7D));
+            double brake = Math.max(0D, Math.min(1D, (34D - elapsed) / 9D));
+            double speed = 0.15D * speedMultiplier * push * brake;
             double yawRad = Math.toRadians(this.pingin.getYRot());
             double xSpeed = -Math.sin(yawRad) * speed;
             double zSpeed = Math.cos(yawRad) * speed;
             this.pingin.setDeltaMovement(xSpeed, this.pingin.getDeltaMovement().y, zSpeed);
-        } else if (this.slideTime == 0) {
+        } else if (ticksLeft == 0) {
             this.pingin.setDeltaMovement(0, this.pingin.getDeltaMovement().y, 0);
         }
     }

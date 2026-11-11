@@ -16,7 +16,6 @@ public class ModRecipeProvider extends RecipeProvider implements IConditionBuild
 
     @Override
     protected void buildRecipes(Consumer<FinishedRecipe> pWriter) {
-        ///ICE STONE PILLAR
         stonecutterResultFromBase(pWriter,RecipeCategory.MISC, ModBlocks.ICE_STONE_PILLAR.get().asItem(), ModBlocks.COBBLED_ICE_STONE.get());
         ShapedRecipeBuilder.shaped(RecipeCategory.MISC, ModBlocks.ICE_STONE_PILLAR.get(),2)
                 .pattern("M  ")
@@ -25,7 +24,6 @@ public class ModRecipeProvider extends RecipeProvider implements IConditionBuild
                 .unlockedBy(getHasName(ModBlocks.COBBLED_ICE_STONE_SLAB.get()), has(ModBlocks.COBBLED_ICE_STONE_SLAB.get()))
                 .save(pWriter);
 
-        //ICE STONE TILES
         stonecutterResultFromBase(pWriter,RecipeCategory.MISC, ModBlocks.ICE_STONE_TILES.get().asItem(), ModBlocks.COBBLED_ICE_STONE.get());
         stonecutterResultFromBase(pWriter,RecipeCategory.MISC, ModBlocks.ICE_STONE_TILES_STAIRS.get().asItem(), ModBlocks.COBBLED_ICE_STONE.get());
         stonecutterResultFromBase(pWriter,RecipeCategory.MISC, ModBlocks.ICE_STONE_TILES_WALL.get().asItem(), ModBlocks.COBBLED_ICE_STONE.get());
@@ -53,7 +51,6 @@ public class ModRecipeProvider extends RecipeProvider implements IConditionBuild
                 .define('M', ModBlocks.ICE_STONE_TILES.get())
                 .unlockedBy(getHasName(ModBlocks.ICE_STONE_TILES.get()), has(ModBlocks.ICE_STONE_TILES.get()))
                 .save(pWriter);
-        //ICE STONE BRICKS
         stonecutterResultFromBase(pWriter,RecipeCategory.MISC, ModBlocks.ICE_STONE_BRICKS.get().asItem(), ModBlocks.COBBLED_ICE_STONE.get());
         stonecutterResultFromBase(pWriter,RecipeCategory.MISC, ModBlocks.ICE_STONE_BRICKS_STAIRS.get().asItem(), ModBlocks.COBBLED_ICE_STONE.get());
         stonecutterResultFromBase(pWriter,RecipeCategory.MISC, ModBlocks.ICE_STONE_BRICKS_WALL.get().asItem(), ModBlocks.COBBLED_ICE_STONE.get());
@@ -81,7 +78,6 @@ public class ModRecipeProvider extends RecipeProvider implements IConditionBuild
                 .define('M', ModBlocks.ICE_STONE_BRICKS.get())
                 .unlockedBy(getHasName(ModBlocks.ICE_STONE_BRICKS.get()), has(ModBlocks.ICE_STONE_BRICKS.get()))
                 .save(pWriter);
-        //COBBLED ICE STONE
         stonecutterResultFromBase(pWriter,RecipeCategory.MISC, ModBlocks.COBBLED_ICE_STONE_STAIRS.get().asItem(), ModBlocks.COBBLED_ICE_STONE.get());
         stonecutterResultFromBase(pWriter,RecipeCategory.MISC, ModBlocks.COBBLED_ICE_STONE_WALL.get().asItem(), ModBlocks.COBBLED_ICE_STONE.get());
         stonecutterResultFromBase(pWriter,RecipeCategory.MISC, ModBlocks.COBBLED_ICE_STONE_SLAB.get().asItem(), ModBlocks.COBBLED_ICE_STONE.get(),2);
@@ -106,7 +102,6 @@ public class ModRecipeProvider extends RecipeProvider implements IConditionBuild
                 .unlockedBy(getHasName(ModBlocks.COBBLED_ICE_STONE.get()), has(ModBlocks.COBBLED_ICE_STONE.get()))
                 .save(pWriter);
 
-        //MOSSY COBBLED ICE STONE
         stonecutterResultFromBase(pWriter,RecipeCategory.MISC, ModBlocks.MOSSY_COBBLED_ICE_STONE_STAIRS.get().asItem(), ModBlocks.MOSSY_COBBLED_ICE_STONE.get());
         stonecutterResultFromBase(pWriter,RecipeCategory.MISC, ModBlocks.MOSSY_COBBLED_ICE_STONE_WALL.get().asItem(), ModBlocks.MOSSY_COBBLED_ICE_STONE.get());
         stonecutterResultFromBase(pWriter,RecipeCategory.MISC, ModBlocks.MOSSY_COBBLED_ICE_STONE_SLAB.get().asItem(), ModBlocks.MOSSY_COBBLED_ICE_STONE.get(),2);

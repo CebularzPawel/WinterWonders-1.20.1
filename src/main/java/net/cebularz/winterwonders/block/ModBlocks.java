@@ -33,6 +33,11 @@ public class ModBlocks {
     public static final DeferredRegister<Block> BLOCKS =
             DeferredRegister.create(ForgeRegistries.BLOCKS, WinterWonders.MOD_ID);
 
+    // public static final RegistryObject<Block> FISH_RACK = registerBlock("fish_rack",
+            // () -> new FishRackBlock(BlockBehaviour.Properties.copy(Blocks.SPRUCE_PLANKS).strength(2F).noOcclusion()));
+    // public static final RegistryObject<Block> PINGIN_NEST = registerBlock("pingin_nest",
+            // () -> new PinginNestBlock(BlockBehaviour.Properties.copy(Blocks.HAY_BLOCK).strength(0.5F).noOcclusion()));
+
     public static final RegistryObject<Block> COLDSTEEL_BLOCK = registerBlock("coldsteel_block",
             () -> new Block(BlockBehaviour.Properties.copy(Blocks.IRON_BLOCK).noOcclusion()));
     public static final RegistryObject<Block> COBBLED_ICE_STONE = registerBlock("cobbled_ice_stone",

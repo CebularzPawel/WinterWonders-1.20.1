@@ -20,7 +20,6 @@ public class AuroraParticle extends TextureSheetParticle {
         this.lifetime = 100;
         this.gravity = 0;
 
-        // Thank you mojank
         float r = Mth.randomBetween(random, 0.2f, 0.8f);
         float g = Mth.randomBetween(random, 0.2f, 0.8f);
         float b = Mth.randomBetween(random, 0.2f, 1.0f);
@@ -60,7 +59,6 @@ public class AuroraParticle extends TextureSheetParticle {
         float g = this.gCol * (1.0f + glowPulse);
         float b = this.bCol * (1.0f + glowPulse);
         int light = 0xF000F0;
-        //TODO::FIX THE VERTEX
 //        consumer.vertex(this.x + vertices[0].x(), this.y + vertices[0].y(), this.z + vertices[0].z())
 //                .color(r, g, b, this.alpha)
 //                .uv(this.getU0(), this.getV0())

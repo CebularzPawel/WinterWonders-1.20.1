@@ -1,17 +1,13 @@
 package net.cebularz.winterwonders.worldgen.biome;
 
 import net.cebularz.winterwonders.WinterWonders;
-import net.cebularz.winterwonders.init.ModSongs;
+import net.cebularz.winterwonders.init.ModSounds;
 import net.minecraft.network.protocol.game.ClientboundStopSoundPacket;
 import net.minecraft.resources.ResourceKey;
-import net.minecraft.resources.ResourceLocation;
-import net.minecraft.server.MinecraftServer;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.level.biome.Biome;
-import net.minecraftforge.api.distmarker.Dist;
-import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.TickEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
@@ -27,7 +23,7 @@ public class BiomeMusicManager {
     private int checkInterval = 20;
 
     public BiomeMusicManager() {
-        biomeSounds.put(WinterFrostBiome.WINTER_FROST, ModSongs.BIOME_MUSIC.get());
+        biomeSounds.put(WinterFrostBiome.WINTER_FROST, ModSounds.BIOME_MUSIC.get());
     }
 
     @SubscribeEvent

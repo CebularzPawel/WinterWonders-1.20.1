@@ -1,5 +1,6 @@
 package net.cebularz.winterwonders.spell;
 
+import java.util.function.Function;
 import net.cebularz.winterwonders.entity.custom.projectile.IcicleProjectileEntity;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.util.RandomSource;
@@ -17,8 +18,14 @@ public class IcicleSpell implements Spell {
     private final boolean homing;
     private final double speed;
     private final double aimAccuracy;
+    private final Function<LivingEntity, Vec3> origin;
 
     public IcicleSpell(CastMode mode, int shots, int intervalTicks, float damagePercent, boolean homing, double speed, double aimAccuracy) {
+        this(mode, shots, intervalTicks, damagePercent, homing, speed, aimAccuracy, null);
+    }
+
+    private IcicleSpell(CastMode mode, int shots, int intervalTicks, float damagePercent, boolean homing,
+                        double speed, double aimAccuracy, Function<LivingEntity, Vec3> origin) {
         this.mode = mode;
         this.shots = Math.max(1, shots);
         this.intervalTicks = Math.max(0, intervalTicks);
@@ -27,6 +34,11 @@ public class IcicleSpell implements Spell {
         this.homing = homing;
         this.speed = speed;
         this.aimAccuracy = Math.max(0.0, aimAccuracy);
+        this.origin = origin;
+    }
+
+    public IcicleSpell withOrigin(Function<LivingEntity, Vec3> origin) {
+        return new IcicleSpell(mode, shots, intervalTicks, damagePercent, homing, speed, aimAccuracy, origin);
     }
 
     @Override
@@ -52,7 +64,7 @@ public class IcicleSpell implements Spell {
         IcicleProjectileEntity icicle = new IcicleProjectileEntity(level, caster, damagePercent / 100.0F, homing);
         Vec3 eyePos = caster.getEyePosition(1.0F);
         Vec3 normalizedDir = caster.getLookAngle().normalize();
-        Vec3 spawnPos = eyePos.add(normalizedDir.scale(0.35));
+        Vec3 spawnPos = origin == null ? eyePos.add(normalizedDir.scale(0.35)) : origin.apply(caster);
         icicle.setPos(spawnPos.x, spawnPos.y, spawnPos.z);
 
         Vec3 dir;
@@ -60,7 +72,7 @@ public class IcicleSpell implements Spell {
         if (hasValidTarget) {
             Vec3 aimPos = target.position().add(
                     random.nextGaussian() * aimAccuracy, target.getBbHeight() * 0.5, random.nextGaussian() * aimAccuracy);
-            dir = aimPos.subtract(eyePos).normalize();
+            dir = aimPos.subtract(origin == null ? eyePos : spawnPos).normalize();
         } else {
             dir = normalizedDir;
         }

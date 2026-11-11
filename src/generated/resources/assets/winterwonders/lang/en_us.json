@@ -97,5 +97,11 @@
   "item.winterwonders.snow_weasel_spawn_egg": "Snow Weasel Spawn Egg",
   "item.winterwonders.snow_wisp_spawn_egg": "Snow Wisp Spawn Egg",
   "item.winterwonders.titanfeller_greatsword": "Titanfeller",
-  "item.winterwonders.trueice_shard": "Trueice Shard"
+  "item.winterwonders.trueice_shard": "Trueice Shard",
+  "item.winterwonders.flint_spear": "Flint Spear",
+  "death.attack.throwing_spear": "%1$s was speared by %2$s",
+  "death.attack.throwing_spear.item": "%1$s was speared by %2$s using %3$s",
+  "subtitles.winterwonders.item.throwing_spear.attack": "Spear jabs",
+  "subtitles.winterwonders.item.throwing_spear.hit": "Spear hits",
+  "entity.winterwonders.throwing_spear": "Thrown Spear"
 }

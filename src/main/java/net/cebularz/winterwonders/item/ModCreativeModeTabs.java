@@ -32,6 +32,8 @@ public class ModCreativeModeTabs {
                         pOutput.accept(ModItems.COLDSTEEL_SHOVEL.get());
                         pOutput.accept(ModItems.COLDSTEEL_HOE.get());
 
+                        pOutput.accept(ModItems.FLINT_SPEAR.get());
+
                         pOutput.accept(ModItems.COLDSTEEL_HELMET.get());
                         pOutput.accept(ModItems.COLDSTEEL_CHESTPLATE.get());
                         pOutput.accept(ModItems.COLDSTEEL_LEGGINGS.get());

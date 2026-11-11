@@ -280,7 +280,8 @@ public class LichEntity extends Monster {
             setCastingSpellTicks(
                     switch (attackType) {
                         case BASIC_PROJECTILE, FREEZING_CUBE -> 60;
-                        case ICE_SPIKES, BLIZZARD, WHIRLWIND, SUMMON_MINIONS, SPECIAL_ATTACK -> 20;
+                        case SUMMON_MINIONS -> getCastingSpellTicks();
+                        case ICE_SPIKES, BLIZZARD, WHIRLWIND, SPECIAL_ATTACK -> 20;
                     });
         }
     }

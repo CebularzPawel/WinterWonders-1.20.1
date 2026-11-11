@@ -1,0 +1,23 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "equipment",
+  "pattern": [
+    "  X",
+    " # ",
+    "#F "
+  ],
+  "key": {
+    "X": {
+      "item": "minecraft:flint"
+    },
+    "#": {
+      "item": "minecraft:stick"
+    },
+    "F": {
+      "item": "winterwonders:pingin_feather"
+    }
+  },
+  "result": {
+    "item": "winterwonders:flint_spear"
+  }
+}

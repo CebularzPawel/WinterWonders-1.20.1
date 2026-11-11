@@ -4,6 +4,7 @@ import net.cebularz.winterwonders.entity.custom.*;
 import net.cebularz.winterwonders.entity.custom.projectile.ChillingSnowballEntity;
 import net.cebularz.winterwonders.entity.custom.projectile.IceCubeEntity;
 import net.cebularz.winterwonders.entity.custom.projectile.OrnamentEntity;
+import net.cebularz.winterwonders.entity.custom.projectile.ThrowingSpearProjectile;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.world.entity.EntityType;
@@ -20,6 +21,10 @@ import java.util.function.Supplier;
 public class ModEntities
 {
     public static final DeferredRegister<EntityType<?>> TYPES = DeferredRegister.create(ForgeRegistries.ENTITY_TYPES, WinterWonders.MOD_ID);
+
+    public static final RegistryObject<EntityType<ThrowingSpearProjectile>> THROWING_SPEAR =
+            TYPES.register("throwing_spear", () -> EntityType.Builder.<ThrowingSpearProjectile>of(ThrowingSpearProjectile::new, MobCategory.MISC)
+                    .sized(.5F, .5F).clientTrackingRange(4).updateInterval(20).build("throwing_spear"));
 
     public static final RegistryObject<EntityType<SnowWispEntity>> SNOW_WISP =
             TYPES.register("snow_wisp",()-> EntityType.Builder.of(SnowWispEntity::new, MobCategory.AMBIENT)

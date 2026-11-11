@@ -1,71 +1,85 @@
 package net.cebularz.winterwonders.entity.ai.pingin;
 
-import net.cebularz.winterwonders.entity.custom.PinginEntity;
-import net.minecraft.sounds.SoundEvents;
-import net.minecraft.world.InteractionHand;
-import net.minecraft.world.entity.ai.goal.Goal;
-import net.minecraft.world.entity.item.ItemEntity;
-import net.minecraft.world.item.Item;
-import net.minecraft.world.item.ItemStack;
-
+import java.util.Comparator;
 import java.util.EnumSet;
 import java.util.List;
 
+import net.cebularz.winterwonders.entity.custom.PinginEntity;
+
+import net.minecraft.sounds.SoundEvents;
+import net.minecraft.core.particles.ItemParticleOption;
+import net.minecraft.core.particles.ParticleTypes;
+import net.minecraft.server.level.ServerLevel;
+import net.minecraft.tags.ItemTags;
+import net.minecraft.world.InteractionHand;
+import net.minecraft.world.entity.ai.goal.Goal;
+import net.minecraft.world.entity.item.ItemEntity;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.Item;
+import net.minecraft.world.item.ItemStack;
+
 public class PinginTradeWithPlayerGoal extends Goal {
-    private final PinginEntity mob;
+    private final PinginEntity pingin;
     private final List<Item> tradableItemList;
     private ItemEntity targetItem;
     private int checkingTimer = 0;
+    private int nextCheck;
     private boolean isChecking = false;
     private boolean hasItemInHand = false;
     private static final int CHECKING_TIME = 40;
-    private static final int ADMIRE_ITEM_TIME = 120;
-    private int admireItemTimer;
 
-    public PinginTradeWithPlayerGoal(PinginEntity mob, List<Item> tradableItemList) {
-        this.mob = mob;
+    public PinginTradeWithPlayerGoal(PinginEntity pingin, List<Item> tradableItemList) {
+        this.pingin = pingin;
         this.tradableItemList = tradableItemList;
         this.setFlags(EnumSet.of(Flag.JUMP, Flag.MOVE, Flag.LOOK));
     }
 
     @Override
     public boolean canUse() {
-        if (!this.mob.isAlive() || this.mob.isInWater() || !this.mob.onGround()) {
+        if (!pingin.getMainHandItem().is(ItemTags.FISHES)) {
+            if (pingin.isAlive() && !pingin.isInWater() && pingin.onGround() && pingin.getTarget() == null) {
+                if (isChecking || hasItemInHand) {
+                    return true;
+                } else {
+                    if (!pingin.hasWeapon() && isTradable(pingin.getMainHandItem())) {
+                        hasItemInHand = true;
+                        return true;
+                    } else if (pingin.tickCount >= nextCheck) {
+                        nextCheck = pingin.tickCount + 20 + pingin.getRandom().nextInt(20);
+                        List<ItemEntity> droppedItems = pingin.level().getEntitiesOfClass(
+                                ItemEntity.class,
+                                pingin.getBoundingBox().inflate(16.0D));
+
+                        targetItem = droppedItems.stream()
+                                .filter(this::canAccept)
+                                .min(Comparator.comparingDouble(item -> item.distanceToSqr(pingin)))
+                                .orElse(null);
+
+                        return targetItem != null;
+                    } else {
+                        return false;
+                    }
+                }
+            } else {
+                return false;
+            }
+        } else {
             return false;
         }
-
-        if (isChecking || hasItemInHand) {
-            return true;
-        }
-
-        if (tradableItemList.stream().anyMatch(item -> mob.getMainHandItem().is(item))) {
-            hasItemInHand = true;
-            return true;
-        }
-
-        List<ItemEntity> droppedItems = mob.level().getEntitiesOfClass(
-                ItemEntity.class,
-                mob.getBoundingBox().inflate(16.0D));
-
-        targetItem = droppedItems.stream()
-                .filter(itemEntity -> !itemEntity.hasPickUpDelay() && tradableItemList.stream()
-                        .anyMatch(item -> itemEntity.getItem().is(item)))
-                .min((a, b) -> Double.compare(
-                        a.distanceToSqr(mob),
-                        b.distanceToSqr(mob)))
-                .orElse(null);
-
-        return targetItem != null;
     }
 
     @Override
     public boolean canContinueToUse() {
-        return isChecking || hasItemInHand || (targetItem != null && targetItem.isAlive());
+        if (pingin.isInWater() || pingin.getMainHandItem().is(ItemTags.FISHES) || pingin.getTarget() != null) {
+            return false;
+        } else {
+            return isChecking || hasItemInHand || (targetItem != null && canAccept(targetItem));
+        }
     }
 
     @Override
     public void start() {
-        if (tradableItemList.stream().anyMatch(item -> mob.getMainHandItem().is(item))) {
+        if (!pingin.hasWeapon() && isTradable(pingin.getMainHandItem())) {
             hasItemInHand = true;
             startChecking();
         }
@@ -76,17 +90,9 @@ public class PinginTradeWithPlayerGoal extends Goal {
         if (isChecking) {
             checkingTimer--;
 
-            //if (checkingTimer % 5 == 0) {
-            //    this.mob.getLookControl().setLookAt(
-            //            this.mob.getX() + this.mob.getRandom().nextGaussian() * 2.0D,
-            //            this.mob.getEyeY(),
-            //            this.mob.getZ() + this.mob.getRandom().nextGaussian() * 2.0D
-            //    );
-            //}
-
-            if (checkingTimer % 20 == 0 && mob.getRandom().nextFloat() < 0.3F) {
-                mob.playSound(SoundEvents.PIGLIN_ADMIRING_ITEM, 0.5F,
-                        1.0F + (mob.getRandom().nextFloat() - mob.getRandom().nextFloat()) * 0.2F);
+            if (checkingTimer % 20 == 0 && pingin.getRandom().nextFloat() < 0.3F) {
+                pingin.playSound(SoundEvents.PIGLIN_ADMIRING_ITEM, 0.5F,
+                        1.0F + (pingin.getRandom().nextFloat() - pingin.getRandom().nextFloat()) * 0.2F);
             }
 
             if (checkingTimer <= 0) {
@@ -94,89 +100,116 @@ public class PinginTradeWithPlayerGoal extends Goal {
                 isChecking = false;
                 hasItemInHand = false;
             }
-            return;
-        }
+        } else {
+            if (!hasItemInHand && !pingin.hasWeapon() && isTradable(pingin.getMainHandItem())) {
+                hasItemInHand = true;
+                startChecking();
+            } else if (targetItem != null && canAccept(targetItem)) {
+                double distance = pingin.distanceToSqr(targetItem);
 
-        if (!hasItemInHand) {
-            for (Item likedItem : this.tradableItemList) {
-                if (mob.getMainHandItem().is(likedItem)) {
-                    hasItemInHand = true;
-                    startChecking();
-                    return;
+                if (distance > 1.5) {
+                    pingin.getNavigation().moveTo(targetItem, 1.0);
+                } else {
+                    pingin.getNavigation().stop();
+                    pickUpItem();
                 }
-            }
-        }
-
-        if (targetItem != null && targetItem.isAlive()) {
-            double distance = mob.distanceToSqr(targetItem);
-
-            if (distance > 1.5) {
-                mob.getNavigation().moveTo(targetItem, 1.0);
-            } else {
-                mob.getNavigation().stop();
-                pickUpItem();
             }
         }
     }
 
+    private boolean isTradable(ItemStack stack) {
+        return tradableItemList.stream().anyMatch(stack::is);
+    }
+
+    private boolean canAccept(ItemEntity item) {
+        if (item.isAlive() && !item.hasPickUpDelay()) {
+            ItemStack stack = item.getItem();
+            if (stack.is(ItemTags.FISHES)) {
+                return !pingin.isBaby() && item.getOwner() instanceof Player player && player.isAlive()
+                        && pingin.likesPlayer(player) && (pingin.getRecruiterId() == null || pingin.getRecruiterId().equals(player.getUUID()));
+            } else if (PinginEntity.isWeapon(stack)) {
+                return pingin.wantsWeapon(stack);
+            } else {
+                return !pingin.hasWeapon() && pingin.getMainHandItem().isEmpty() && isTradable(stack);
+            }
+        } else {
+            return false;
+        }
+    }
+
     private void pickUpItem() {
-        if (targetItem != null && targetItem.isAlive()) {
-            mob.playSound(SoundEvents.ITEM_PICKUP, 0.5F,
-                    1.0F + (mob.getRandom().nextFloat() - mob.getRandom().nextFloat()) * 0.2F);
-
-            mob.setItemInHand(InteractionHand.MAIN_HAND, targetItem.getItem().copy());
-            targetItem.discard();
+        if (targetItem != null && canAccept(targetItem)) {
+            pingin.playSound(SoundEvents.ITEM_PICKUP, 0.5F,
+                    1.0F + (pingin.getRandom().nextFloat() - pingin.getRandom().nextFloat()) * 0.2F);
+            ItemStack stack = targetItem.getItem();
+            if (stack.is(ItemTags.FISHES) && targetItem.getOwner() instanceof Player player) {
+                pingin.recruit(player);
+                ((ServerLevel)pingin.level()).sendParticles(new ItemParticleOption(ParticleTypes.ITEM, stack.copyWithCount(1)),
+                        pingin.getX(), pingin.getEyeY(), pingin.getZ(), 4, 0.08D, 0.05D, 0.08D, 0.01D);
+                pingin.take(targetItem, 1);
+                stack.shrink(1);
+            } else if (PinginEntity.isWeapon(stack)) {
+                if (pingin.equipWeapon(stack)) {
+                    pingin.take(targetItem, 1);
+                    stack.shrink(1);
+                    hasItemInHand = true;
+                    startChecking();
+                }
+            } else {
+                pingin.setItemInHand(InteractionHand.MAIN_HAND, stack.copy());
+                stack.setCount(0);
+                hasItemInHand = true;
+                startChecking();
+            }
+            if (stack.isEmpty()) {
+                targetItem.discard();
+            }
             targetItem = null;
-            hasItemInHand = true;
-
-            startChecking();
         }
     }
 
     private void startChecking() {
         isChecking = true;
-        checkingTimer = CHECKING_TIME + mob.getRandom().nextInt(40);
-        mob.setAdmiring(true);
-        mob.getNavigation().stop();
+        checkingTimer = CHECKING_TIME + pingin.getRandom().nextInt(40);
+        pingin.setAdmiring(true);
+        pingin.getNavigation().stop();
     }
 
     private void giveReward() {
-        if (mob.getMainHandItem().isEmpty()) {
-            return;
+        if (pingin.hasWeapon()) {
+            pingin.setAdmiring(false);
+        } else if (!pingin.getMainHandItem().isEmpty()) {
+            pingin.getMainHandItem().shrink(1);
+
+            if (pingin.getTradeContainer() != null && !pingin.getTradeContainer().isEmpty()) {
+                int index = pingin.getRandom().nextInt(pingin.getTradeContainer().getContainerSize());
+                ItemStack rewardItem = pingin.getTradeContainer().getItem(index).copy();
+
+                if (!rewardItem.isEmpty()) {
+                    rewardItem.setCount(1 + pingin.getRandom().nextInt(3));
+
+                    ItemEntity throwingItem = new ItemEntity(
+                            pingin.level(),
+                            pingin.getX(),
+                            pingin.getEyeY() - 0.3,
+                            pingin.getZ(),
+                            rewardItem
+                    );
+
+                    double dx = pingin.getRandom().nextGaussian() * 0.13D;
+                    double dz = pingin.getRandom().nextGaussian() * 0.13D;
+                    throwingItem.setDeltaMovement(dx, 0.3, dz);
+
+                    pingin.level().addFreshEntity(throwingItem);
+
+                    pingin.playSound(SoundEvents.VILLAGER_YES, 1.0F, 1.0F);
+                }
+
+                hasItemInHand = false;
+                pingin.setItemInHand(InteractionHand.MAIN_HAND, ItemStack.EMPTY);
+                pingin.setAdmiring(false);
+            }
         }
-
-        mob.getMainHandItem().shrink(1);
-
-        if (mob.getTradeContainer() == null || mob.getTradeContainer().isEmpty()) {
-            return;
-        }
-
-        int index = mob.getRandom().nextInt(mob.getTradeContainer().getContainerSize());
-        ItemStack rewardItem = mob.getTradeContainer().getItem(index).copy();
-
-        if (!rewardItem.isEmpty()) {
-            rewardItem.setCount(1 + mob.getRandom().nextInt(3));
-
-            ItemEntity throwingItem = new ItemEntity(
-                    mob.level(),
-                    mob.getX(),
-                    mob.getEyeY() - 0.3,
-                    mob.getZ(),
-                    rewardItem
-            );
-
-            double dx = mob.getRandom().nextGaussian() * 0.13D;
-            double dz = mob.getRandom().nextGaussian() * 0.13D;
-            throwingItem.setDeltaMovement(dx, 0.3, dz);
-
-            mob.level().addFreshEntity(throwingItem);
-
-            mob.playSound(SoundEvents.VILLAGER_YES, 1.0F, 1.0F);
-        }
-
-        hasItemInHand = false;
-        mob.setItemInHand(InteractionHand.MAIN_HAND, ItemStack.EMPTY);
-        mob.setAdmiring(false);
     }
 
     @Override
@@ -185,6 +218,6 @@ public class PinginTradeWithPlayerGoal extends Goal {
         this.isChecking = false;
         this.hasItemInHand = false;
         this.checkingTimer = 0;
-        this.mob.setAdmiring(false);
+        this.pingin.setAdmiring(false);
     }
 }

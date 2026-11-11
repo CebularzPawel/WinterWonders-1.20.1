@@ -1,0 +1,33 @@
+{
+  "loader": "forge:separate_transforms",
+  "gui_light": "front",
+  "textures": {
+    "particle": "winterwonders:item/flint_spear"
+  },
+  "base": {
+    "parent": "winterwonders:item/flint_spear_in_hand",
+    "textures": {
+      "layer0": "winterwonders:item/flint_spear_in_hand"
+    }
+  },
+  "perspectives": {
+    "gui": {
+      "parent": "minecraft:item/generated",
+      "textures": {
+        "layer0": "winterwonders:item/flint_spear"
+      }
+    },
+    "ground": {
+      "parent": "minecraft:item/generated",
+      "textures": {
+        "layer0": "winterwonders:item/flint_spear"
+      }
+    },
+    "fixed": {
+      "parent": "minecraft:item/generated",
+      "textures": {
+        "layer0": "winterwonders:item/flint_spear"
+      }
+    }
+  }
+}

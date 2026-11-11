@@ -17,7 +17,6 @@ public class MittenMouseRenderer extends MobRenderer<MittenMouseEntity, MittenMo
     private static final ResourceLocation BLACK_MOUSE = new ResourceLocation(WinterWonders.MOD_ID, "textures/entity/mice/mitten_mouse_black.png");
     public MittenMouseRenderer(EntityRendererProvider.Context context) {
         super(context, new MittenMouseModel<>(context.bakeLayer(MittenMouseModel.MOUSE_LAYER)), 0.25f);
-        //add item render
     }
 
     @Override
