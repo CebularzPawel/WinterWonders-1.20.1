@@ -9,10 +9,14 @@ import net.minecraftforge.registries.RegistryObject;
 import net.cebularz.winterwonders.WinterWonders;
 import net.cebularz.winterwonders.block.entity.custom.IcyVinesBlockEntity;
 import net.cebularz.winterwonders.block.entity.custom.IcyVinesPlantBlockEntity;
+// import net.cebularz.winterwonders.block.entity.custom.FishRackBlockEntity;
 
 public class ModBlockEntities{
     public static final DeferredRegister<BlockEntityType<?>> BLOCK_ENTITIES =
             DeferredRegister.create(ForgeRegistries.BLOCK_ENTITY_TYPES, WinterWonders.MOD_ID);
+
+    // public static final RegistryObject<BlockEntityType<FishRackBlockEntity>> FISH_RACK_BE =
+            // BLOCK_ENTITIES.register("fish_rack", () -> BlockEntityType.Builder.of(FishRackBlockEntity::new, ModBlocks.FISH_RACK.get()).build(null));
 
     public static final RegistryObject<BlockEntityType<IcyVinesBlockEntity>> ICY_VINES_BE =
             BLOCK_ENTITIES.register("icy_vines_be", () ->

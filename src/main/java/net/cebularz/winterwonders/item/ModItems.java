@@ -22,6 +22,9 @@ public class ModItems {
     public static final DeferredRegister<Item> ITEMS =
             DeferredRegister.create(ForgeRegistries.ITEMS, WinterWonders.MOD_ID);
 
+    public static final RegistryObject<Item> FLINT_SPEAR = ITEMS.register("flint_spear",
+            () -> new ThrowingSpearItem(ModToolTiers.FLINT, .75F, new Item.Properties()));
+
     public static final RegistryObject<Item> FROST_ESSENCE = ITEMS.register("frost_essence",
             () -> new Item(new Item.Properties().rarity(Rarity.COMMON)));
 

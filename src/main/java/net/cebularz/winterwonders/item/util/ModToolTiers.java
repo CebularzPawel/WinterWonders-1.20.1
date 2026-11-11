@@ -4,6 +4,8 @@ import net.cebularz.winterwonders.item.ModItems;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.Tier;
 import net.minecraft.world.item.Tiers;
+import net.minecraft.world.item.Items;
+import net.minecraft.tags.BlockTags;
 import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraftforge.common.ForgeTier;
 import net.minecraftforge.common.TierSortingRegistry;
@@ -13,6 +15,9 @@ import net.cebularz.winterwonders.init.ModTags;
 import java.util.List;
 
 public class ModToolTiers {
+    public static final Tier FLINT = new ForgeTier(1, 131, 4, 1, 5,
+            BlockTags.NEEDS_STONE_TOOL, () -> Ingredient.of(Items.FLINT));
+
     public static final Tier COLDSTEEL = TierSortingRegistry.registerTier(
             new ForgeTier(2, 512, 7f, 2.5f, 15,
                     ModTags.Blocks.NEEDS_COLDSTEEL_TOOL, () -> Ingredient.of(ModItems.COLDSTEEL_INGOT.get())),

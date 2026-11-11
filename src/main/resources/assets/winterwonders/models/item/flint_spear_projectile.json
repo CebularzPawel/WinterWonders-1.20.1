@@ -1,0 +1,6 @@
+{
+  "parent": "winterwonders:item/flint_spear_in_hand",
+  "textures": {
+    "layer0": "winterwonders:item/flint_spear_in_hand"
+  }
+}

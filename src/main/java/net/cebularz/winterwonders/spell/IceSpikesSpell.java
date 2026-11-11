@@ -51,6 +51,13 @@ public class IceSpikesSpell implements Spell {
         if (level == null || caster == null || target == null || random == null) return;
         if (!caster.isAlive() || !target.isAlive()) return;
 
+        cast(level, caster, target, random, random.nextBoolean());
+    }
+
+    public void cast(ServerLevel level, LivingEntity caster, LivingEntity target, RandomSource random, boolean reverseSweep) {
+        if (level == null || caster == null || target == null || random == null) return;
+        if (!caster.isAlive() || !target.isAlive()) return;
+
         Vec3 casterPos = caster.position();
         Vec3 targetPos = target.position();
         double dx = targetPos.x - casterPos.x;
@@ -61,7 +68,6 @@ public class IceSpikesSpell implements Spell {
         double baseRadius = Mth.clamp(distance, minRadius, maxRadius);
 
         double arcRadians = Math.toRadians(arcDegrees);
-        boolean reverseSweep = random.nextBoolean();
 
         for (int i = 0; i < spikeCount; i++) {
             double totalSpikes = (spikeCount == 1) ? 0.0 : ((double) i / (spikeCount - 1) - 0.5);

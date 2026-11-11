@@ -40,7 +40,6 @@ public class SnowWispEntity extends PathfinderMob {
     private int endColor;
     private float colorTransition = 0.0F;
 
-    //Playing things
     private Player targetPlayer;
     private int playingTicks = 0;
     private static final int PLAYING_DURATION = 200;
@@ -61,7 +60,7 @@ public class SnowWispEntity extends PathfinderMob {
     @Override
     protected void defineSynchedData() {
         super.defineSynchedData();
-        this.entityData.define(COLOR, 0xFFFFFF); // default
+        this.entityData.define(COLOR, 0xFFFFFF);
         this.entityData.define(IS_PLAYING, false);
         this.entityData.define(LIKES_PLAYER, false);
     }
@@ -217,7 +216,6 @@ public class SnowWispEntity extends PathfinderMob {
         return super.mobInteract(player, hand);
     }
 
-    // Helper methods
     public boolean isPlaying() {
         return this.entityData.get(IS_PLAYING);
     }
@@ -234,7 +232,6 @@ public class SnowWispEntity extends PathfinderMob {
         this.entityData.set(LIKES_PLAYER, likes);
     }
 
-    // Group behavior goal
     private static class RandomFlyingGoal extends RandomStrollGoal {
         public RandomFlyingGoal(PathfinderMob pMob, double pSpeedModifier) {
             super(pMob, pSpeedModifier, 10);
@@ -247,7 +244,6 @@ public class SnowWispEntity extends PathfinderMob {
         }
     }
 
-    // Play with player goal
     private static class SnowWispPlayGoal extends Goal {
         private final SnowWispEntity wisp;
         private Player targetPlayer;
@@ -256,7 +252,7 @@ public class SnowWispEntity extends PathfinderMob {
         private boolean hasTaggedPlayer = false;
         private static final double CHASE_SPEED = 1.2D;
         private static final double FLEE_SPEED = 1.5D;
-        private static final double TAG_DISTANCE = 1.5D; // Distance to tag the player
+        private static final double TAG_DISTANCE = 1.5D;
         private static final double FLEE_DISTANCE = 10.0D;
 
         public SnowWispPlayGoal(SnowWispEntity wisp) {
@@ -344,7 +340,6 @@ public class SnowWispEntity extends PathfinderMob {
     }
 
 
-    // Follow liked player goal
     private static class SnowWispFollowPlayerGoal extends Goal {
         private final SnowWispEntity wisp;
         private final double speedModifier;

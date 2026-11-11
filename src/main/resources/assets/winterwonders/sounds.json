@@ -6,5 +6,33 @@
         "stream": true
       }
     ]
+  },
+  "item.throwing_spear.attack": {
+    "sounds": [
+      {
+        "name": "winterwonders:item/throwing_spear/attack1"
+      },
+      {
+        "name": "winterwonders:item/throwing_spear/attack2"
+      },
+      {
+        "name": "winterwonders:item/throwing_spear/attack3"
+      }
+    ],
+    "subtitle": "subtitles.winterwonders.item.throwing_spear.attack"
+  },
+  "item.throwing_spear.hit": {
+    "sounds": [
+      {
+        "name": "winterwonders:item/throwing_spear/hit1"
+      },
+      {
+        "name": "winterwonders:item/throwing_spear/hit2"
+      },
+      {
+        "name": "winterwonders:item/throwing_spear/hit3"
+      }
+    ],
+    "subtitle": "subtitles.winterwonders.item.throwing_spear.hit"
   }
 }
