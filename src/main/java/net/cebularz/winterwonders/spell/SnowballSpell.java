@@ -1,11 +1,17 @@
 package net.cebularz.winterwonders.spell;
 
+import java.util.function.BooleanSupplier;
+import java.util.function.Function;
+
 import net.cebularz.winterwonders.entity.custom.projectile.ChillingSnowballEntity;
+
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.phys.Vec3;
+
+import net.turtleboi.turtlecore.particle.CoreParticles;
 import net.turtleboi.turtlecore.spell.Spell;
 import net.turtleboi.turtlecore.spell.SpellScheduler;
 
@@ -32,28 +38,42 @@ public class SnowballSpell implements Spell {
 
     @Override
     public void cast(ServerLevel level, LivingEntity caster, LivingEntity target, RandomSource random) {
-        if (level == null || caster == null || random == null) return;
-        if (!caster.isAlive()) return;
+        castWithOrigin(level, caster, target, random, null, () -> true);
+    }
+
+    public void castWithOrigin(ServerLevel level, LivingEntity caster, LivingEntity target, RandomSource random,
+                               Function<LivingEntity, Vec3> origin, BooleanSupplier active) {
+        if (level == null || caster == null || random == null) {
+            return;
+        }
+        if (!caster.isAlive()) {
+            return;
+        }
 
         if (mode == CastMode.SINGLE) {
-            singularCast(level, caster, target, random);
+            if (active.getAsBoolean()) {
+                singularCast(level, caster, target, random, origin);
+            }
             return;
         }
 
         for (int i = 0; i < shots; i++) {
             int delay = i * intervalTicks;
             SpellScheduler.schedule(level, delay, () -> {
-                if (!caster.isAlive()) return;
-                singularCast(level, caster, target, random);
+                if (!caster.isAlive() || caster.isRemoved() || !active.getAsBoolean()) {
+                    return;
+                }
+                singularCast(level, caster, target, random, origin);
             });
         }
     }
 
-    private void singularCast(ServerLevel level, LivingEntity caster, LivingEntity target, RandomSource random) {
+    private void singularCast(ServerLevel level, LivingEntity caster, LivingEntity target, RandomSource random,
+                              Function<LivingEntity, Vec3> origin) {
         ChillingSnowballEntity snowball = new ChillingSnowballEntity(level, caster, chillAmplifier, true, (int) damagePercent);
         Vec3 eyePos = caster.getEyePosition(1.0F);
         Vec3 normalizedDir = caster.getLookAngle().normalize();
-        Vec3 spawnPos = eyePos.add(normalizedDir.scale(0.35));
+        Vec3 spawnPos = origin == null ? eyePos.add(normalizedDir.scale(0.35)) : origin.apply(caster);
         snowball.setPos(spawnPos.x, spawnPos.y, spawnPos.z);
 
         Vec3 dir;
@@ -63,13 +83,15 @@ public class SnowballSpell implements Spell {
                     target.getBbHeight() * 0.5,
                     random.nextGaussian() * aimAccuracy
             );
-            dir = aimPos.subtract(eyePos).normalize();
+            dir = aimPos.subtract(origin == null ? eyePos : spawnPos).normalize();
         } else {
             dir = normalizedDir;
         }
 
         snowball.setDeltaMovement(dir.scale(speed));
         level.addFreshEntity(snowball);
+
+        level.sendParticles(CoreParticles.CHILLED_PARTICLES.get(), spawnPos.x, spawnPos.y, spawnPos.z, 6, .18, .18, .18, .02);
 
         level.sendParticles(
                 ParticleTypes.SNOWFLAKE,

@@ -1,12 +1,18 @@
 package net.cebularz.winterwonders.spell;
 
+import java.util.function.BooleanSupplier;
+
 import net.cebularz.winterwonders.entity.ModEntities;
+import net.cebularz.winterwonders.entity.custom.LichEntity.CastState;
+import net.cebularz.winterwonders.entity.custom.LichEntity;
 import net.cebularz.winterwonders.entity.custom.projectile.IceCubeEntity;
+
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.util.Mth;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.phys.Vec3;
+
 import net.turtleboi.turtlecore.spell.Spell;
 import net.turtleboi.turtlecore.spell.SpellScheduler;
 
@@ -38,28 +44,66 @@ public class FreezingCubeSpell implements Spell {
 
     @Override
     public void cast(ServerLevel level, LivingEntity caster, LivingEntity target, RandomSource random) {
-        if (level == null || caster == null || target == null || random == null) return;
-        if (!caster.isAlive() || !target.isAlive()) return;
-        if (!canAffectAllies && target.isAlliedTo(caster)) return;
+        if (random == null) {
+            return;
+        }
+        castWithDelays(level, caster, target, random, planReleaseDelays(random), () -> true);
+    }
+
+    public int[] planReleaseDelays(RandomSource random) {
+        int[] delays = new int[cubeCount];
+        for (int i = 0; i < cubeCount; i++) {
+            delays[i] = random.nextIntBetweenInclusive(minDelayTicks, maxDelayTicks)
+                    + i * random.nextIntBetweenInclusive(minDelayTicks, maxDelayTicks);
+        }
+        return delays;
+    }
+
+    public void castWithDelays(ServerLevel level, LivingEntity caster, LivingEntity target, RandomSource random,
+                               int[] releaseDelays, BooleanSupplier active) {
+        castWithDelays(level, caster, target, random, releaseDelays, active, windupTicks);
+    }
+
+    public void castWithDelays(ServerLevel level, LivingEntity caster, LivingEntity target, RandomSource random,
+                               int[] releaseDelays, BooleanSupplier active, int postReleaseWindupTicks) {
+        if (level == null || caster == null || target == null || random == null) {
+            return;
+        }
+        if (!caster.isAlive() || !target.isAlive()) {
+            return;
+        }
+        if (!canAffectAllies && target.isAlliedTo(caster)) {
+            return;
+        }
 
         for (int i = 0; i < cubeCount; i++) {
             IceCubeEntity cube = ModEntities.ICE_CUBE.get().create(level);
-            if (cube == null) continue;
+            if (cube == null) {
+                continue;
+            }
 
             cube.setOwner(caster);
             cube.setTarget(target);
             cube.configureStats(cubeHealth, windupTicks, speed, targetHitRadius, freezeTicks, canAffectAllies);
 
             cube.setArcSlot(i, cubeCount);
-            Vec3 spawnPos = caster.position().add(0, caster.getBbHeight() + 1.45, 0);
+            if (caster instanceof LichEntity lich && lich.getCastState().kind() == CastState.Kind.CUBES) {
+                cube.trackLichCast(lich.getCastState().serial(), lich.getCastState().started(), i);
+            }
+            Vec3 spawnPos = caster.position().add(0, caster.getBbHeight() + (caster instanceof LichEntity && cubeCount > 1 ? 1.5 : 1.45), 0);
             cube.setPos(spawnPos.x, spawnPos.y, spawnPos.z);
 
             level.addFreshEntity(cube);
 
-            int delay = random.nextIntBetweenInclusive(minDelayTicks, maxDelayTicks) + (i * random.nextIntBetweenInclusive(minDelayTicks, maxDelayTicks));
+            int delay = releaseDelays[i];
             SpellScheduler.schedule(level, delay, () -> {
-                if (!caster.isAlive() || !target.isAlive() || cube.isRemoved()) return;
-                cube.releaseNow();
+                if (!caster.isAlive() || !target.isAlive() || cube.isRemoved() || !active.getAsBoolean()) {
+                    if (!cube.isRemoved()) {
+                        cube.discard();
+                    }
+                    return;
+                }
+                cube.releaseNow(postReleaseWindupTicks);
             });
         }
     }

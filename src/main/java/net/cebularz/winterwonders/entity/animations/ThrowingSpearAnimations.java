@@ -15,8 +15,6 @@ import net.cebularz.winterwonders.entity.custom.PinginEntity;
 import static net.cebularz.winterwonders.entity.animations.AnimationUtil.*;
 
 public final class ThrowingSpearAnimations {
-    private ThrowingSpearAnimations() {}
-
     public static float windup(float time) {
         return inOutSine(progress(time, 0, .05F)) - inOutExpo(progress(time, .4F, 1));
     }

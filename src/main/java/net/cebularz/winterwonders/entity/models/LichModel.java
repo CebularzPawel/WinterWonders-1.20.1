@@ -2,10 +2,13 @@ package net.cebularz.winterwonders.entity.models;
 
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
+
 import net.cebularz.winterwonders.WinterWonders;
-import net.cebularz.winterwonders.entity.animations.AnimationUtil;
+import net.cebularz.winterwonders.entity.animations.AnimationUtil.BonePose;
 import net.cebularz.winterwonders.entity.animations.LichAnimations;
+import net.cebularz.winterwonders.entity.custom.LichEntity.CastState;
 import net.cebularz.winterwonders.entity.custom.LichEntity;
+
 import net.minecraft.client.animation.KeyframeAnimations;
 import net.minecraft.client.model.ArmedModel;
 import net.minecraft.client.model.HierarchicalModel;
@@ -16,6 +19,9 @@ import net.minecraft.client.model.geom.builders.*;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.Mth;
 import net.minecraft.world.entity.HumanoidArm;
+import net.minecraft.world.phys.Vec3;
+
+import org.joml.Quaternionf;
 import org.joml.Vector3f;
 
 public class LichModel<T extends LichEntity> extends HierarchicalModel<T> implements ArmedModel {
@@ -26,6 +32,9 @@ public class LichModel<T extends LichEntity> extends HierarchicalModel<T> implem
     private final ModelPart left_arm;
     private final ModelPart right_arm;
     private final Vector3f animationScratch = new Vector3f();
+    private float staffRotation;
+    private Vector3f floatingStaffPosition;
+    private Quaternionf floatingStaffOrientation;
 
     public LichModel(ModelPart root) {
         this.lich = root.getChild("lich");
@@ -90,22 +99,58 @@ public class LichModel<T extends LichEntity> extends HierarchicalModel<T> implem
 
     @Override
     public void setupAnim(T entity, float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch) {
-        float partial = Mth.clamp(ageInTicks - entity.tickCount, 0F, 1F);
-        float casting = Mth.lerp(partial, entity.lastCastProgress, entity.castProgress);
-        pose(ageInTicks, limbSwingAmount, netHeadYaw, headPitch, casting, entity.getMainArm());
+        float partialTick = Mth.clamp(ageInTicks - entity.tickCount, 0F, 1F);
+        staffRotation = 0F;
+        floatingStaffPosition = null;
+        floatingStaffOrientation = null;
+        if (entity.getCastState().kind() != CastState.Kind.NONE && entity.isCastAnimating()) {
+            this.lich.getAllParts().forEach(ModelPart::resetPose);
+            LichAnimations.Pose pose = LichAnimations.sample(entity.getCastState(), entity.getCastSeconds(partialTick), ageInTicks * .05F);
+            applyPose(lich, pose.root);
+            applyPose(body, pose.body);
+            applyPose(head, pose.head);
+            applyPose(right_arm, pose.rightArm);
+            applyPose(left_arm, pose.leftArm);
+            applyPose(body.getChild("left_leg"), pose.leftLeg);
+            applyPose(body.getChild("right_leg"), pose.rightLeg);
+            staffRotation = pose.staffPitch;
+            floatingStaffPosition = pose.staffPosition;
+            floatingStaffOrientation = pose.staffOrientation;
+        } else {
+            idlePose(ageInTicks, limbSwingAmount, netHeadYaw, headPitch);
+        }
+        updateFootParticleOrigins(entity);
     }
 
-    private void pose(float ageInTicks, float movement, float yaw, float pitch, float casting, HumanoidArm mainArm) {
+    private static void applyPose(ModelPart part, BonePose pose) {
+        part.setPos(pose.x, pose.y, pose.z);
+        part.setRotation(pose.xRot, pose.yRot, pose.zRot);
+    }
+
+    private void updateFootParticleOrigins(T entity) {
+        PoseStack poseStack = new PoseStack();
+        lich.translateAndRotate(poseStack);
+        body.translateAndRotate(poseStack);
+        Vec3[] footOffsets = new Vec3[2];
+        String[] legNames = {"left_leg", "right_leg"};
+        for (int leg = 0; leg < 2; leg++) {
+            poseStack.pushPose();
+            body.getChild(legNames[leg]).translateAndRotate(poseStack);
+            Vector3f sole = poseStack.last().pose().transformPosition(new Vector3f((leg == 0 ? -.1F : .1F) / 16F, 12.25F / 16F, 0));
+            footOffsets[leg] = new Vec3(sole.x, sole.y, sole.z);
+            poseStack.popPose();
+        }
+        entity.updateClientFootOffsets(footOffsets[0], footOffsets[1]);
+    }
+
+    private void idlePose(float ageInTicks, float limbSwingAmount, float headYaw, float headPitch) {
         this.lich.getAllParts().forEach(ModelPart::resetPose);
-        long time = (long) (ageInTicks * 50F);
-        float castWeight = AnimationUtil.smootherStep(casting);
-        float glideWeight = Mth.clamp(movement * 3F, 0F, 1F) * (1F - castWeight * .75F);
-        boolean left = mainArm == HumanoidArm.LEFT;
-        KeyframeAnimations.animate(this, left ? LichAnimations.LEFT_IDLE : LichAnimations.IDLE, time, 1F, animationScratch);
-        KeyframeAnimations.animate(this, left ? LichAnimations.LEFT_GLIDING : LichAnimations.GLIDING, time, glideWeight, animationScratch);
-        KeyframeAnimations.animate(this, left ? LichAnimations.LEFT_CASTING : LichAnimations.CASTING, time, castWeight, animationScratch);
-        this.head.yRot += Mth.clamp(yaw, -50F, 50F) * Mth.DEG_TO_RAD;
-        this.head.xRot += Mth.clamp(pitch, -35F, 35F) * Mth.DEG_TO_RAD;
+        long timeMillis = (long) (ageInTicks * 50F);
+        float glideWeight = Mth.clamp(limbSwingAmount * 3F, 0F, 1F);
+        KeyframeAnimations.animate(this, LichAnimations.Locomotion.IDLE, timeMillis, 1F, animationScratch);
+        KeyframeAnimations.animate(this, LichAnimations.Locomotion.GLIDING, timeMillis, glideWeight, animationScratch);
+        this.head.yRot += Mth.clamp(headYaw, -50F, 50F) * Mth.DEG_TO_RAD;
+        this.head.xRot += Mth.clamp(headPitch, -35F, 35F) * Mth.DEG_TO_RAD;
     }
 
     @Override
@@ -120,10 +165,21 @@ public class LichModel<T extends LichEntity> extends HierarchicalModel<T> implem
 
     @Override
     public void translateToHand(HumanoidArm humanoidArm, PoseStack poseStack) {
+        if (humanoidArm == HumanoidArm.RIGHT && floatingStaffPosition != null) {
+            poseStack.translate(floatingStaffPosition.x, floatingStaffPosition.y, floatingStaffPosition.z);
+            poseStack.mulPose(floatingStaffOrientation);
+            poseStack.translate(1F / 16F, -8F / 16F, 0F);
+            return;
+        }
         this.lich.translateAndRotate(poseStack);
         this.body.translateAndRotate(poseStack);
         ModelPart arm = humanoidArm == HumanoidArm.LEFT ? this.left_arm : this.right_arm;
         arm.translateAndRotate(poseStack);
         poseStack.translate((humanoidArm == HumanoidArm.RIGHT ? 1F : -1F) / 16F, .5F / 16F, 0F);
+        if (humanoidArm == HumanoidArm.RIGHT && staffRotation != 0F) {
+            poseStack.translate(-1F / 16F, 8F / 16F, 0F);
+            poseStack.mulPose(com.mojang.math.Axis.XP.rotation(staffRotation));
+            poseStack.translate(1F / 16F, -8F / 16F, 0F);
+        }
     }
 }

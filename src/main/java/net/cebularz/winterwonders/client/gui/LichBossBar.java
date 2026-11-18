@@ -15,10 +15,14 @@ public class LichBossBar {
             new ResourceLocation(WinterWonders.MOD_ID, "textures/gui/lich_boss_bar.png");
 
     public static void render(GuiGraphics guiGraphics, int x, int y, Minecraft minecraft) {
-        if (minecraft.player == null) return;
+        if (minecraft.player == null) {
+            return;
+        }
 
         Map<Integer, Double> activeBosses = LichBossData.getAllActiveBosses();
-        if (activeBosses.isEmpty()) return;
+        if (activeBosses.isEmpty()) {
+            return;
+        }
 
         int barWidth = 192;
         int barHeight = 20;
@@ -29,7 +33,9 @@ public class LichBossBar {
             int entityId = entry.getKey();
             double bossHealth = entry.getValue();
 
-            if (bossHealth <= 0.0F) continue;
+            if (bossHealth <= 0.0F) {
+                continue;
+            }
 
             int yOffset = y + (index * barSpacing);
             int bossHealthWidth = getBossHealthWidth(bossHealth, barWidth);
@@ -46,7 +52,7 @@ public class LichBossBar {
 
             Component displayText = getBossDisplayName();
             int titleWidth = minecraft.font.width(displayText);
-            guiGraphics.drawString(minecraft.font, displayText, x + (barWidth / 2) - (titleWidth / 2), yOffset - 4,0xFFFFFF, true);
+            guiGraphics.drawString(minecraft.font, displayText, x + (barWidth / 2) - (titleWidth / 2), yOffset - 4, 0xFFFFFF, true);
 
             index++;
         }

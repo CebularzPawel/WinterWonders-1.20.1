@@ -1,12 +1,16 @@
 package net.cebularz.winterwonders.spell;
 
+import net.cebularz.winterwonders.entity.custom.LichEntity;
 import net.cebularz.winterwonders.entity.custom.projectile.IcicleProjectileEntity;
+
 import net.minecraft.core.particles.ParticleOptions;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.phys.Vec3;
+
+import net.turtleboi.turtlecore.particle.CoreParticles;
 import net.turtleboi.turtlecore.spell.Spell;
 import net.turtleboi.turtlecore.spell.SpellScheduler;
 
@@ -46,20 +50,31 @@ public class BlizzardSpell implements Spell {
 
     @Override
     public void cast(ServerLevel level, LivingEntity caster, LivingEntity target, RandomSource random) {
-        if (level == null || caster == null || target == null || random == null) return;
-        if (!caster.isAlive() || !target.isAlive()) return;
+        if (level == null || caster == null || target == null || random == null) {
+            return;
+        }
+        if (!caster.isAlive() || !target.isAlive()) {
+            return;
+        }
+
+        Vec3 origin = caster instanceof LichEntity lich ? lich.getStaffCastOrigin() : caster.getEyePosition();
+        level.sendParticles(CoreParticles.CHILLED_PARTICLES.get(), origin.x, origin.y, origin.z, 12, .2, .2, .2, .02);
 
         final double domeHeight = radius * 0.6;
         final double shearStrength = Math.min(radius * 0.65, 3.5);
         Vec3 windDir = new Vec3(random.nextDouble() - 0.5, 0.0, random.nextDouble() - 0.5);
-        if (windDir.lengthSqr() < 1.0e-6) windDir = new Vec3(1, 0, 0);
+        if (windDir.lengthSqr() < 1.0e-6) {
+            windDir = new Vec3(1, 0, 0);
+        }
         windDir = windDir.normalize();
 
         for (int tick = 0; tick <= durationTicks; tick++) {
             if (tick % cloudIntervalTicks == 0) {
                 Vec3 finalWindDir = windDir;
                 SpellScheduler.schedule(level, tick, () -> {
-                    if (!caster.isAlive() || !target.isAlive()) return;
+                    if (!caster.isAlive() || !target.isAlive()) {
+                        return;
+                    }
                     Vec3 center = target.position().add(0, target.getBbHeight() + heightAboveTarget, 0);
                     spawnCloudParticles(level, center, domeHeight, finalWindDir, shearStrength, random);
                 });
@@ -68,7 +83,9 @@ public class BlizzardSpell implements Spell {
             if (tick % icicleIntervalTicks == 0) {
                 Vec3 finalWindDir = windDir;
                 SpellScheduler.schedule(level, tick, () -> {
-                    if (!caster.isAlive() || !target.isAlive()) return;
+                    if (!caster.isAlive() || !target.isAlive()) {
+                        return;
+                    }
 
                     Vec3 center = target.position().add(0, target.getBbHeight() + heightAboveTarget, 0);
                     spawnIcicle(level, caster, target, center, domeHeight, finalWindDir, shearStrength, random);
@@ -88,6 +105,10 @@ public class BlizzardSpell implements Spell {
                     0.0, 0.0, 0.0,
                     0.0
             );
+            if (i % 20 == 0) {
+                level.sendParticles(CoreParticles.CHILLED_PARTICLES.get(),
+                        randomPoint.x, randomPoint.y, randomPoint.z, 1, 0, 0, 0, 0);
+            }
         }
     }
 
@@ -95,7 +116,9 @@ public class BlizzardSpell implements Spell {
                              double domeHeight, Vec3 windDir, double shearStrength, RandomSource random) {
         Vec3 spawnPos = randomPointInCloud(cloudCenter, radius, domeHeight, windDir, shearStrength, random);
         IcicleProjectileEntity icicle = new IcicleProjectileEntity(level, caster, damagePercent / 100.0F, homing);
-        if (homing) icicle.setHomingTarget(target);
+        if (homing) {
+            icicle.setHomingTarget(target);
+        }
         icicle.setPos(spawnPos.x, spawnPos.y, spawnPos.z);
 
         final double impactRadius = Math.max(0.35, radius * 0.22);
@@ -148,7 +171,6 @@ public class BlizzardSpell implements Spell {
         double denominator = radius * radius;
         double t = (denominator <= 1.0e-6) ? 0.0 : (randomizedRadius * randomizedRadius) / denominator;
         double domeMaxY = Math.sqrt(Math.max(0.0, 1.0 - t)) * domeHeight;
-
 
         double localY = random.nextDouble() * domeMaxY;
         double shearT = (domeHeight <= 1.0e-6) ? 0.0 : (localY / domeHeight);

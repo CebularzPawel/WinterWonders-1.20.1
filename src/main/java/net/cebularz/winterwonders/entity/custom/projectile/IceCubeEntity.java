@@ -1,5 +1,10 @@
 package net.cebularz.winterwonders.entity.custom.projectile;
 
+import java.util.UUID;
+import javax.annotation.Nullable;
+
+import net.cebularz.winterwonders.entity.custom.LichEntity;
+
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.syncher.EntityDataAccessor;
@@ -20,10 +25,9 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.EntityHitResult;
 import net.minecraft.world.phys.Vec3;
-import net.turtleboi.turtlecore.effect.CoreEffects;
 
-import javax.annotation.Nullable;
-import java.util.UUID;
+import net.turtleboi.turtlecore.effect.CoreEffects;
+import net.turtleboi.turtlecore.particle.CoreParticles;
 
 public class IceCubeEntity extends ThrowableProjectile {
     private int windupTicks = 15;
@@ -36,6 +40,9 @@ public class IceCubeEntity extends ThrowableProjectile {
     private int postReleaseWindup = 0;
     private int arcIndex = 0;
     private int arcTotal = 1;
+    private int lichCastSerial = -1;
+    private long lichCastStarted = -1;
+    private int lichCastSlot = -1;
 
     private int ageTicks = 0;
     private @Nullable UUID targetUuid;
@@ -79,11 +86,17 @@ public class IceCubeEntity extends ThrowableProjectile {
 
     @Nullable
     private LivingEntity getTargetResolved() {
-        if (cachedTarget != null && cachedTarget.isAlive() && !cachedTarget.isRemoved()) return cachedTarget;
+        if (cachedTarget != null && cachedTarget.isAlive() && !cachedTarget.isRemoved()) {
+            return cachedTarget;
+        }
         cachedTarget = null;
 
-        if (targetUuid == null) return null;
-        if (!(level() instanceof ServerLevel serverLevel)) return null;
+        if (targetUuid == null) {
+            return null;
+        }
+        if (!(level() instanceof ServerLevel serverLevel)) {
+            return null;
+        }
 
         Entity targetEntity = serverLevel.getEntity(targetUuid);
         if (targetEntity instanceof LivingEntity livingEntity && livingEntity.isAlive() && !livingEntity.isRemoved()) {
@@ -130,6 +143,12 @@ public class IceCubeEntity extends ThrowableProjectile {
                         0, 0, 0
                 );
             }
+            if (tickCount % 2 == 0) {
+                level().addParticle(CoreParticles.CHILLED_PARTICLES.get(),
+                        (xo + getX()) * .5 + (random.nextDouble() - .5) * .5,
+                        (yo + getY()) * .5 + .5 + (random.nextDouble() - .5) * .5,
+                        (zo + getZ()) * .5 + (random.nextDouble() - .5) * .5, 0, .01, 0);
+            }
             return;
         }
 
@@ -156,7 +175,9 @@ public class IceCubeEntity extends ThrowableProjectile {
             Vec3 desiredStep = hoverPos.subtract(cur).scale(hoverLerp);
 
             double length = desiredStep.length();
-            if (length > maxStep) desiredStep = desiredStep.scale(maxStep / length);
+            if (length > maxStep) {
+                desiredStep = desiredStep.scale(maxStep / length);
+            }
 
             setDeltaMovement(desiredStep);
             this.hasImpulse = true;
@@ -201,7 +222,8 @@ public class IceCubeEntity extends ThrowableProjectile {
     }
 
     private Vec3 computeArcHoverPos(LivingEntity owner, int index, int total) {
-        Vec3 basePos = owner.position().add(0.0, owner.getBbHeight() + 1.25, 0.0);
+        boolean lich = owner instanceof LichEntity;
+        Vec3 basePos = owner.position().add(0.0, owner.getBbHeight() + (lich && total > 1 ? -.5 : 1.25), 0.0);
         if (total <= 1) {
             return basePos;
         }
@@ -209,7 +231,7 @@ public class IceCubeEntity extends ThrowableProjectile {
         double radius = 2.0;
         double arcDegrees = 145.0;
 
-        double totalCubes = index / (double)(total - 1);
+        double totalCubes = index / (double) (total - 1);
         double span = Math.toRadians(arcDegrees);
         double start = (Math.PI - span) * 0.5;
         double angle = start + span * totalCubes;
@@ -233,11 +255,28 @@ public class IceCubeEntity extends ThrowableProjectile {
     }
 
     public void releaseNow() {
+        releaseNow(this.windupTicks);
+    }
+
+    public void releaseNow(int postReleaseWindupTicks) {
+        if (!released && level() instanceof ServerLevel serverLevel) {
+            serverLevel.sendParticles(
+                    CoreParticles.CHILLED_PARTICLES.get(), getX(), getY() + .5, getZ(), 8, .4, .4, .4, .02);
+        }
         this.released = true;
-        this.postReleaseWindup = this.windupTicks;
+        this.postReleaseWindup = Math.max(0, postReleaseWindupTicks);
+    }
+
+    public void trackLichCast(int serial, long started, int slot) {
+        lichCastSerial = serial;
+        lichCastStarted = started;
+        lichCastSlot = slot;
     }
 
     private void impactTarget(LivingEntity target) {
+        if (getOwner() instanceof LichEntity lich) {
+            lich.onCubeImpact(lichCastSerial, lichCastStarted, lichCastSlot);
+        }
         target.addEffect(new MobEffectInstance(CoreEffects.FROZEN.get(), freezeTicks, 0));
         level().playSound(
                 null,
@@ -254,13 +293,14 @@ public class IceCubeEntity extends ThrowableProjectile {
         float cubeHealth = this.entityData.get(CUBE_HEALTH);
         float maxCubeHealth = Math.max(1.0F, this.maxCubeHealth);
         float damagePercent = 1.0F - (cubeHealth / maxCubeHealth);
-        int stage = (int)(damagePercent * 9.0F);
+        int stage = (int) (damagePercent * 9.0F);
         return Mth.clamp(stage, 0, 9);
     }
 
-
     private void breakCube() {
         if (level() instanceof ServerLevel serverLevel) {
+            serverLevel.sendParticles(CoreParticles.CHILLED_PARTICLES.get(),
+                    getX(), getY() + .5, getZ(), 14, .45, .45, .45, .04);
             serverLevel.sendParticles(
                     ParticleTypes.ITEM_SNOWBALL,
                     getX(), getY(), getZ(),
@@ -278,7 +318,9 @@ public class IceCubeEntity extends ThrowableProjectile {
 
     @Override
     public boolean hurt(DamageSource source, float amount) {
-        if (level().isClientSide) return true;
+        if (level().isClientSide) {
+            return true;
+        }
         Entity attacker = source.getEntity();
         Entity owner = getOwner();
         if (attacker != null && owner != null && attacker.getUUID().equals(owner.getUUID())) {
@@ -322,25 +364,63 @@ public class IceCubeEntity extends ThrowableProjectile {
         tag.putInt("FreezeTicks", freezeTicks);
         tag.putBoolean("CanAffectAllies", canAffectAllies);
         tag.putInt("AgeTicks", ageTicks);
-        if (targetUuid != null) tag.putUUID("Target", targetUuid);
+        if (targetUuid != null) {
+            tag.putUUID("Target", targetUuid);
+        }
         tag.putBoolean("Released", released);
         tag.putInt("ArcIndex", arcIndex);
         tag.putInt("ArcTotal", arcTotal);
+        tag.putInt("LichCastSerial", lichCastSerial);
+        tag.putLong("LichCastStarted", lichCastStarted);
+        tag.putInt("LichCastSlot", lichCastSlot);
     }
 
     @Override
     protected void readAdditionalSaveData(CompoundTag tag) {
-        if (tag.contains("HP")) entityData.set(CUBE_HEALTH, tag.getFloat("HP"));
-        if (tag.contains("MaxHP")) maxCubeHealth = tag.getFloat("MaxHP");
-        if (tag.contains("Windup")) windupTicks = tag.getInt("Windup");
-        if (tag.contains("Speed")) homingSpeed = tag.getDouble("Speed");
-        if (tag.contains("HitRadius")) hitRadius = tag.getDouble("HitRadius");
-        if (tag.contains("FreezeTicks")) freezeTicks = tag.getInt("FreezeTicks");
-        if (tag.contains("CanAffectAllies")) canAffectAllies = tag.getBoolean("CanAffectAllies");
-        if (tag.contains("AgeTicks")) ageTicks = tag.getInt("AgeTicks");
-        if (tag.hasUUID("Target")) targetUuid = tag.getUUID("Target");
-        if (tag.contains("Released")) released = tag.getBoolean("Released");
-        if (tag.contains("ArcIndex")) arcIndex = tag.getInt("ArcIndex");
-        if (tag.contains("ArcTotal")) arcTotal = tag.getInt("ArcTotal");
+        if (tag.contains("HP")) {
+            entityData.set(CUBE_HEALTH, tag.getFloat("HP"));
+        }
+        if (tag.contains("MaxHP")) {
+            maxCubeHealth = tag.getFloat("MaxHP");
+        }
+        if (tag.contains("Windup")) {
+            windupTicks = tag.getInt("Windup");
+        }
+        if (tag.contains("Speed")) {
+            homingSpeed = tag.getDouble("Speed");
+        }
+        if (tag.contains("HitRadius")) {
+            hitRadius = tag.getDouble("HitRadius");
+        }
+        if (tag.contains("FreezeTicks")) {
+            freezeTicks = tag.getInt("FreezeTicks");
+        }
+        if (tag.contains("CanAffectAllies")) {
+            canAffectAllies = tag.getBoolean("CanAffectAllies");
+        }
+        if (tag.contains("AgeTicks")) {
+            ageTicks = tag.getInt("AgeTicks");
+        }
+        if (tag.hasUUID("Target")) {
+            targetUuid = tag.getUUID("Target");
+        }
+        if (tag.contains("Released")) {
+            released = tag.getBoolean("Released");
+        }
+        if (tag.contains("ArcIndex")) {
+            arcIndex = tag.getInt("ArcIndex");
+        }
+        if (tag.contains("ArcTotal")) {
+            arcTotal = tag.getInt("ArcTotal");
+        }
+        if (tag.contains("LichCastSerial")) {
+            lichCastSerial = tag.getInt("LichCastSerial");
+        }
+        if (tag.contains("LichCastStarted")) {
+            lichCastStarted = tag.getLong("LichCastStarted");
+        }
+        if (tag.contains("LichCastSlot")) {
+            lichCastSlot = tag.getInt("LichCastSlot");
+        }
     }
 }

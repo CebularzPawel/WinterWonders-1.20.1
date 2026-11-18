@@ -1,8 +1,10 @@
 package net.cebularz.winterwonders.entity.custom.projectile;
 
-import net.cebularz.winterwonders.init.ModDamageSources;
 import net.cebularz.winterwonders.effect.ModEffects;
 import net.cebularz.winterwonders.entity.ModEntities;
+import net.cebularz.winterwonders.init.ModDamageSources;
+
+import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.effect.MobEffectInstance;
@@ -12,12 +14,15 @@ import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.projectile.Snowball;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.EntityHitResult;
+
 import net.turtleboi.turtlecore.effect.CoreEffects;
+import net.turtleboi.turtlecore.particle.CoreParticles;
 
 public class ChillingSnowballEntity extends Snowball {
     private final int chillAmplifier;
     private final boolean dealsDamage;
     private final float damagePercent;
+
     public ChillingSnowballEntity(EntityType<? extends Snowball> pEntityType, Level pLevel) {
         super(pEntityType, pLevel);
         this.chillAmplifier = 0;
@@ -25,7 +30,7 @@ public class ChillingSnowballEntity extends Snowball {
         this.damagePercent = 0.0f;
     }
 
-    public ChillingSnowballEntity(Level pLevel){
+    public ChillingSnowballEntity(Level pLevel) {
         super(ModEntities.CHILLING_SNOWBALL.get(), pLevel);
         this.chillAmplifier = 0;
         this.dealsDamage = false;
@@ -39,7 +44,7 @@ public class ChillingSnowballEntity extends Snowball {
         this.damagePercent = 0.0f;
     }
 
-    public ChillingSnowballEntity(Level pLevel, LivingEntity pLivingEntity, int chillAmplifier, boolean dealsDamage, float damagePercent){
+    public ChillingSnowballEntity(Level pLevel, LivingEntity pLivingEntity, int chillAmplifier, boolean dealsDamage, float damagePercent) {
         super(pLevel, pLivingEntity);
         this.chillAmplifier = chillAmplifier;
         this.dealsDamage = dealsDamage;
@@ -47,10 +52,22 @@ public class ChillingSnowballEntity extends Snowball {
     }
 
     @Override
+    public void tick() {
+        super.tick();
+        if (level().isClientSide && !isRemoved() && tickCount % 2 == 0) {
+            level().addParticle(CoreParticles.CHILLED_PARTICLES.get(), getX(), getY() + .05, getZ(), 0, 0, 0);
+        }
+    }
+
+    @Override
     protected void onHitEntity(EntityHitResult pResult) {
         Entity hitEntity = pResult.getEntity();
         Entity ownerEntity = getOwner();
         if (hitEntity != ownerEntity) {
+            if (level() instanceof ServerLevel serverLevel) {
+                serverLevel.sendParticles(
+                        CoreParticles.CHILLED_PARTICLES.get(), getX(), getY(), getZ(), 6, .2, .2, .2, .02);
+            }
             if (hitEntity instanceof LivingEntity livingEntity) {
                 if (livingEntity.hasEffect(CoreEffects.CHILLED.get())) {
                     int currentAmplifier = livingEntity.getEffect(CoreEffects.CHILLED.get()).getAmplifier();
@@ -60,7 +77,7 @@ public class ChillingSnowballEntity extends Snowball {
                 }
 
                 if (this.dealsDamage) {
-                    ModDamageSources.hurtWithFrostDamage(livingEntity, ownerEntity, this.damagePercent/100);
+                    ModDamageSources.hurtWithFrostDamage(livingEntity, ownerEntity, this.damagePercent / 100);
                 }
 
                 this.level().playSound(

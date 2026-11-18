@@ -1,11 +1,15 @@
 package net.cebularz.winterwonders.spell;
 
+import java.util.function.BooleanSupplier;
 import java.util.function.Function;
+
 import net.cebularz.winterwonders.entity.custom.projectile.IcicleProjectileEntity;
+
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.phys.Vec3;
+
 import net.turtleboi.turtlecore.particle.CoreParticles;
 import net.turtleboi.turtlecore.spell.Spell;
 import net.turtleboi.turtlecore.spell.SpellScheduler;
@@ -18,14 +22,8 @@ public class IcicleSpell implements Spell {
     private final boolean homing;
     private final double speed;
     private final double aimAccuracy;
-    private final Function<LivingEntity, Vec3> origin;
 
     public IcicleSpell(CastMode mode, int shots, int intervalTicks, float damagePercent, boolean homing, double speed, double aimAccuracy) {
-        this(mode, shots, intervalTicks, damagePercent, homing, speed, aimAccuracy, null);
-    }
-
-    private IcicleSpell(CastMode mode, int shots, int intervalTicks, float damagePercent, boolean homing,
-                        double speed, double aimAccuracy, Function<LivingEntity, Vec3> origin) {
         this.mode = mode;
         this.shots = Math.max(1, shots);
         this.intervalTicks = Math.max(0, intervalTicks);
@@ -34,33 +32,42 @@ public class IcicleSpell implements Spell {
         this.homing = homing;
         this.speed = speed;
         this.aimAccuracy = Math.max(0.0, aimAccuracy);
-        this.origin = origin;
-    }
-
-    public IcicleSpell withOrigin(Function<LivingEntity, Vec3> origin) {
-        return new IcicleSpell(mode, shots, intervalTicks, damagePercent, homing, speed, aimAccuracy, origin);
     }
 
     @Override
     public void cast(ServerLevel level, LivingEntity caster, LivingEntity target, RandomSource random) {
-        if (level == null || caster == null || random == null) return;
-        if (!caster.isAlive()) return;
+        castWithOrigin(level, caster, target, random, null, () -> true);
+    }
+
+    public void castWithOrigin(ServerLevel level, LivingEntity caster, LivingEntity target, RandomSource random,
+                               Function<LivingEntity, Vec3> origin, BooleanSupplier active) {
+        if (level == null || caster == null || random == null) {
+            return;
+        }
+        if (!caster.isAlive()) {
+            return;
+        }
 
         if (mode == CastMode.SINGLE) {
-            singularCast(level, caster, target, random);
+            if (active.getAsBoolean()) {
+                singularCast(level, caster, target, random, origin);
+            }
             return;
         }
 
         for (int i = 0; i < shots; i++) {
             int delay = i * intervalTicks;
             SpellScheduler.schedule(level, delay, () -> {
-                if (!caster.isAlive()) return;
-                singularCast(level, caster, target, random);
+                if (!caster.isAlive() || caster.isRemoved() || !active.getAsBoolean()) {
+                    return;
+                }
+                singularCast(level, caster, target, random, origin);
             });
         }
     }
 
-    private void singularCast(ServerLevel level, LivingEntity caster, LivingEntity target, RandomSource random) {
+    private void singularCast(ServerLevel level, LivingEntity caster, LivingEntity target, RandomSource random,
+                              Function<LivingEntity, Vec3> origin) {
         IcicleProjectileEntity icicle = new IcicleProjectileEntity(level, caster, damagePercent / 100.0F, homing);
         Vec3 eyePos = caster.getEyePosition(1.0F);
         Vec3 normalizedDir = caster.getLookAngle().normalize();

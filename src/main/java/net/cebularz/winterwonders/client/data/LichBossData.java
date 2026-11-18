@@ -25,7 +25,9 @@ public class LichBossData {
 
     public static void removeFarAwayBosses() {
         Minecraft minecraft = Minecraft.getInstance();
-        if (minecraft.level == null || minecraft.player == null) return;
+        if (minecraft.level == null || minecraft.player == null) {
+            return;
+        }
 
         Level level = minecraft.level;
         lichHealthMap.entrySet().removeIf(entry -> {

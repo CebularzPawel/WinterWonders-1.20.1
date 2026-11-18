@@ -1,6 +1,10 @@
 package net.cebularz.winterwonders.entity.custom.projectile;
 
+import net.cebularz.winterwonders.entity.ModEntities;
+import net.cebularz.winterwonders.init.ModDamageSources;
+
 import net.minecraft.core.particles.ParticleTypes;
+import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.effect.MobEffectInstance;
@@ -13,27 +17,28 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.EntityHitResult;
 import net.minecraft.world.phys.Vec3;
-import net.cebularz.winterwonders.init.ModDamageSources;
-import net.cebularz.winterwonders.entity.ModEntities;
+
 import net.turtleboi.turtlecore.effect.CoreEffects;
+import net.turtleboi.turtlecore.particle.CoreParticles;
 
 public class IcicleProjectileEntity extends AbstractArrow {
     private final float damageAmount;
     private final boolean homing;
     private LivingEntity homingTarget;
+
     public IcicleProjectileEntity(EntityType<? extends AbstractArrow> pEntityType, Level pLevel) {
         super(pEntityType, pLevel);
         this.damageAmount = 0.05f;
         this.homing = false;
     }
 
-    public IcicleProjectileEntity(Level pLevel){
+    public IcicleProjectileEntity(Level pLevel) {
         super(ModEntities.ICICLE.get(), pLevel);
         this.damageAmount = 0.05f;
         this.homing = false;
     }
 
-    public IcicleProjectileEntity(Level pLevel, LivingEntity pLivingEntity){
+    public IcicleProjectileEntity(Level pLevel, LivingEntity pLivingEntity) {
         super(ModEntities.ICICLE.get(), pLivingEntity, pLevel);
         this.damageAmount = 0.05f;
         this.homing = false;
@@ -49,8 +54,11 @@ public class IcicleProjectileEntity extends AbstractArrow {
     public void tick() {
         super.tick();
 
-        if (this.level().isClientSide){
-            for(int particles = 0; particles < 1; ++particles) {
+        if (this.level().isClientSide) {
+            if (!isRemoved() && tickCount % 2 == 0) {
+                level().addParticle(CoreParticles.CHILLED_PARTICLES.get(), getX(), getY(), getZ(), 0, 0, 0);
+            }
+            for (int particles = 0; particles < 1; ++particles) {
                 this.level().addParticle(
                         ParticleTypes.SNOWFLAKE,
                         this.getRandomX(0.25F),
@@ -79,6 +87,7 @@ public class IcicleProjectileEntity extends AbstractArrow {
         Entity ownerEntity = getOwner();
 
         if (hitEntity != ownerEntity) {
+            frostImpact();
             if (hitEntity instanceof LivingEntity livingEntity) {
                 int chilledLevel;
                 float multiplier = 1.0f;
@@ -112,9 +121,9 @@ public class IcicleProjectileEntity extends AbstractArrow {
         }
     }
 
-
     @Override
     protected void onHitBlock(BlockHitResult pResult) {
+        frostImpact();
         this.level().playSound(
                 this,
                 this.blockPosition(),
@@ -144,6 +153,13 @@ public class IcicleProjectileEntity extends AbstractArrow {
     @Override
     protected ItemStack getPickupItem() {
         return null;
+    }
+
+    private void frostImpact() {
+        if (level() instanceof ServerLevel serverLevel) {
+            serverLevel.sendParticles(
+                    CoreParticles.CHILLED_PARTICLES.get(), getX(), getY(), getZ(), 3, .15, .15, .15, .01);
+        }
     }
 
     public void setHomingTarget(LivingEntity target) {

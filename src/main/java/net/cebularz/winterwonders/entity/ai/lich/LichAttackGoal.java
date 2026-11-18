@@ -107,7 +107,9 @@ public class LichAttackGoal extends Goal {
 
     private void selectAttackType() {
         LivingEntity target = this.lich.getTarget();
-        if (target == null) return;
+        if (target == null) {
+            return;
+        }
 
         final double distSq = this.lich.distanceToSqr(target);
         if (this.lich.hasPhased() && distSq >= SUMMON_MINIONS_SQ) {
@@ -166,10 +168,12 @@ public class LichAttackGoal extends Goal {
         boolean canSeeTarget = this.lich.getSensing().hasLineOfSight(target);
         boolean hasSeen = this.seeTime > 0;
 
-        if (canSeeTarget != hasSeen) this.seeTime = 0;
+        if (canSeeTarget != hasSeen) {
+            this.seeTime = 0;
+        }
         this.seeTime += canSeeTarget ? 1 : -1;
 
-        if (distanceToTargetSq <= (double)(this.attackRadius * this.attackRadius) && this.seeTime >= 20) {
+        if (distanceToTargetSq <= (double) (this.attackRadius * this.attackRadius) && this.seeTime >= 20) {
             this.lich.getNavigation().stop();
             ++this.strafingTime;
         } else {
@@ -178,15 +182,22 @@ public class LichAttackGoal extends Goal {
         }
 
         if (this.strafingTime >= 20) {
-            if (this.lich.getRandom().nextFloat() < 0.3F) this.strafingClockwise = !this.strafingClockwise;
-            if (this.lich.getRandom().nextFloat() < 0.3F) this.strafingBackwards = !this.strafingBackwards;
+            if (this.lich.getRandom().nextFloat() < 0.3F) {
+                this.strafingClockwise = !this.strafingClockwise;
+            }
+            if (this.lich.getRandom().nextFloat() < 0.3F) {
+                this.strafingBackwards = !this.strafingBackwards;
+            }
             this.strafingTime = 0;
         }
 
         if (this.strafingTime > -1) {
             double rSq = this.attackRadius * this.attackRadius;
-            if (distanceToTargetSq > rSq * 0.75F) this.strafingBackwards = false;
-            else if (distanceToTargetSq < rSq * 0.25F) this.strafingBackwards = true;
+            if (distanceToTargetSq > rSq * 0.75F) {
+                this.strafingBackwards = false;
+            } else if (distanceToTargetSq < rSq * 0.25F) {
+                this.strafingBackwards = true;
+            }
 
             this.lich.getMoveControl().strafe(
                     this.strafingBackwards ? -0.5F : 0.5F,

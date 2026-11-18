@@ -24,8 +24,6 @@ import net.minecraft.client.animation.AnimationDefinition;
 import org.joml.Vector3f;
 
 public final class PinginAnimations {
-    private PinginAnimations() {}
-
     public static final AnimationDefinition IDLE = AnimationDefinition.Builder.withLength(3.2F).looping()
             .addAnimation("body", loopPosition(3.2F,
                     pos(0F, 0F, 0F, 0F),
@@ -481,86 +479,87 @@ public final class PinginAnimations {
             .build();
 
     // public static final AnimationDefinition CHIP_BEAK = AnimationDefinition.Builder.withLength(1.2F)
-            // .addAnimation("body", rotation(
-                    // flowRot(0F, 0F, 0F, 0F), flowRot(0.18F, 14F, 0F, 0F), flowRot(0.35F, 60F, 0F, 0F),
-                    // flowRot(0.5F, 80F, 0F, 0F), flowRot(0.62F, 65F, 0F, 0F), flowRot(0.85F, 80F, 0F, 0F),
-                    // flowRot(0.98F, 60F, 0F, 0F), flowRot(1.2F, 0F, 0F, 0F)))
-            // .addAnimation("body", position(
-                    // pos(0F, 0F, 0F, 0F), easePos(0.18F, 0F, -0.5F, 0F), easePos(0.35F, 0F, -0.1F, -0.2F),
-                    // easePos(0.5F, 0F, -1.2F, -0.3F), easePos(0.62F, 0F, 0F, 0F), easePos(0.85F, 0F, -1.2F, -0.3F),
-                    // easePos(0.98F, 0F, -0.1F, 0F), easePos(1.2F, 0F, 0F, 0F)))
-            // .addAnimation("head", rotation(
-                    // flowRot(0F, 0F, 0F, 0F), flowRot(0.18F, 14F, 0F, 0F), flowRot(0.35F, 18F, 0F, 0F),
-                    // flowRot(0.5F, 10F, 0F, 0F), flowRot(0.62F, 9F, 0F, 0F), flowRot(0.85F, 10F, 0F, 0F),
-                    // flowRot(0.98F, 15F, 0F, 0F), flowRot(1.2F, 0F, 0F, 0F)))
-            // .addAnimation("left_arm", rotation(
-                    // flowRot(0F, 0F, 0F, 0F), flowRot(0.18F, -12F, 0F, -29F), flowRot(0.35F, -38F, 0F, -54F),
-                    // flowRot(0.5F, -49F, 0F, -63F), flowRot(0.62F, -38F, 0F, -56F), flowRot(0.85F, -49F, 0F, -63F),
-                    // flowRot(0.98F, -38F, 0F, -54F), flowRot(1.2F, 0F, 0F, 0F)))
-            // .addAnimation("right_arm", rotation(
-                    // flowRot(0F, 0F, 0F, 0F), flowRot(0.18F, -12F, 0F, 29F), flowRot(0.35F, -38F, 0F, 54F),
-                    // flowRot(0.5F, -49F, 0F, 63F), flowRot(0.62F, -38F, 0F, 56F), flowRot(0.85F, -49F, 0F, 63F),
-                    // flowRot(0.98F, -38F, 0F, 54F), flowRot(1.2F, 0F, 0F, 0F)))
-            // .addAnimation("tail", rotation(
-                    // flowRot(0F, 0F, 0F, 0F), flowRot(0.5F, -8F, -4F, 0F), flowRot(0.62F, -3F, 3F, 0F),
-                    // flowRot(0.85F, -8F, -4F, 0F), flowRot(1.2F, 0F, 0F, 0F)))
-            // .build();
+    // .addAnimation("body", rotation(
+    // flowRot(0F, 0F, 0F, 0F), flowRot(0.18F, 14F, 0F, 0F), flowRot(0.35F, 60F, 0F, 0F),
+    // flowRot(0.5F, 80F, 0F, 0F), flowRot(0.62F, 65F, 0F, 0F), flowRot(0.85F, 80F, 0F, 0F),
+    // flowRot(0.98F, 60F, 0F, 0F), flowRot(1.2F, 0F, 0F, 0F)))
+    // .addAnimation("body", position(
+    // pos(0F, 0F, 0F, 0F), easePos(0.18F, 0F, -0.5F, 0F), easePos(0.35F, 0F, -0.1F, -0.2F),
+    // easePos(0.5F, 0F, -1.2F, -0.3F), easePos(0.62F, 0F, 0F, 0F), easePos(0.85F, 0F, -1.2F, -0.3F),
+    // easePos(0.98F, 0F, -0.1F, 0F), easePos(1.2F, 0F, 0F, 0F)))
+    // .addAnimation("head", rotation(
+    // flowRot(0F, 0F, 0F, 0F), flowRot(0.18F, 14F, 0F, 0F), flowRot(0.35F, 18F, 0F, 0F),
+    // flowRot(0.5F, 10F, 0F, 0F), flowRot(0.62F, 9F, 0F, 0F), flowRot(0.85F, 10F, 0F, 0F),
+    // flowRot(0.98F, 15F, 0F, 0F), flowRot(1.2F, 0F, 0F, 0F)))
+    // .addAnimation("left_arm", rotation(
+    // flowRot(0F, 0F, 0F, 0F), flowRot(0.18F, -12F, 0F, -29F), flowRot(0.35F, -38F, 0F, -54F),
+    // flowRot(0.5F, -49F, 0F, -63F), flowRot(0.62F, -38F, 0F, -56F), flowRot(0.85F, -49F, 0F, -63F),
+    // flowRot(0.98F, -38F, 0F, -54F), flowRot(1.2F, 0F, 0F, 0F)))
+    // .addAnimation("right_arm", rotation(
+    // flowRot(0F, 0F, 0F, 0F), flowRot(0.18F, -12F, 0F, 29F), flowRot(0.35F, -38F, 0F, 54F),
+    // flowRot(0.5F, -49F, 0F, 63F), flowRot(0.62F, -38F, 0F, 56F), flowRot(0.85F, -49F, 0F, 63F),
+    // flowRot(0.98F, -38F, 0F, 54F), flowRot(1.2F, 0F, 0F, 0F)))
+    // .addAnimation("tail", rotation(
+    // flowRot(0F, 0F, 0F, 0F), flowRot(0.5F, -8F, -4F, 0F), flowRot(0.62F, -3F, 3F, 0F),
+    // flowRot(0.85F, -8F, -4F, 0F), flowRot(1.2F, 0F, 0F, 0F)))
+    // .build();
 
     // public static final AnimationDefinition CHIP_HOP = AnimationDefinition.Builder.withLength(1.2F)
-            // .addAnimation("body", rotation(
-                    // flowRot(0F, 0F, 0F, 0F), flowRot(0.25F, -10F, 0F, 0F),
-                    // flowRot(0.4F, 4F, 0F, 0F), flowRot(0.6F, 8F, 0F, 0F),
-                    // flowRot(0.85F, 12F, 0F, 0F), flowRot(1.2F, 12F, 0F, 0F)))
-            // .addAnimation("body", position(
-                    // pos(0F, 0F, 0F, 0F), easePos(0.25F, 0F, -0.8F, 0F),
-                    // easePos(0.4F, 0F, 0F, 0F), easePos(1.2F, 0F, 0F, 0F)))
-            // .addAnimation("head", rotation(
-                    // flowRot(0F, 0F, 0F, 0F), flowRot(0.25F, -5F, 0F, 0F),
-                    // flowRot(0.55F, 8F, 0F, 0F), flowRot(0.85F, 5F, 0F, 0F), flowRot(1.2F, 5F, 0F, 0F)))
-            // .addAnimation("left_arm", rotation(
-                    // flowRot(0F, 0F, 0F, 0F), flowRot(0.25F, 20F, 0F, -20F),
-                    // flowRot(0.45F, -30F, 0F, -48F), flowRot(0.75F, -12F, 0F, -24F), flowRot(1.2F, -12F, 0F, -24F)))
-            // .addAnimation("right_arm", rotation(
-                    // flowRot(0F, 0F, 0F, 0F), flowRot(0.25F, 20F, 0F, 20F),
-                    // flowRot(0.45F, -30F, 0F, 48F), flowRot(0.75F, -12F, 0F, 24F), flowRot(1.2F, -12F, 0F, 24F)))
-            // .addAnimation("left_foot", rotation(
-                    // flowRot(0F, 0F, 0F, 0F), flowRot(0.45F, -18F, 0F, 0F),
-                    // flowRot(0.75F, 0F, 0F, 0F), flowRot(1.2F, 0F, 0F, 0F)))
-            // .addAnimation("right_foot", rotation(
-                    // flowRot(0F, 0F, 0F, 0F), flowRot(0.45F, -18F, 0F, 0F),
-                    // flowRot(0.75F, 0F, 0F, 0F), flowRot(1.2F, 0F, 0F, 0F)))
-            // .build();
+    // .addAnimation("body", rotation(
+    // flowRot(0F, 0F, 0F, 0F), flowRot(0.25F, -10F, 0F, 0F),
+    // flowRot(0.4F, 4F, 0F, 0F), flowRot(0.6F, 8F, 0F, 0F),
+    // flowRot(0.85F, 12F, 0F, 0F), flowRot(1.2F, 12F, 0F, 0F)))
+    // .addAnimation("body", position(
+    // pos(0F, 0F, 0F, 0F), easePos(0.25F, 0F, -0.8F, 0F),
+    // easePos(0.4F, 0F, 0F, 0F), easePos(1.2F, 0F, 0F, 0F)))
+    // .addAnimation("head", rotation(
+    // flowRot(0F, 0F, 0F, 0F), flowRot(0.25F, -5F, 0F, 0F),
+    // flowRot(0.55F, 8F, 0F, 0F), flowRot(0.85F, 5F, 0F, 0F), flowRot(1.2F, 5F, 0F, 0F)))
+    // .addAnimation("left_arm", rotation(
+    // flowRot(0F, 0F, 0F, 0F), flowRot(0.25F, 20F, 0F, -20F),
+    // flowRot(0.45F, -30F, 0F, -48F), flowRot(0.75F, -12F, 0F, -24F), flowRot(1.2F, -12F, 0F, -24F)))
+    // .addAnimation("right_arm", rotation(
+    // flowRot(0F, 0F, 0F, 0F), flowRot(0.25F, 20F, 0F, 20F),
+    // flowRot(0.45F, -30F, 0F, 48F), flowRot(0.75F, -12F, 0F, 24F), flowRot(1.2F, -12F, 0F, 24F)))
+    // .addAnimation("left_foot", rotation(
+    // flowRot(0F, 0F, 0F, 0F), flowRot(0.45F, -18F, 0F, 0F),
+    // flowRot(0.75F, 0F, 0F, 0F), flowRot(1.2F, 0F, 0F, 0F)))
+    // .addAnimation("right_foot", rotation(
+    // flowRot(0F, 0F, 0F, 0F), flowRot(0.45F, -18F, 0F, 0F),
+    // flowRot(0.75F, 0F, 0F, 0F), flowRot(1.2F, 0F, 0F, 0F)))
+    // .build();
 
     // public static final AnimationDefinition CHIP_BACK = AnimationDefinition.Builder.withLength(1.2F)
-            // .addAnimation("body", rotation(
-                    // flowRot(0F, 12F, 0F, 0F), flowRot(0.1F, 16F, 0F, 0F),
-                    // flowRot(0.2F, -13F, 0F, 0F), flowRot(0.5F, -8F, 0F, 0F),
-                    // flowRot(0.65F, 8F, 0F, 0F), flowRot(0.78F, -4F, 0F, -3F), flowRot(0.9F, 0F, 0F, 0F), flowRot(1.2F, 0F, 0F, 0F)))
-            // .addAnimation("body", position(
-                    // pos(0F, 0F, 0F, 0F), easePos(0.1F, 0F, -1F, 0F),
-                    // easePos(0.2F, 0F, 0F, 0F), easePos(0.65F, 0F, -0.4F, 0F),
-                    // easePos(0.78F, 0F, 0.15F, 0F), easePos(0.9F, 0F, 0F, 0F)))
-            // .addAnimation("head", rotation(
-                    // flowRot(0F, 5F, 0F, 0F), flowRot(0.15F, -5F, 0F, 0F),
-                    // flowRot(0.6F, 4F, 0F, 0F), flowRot(0.9F, 0F, 0F, 0F)))
-            // .addAnimation("left_arm", rotation(
-                    // flowRot(0F, -12F, 0F, -24F), flowRot(0.15F, -35F, 0F, -58F),
-                    // flowRot(0.5F, -25F, 0F, -58F), flowRot(0.7F, 8F, 0F, -28F), flowRot(0.9F, 0F, 0F, 0F)))
-            // .addAnimation("right_arm", rotation(
-                    // flowRot(0F, -12F, 0F, 24F), flowRot(0.15F, -35F, 0F, 58F),
-                    // flowRot(0.5F, -25F, 0F, 58F), flowRot(0.7F, 8F, 0F, 28F), flowRot(0.9F, 0F, 0F, 0F)))
-            // .addAnimation("left_foot", rotation(
-                    // flowRot(0F, 0F, 0F, 0F), flowRot(0.2F, 20F, 0F, 0F),
-                    // flowRot(0.5F, 12F, 0F, 0F), flowRot(0.65F, 0F, 0F, 0F), flowRot(1.2F, 0F, 0F, 0F)))
-            // .addAnimation("right_foot", rotation(
-                    // flowRot(0F, 0F, 0F, 0F), flowRot(0.2F, 20F, 0F, 0F),
-                    // flowRot(0.5F, 12F, 0F, 0F), flowRot(0.65F, 0F, 0F, 0F), flowRot(1.2F, 0F, 0F, 0F)))
-            // .addAnimation("tail", rotation(
-                    // flowRot(0F, 0F, 0F, 0F), flowRot(0.2F, 8F, -10F, 0F),
-                    // flowRot(0.6F, -8F, 8F, 0F), flowRot(0.9F, 0F, 0F, 0F)))
-            // .build();
+    // .addAnimation("body", rotation(
+    // flowRot(0F, 12F, 0F, 0F), flowRot(0.1F, 16F, 0F, 0F),
+    // flowRot(0.2F, -13F, 0F, 0F), flowRot(0.5F, -8F, 0F, 0F),
+    // flowRot(0.65F, 8F, 0F, 0F), flowRot(0.78F, -4F, 0F, -3F), flowRot(0.9F, 0F, 0F, 0F), flowRot(1.2F, 0F, 0F, 0F)))
+    // .addAnimation("body", position(
+    // pos(0F, 0F, 0F, 0F), easePos(0.1F, 0F, -1F, 0F),
+    // easePos(0.2F, 0F, 0F, 0F), easePos(0.65F, 0F, -0.4F, 0F),
+    // easePos(0.78F, 0F, 0.15F, 0F), easePos(0.9F, 0F, 0F, 0F)))
+    // .addAnimation("head", rotation(
+    // flowRot(0F, 5F, 0F, 0F), flowRot(0.15F, -5F, 0F, 0F),
+    // flowRot(0.6F, 4F, 0F, 0F), flowRot(0.9F, 0F, 0F, 0F)))
+    // .addAnimation("left_arm", rotation(
+    // flowRot(0F, -12F, 0F, -24F), flowRot(0.15F, -35F, 0F, -58F),
+    // flowRot(0.5F, -25F, 0F, -58F), flowRot(0.7F, 8F, 0F, -28F), flowRot(0.9F, 0F, 0F, 0F)))
+    // .addAnimation("right_arm", rotation(
+    // flowRot(0F, -12F, 0F, 24F), flowRot(0.15F, -35F, 0F, 58F),
+    // flowRot(0.5F, -25F, 0F, 58F), flowRot(0.7F, 8F, 0F, 28F), flowRot(0.9F, 0F, 0F, 0F)))
+    // .addAnimation("left_foot", rotation(
+    // flowRot(0F, 0F, 0F, 0F), flowRot(0.2F, 20F, 0F, 0F),
+    // flowRot(0.5F, 12F, 0F, 0F), flowRot(0.65F, 0F, 0F, 0F), flowRot(1.2F, 0F, 0F, 0F)))
+    // .addAnimation("right_foot", rotation(
+    // flowRot(0F, 0F, 0F, 0F), flowRot(0.2F, 20F, 0F, 0F),
+    // flowRot(0.5F, 12F, 0F, 0F), flowRot(0.65F, 0F, 0F, 0F), flowRot(1.2F, 0F, 0F, 0F)))
+    // .addAnimation("tail", rotation(
+    // flowRot(0F, 0F, 0F, 0F), flowRot(0.2F, 8F, -10F, 0F),
+    // flowRot(0.6F, -8F, 8F, 0F), flowRot(0.9F, 0F, 0F, 0F)))
+    // .build();
 
     private record AttackClip(AnimationDefinition right, AnimationDefinition left, AnimationChannel pitch, AnimationChannel weapon) {}
+
     private static final Map<PinginAttack, AttackClip> ATTACKS = buildAttacks();
 
     private static Map<PinginAttack, AttackClip> buildAttacks() {
@@ -621,7 +620,9 @@ public final class PinginAnimations {
                 .build();
 
         float[] weaponTimes = times.clone();
-        for (int index = 1; index < weaponTimes.length - 1; index++) weaponTimes[index] -= attack.weaponLead;
+        for (int index = 1; index < weaponTimes.length - 1; index++) {
+            weaponTimes[index] -= attack.weaponLead;
+        }
         AnimationChannel weapon = flowTrack(AnimationChannel.Targets.ROTATION, weaponTimes,
                 scaleValues(attack.weaponAngle, 0F, -0.35F, -0.55F, 1F, 1F + 0.2F * attack.inertia, 0.45F, -0.08F, 0F), zeros, zeros);
         return new AttackClip(clip, mirror(clip), pitch, weapon);

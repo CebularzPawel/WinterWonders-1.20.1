@@ -1,7 +1,10 @@
 package net.cebularz.winterwonders.spell;
 
+import java.util.List;
+
 import net.cebularz.winterwonders.network.ModNetworking;
 import net.cebularz.winterwonders.network.packets.IceSpikeVisualS2C;
+
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.server.level.ServerLevel;
@@ -19,11 +22,11 @@ import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraft.world.level.material.Fluids;
 import net.minecraft.world.phys.AABB;
 import net.minecraft.world.phys.Vec3;
+
 import net.turtleboi.turtlecore.effect.CoreEffects;
+import net.turtleboi.turtlecore.particle.CoreParticles;
 import net.turtleboi.turtlecore.spell.Spell;
 import net.turtleboi.turtlecore.spell.SpellScheduler;
-
-import java.util.List;
 
 public class IceSpikesSpell implements Spell {
     private final int spikeCount;
@@ -48,15 +51,23 @@ public class IceSpikesSpell implements Spell {
 
     @Override
     public void cast(ServerLevel level, LivingEntity caster, LivingEntity target, RandomSource random) {
-        if (level == null || caster == null || target == null || random == null) return;
-        if (!caster.isAlive() || !target.isAlive()) return;
+        if (level == null || caster == null || target == null || random == null) {
+            return;
+        }
+        if (!caster.isAlive() || !target.isAlive()) {
+            return;
+        }
 
         cast(level, caster, target, random, random.nextBoolean());
     }
 
     public void cast(ServerLevel level, LivingEntity caster, LivingEntity target, RandomSource random, boolean reverseSweep) {
-        if (level == null || caster == null || target == null || random == null) return;
-        if (!caster.isAlive() || !target.isAlive()) return;
+        if (level == null || caster == null || target == null || random == null) {
+            return;
+        }
+        if (!caster.isAlive() || !target.isAlive()) {
+            return;
+        }
 
         Vec3 casterPos = caster.position();
         Vec3 targetPos = target.position();
@@ -96,6 +107,8 @@ public class IceSpikesSpell implements Spell {
     }
 
     private void doIceSpikeStage(ServerLevel level, LivingEntity caster, BlockPos blockPos, float damage, int stage, float yawDegrees, RandomSource random) {
+        level.sendParticles(CoreParticles.CHILLED_PARTICLES.get(), blockPos.getX() + .5, blockPos.getY() + stage * .5 + .25,
+                blockPos.getZ() + .5, 4, .25, .1, .25, .01);
         level.sendParticles(
                 ParticleTypes.ITEM_SNOWBALL,
                 blockPos.getX() + 0.5,
@@ -137,7 +150,6 @@ public class IceSpikesSpell implements Spell {
             }
         }
 
-
         if (stage == 2) {
             ModNetworking.sendNear(new IceSpikeVisualS2C(blockPos, yawDegrees), caster);
             AABB damageArea = new AABB(
@@ -151,8 +163,12 @@ public class IceSpikesSpell implements Spell {
 
             for (Entity entity : entities) {
                 LivingEntity victim = (LivingEntity) entity;
-                if (victim == caster) continue;
-                if (!canDamageAllies && victim.isAlliedTo(caster)) continue;
+                if (victim == caster) {
+                    continue;
+                }
+                if (!canDamageAllies && victim.isAlliedTo(caster)) {
+                    continue;
+                }
 
                 victim.hurt(victim.damageSources().indirectMagic(caster, caster), damage);
                 Vec3 knockbackDir = victim.position().subtract(caster.position());
